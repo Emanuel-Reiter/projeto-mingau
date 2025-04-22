@@ -3,10 +3,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputManager : MonoBehaviour {
 
-    // Input Actions declaration
+    // Input Actions
     private PlayerInputActions playerInputActions;
 
-    // Input references
     // Movement
     public Vector2 movementDirection { get; private set; } = Vector2.zero;
     public bool isJumpPressed { get; private set; } = false;
@@ -35,24 +34,24 @@ public class PlayerInputManager : MonoBehaviour {
 
     private void SubscribeToAllActions() {
         // Jump
-        playerInputActions.Default.Jump.performed += ProcessPerformedJumpInput;
+        playerInputActions.Default.Jump.started += ProcessPerformedJumpInput;
         playerInputActions.Default.Jump.canceled += ProcessCanceledJumpInput;
 
-        // Sprint
-        playerInputActions.Default.Jump.performed += ProcessPerformedSprintInput;
-        playerInputActions.Default.Jump.canceled += ProcessCanceledSprintInput;
+        // Sprint (Hold)
+        playerInputActions.Default.Sprint.performed += ProcessPerformedSprintInput;
+        playerInputActions.Default.Sprint.canceled += ProcessCanceledSprintInput;
 
         // Dash
-        playerInputActions.Default.Jump.performed += ProcessPerformedDashInput;
-        playerInputActions.Default.Jump.canceled += ProcessCanceledDashInput;
+        playerInputActions.Default.Dash.started += ProcessPerformedDashInput;
+        playerInputActions.Default.Dash.canceled += ProcessCanceledDashInput;
 
         // Attack Light
-        playerInputActions.Default.Jump.performed += ProcessPerformedAttackLightInput;
-        playerInputActions.Default.Jump.canceled += ProcessCanceledAttackLightInput;
+        playerInputActions.Default.AttackLight.started += ProcessPerformedAttackLightInput;
+        playerInputActions.Default.AttackLight.canceled += ProcessCanceledAttackLightInput;
 
         // Interact
-        playerInputActions.Default.Jump.performed += ProcessPerformedInteractInput;
-        playerInputActions.Default.Jump.canceled += ProcessCanceledInteractInput;
+        playerInputActions.Default.Interact.started += ProcessPerformedInteractInput;
+        playerInputActions.Default.Interact.canceled += ProcessCanceledInteractInput;
     }
 
     // Jump

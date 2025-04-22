@@ -1,26 +1,45 @@
+using System;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour {
 
-    [Range(0.1f, 10.0f)][SerializeField] private float mouseSensitivity = 1.0f;
-
+    // External references
     private Camera playerCamera;
+    
+    private Transform playerCameraParent;
     private Transform playerTransform;
     private PlayerInputManager input;
 
+    // Camera rotation and position
     private float horizontalInput, verticalInput;
-    private float xRotation = 0.0f; // Track the camera X rotation (pitch)
-
-    [Header("Camera Settings")]
-    [SerializeField] private Vector3 positionOffset = new Vector3(0.0f, 1.75f, 0.0f);
-    [SerializeField] private float smoothTime = 0.025f; //Camera rotation smoothing time
+    private float xRotation, yRotation = 0.0f; // Track the camera X rotation (pitch), and the Y rotation (yaw)
 
     private Quaternion targetRotation; // Desired camera rotation
+
+
+
+    // Camera settings
+    private float smoothTime = 0.025f; //Camera rotation smoothing time
+
+    private Vector3 cameraPositionOffset = new Vector3(0.0f, 0.0f, -5f);
+    private Vector2 cameraDistanceFromPlayerMinMax = new Vector2 (1.0f, 5.0f);
+
+    private Vector3 cameraParentPositionOffset = new Vector3(0.0f, 2f, 0.0f);
+
+    // Mouse and cursor settings
+    [Range(0.1f, 10.0f)][SerializeField] private float mouseSensitivity = 1.0f;
     private bool isCursorLocked = false;
 
     private void Start() {
-        playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        try {
+            playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+            playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+            playerCameraParent = GameObject.FindGameObjectWithTag("PlayerCameraParent").GetComponent<Transform>();
+        }
+        catch {
+            Debug.LogError("Not all the camera external references have been found.\nMake sure tha all the objects with their respective exists in the game scene.");
+        }
+
         input = GetComponent<PlayerInputManager>();
 
         // Initialize the camera rotation
@@ -31,7 +50,6 @@ public class PlayerCamera : MonoBehaviour {
 
     private void Update() {
         HandleMouseInput();
-        HandlePlayerRotation();
         HandleCameraRotation();
         HandleCameraPosition();
     }
@@ -39,34 +57,35 @@ public class PlayerCamera : MonoBehaviour {
     private void HandleMouseInput() {
         float mouseSensitivityMultiplaier = 0.1f;
 
-        horizontalInput = input.cameraLookDirection.x * (mouseSensitivity * mouseSensitivityMultiplaier);
         verticalInput = input.cameraLookDirection.y * (mouseSensitivity * mouseSensitivityMultiplaier);
+        horizontalInput = input.cameraLookDirection.x * (mouseSensitivity * mouseSensitivityMultiplaier);
 
-        // Adjust camera pitch and clamp it to avoid flipping.
+        // Adjust camera pitch and clamp it in order to avoid flipping.
         xRotation -= verticalInput;
-        xRotation = Mathf.Clamp(xRotation, -90.0f, 90.0f);
-    }
+        xRotation = Mathf.Clamp(xRotation, -80.0f, 80.0f);
 
-    private void HandlePlayerRotation() {
-        // Rotate the player on the Y-axis without any smoothing for more responsiveness to the movement controls.
-        playerTransform.Rotate(Vector3.up * horizontalInput);
+        yRotation += horizontalInput;
     }
 
     private void HandleCameraRotation() {
         // Create the target rotation using pitch and player yaw.
-        targetRotation = Quaternion.Euler(xRotation, playerTransform.eulerAngles.y, 0.0f);
+        targetRotation = Quaternion.Euler(xRotation, yRotation, 0.0f);
 
-        // Linearly interpolates the camera rotation.
-        playerCamera.transform.localRotation = Quaternion.Lerp(
-            playerCamera.transform.localRotation, targetRotation, smoothTime / Time.deltaTime);
+        // Linearly interpolates the camera rotation to avoid jittering.
+        playerCameraParent.transform.rotation = Quaternion.Lerp(
+            playerCameraParent.transform.rotation,
+            targetRotation,
+            smoothTime / Time.deltaTime);
     }
 
     private void HandleCameraPosition() {
-        float cameraFollowSpeed = 20.0f;
+        float cameraParentFollowSpeed = 20.0f;
 
-        // Smoothly move the camera to follow the player with the position offset.
-        Vector3 targetPosition = playerTransform.position + positionOffset;
-        playerCamera.transform.position = Vector3.Lerp(playerCamera.transform.position, targetPosition, cameraFollowSpeed * Time.deltaTime);
+        // Smoothly move the camera to follow the player with the position offset to avoid jittering.
+        Vector3 playerTargetPosition = playerTransform.position + cameraParentPositionOffset;
+        playerCameraParent.transform.position = Vector3.Lerp(playerCameraParent.transform.position, playerTargetPosition, cameraParentFollowSpeed * Time.deltaTime);
+
+        playerCamera.transform.localPosition = cameraPositionOffset;
     }
 
     private void ToggleLockCursor() {
