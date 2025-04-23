@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -17,22 +18,23 @@ public class PlayerMovement : MonoBehaviour {
     private float graphicsRotationSpeed = 20.0f;
 
     // Velocity
-    private Vector3 horizontalVelocity;
-    private float verticalVelocity;
+    public Vector3 horizontalVelocity { get; private set; }
+    public float verticalVelocity { get; private set; }
 
     // Slope movement
     private float slopeRaycastDistance = 0.5f;
-    private float groundSnapDistance = 0.333f;
+    private float groundSnapDistance = 0.25f;
     private float slopeForce = 5.0f;
 
     // Jump
-    private bool isJumping = false;
+    public bool isJumping { get; private set; } = false; 
 
     // Input
     private Vector2 inputVector;
 
     // Toggles
     private bool isGroundedMovementEnabled = false;
+    private bool isGroundSnapingActive = false;
 
     private void Start() {
         AssignReferences();
@@ -47,8 +49,8 @@ public class PlayerMovement : MonoBehaviour {
         CalculateHorizontalMovement();
         CalculateVerticalMovement();
 
-        // Calculate movenet when in slopes
-        ApplyGroundSnaping();
+        // Calculate movenet when in slopes when active
+        if(isGroundSnapingActive) ApplyGroundSnaping();
 
         // Apply final movement
         ApplyMovement();
@@ -71,9 +73,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void CalculateVerticalMovement() {
-        if (characterController.isGrounded) {
+        if (characterController.isGrounded && !isJumping) {
             verticalVelocity = playerAttributes.groundedGravityAcceleration;
-            CalculateSlopeMovement();
+            if (isGroundSnapingActive) CalculateSlopeMovement();
         }
         else {
             verticalVelocity += playerAttributes.gravityAcceleration * Time.deltaTime;
@@ -113,11 +115,12 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void ApplyMovement() {
-        Vector3 motion = horizontalVelocity + Vector3.up * verticalVelocity;
-        characterController.Move(motion * Time.deltaTime);
+        Vector3 finalMovement = horizontalVelocity + (Vector3.up * verticalVelocity);
+        characterController.Move(finalMovement * Time.deltaTime);
     }
 
     private Vector3 GetCameraRelativeDirection(Vector2 input) {
+        // Calculate the facing vector of the camera
         Vector3 forward = playerCameraParent.forward;
         Vector3 right = playerCameraParent.right;
         forward.y = 0;
@@ -161,10 +164,19 @@ public class PlayerMovement : MonoBehaviour {
    
     // Public access methods
     public void ApplyJump() {
-        Debug.Log("Jumping!");
-        isJumping = true;
-        //verticalVelocity = Mathf.Sqrt(-2f * playerAttributes.jumpHeight);
+        if (characterController.isGrounded) {
+            SetIsJumping(true);
+            ToggleGroundSnaping(false);
+
+            // Resets player vertical velocity in order to assure full controll of the height of the jump
+            verticalVelocity = 0.0f;
+
+            float jumpVelocity = Mathf.Sqrt(-2.0f * playerAttributes.gravityAcceleration * (playerAttributes.jumpHeight * 1.25f));
+            verticalVelocity = jumpVelocity;
+        }
     }
 
-    public void ToggleGroundedMovement(bool toggle) { isGroundedMovementEnabled = toggle; }
+    public void ToggleHorizontalMovementInput(bool toggle) { isGroundedMovementEnabled = toggle; }
+    public void ToggleGroundSnaping(bool toggle) { isGroundSnapingActive = toggle; }
+    public void SetIsJumping(bool isJumping) { this.isJumping = isJumping; }
 }

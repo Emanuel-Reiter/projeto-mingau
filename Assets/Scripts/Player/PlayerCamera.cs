@@ -21,9 +21,7 @@ public class PlayerCamera : MonoBehaviour {
     // Camera settings
     private float smoothTime = 0.025f; //Camera rotation smoothing time
 
-    private Vector3 cameraPositionOffset = new Vector3(0.0f, 0.0f, -5f);
-    private Vector2 cameraDistanceFromPlayerMinMax = new Vector2 (1.0f, 5.0f);
-
+    private Vector3 cameraPositionOffset = new Vector3(0.0f, 0.0f, -8f);
     private Vector3 cameraParentPositionOffset = new Vector3(0.0f, 2f, 0.0f);
 
     // Mouse and cursor settings

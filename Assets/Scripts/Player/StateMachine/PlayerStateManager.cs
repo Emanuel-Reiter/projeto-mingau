@@ -6,6 +6,7 @@ public class PlayerStateManager : MonoBehaviour {
     public PlayerIdleState idleState = new PlayerIdleState();
     public PlayerRunState runState = new PlayerRunState();
     public PlayerJumpState jumpState = new PlayerJumpState();
+    public PlayerFallState fallState = new PlayerFallState();
 
     // State management
     private PlayerBaseState currentState;

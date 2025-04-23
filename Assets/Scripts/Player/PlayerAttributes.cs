@@ -16,7 +16,7 @@ public class PlayerAttributes : MonoBehaviour {
     public float gravityAcceleration { get; private set; }
 
     // Jump
-    public float jumpHeight { get; private set; } = 2.0f;
+    public float jumpHeight { get; private set; } = 3.0f;
 
     public int maxAirJumps { get; private set; } = 0;
     public int airJumpsLeft { get; private set; } = 0;

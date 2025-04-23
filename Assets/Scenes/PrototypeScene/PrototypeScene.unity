@@ -15,9 +15,9 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 1
-  m_FogColor: {r: 0.26666668, g: 0.39607847, b: 0.59607846, a: 1}
+  m_FogColor: {r: 0.58431375, g: 0.68235296, b: 0.7294118, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.0125
+  m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -420,7 +420,7 @@ MonoBehaviour:
   m_ShadowRenderingLayers: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 3
+  m_SoftShadowQuality: 0
 --- !u!1 &414956051
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class PlayerJumpState : PlayerBaseState {
+public class PlayerFallState : PlayerBaseState {
     public override void CheckExitState(PlayerStateManager player) {
-        if (player.movement.verticalVelocity < 0.0f) {
-            player.SwitchState(player.fallState);
+        if (player.characterController.isGrounded) {
+            if (player.input.movementDirection != Vector2.zero) player.SwitchState(player.runState);
+            else player.SwitchState(player.idleState);
         }
     }
 
     public override void EnterState(PlayerStateManager player) {
-        player.movement.ApplyJump();
         player.movement.ToggleHorizontalMovementInput(true);
     }
 
@@ -16,7 +16,5 @@ public class PlayerJumpState : PlayerBaseState {
 
     public override void PhysicsUpdateState(PlayerStateManager player) { }
 
-    public override void ExitState(PlayerStateManager player) {
-        player.movement.SetIsJumping(false);
-    }
+    public override void ExitState(PlayerStateManager player) { }
 }

@@ -12,7 +12,8 @@ public class PlayerRunState : PlayerBaseState {
     }
 
     public override void EnterState(PlayerStateManager player) {
-        player.movement.ToggleGroundedMovement(true);
+        player.movement.ToggleGroundSnaping(true);
+        player.movement.ToggleHorizontalMovementInput(true);
     }
 
     public override void UpdateState(PlayerStateManager player) { }
@@ -20,6 +21,6 @@ public class PlayerRunState : PlayerBaseState {
     public override void PhysicsUpdateState(PlayerStateManager player) { }
 
     public override void ExitState(PlayerStateManager player) {
-        player.movement.ToggleGroundedMovement(false);
+        player.movement.ToggleGroundSnaping(false);
     }
 }

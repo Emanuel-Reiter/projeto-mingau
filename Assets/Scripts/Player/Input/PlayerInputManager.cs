@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -55,7 +56,7 @@ public class PlayerInputManager : MonoBehaviour {
     }
 
     // Jump
-    private void ProcessPerformedJumpInput(InputAction.CallbackContext context) { isJumpPressed = true; }
+    private void ProcessPerformedJumpInput(InputAction.CallbackContext context) { StartCoroutine(ProcessPerformedJumpInputCoroutine()); }
     private void ProcessCanceledJumpInput(InputAction.CallbackContext context) { isJumpPressed = false; }
 
     // Sprint 
@@ -63,15 +64,15 @@ public class PlayerInputManager : MonoBehaviour {
     private void ProcessCanceledSprintInput(InputAction.CallbackContext context) { isSprintPressed = false; }
 
     // Dash
-    private void ProcessPerformedDashInput(InputAction.CallbackContext context) { isDashPressed = true; }
+    private void ProcessPerformedDashInput(InputAction.CallbackContext context) { StartCoroutine(ProcessPerformedDashInputCoroutine()); }
     private void ProcessCanceledDashInput(InputAction.CallbackContext context) { isDashPressed = false; }
 
     // Attack Light
-    private void ProcessPerformedAttackLightInput(InputAction.CallbackContext context) { isAttackLightPressed = true; }
+    private void ProcessPerformedAttackLightInput(InputAction.CallbackContext context) { StartCoroutine(ProcessPerformedAttackLightInputtCoroutine()); }
     private void ProcessCanceledAttackLightInput(InputAction.CallbackContext context) { isAttackLightPressed = false; }
 
     // Interact
-    private void ProcessPerformedInteractInput(InputAction.CallbackContext context) { isInteractPressed = true; }
+    private void ProcessPerformedInteractInput(InputAction.CallbackContext context) { StartCoroutine(ProcessPerformedInteractInputCoroutine()); }
     private void ProcessCanceledInteractInput(InputAction.CallbackContext context) { isInteractPressed = false; }
 
     // Movement Direction
@@ -84,4 +85,33 @@ public class PlayerInputManager : MonoBehaviour {
         cameraLookDirection = playerInputActions.Default.CameraLook.ReadValue<Vector2>();
     }
 
+    // Coroutines
+    
+    // Jump
+    private IEnumerator ProcessPerformedJumpInputCoroutine() {
+        isJumpPressed = true;
+        yield return null;
+        isJumpPressed = false;
+    }
+
+    // Dash
+    private IEnumerator ProcessPerformedDashInputCoroutine() {
+        isDashPressed = true;
+        yield return null;
+        isDashPressed = false;
+    }
+
+    // Attack Light
+    private IEnumerator ProcessPerformedAttackLightInputtCoroutine() {
+        isAttackLightPressed = true;
+        yield return null;
+        isAttackLightPressed = false;
+    }
+
+    // Interact
+    private IEnumerator ProcessPerformedInteractInputCoroutine() {
+        isInteractPressed = true;
+        yield return null;
+        isInteractPressed = false;
+    }
 }
