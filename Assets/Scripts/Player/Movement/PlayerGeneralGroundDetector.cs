@@ -1,8 +1,9 @@
 using UnityEngine;
 
 public class PlayerGeneralGroundDetector : MonoBehaviour {
-    [SerializeField] private LayerMask lowHitCollisionMask;
 
+    // Ground detection
+    [SerializeField] private LayerMask lowHitCollisionMask;
     public bool isGrounded { get; private set; } = false;
 
     public void OnCollisionEnter(Collision collision) {

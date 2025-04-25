@@ -52,7 +52,7 @@ public class PlayerCamera : MonoBehaviour {
     }
 
     private void HandleMouseInput() {
-        float mouseSensitivityMultiplaier = 0.15f;
+        float mouseSensitivityMultiplaier = 0.25f;
 
         verticalInput = input.cameraLookDirection.y * (mouseSensitivity * mouseSensitivityMultiplaier);
         horizontalInput = input.cameraLookDirection.x * (mouseSensitivity * mouseSensitivityMultiplaier);
