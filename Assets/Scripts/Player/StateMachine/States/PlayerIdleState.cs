@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerIdleState : PlayerBaseState {
     public override void CheckExitState(PlayerStateManager player) {
         
-        // Checks if the player is grounded
+        // Checks of the player is currently grounded
         if(player.characterController.isGrounded) {
             // Checks for player jump input
             if (player.input.isJumpPressed) player.SwitchState(player.jumpState);
@@ -11,9 +11,16 @@ public class PlayerIdleState : PlayerBaseState {
             // Checks for player movement input
             if (player.input.movementDirection != Vector2.zero) player.SwitchState(player.runState);
         }
+        else {
+            // If not grounded switch to fall state
+            player.SwitchState(player.fallState);
+        }
     }
 
     public override void EnterState(PlayerStateManager player) {
+        // Reset player air jumps
+        player.attributes.ResetAirJumps();
+
         player.movement.ToggleGroundSnaping(true);
         player.movement.ToggleHorizontalMovementInput(false);
     }

@@ -1064,6 +1064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 0}
   movement: {fileID: 0}
+  attributes: {fileID: 0}
   characterController: {fileID: 0}
 --- !u!114 &2028295732
 MonoBehaviour:

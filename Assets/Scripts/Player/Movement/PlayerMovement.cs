@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour {
     private bool isGroundSnapingActive = false;
 
     private void Start() {
-        AssignReferences();
+        InitializeReferences();
     }
 
     private void Update() {
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour {
         CalculateHorizontalMovement();
         CalculateVerticalMovement();
 
-        // Calculate movenet when in slopes when active
+        // When active calculate movenet when in slopes
         if(isGroundSnapingActive) ApplyGroundSnaping();
 
         // Apply final movement
@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 moveDirection = GetCameraRelativeDirection(inputVector);
 
         if (inputVector.magnitude > 0.1f) {
-            Vector3 targetVelocity = moveDirection * playerAttributes.GetCurrentSpeed(input.isSprintPressed);
+            Vector3 targetVelocity = moveDirection * playerAttributes.GetCurrentSpeed(characterController.isGrounded);
             CalculateAcceleration(targetVelocity, moveDirection);
         }
         else {
@@ -146,7 +146,7 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    private void AssignReferences() {
+    private void InitializeReferences() {
         try {
             // External references
             playerCameraParent = GameObject.FindGameObjectWithTag("PlayerCameraParent").transform;
@@ -164,16 +164,17 @@ public class PlayerMovement : MonoBehaviour {
    
     // Public access methods
     public void ApplyJump() {
-        if (characterController.isGrounded) {
-            SetIsJumping(true);
-            ToggleGroundSnaping(false);
+        if (!characterController.isGrounded) playerAttributes.DecreaseAirJumps();
 
-            // Resets player vertical velocity in order to assure full controll of the height of the jump
-            verticalVelocity = 0.0f;
+        playerAttributes.TriggerJumpCooldown();
+        SetIsJumping(true);
+        ToggleGroundSnaping(false);
 
-            float jumpVelocity = Mathf.Sqrt(-2.0f * playerAttributes.gravityAcceleration * (playerAttributes.jumpHeight * 1.25f));
-            verticalVelocity = jumpVelocity;
-        }
+        // Resets player vertical velocity in order to assure full controll of the height of the jump
+        verticalVelocity = 0.0f;
+
+        float jumpVelocity = Mathf.Sqrt(-2.0f * playerAttributes.gravityAcceleration * playerAttributes.jumpHeight);
+        verticalVelocity = jumpVelocity;
     }
 
     public void ToggleHorizontalMovementInput(bool toggle) { isGroundedMovementEnabled = toggle; }

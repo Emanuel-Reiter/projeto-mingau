@@ -17,7 +17,6 @@ public class PlayerCamera : MonoBehaviour {
     private Quaternion targetRotation; // Desired camera rotation
 
 
-
     // Camera settings
     private float smoothTime = 0.025f; //Camera rotation smoothing time
 
@@ -53,7 +52,7 @@ public class PlayerCamera : MonoBehaviour {
     }
 
     private void HandleMouseInput() {
-        float mouseSensitivityMultiplaier = 0.1f;
+        float mouseSensitivityMultiplaier = 0.15f;
 
         verticalInput = input.cameraLookDirection.y * (mouseSensitivity * mouseSensitivityMultiplaier);
         horizontalInput = input.cameraLookDirection.x * (mouseSensitivity * mouseSensitivityMultiplaier);

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour {
@@ -9,12 +10,13 @@ public class PlayerStateManager : MonoBehaviour {
     public PlayerFallState fallState = new PlayerFallState();
 
     // State management
-    private PlayerBaseState currentState;
-    private PlayerBaseState previousState;
+    public PlayerBaseState currentState { get; private set; }
+    public PlayerBaseState previousState { get; private set; }
 
     // External references
     [HideInInspector] public PlayerInputManager input;
     [HideInInspector] public PlayerMovement movement;
+    [HideInInspector] public PlayerAttributes attributes;
     [HideInInspector] public CharacterController characterController;
 
     private void Start() {
@@ -47,8 +49,17 @@ public class PlayerStateManager : MonoBehaviour {
     }
 
     private void InitializeReferences() {
-        input = GetComponent<PlayerInputManager>();
-        movement = GetComponent<PlayerMovement>();
-        characterController = GetComponent<CharacterController>();
+        try {
+            // External references
+
+            // Object references
+            input = GetComponent<PlayerInputManager>();
+            movement = GetComponent<PlayerMovement>();
+            attributes = GetComponent<PlayerAttributes>();
+            characterController = GetComponent<CharacterController>();
+        }
+        catch {
+            Debug.LogError("Some references were not assigned correctly.\nCheck external tag names and components assigned to this object.");
+        }
     }
 }
