@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: 1fccb2815ee1f5f4c91065666b81f2aa
+guid: bf9cea836508bcf458c3c38da2022df0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: level_prototype_02_blue_mat
+    second: {fileID: 2100000, guid: 1dc47484c550a344cac753f900d749d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: level_prototype_02_green_mat
+    second: {fileID: 2100000, guid: c8230aff0e9368142a59d9b5405fdff3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: level_prototype_02_red_mat
+    second: {fileID: 2100000, guid: 3d4dd2b92044b2542a4df01a325e70c4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
