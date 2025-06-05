@@ -18,6 +18,7 @@ public class PlayerStateManager : MonoBehaviour {
     [HideInInspector] public PlayerMovement movement;
     [HideInInspector] public PlayerAttributes attributes;
     [HideInInspector] public CharacterController characterController;
+    [HideInInspector] public PlayerAnimationManager animationManager;
 
     private void Start() {
         InitializeReferences();
@@ -57,6 +58,7 @@ public class PlayerStateManager : MonoBehaviour {
             movement = GetComponent<PlayerMovement>();
             attributes = GetComponent<PlayerAttributes>();
             characterController = GetComponent<CharacterController>();
+            animationManager = GetComponent<PlayerAnimationManager>();
         }
         catch {
             Debug.LogError("Some references were not assigned correctly.\nCheck external tag names and components assigned to this object.");

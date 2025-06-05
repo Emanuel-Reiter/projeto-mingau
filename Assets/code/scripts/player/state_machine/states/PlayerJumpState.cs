@@ -17,6 +17,8 @@ public class PlayerJumpState : PlayerBaseState {
     public override void EnterState(PlayerStateManager player) {
         player.movement.ApplyJump();
         player.movement.ToggleHorizontalMovementInput(true);
+
+        player.animationManager.PlayAnimationInterpolated(player.animationManager.jumpAnimation, player.animationManager.instantaneousInterpolationTime);
     }
 
     public override void UpdateState(PlayerStateManager player) { }

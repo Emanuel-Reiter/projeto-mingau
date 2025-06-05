@@ -17,6 +17,8 @@ public class PlayerFallState : PlayerBaseState {
 
     public override void EnterState(PlayerStateManager player) {
         player.movement.ToggleHorizontalMovementInput(true);
+
+        player.animationManager.PlayAnimationInterpolated(player.animationManager.fallAnimation, player.animationManager.fastInterpolationTime);
     }
 
     public override void UpdateState(PlayerStateManager player) { }

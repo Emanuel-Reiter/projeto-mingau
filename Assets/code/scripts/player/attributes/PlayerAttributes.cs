@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerAttributes : MonoBehaviour {
     // Movement speed
-    private float baseSpeed = 12.0f;
+    private float baseSpeed = 8.0f;
     private float currentSpeed = 0.0f;
 
     private float runSpeedMultiplaier = 1.0f;
@@ -10,8 +10,8 @@ public class PlayerAttributes : MonoBehaviour {
     private float airSpeedMultiplaier = 1.75f;
 
     // Acceleration
-    public float accelerationRate { get; private set; } = 48.0f;
-    public float decelerationRate { get; private set; } = 48.0f;
+    public float accelerationRate { get; private set; } = 32.0f;
+    public float decelerationRate { get; private set; } = 32.0f;
 
     // Gravity
     private float defaultGravity = -50.0f;

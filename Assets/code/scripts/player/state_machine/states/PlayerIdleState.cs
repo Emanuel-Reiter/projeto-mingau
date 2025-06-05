@@ -23,6 +23,8 @@ public class PlayerIdleState : PlayerBaseState {
 
         player.movement.ToggleGroundSnaping(true);
         player.movement.ToggleHorizontalMovementInput(false);
+
+        player.animationManager.PlayAnimationInterpolated(player.animationManager.idleAnimation, player.animationManager.fastInterpolationTime);
     }
 
     public override void UpdateState(PlayerStateManager player) { }
