@@ -26,8 +26,6 @@ public class PlayerStateManager : MonoBehaviour {
         // Setups the default state implementation to avoid errors
         currentState = idleState;
         previousState = currentState;
-
-        idleState.EnterState(this);
     }
 
     private void Update() {

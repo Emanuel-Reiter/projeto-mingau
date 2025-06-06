@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class PlayerAnimationManager : MonoBehaviour
 {
+    [Header("Animation clip references")]
     public AnimationClip idleAnimation;
     public AnimationClip runAnimation;
     public AnimationClip fallAnimation;
-    public AnimationClip jumpAnimation;
+    public AnimationClip jumpAnimation01;
+    public AnimationClip jumpAnimation02;
 
     private Animator playerAnimator;
 
     [Header("Animation interpolation times")]
-    public float instantaneousInterpolationTime { get; private set; } = 0.1f;
+    public float instantaneousInterpolationTime { get; private set; } = 0.01f;
     public float fastInterpolationTime { get; private set; } = 0.2f;
     public float averageInterpolationTime { get; private set; } = 0.4f;
     public float slowInterpolationTime { get; private set; } = 0.8f;

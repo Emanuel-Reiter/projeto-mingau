@@ -1288,6 +1288,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a417783cdefb93c459c8fad0e80adc05, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 723723773}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a417783cdefb93c459c8fad0e80adc05, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 723723772}
   m_SourcePrefab: {fileID: 100100000, guid: a417783cdefb93c459c8fad0e80adc05, type: 3}
 --- !u!4 &454223882 stripped
@@ -1450,6 +1453,28 @@ MonoBehaviour:
   - {fileID: 693306712}
   - {fileID: 75677661}
   doUpdate: 1
+--- !u!95 &723723773
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723723769}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9f2fcde74434bda43970df5177e6024a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!64 &732585421
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2299,8 +2324,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idleAnimation: {fileID: -8039279847914953615, guid: a417783cdefb93c459c8fad0e80adc05, type: 3}
   runAnimation: {fileID: -109940576852106368, guid: a417783cdefb93c459c8fad0e80adc05, type: 3}
-  fallAnimation: {fileID: 6930973180853094610, guid: a417783cdefb93c459c8fad0e80adc05, type: 3}
-  jumpAnimation: {fileID: 986348124575906379, guid: a417783cdefb93c459c8fad0e80adc05, type: 3}
+  fallAnimation: {fileID: 7578871944080951729, guid: a417783cdefb93c459c8fad0e80adc05, type: 3}
+  jumpAnimation01: {fileID: -5673797708764587222, guid: a417783cdefb93c459c8fad0e80adc05, type: 3}
+  jumpAnimation02: {fileID: -1524337244152415164, guid: a417783cdefb93c459c8fad0e80adc05, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

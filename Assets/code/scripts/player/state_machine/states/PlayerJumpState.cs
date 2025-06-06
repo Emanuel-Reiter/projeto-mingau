@@ -18,7 +18,18 @@ public class PlayerJumpState : PlayerBaseState {
         player.movement.ApplyJump();
         player.movement.ToggleHorizontalMovementInput(true);
 
-        player.animationManager.PlayAnimationInterpolated(player.animationManager.jumpAnimation, player.animationManager.instantaneousInterpolationTime);
+        // Selects the jump animation based on if the player is grounded or not
+        if (player.characterController.isGrounded) 
+            player.animationManager.PlayAnimationInterpolated(
+                player.animationManager.jumpAnimation01, 
+                player.animationManager.instantaneousInterpolationTime
+                );
+        else 
+            player.animationManager.PlayAnimationInterpolated(
+                player.animationManager.jumpAnimation02, 
+                player.animationManager.instantaneousInterpolationTime
+                );
+
     }
 
     public override void UpdateState(PlayerStateManager player) { }
