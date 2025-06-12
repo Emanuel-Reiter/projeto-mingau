@@ -2,21 +2,23 @@ using UnityEngine;
 
 public class PlayerFallState : PlayerBaseState {
     public override void CheckExitState(PlayerStateManager player) {
-        if (player.characterController.isGrounded) {
+        if (player.verticalMovement.GetSlopeRelativeIsGrounded()) {
             // Checks if the player is grounded, then switch to the fitting grounded state
             if (player.input.movementDirection != Vector2.zero) player.SwitchState(player.runState);
             else player.SwitchState(player.idleState);
         }
         else {
             // Checks for player air jump input
-            if (player.input.isJumpPressed && player.attributes.haveAirJumpsLeft()) {
+            if (player.input.isJumpPressed && player.attributes.HaveRemainingJumps()) {
                 player.SwitchState(player.jumpState);
             }
         }
     }
 
     public override void EnterState(PlayerStateManager player) {
-        player.movement.ToggleHorizontalMovementInput(true);
+        player.verticalMovement.ToggleGroundSnaping(true);
+        player.horizontalMovement.CalculateHorizontalMovement();
+        player.verticalMovement.CalculateVerticalMovement();
 
         player.animationManager.PlayAnimationInterpolated(player.animationManager.fallAnimation, player.animationManager.fastInterpolationTime);
     }

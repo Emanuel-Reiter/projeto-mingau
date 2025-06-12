@@ -5,7 +5,8 @@ public class PlayerDeveloperUI : MonoBehaviour {
     // Exteral player references
     private PlayerAttributes playerAttributes;
     private PlayerStateManager playerStateManager;
-    private PlayerMovement playerMovement;
+    private PlayerHorizontalMovement horizontalMovement;
+    private PlayerVerticalMovement verticalMovement;
 
     // Framerate calculation
     private int lastFrameIndex;
@@ -15,6 +16,8 @@ public class PlayerDeveloperUI : MonoBehaviour {
 
     private void Awake() {
         frameDeltaTimeArray = new float[64];
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 0;
     }
 
     private void Start() {
@@ -46,7 +49,8 @@ public class PlayerDeveloperUI : MonoBehaviour {
         try {
             // Object references
             playerAttributes = GetComponent<PlayerAttributes>();
-            playerMovement = GetComponent<PlayerMovement>();
+            horizontalMovement = GetComponent<PlayerHorizontalMovement>();
+            verticalMovement = GetComponent<PlayerVerticalMovement>();
             playerStateManager = GetComponent<PlayerStateManager>();
         }
         catch {
@@ -64,9 +68,12 @@ public class PlayerDeveloperUI : MonoBehaviour {
         GUI.Label(new Rect(32, 64, 512, 32), $"currentState: {playerStateManager.currentState}");
 
         // Current player horizontal velocity
-        GUI.Label(new Rect(32, 96, 512, 32), $"currentVelocity: {playerMovement.horizontalVelocity.magnitude.ToString("F2")}");
+        GUI.Label(new Rect(32, 96, 512, 32), $"currentVelocity: {playerAttributes.horizontalVelocity.magnitude.ToString("F2")}");
 
         // Current player air jumps left
-        GUI.Label(new Rect(32, 128, 512, 32), $"airJumpsLeft: {playerAttributes.GetAirJumpsLeft()}");
+        GUI.Label(new Rect(32, 128, 512, 32), $"airJumpsLeft: {playerAttributes.GetAmountOfJumpsRemaining()}");
+
+        // Ground sanpping
+        GUI.Label(new Rect(32, 160, 512, 32), $"groundSnaping: {verticalMovement.isGroundSnapingActive}");
     }
 }

@@ -17,8 +17,6 @@ public class PlayerAnimationManager : MonoBehaviour
     public float averageInterpolationTime { get; private set; } = 0.4f;
     public float slowInterpolationTime { get; private set; } = 0.8f;
 
-
-
     private void Start() {
         playerAnimator = GameObject.FindGameObjectWithTag("PlayerGraphics").gameObject.GetComponent<Animator>();
     }

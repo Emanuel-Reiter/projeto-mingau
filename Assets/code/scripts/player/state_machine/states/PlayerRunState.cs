@@ -4,7 +4,7 @@ public class PlayerRunState : PlayerBaseState {
     public override void CheckExitState(PlayerStateManager player) {
 
         // Checks of the player is currently grounded
-        if (player.characterController.isGrounded) {
+        if (player.verticalMovement.GetSlopeRelativeIsGrounded()) {
             // Checks for player jump input
             if (player.input.isJumpPressed) player.SwitchState(player.jumpState);
 
@@ -19,10 +19,11 @@ public class PlayerRunState : PlayerBaseState {
 
     public override void EnterState(PlayerStateManager player) {
         // Reset player air jumps
-        player.attributes.ResetAirJumps();
+        player.attributes.ResetAmountOfJumps();
 
-        player.movement.ToggleGroundSnaping(true);
-        player.movement.ToggleHorizontalMovementInput(true);
+        player.verticalMovement.ToggleGroundSnaping(true);
+        player.horizontalMovement.CalculateHorizontalMovement();
+        player.verticalMovement.CalculateVerticalMovement();
 
         player.animationManager.PlayAnimationInterpolated(player.animationManager.runAnimation, player.animationManager.fastInterpolationTime);
     }
@@ -31,7 +32,5 @@ public class PlayerRunState : PlayerBaseState {
 
     public override void PhysicsUpdateState(PlayerStateManager player) { }
 
-    public override void ExitState(PlayerStateManager player) {
-        player.movement.ToggleGroundSnaping(false);
-    }
+    public override void ExitState(PlayerStateManager player) { }
 }

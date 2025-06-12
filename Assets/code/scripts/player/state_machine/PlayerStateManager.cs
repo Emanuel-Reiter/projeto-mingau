@@ -15,10 +15,15 @@ public class PlayerStateManager : MonoBehaviour {
 
     // External references
     [HideInInspector] public PlayerInputManager input;
-    [HideInInspector] public PlayerMovement movement;
+    [HideInInspector] public PlayerHorizontalMovement horizontalMovement;
+    [HideInInspector] public PlayerVerticalMovement verticalMovement;
+    [HideInInspector] public PlayerJump jump;
+    [HideInInspector] public PlayerDash dash;
+    [HideInInspector] public PlayerGraphicsRotationSync rotationSync;
     [HideInInspector] public PlayerAttributes attributes;
     [HideInInspector] public CharacterController characterController;
     [HideInInspector] public PlayerAnimationManager animationManager;
+    [HideInInspector] public PlayerRigManager rigManager;
 
     private void Start() {
         InitializeReferences();
@@ -53,10 +58,15 @@ public class PlayerStateManager : MonoBehaviour {
 
             // Object references
             input = GetComponent<PlayerInputManager>();
-            movement = GetComponent<PlayerMovement>();
+            horizontalMovement = GetComponent<PlayerHorizontalMovement>();
+            verticalMovement = GetComponent<PlayerVerticalMovement>();
+            jump = GetComponent<PlayerJump>();
+            dash = GetComponent<PlayerDash>();
+            rotationSync = GetComponent<PlayerGraphicsRotationSync>();
             attributes = GetComponent<PlayerAttributes>();
             characterController = GetComponent<CharacterController>();
             animationManager = GetComponent<PlayerAnimationManager>();
+            rigManager = GetComponent<PlayerRigManager>();
         }
         catch {
             Debug.LogError("Some references were not assigned correctly.\nCheck external tag names and components assigned to this object.");
