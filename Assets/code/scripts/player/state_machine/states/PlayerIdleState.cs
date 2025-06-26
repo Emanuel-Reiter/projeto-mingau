@@ -22,13 +22,14 @@ public class PlayerIdleState : PlayerBaseState {
         player.attributes.ResetAmountOfJumps();
 
         player.verticalMovement.ToggleGroundSnaping(true);
-        player.horizontalMovement.CalculateHorizontalMovement();
-        player.verticalMovement.CalculateVerticalMovement();
 
         player.animationManager.PlayAnimationInterpolated(player.animationManager.idleAnimation, player.animationManager.fastInterpolationTime);
     }
 
-    public override void UpdateState(PlayerStateManager player) { }
+    public override void UpdateState(PlayerStateManager player) {
+        player.horizontalMovement.CalculateHorizontalMovement();
+        player.verticalMovement.CalculateVerticalMovement();
+    }
 
     public override void PhysicsUpdateState(PlayerStateManager player) { }
 

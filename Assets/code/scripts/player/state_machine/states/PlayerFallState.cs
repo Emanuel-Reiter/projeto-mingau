@@ -17,13 +17,14 @@ public class PlayerFallState : PlayerBaseState {
 
     public override void EnterState(PlayerStateManager player) {
         player.verticalMovement.ToggleGroundSnaping(true);
-        player.horizontalMovement.CalculateHorizontalMovement();
-        player.verticalMovement.CalculateVerticalMovement();
 
         player.animationManager.PlayAnimationInterpolated(player.animationManager.fallAnimation, player.animationManager.fastInterpolationTime);
     }
 
-    public override void UpdateState(PlayerStateManager player) { }
+    public override void UpdateState(PlayerStateManager player) {
+        player.horizontalMovement.CalculateHorizontalMovement();
+        player.verticalMovement.CalculateVerticalMovement();
+    }
 
     public override void PhysicsUpdateState(PlayerStateManager player) { }
 

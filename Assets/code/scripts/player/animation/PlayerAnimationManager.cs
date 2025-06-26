@@ -12,7 +12,7 @@ public class PlayerAnimationManager : MonoBehaviour
     private Animator playerAnimator;
 
     [Header("Animation interpolation times")]
-    public float instantaneousInterpolationTime { get; private set; } = 0.01f;
+    public float instantaneousInterpolationTime { get; private set; } = 0.05f;
     public float fastInterpolationTime { get; private set; } = 0.2f;
     public float averageInterpolationTime { get; private set; } = 0.4f;
     public float slowInterpolationTime { get; private set; } = 0.8f;

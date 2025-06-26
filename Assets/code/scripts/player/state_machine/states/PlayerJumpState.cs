@@ -18,8 +18,6 @@ public class PlayerJumpState : PlayerBaseState {
         player.verticalMovement.ToggleGroundSnaping(false);
 
         player.jump.ApplyJump();
-        player.horizontalMovement.CalculateHorizontalMovement();
-        player.verticalMovement.CalculateVerticalMovement();
 
         // Selects the jump animation and behaviuor based on if the player is grounded or not
         if (player.characterController.isGrounded) {
@@ -36,7 +34,10 @@ public class PlayerJumpState : PlayerBaseState {
         }
     }
 
-    public override void UpdateState(PlayerStateManager player) { }
+    public override void UpdateState(PlayerStateManager player) {
+        player.horizontalMovement.CalculateHorizontalMovement();
+        player.verticalMovement.CalculateVerticalMovement();
+    }
 
     public override void PhysicsUpdateState(PlayerStateManager player) { }
 

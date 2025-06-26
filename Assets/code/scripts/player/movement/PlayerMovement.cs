@@ -5,6 +5,9 @@ public class PlayerMovement : MonoBehaviour {
     private PlayerAttributes playerAttributes;
     private CharacterController characterController;
 
+    // Rotation
+    private float directionChangeThreshold = 135.0f;
+
     private void Start() {
         InitializeReferences();
     }
@@ -15,6 +18,29 @@ public class PlayerMovement : MonoBehaviour {
     private void ApplyMovement() {
         Vector3 finalMovement = playerAttributes.horizontalVelocity + (Vector3.up * playerAttributes.verticalVelocity);
         characterController.Move(finalMovement * Time.deltaTime);
+    }
+    public void CalculateAcceleration(Vector3 targetVelocity, Vector3 moveDirection) {
+        // Checks if there is a great change in the movement direction, and if there is, decelerate, else accelerate the body
+        if (ClaculateGreatDifferenceInMovementDirection(moveDirection)) Decelerate();
+        else Accelerate(targetVelocity);
+    }
+
+    public void Decelerate() {
+        playerAttributes.SetHorizontalVelocity(
+            Vector3.MoveTowards(playerAttributes.horizontalVelocity, Vector3.zero, playerAttributes.decelerationRate * Time.deltaTime));
+    }
+
+    public void Accelerate(Vector3 targetVelocity) {
+        playerAttributes.SetHorizontalVelocity(
+            Vector3.MoveTowards(playerAttributes.horizontalVelocity, targetVelocity, playerAttributes.accelerationRate * Time.deltaTime));
+    }
+
+    public bool ClaculateGreatDifferenceInMovementDirection(Vector3 moveDirection) {
+        if (playerAttributes.horizontalVelocity.magnitude < Mathf.Epsilon) return false;
+
+        float dotProduct = Vector3.Dot(playerAttributes.horizontalVelocity.normalized, moveDirection.normalized);
+        float directionThreshold = Mathf.Cos(directionChangeThreshold * Mathf.Deg2Rad);
+        return dotProduct < directionThreshold;
     }
 
     public Vector3 GetCameraRelativeDirection(Vector2 input) {
