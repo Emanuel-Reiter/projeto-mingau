@@ -21,16 +21,14 @@ public class PlayerJumpState : PlayerBaseState {
 
         // Selects the jump animation and behaviuor based on if the player is grounded or not
         if (player.characterController.isGrounded) {
-            player.animationManager.PlayAnimationInterpolated(
-                player.animationManager.jumpAnimation01, 
-                player.animationManager.instantaneousInterpolationTime);
+            player.animationManager.PlayAnimation(player.animationManager.jumpAnimation01);
         }
         else {
             player.animationManager.PlayAnimationInterpolated(
                 player.animationManager.jumpAnimation02, 
                 player.animationManager.instantaneousInterpolationTime);
 
-            player.rigManager.SetTailRigWeight(0.0f);
+            //player.rigManager.SetTailRigWeight(0.0f);
         }
     }
 
@@ -43,6 +41,6 @@ public class PlayerJumpState : PlayerBaseState {
 
     public override void ExitState(PlayerStateManager player) {
         player.attributes.SetIsJumping(false);
-        player.rigManager.SetTailRigWeight(1.0f);
+        //player.rigManager.SetTailRigWeight(1.0f);
     }
 }

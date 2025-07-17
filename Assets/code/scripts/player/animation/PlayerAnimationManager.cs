@@ -24,4 +24,8 @@ public class PlayerAnimationManager : MonoBehaviour
     public void PlayAnimationInterpolated(AnimationClip animation, float interpolationTime) {
         playerAnimator.CrossFadeInFixedTime(animation.name, interpolationTime);
     }
+
+    public void PlayAnimation(AnimationClip animation) {
+        playerAnimator.Play(animation.name);
+    }
 }
