@@ -1,8 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerIdleState : PlayerBaseState {
     public override void CheckExitState(PlayerStateManager player) {
-        
+        // Checks for dash input
+        if (player.input.isDashPressed && player.dash.HaveReaminingDashes()) player.SwitchState(player.dashState);
+
         // Checks if the player is currently grounded
         if(player.verticalMovement.GetSlopeRelativeIsGrounded()) {
             // Checks for player jump input
@@ -18,12 +21,13 @@ public class PlayerIdleState : PlayerBaseState {
     }
 
     public override void EnterState(PlayerStateManager player) {
-        // Reset player air jumps
-        player.attributes.ResetAmountOfJumps();
+        // Reset player jumps and dashes
+        player.movementAttributes.ResetAmountOfJumps();
+        player.dash.ResetAmountOfDashes();
 
         player.verticalMovement.ToggleGroundSnaping(true);
 
-        player.animationManager.PlayAnimationInterpolated(player.animationManager.idleAnimation, player.animationManager.fastInterpolationTime);
+        player.animationManager.PlayAnimationInterpolated(player.animationManager.idle_01_anim, player.animationManager.fastInterpolationTime);
     }
 
     public override void UpdateState(PlayerStateManager player) {

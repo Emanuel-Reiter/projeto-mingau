@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerGraphicsRotationSync : MonoBehaviour {
 
     // References
-    private PlayerAttributes playerAttributes;
+    private PlayerMovementAttributes movementAttributes;
     private Transform playerGraphics;
 
     // Rotation attributes
@@ -18,9 +18,9 @@ public class PlayerGraphicsRotationSync : MonoBehaviour {
     }
 
     private void RotateGraphics() {
-        if (playerAttributes.horizontalVelocity.magnitude > 0.1f) {
+        if (movementAttributes.horizontalVelocity.magnitude > 0.1f) {
             // Calculate target rotation based on movement direction
-            Quaternion targetRotation = Quaternion.LookRotation(playerAttributes.horizontalVelocity.normalized);
+            Quaternion targetRotation = Quaternion.LookRotation(movementAttributes.horizontalVelocity.normalized);
 
             // Smoothly interpolate rotation
             playerGraphics.rotation = Quaternion.Slerp(playerGraphics.rotation, targetRotation, graphicsRotationSpeed * Time.deltaTime);
@@ -33,7 +33,7 @@ public class PlayerGraphicsRotationSync : MonoBehaviour {
             playerGraphics = GameObject.FindGameObjectWithTag("PlayerGraphics").transform;
 
             // Object references
-            playerAttributes = GetComponent<PlayerAttributes>();
+            movementAttributes = GetComponent<PlayerMovementAttributes>();
         }
         catch {
             Debug.LogError("Some references were not assigned correctly.\nCheck external tag names and components assigned to this object.");

@@ -1,8 +1,8 @@
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-    private Transform playerCameraParent;
-    private PlayerAttributes playerAttributes;
+    private Transform playerCamera;
+    private PlayerMovementAttributes movementAttributes;
     private CharacterController characterController;
 
     // Rotation
@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour {
         ApplyMovement();
     }
     private void ApplyMovement() {
-        Vector3 finalMovement = playerAttributes.horizontalVelocity + (Vector3.up * playerAttributes.verticalVelocity);
+        Vector3 finalMovement = movementAttributes.horizontalVelocity + (Vector3.up * movementAttributes.verticalVelocity);
         characterController.Move(finalMovement * Time.deltaTime);
     }
     public void CalculateAcceleration(Vector3 targetVelocity, Vector3 moveDirection) {
@@ -26,27 +26,27 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void Decelerate() {
-        playerAttributes.SetHorizontalVelocity(
-            Vector3.MoveTowards(playerAttributes.horizontalVelocity, Vector3.zero, playerAttributes.decelerationRate * Time.deltaTime));
+        movementAttributes.SetHorizontalVelocity(
+            Vector3.MoveTowards(movementAttributes.horizontalVelocity, Vector3.zero, movementAttributes.decelerationRate * Time.deltaTime));
     }
 
     public void Accelerate(Vector3 targetVelocity) {
-        playerAttributes.SetHorizontalVelocity(
-            Vector3.MoveTowards(playerAttributes.horizontalVelocity, targetVelocity, playerAttributes.accelerationRate * Time.deltaTime));
+        movementAttributes.SetHorizontalVelocity(
+            Vector3.MoveTowards(movementAttributes.horizontalVelocity, targetVelocity, movementAttributes.accelerationRate * Time.deltaTime));
     }
 
     public bool ClaculateGreatDifferenceInMovementDirection(Vector3 moveDirection) {
-        if (playerAttributes.horizontalVelocity.magnitude < Mathf.Epsilon) return false;
+        if (movementAttributes.horizontalVelocity.magnitude < Mathf.Epsilon) return false;
 
-        float dotProduct = Vector3.Dot(playerAttributes.horizontalVelocity.normalized, moveDirection.normalized);
+        float dotProduct = Vector3.Dot(movementAttributes.horizontalVelocity.normalized, moveDirection.normalized);
         float directionThreshold = Mathf.Cos(directionChangeThreshold * Mathf.Deg2Rad);
         return dotProduct < directionThreshold;
     }
 
     public Vector3 GetCameraRelativeDirection(Vector2 input) {
         // Calculate the facing vector of the camera
-        Vector3 forward = playerCameraParent.forward;
-        Vector3 right = playerCameraParent.right;
+        Vector3 forward = playerCamera.forward;
+        Vector3 right = playerCamera.right;
         forward.y = 0.0f;
         right.y = 0.0f;
         return (forward.normalized * input.y + right.normalized * input.x).normalized;
@@ -55,8 +55,8 @@ public class PlayerMovement : MonoBehaviour {
     private void InitializeReferences() {
         try {
             // Object references
-            playerCameraParent = GameObject.FindGameObjectWithTag("PlayerCameraParent").transform;
-            playerAttributes = GetComponent<PlayerAttributes>();
+            playerCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
+            movementAttributes = GetComponent<PlayerMovementAttributes>();
             characterController = GetComponent<CharacterController>();
         }
         catch {

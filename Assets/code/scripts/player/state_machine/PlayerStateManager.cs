@@ -8,6 +8,7 @@ public class PlayerStateManager : MonoBehaviour {
     public PlayerRunState runState = new PlayerRunState();
     public PlayerJumpState jumpState = new PlayerJumpState();
     public PlayerFallState fallState = new PlayerFallState();
+    public PlayerDashState dashState = new PlayerDashState();
 
     // State management
     public PlayerBaseState currentState { get; private set; }
@@ -15,15 +16,19 @@ public class PlayerStateManager : MonoBehaviour {
 
     // External references
     [HideInInspector] public PlayerInputManager input;
+    [HideInInspector] public PlayerMovementAttributes movementAttributes;
+    [HideInInspector] public PlayerAnimationManager animationManager;
+    [HideInInspector] public CharacterController characterController;
+
+    [HideInInspector] public PlayerMovement movement;
     [HideInInspector] public PlayerHorizontalMovement horizontalMovement;
     [HideInInspector] public PlayerVerticalMovement verticalMovement;
+
     [HideInInspector] public PlayerJump jump;
     [HideInInspector] public PlayerDash dash;
+
     [HideInInspector] public PlayerGraphicsRotationSync rotationSync;
-    [HideInInspector] public PlayerAttributes attributes;
-    [HideInInspector] public CharacterController characterController;
-    [HideInInspector] public PlayerAnimationManager animationManager;
-    [HideInInspector] public PlayerRigManager rigManager;
+
 
     private void Start() {
         InitializeReferences();
@@ -63,10 +68,10 @@ public class PlayerStateManager : MonoBehaviour {
             jump = GetComponent<PlayerJump>();
             dash = GetComponent<PlayerDash>();
             rotationSync = GetComponent<PlayerGraphicsRotationSync>();
-            attributes = GetComponent<PlayerAttributes>();
+            movementAttributes = GetComponent<PlayerMovementAttributes>();
             characterController = GetComponent<CharacterController>();
             animationManager = GetComponent<PlayerAnimationManager>();
-            rigManager = GetComponent<PlayerRigManager>();
+            movement = GetComponent<PlayerMovement>();
         }
         catch {
             Debug.LogError("Some references were not assigned correctly.\nCheck external tag names and components assigned to this object.");

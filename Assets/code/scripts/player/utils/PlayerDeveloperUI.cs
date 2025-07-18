@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerDeveloperUI : MonoBehaviour {
 
     // Exteral player references
-    private PlayerAttributes playerAttributes;
+    private PlayerMovementAttributes movementAttributes;
     private PlayerStateManager playerStateManager;
     private PlayerHorizontalMovement horizontalMovement;
     private PlayerVerticalMovement verticalMovement;
@@ -48,7 +48,7 @@ public class PlayerDeveloperUI : MonoBehaviour {
     private void InitializeReferences() {
         try {
             // Object references
-            playerAttributes = GetComponent<PlayerAttributes>();
+            movementAttributes = GetComponent<PlayerMovementAttributes>();
             horizontalMovement = GetComponent<PlayerHorizontalMovement>();
             verticalMovement = GetComponent<PlayerVerticalMovement>();
             playerStateManager = GetComponent<PlayerStateManager>();
@@ -68,10 +68,10 @@ public class PlayerDeveloperUI : MonoBehaviour {
         GUI.Label(new Rect(32, 64, 512, 32), $"currentState: {playerStateManager.currentState}");
 
         // Current player horizontal velocity
-        GUI.Label(new Rect(32, 96, 512, 32), $"currentVelocity: {playerAttributes.horizontalVelocity.magnitude.ToString("F2")}");
+        GUI.Label(new Rect(32, 96, 512, 32), $"currentVelocity: {movementAttributes.horizontalVelocity.magnitude.ToString("F2")}");
 
         // Current player air jumps left
-        GUI.Label(new Rect(32, 128, 512, 32), $"airJumpsLeft: {playerAttributes.GetAmountOfJumpsRemaining()}");
+        GUI.Label(new Rect(32, 128, 512, 32), $"airJumpsLeft: {movementAttributes.GetAmountOfJumpsRemaining()}");
 
         // Ground sanpping
         GUI.Label(new Rect(32, 160, 512, 32), $"groundSnaping: {verticalMovement.isGroundSnapingActive}");

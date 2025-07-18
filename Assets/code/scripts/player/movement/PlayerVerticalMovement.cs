@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerVerticalMovement : MonoBehaviour {
 
     // Internal references
-    private PlayerAttributes playerAttributes;
+    private PlayerMovementAttributes playerAttributes;
     private CharacterController characterController;
 
     // Slope movement
@@ -57,7 +57,7 @@ public class PlayerVerticalMovement : MonoBehaviour {
     private void InitializeReferences() {
         try {
             // Object references
-            playerAttributes = GetComponent<PlayerAttributes>();
+            playerAttributes = GetComponent<PlayerMovementAttributes>();
             characterController = GetComponent<CharacterController>();
         }
         catch {

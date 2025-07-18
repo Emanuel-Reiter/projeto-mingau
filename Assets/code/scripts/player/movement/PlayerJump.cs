@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class PlayerJump : MonoBehaviour {
 
-    private PlayerAttributes playerAttributes;
+    private PlayerMovementAttributes playerAttributes;
     private PlayerVerticalMovement verticalMovement;
 
     private void Start() {
         InitializeReferences();
     }
 
-    public void ApplyJump() {
+    public void Jump() {
         playerAttributes.DecreaseAmountOfJumps();
 
         playerAttributes.TriggerJumpCooldown();
@@ -26,7 +26,7 @@ public class PlayerJump : MonoBehaviour {
     private void InitializeReferences() {
         try {
             // Object references
-            playerAttributes = GetComponent<PlayerAttributes>();
+            playerAttributes = GetComponent<PlayerMovementAttributes>();
             verticalMovement = GetComponent<PlayerVerticalMovement>();
         }
         catch {

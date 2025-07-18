@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerHorizontalMovement : MonoBehaviour {
 
     // Internal references
-    private PlayerAttributes playerAttributes;
+    private PlayerMovementAttributes playerAttributes;
     private PlayerInputManager input;
     private PlayerVerticalMovement verticalMovement;
     private PlayerMovement movement;
@@ -31,7 +31,7 @@ public class PlayerHorizontalMovement : MonoBehaviour {
     private void InitializeReferences() {
         try {
             // Object references
-            playerAttributes = GetComponent<PlayerAttributes>();
+            playerAttributes = GetComponent<PlayerMovementAttributes>();
             input = GetComponent<PlayerInputManager>();
             verticalMovement = GetComponent<PlayerVerticalMovement>();
             movement = GetComponent<PlayerMovement>();
