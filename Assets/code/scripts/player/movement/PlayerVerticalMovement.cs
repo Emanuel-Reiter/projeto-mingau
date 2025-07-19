@@ -7,7 +7,10 @@ public class PlayerVerticalMovement : MonoBehaviour {
     private CharacterController characterController;
 
     // Slope movement
-    private float slopeRaycastDistance = 0.5f;
+    private float slopeDetectionsDistance = 0.25f;
+    private float slopeCollisionRadiusOffset = 0.005f;
+    [SerializeField] private LayerMask groundMask;
+
     private float groundSnapDistance = 0.25f;
     private float slopeForce = 5.0f;
 
@@ -36,7 +39,7 @@ public class PlayerVerticalMovement : MonoBehaviour {
     }
 
     private void CalculateSlopeMovement() {
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, slopeRaycastDistance)) {
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, slopeDetectionsDistance)) {
             float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
             if (slopeAngle > characterController.slopeLimit) {
                 // Apply downward force along slope normal
@@ -66,7 +69,8 @@ public class PlayerVerticalMovement : MonoBehaviour {
     }
 
     public bool GetSlopeRelativeIsGrounded() {
-        return Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, slopeRaycastDistance);
+        Vector3 checkPosition = transform.position + Vector3.down * slopeDetectionsDistance;
+        return Physics.CheckSphere(checkPosition, (characterController.radius - slopeCollisionRadiusOffset), groundMask);
     }
 
     public void ToggleGroundSnaping(bool toggle) { isGroundSnapingActive = toggle; }

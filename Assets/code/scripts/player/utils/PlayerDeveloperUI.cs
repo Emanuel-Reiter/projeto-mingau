@@ -15,7 +15,7 @@ public class PlayerDeveloperUI : MonoBehaviour {
 
 
     private void Awake() {
-        frameDeltaTimeArray = new float[64];
+        frameDeltaTimeArray = new float[128];
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 0;
     }

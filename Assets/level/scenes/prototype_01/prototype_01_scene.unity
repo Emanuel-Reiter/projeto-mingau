@@ -2242,6 +2242,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1316029606537603851, guid: 56741755db25387439eca179c0018031, type: 3}
+      propertyPath: groundMask.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 3400830882231886775, guid: 56741755db25387439eca179c0018031, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4907246070651380510, guid: 56741755db25387439eca179c0018031, type: 3}
       propertyPath: m_Name
       value: player
