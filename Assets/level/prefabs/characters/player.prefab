@@ -224,6 +224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98e6393a2c462c429edb649ccb94377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &3627623256607066347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,9 +372,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5458507129815523376, guid: 84a8171a072890147b4440c7dc2a1f97, type: 3}
+      propertyPath: m_Name
+      value: mingau_tail_mesh
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 84a8171a072890147b4440c7dc2a1f97, type: 3}
       propertyPath: m_Name
-      value: player_mingau_tail
+      value: mingau_tail
+      objectReference: {fileID: 0}
+    - target: {fileID: 9220373823627197170, guid: 84a8171a072890147b4440c7dc2a1f97, type: 3}
+      propertyPath: m_Name
+      value: mingau_tail_armature
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -555,9 +566,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 214307693806057643, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
+      propertyPath: m_Name
+      value: mingau_mesh
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
       propertyPath: m_Name
-      value: player_mingau
+      value: mingau
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
       propertyPath: m_TagString

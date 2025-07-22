@@ -23,7 +23,6 @@ public class PlayerDash : MonoBehaviour {
         SetIsDashing(true);
 
         float dashVelocity = Mathf.Sqrt(2.0f * movementAttributes.GetCurrentSpeed(verticalMovement.GetSlopeRelativeIsGrounded()) * dashSpeed);
-        Debug.Log(dashVelocity); 
 
         Vector2 inputVector = input.movementDirection;
         Vector3 dashDirection = movement.GetCameraRelativeDirection(inputVector);
