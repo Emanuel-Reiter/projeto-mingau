@@ -10,7 +10,7 @@ public class PlayerDash : MonoBehaviour {
     private PlayerVerticalMovement verticalMovement;
     private ActionOnTimer timer;
 
-    public float dashSpeed { get; private set; } = 48.0f;
+    public float dashSpeed { get; private set; } = 32.0f;
     public bool isDashing { get; private set; } = false;
     private int maxAmountOfDashes = 1;
     private int currentAmountOfDashes = 0;

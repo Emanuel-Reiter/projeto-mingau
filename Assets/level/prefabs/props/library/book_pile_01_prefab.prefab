@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4071763918991991997}
   - component: {fileID: 3215708832594155370}
   - component: {fileID: 9013635625165782539}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: graphics (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 6329478760695113475}
   - component: {fileID: 338031048883083172}
   - component: {fileID: 5626742841457714867}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4212981146194023201}
   - component: {fileID: 5770107166820777587}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: book_pile_01_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 8423100334717851569}
   - component: {fileID: 3655127742305154243}
   - component: {fileID: 3646218217214990491}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: graphics (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

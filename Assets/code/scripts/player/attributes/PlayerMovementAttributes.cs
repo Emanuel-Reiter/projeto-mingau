@@ -6,7 +6,7 @@ public class PlayerMovementAttributes : MonoBehaviour {
     public float verticalVelocity { get; private set; }
 
     // Movement speed
-    private float baseSpeed = 10.0f;
+    private float baseSpeed = 6.667f;
     private float currentSpeed = 0.0f;
 
     private float runSpeedMultiplaier = 1.0f;
@@ -24,7 +24,7 @@ public class PlayerMovementAttributes : MonoBehaviour {
 
     // Jump
     public bool isJumping { get; private set; } = false;
-    public float jumpHeight { get; private set; } = 4.75f;
+    public float jumpHeight { get; private set; } = 2.25f;
 
     private float jumpCooldown = 0.067f; 
     public bool isJumpOnCooldown { get; private set; } = false;
