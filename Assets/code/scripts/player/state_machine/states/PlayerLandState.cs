@@ -27,7 +27,7 @@ public class PlayerLandState : PlayerBaseState
 
         player.animationManager.PlayAnimationInterpolated
             (player.animationManager.land_01_anim, 
-            player.animationManager.instantaneousInterpolationTime);
+            player.animationManager.interpolationTime_00);
 
         exitTimer = player.animationManager.land_01_anim.length;
     }

@@ -26,7 +26,7 @@ public class PlayerJumpState : PlayerBaseState {
         else {
             player.animationManager.PlayAnimationInterpolated(
                 player.animationManager.jump_02_anim, 
-                player.animationManager.instantaneousInterpolationTime);
+                player.animationManager.interpolationTime_00);
 
             //player.rigManager.SetTailRigWeight(0.0f);
         }

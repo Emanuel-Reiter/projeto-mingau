@@ -11,7 +11,7 @@ public class PlayerFallState : PlayerBaseState {
         if (player.verticalMovement.GetSlopeRelativeIsGrounded()) {
             // Checks if the player is grounded, then switch to the fitting grounded state
 
-            if (airTime > 0.3f) {
+            if (airTime > 0.1f) {
                 player.SwitchState(player.landState);
             }
             else {
@@ -31,7 +31,7 @@ public class PlayerFallState : PlayerBaseState {
     public override void EnterState(PlayerStateManager player) {
         player.verticalMovement.ToggleGroundSnaping(true);
 
-        player.animationManager.PlayAnimationInterpolated(player.animationManager.fall_01_anim, player.animationManager.fastInterpolationTime);
+        player.animationManager.PlayAnimationInterpolated(player.animationManager.fall_01_anim, player.animationManager.interpolationTime_02);
 
         airTime = 0.0f;
     }

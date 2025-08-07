@@ -23,7 +23,7 @@ public class PlayerDashState : PlayerBaseState {
 
         player.animationManager.PlayAnimationInterpolated(
             player.animationManager.dash_01_anim,
-            player.animationManager.instantaneousInterpolationTime);
+            player.animationManager.interpolationTime_00);
 
         player.dash.Dash();
     }

@@ -24,10 +24,11 @@ public class PlayerAnimationManager : MonoBehaviour
     private Animator playerAnimator;
 
     [Header("Animation interpolation times")]
-    public float instantaneousInterpolationTime { get; private set; } = 0.0125f;
-    public float fastInterpolationTime { get; private set; } = 0.25f;
-    public float averageInterpolationTime { get; private set; } = 0.5f;
-    public float slowInterpolationTime { get; private set; } = 1.0f;
+    public float interpolationTime_00 { get; private set; } = 0.05f;
+    public float interpolationTime_01 { get; private set; } = 0.1f;
+    public float interpolationTime_02 { get; private set; } = 0.25f;
+    public float interpolationTime_03 { get; private set; } = 0.5f;
+    public float interpolationTime_04 { get; private set; } = 1.0f;
 
     private void Start() {
         playerAnimator = GameObject.FindGameObjectWithTag("PlayerGraphics").gameObject.GetComponent<Animator>();

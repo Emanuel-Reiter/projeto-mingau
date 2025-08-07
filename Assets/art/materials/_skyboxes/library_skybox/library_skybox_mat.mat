@@ -58,9 +58,9 @@ Material:
     - _StarsSize: 2
     - _StarsTiling: 1
     m_Colors:
-    - _GroundColor: {r: 0.5, g: 0.25174826, b: 0.5, a: 0}
-    - _HorizonColor: {r: 0.68750006, g: 0.375, b: 0.75, a: 0}
-    - _SkyColor: {r: 0.8304348, g: 0.5, b: 1, a: 0}
+    - _GroundColor: {r: 0.5019608, g: 0.2509804, b: 0.5019608, a: 0}
+    - _HorizonColor: {r: 0.7490196, g: 0.4509804, b: 0.5503268, a: 0}
+    - _SkyColor: {r: 0.83333325, g: 0.5, b: 1, a: 0}
     - _StarsColor: {r: 47.937256, g: 15.579609, b: 4.793727, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

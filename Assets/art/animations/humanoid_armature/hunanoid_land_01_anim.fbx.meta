@@ -12,7 +12,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleCurves: 0
+    resampleCurves: 1
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
@@ -35,7 +35,7 @@ ModelImporter:
       takeName: humanoid_land_01
       internalID: -636547287791415942
       firstFrame: 0
-      lastFrame: 7
+      lastFrame: 9
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
