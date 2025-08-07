@@ -1,6 +1,9 @@
 using UnityEngine;
 
 public class PlayerFallState : PlayerBaseState {
+
+    private float airTime;
+
     public override void CheckExitState(PlayerStateManager player) {
         // Checks for dash input
         if (player.input.isDashPressed && player.dash.HaveReaminingDashes()) player.SwitchState(player.dashState);
@@ -8,10 +11,14 @@ public class PlayerFallState : PlayerBaseState {
         if (player.verticalMovement.GetSlopeRelativeIsGrounded()) {
             // Checks if the player is grounded, then switch to the fitting grounded state
 
-            player.SwitchState(player.landState);
+            if (airTime > 0.3f) {
+                player.SwitchState(player.landState);
+            }
+            else {
+                if (player.input.movementDirection != Vector2.zero) player.SwitchState(player.runState);
+                else player.SwitchState(player.idleState);
+            }
 
-            //if (player.input.movementDirection != Vector2.zero) player.SwitchState(player.runState);
-            //else player.SwitchState(player.idleState);
         }
         else {
             // Checks for player air jump input
@@ -25,11 +32,15 @@ public class PlayerFallState : PlayerBaseState {
         player.verticalMovement.ToggleGroundSnaping(true);
 
         player.animationManager.PlayAnimationInterpolated(player.animationManager.fall_01_anim, player.animationManager.fastInterpolationTime);
+
+        airTime = 0.0f;
     }
 
     public override void UpdateState(PlayerStateManager player) {
         player.horizontalMovement.CalculateHorizontalMovement();
         player.verticalMovement.CalculateVerticalMovement();
+
+        airTime += Time.deltaTime;
     }
 
     public override void PhysicsUpdateState(PlayerStateManager player) { }
