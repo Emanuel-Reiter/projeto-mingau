@@ -8,7 +8,9 @@ public class PlayerStateManager : MonoBehaviour {
     public PlayerRunState runState = new PlayerRunState();
     public PlayerJumpState jumpState = new PlayerJumpState();
     public PlayerFallState fallState = new PlayerFallState();
+    public PlayerLandState landState = new PlayerLandState();
     public PlayerDashState dashState = new PlayerDashState();
+
 
     // State management
     public PlayerBaseState currentState { get; private set; }
@@ -28,7 +30,6 @@ public class PlayerStateManager : MonoBehaviour {
     [HideInInspector] public PlayerDash dash;
 
     [HideInInspector] public PlayerGraphicsRotationSync rotationSync;
-
 
     private void Start() {
         InitializeReferences();

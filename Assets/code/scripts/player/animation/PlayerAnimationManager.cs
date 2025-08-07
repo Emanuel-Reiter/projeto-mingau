@@ -11,6 +11,9 @@ public class PlayerAnimationManager : MonoBehaviour
     [Header("Fall")]
     public AnimationClip fall_01_anim;
 
+    [Header("Land")]
+    public AnimationClip land_01_anim;
+
     [Header("jump")]
     public AnimationClip jump_01_anim;
     public AnimationClip jump_02_anim;

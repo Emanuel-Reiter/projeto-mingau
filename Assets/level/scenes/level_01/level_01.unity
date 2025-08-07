@@ -9923,7 +9923,7 @@ MonoBehaviour:
   TargetOffset: {x: 0, y: 0, z: 0}
   TrackerSettings:
     BindingMode: 4
-    PositionDamping: {x: 0.667, y: 0.667, z: 0.667}
+    PositionDamping: {x: 1, y: 1, z: 1}
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
@@ -10881,6 +10881,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8391578740755683004, guid: 56741755db25387439eca179c0018031, type: 3}
+      propertyPath: land_01_anim
+      value: 
+      objectReference: {fileID: -636547287791415942, guid: d3a58810baf30a048b56f5b4e6136f6d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

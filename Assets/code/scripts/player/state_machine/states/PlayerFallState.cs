@@ -7,8 +7,11 @@ public class PlayerFallState : PlayerBaseState {
 
         if (player.verticalMovement.GetSlopeRelativeIsGrounded()) {
             // Checks if the player is grounded, then switch to the fitting grounded state
-            if (player.input.movementDirection != Vector2.zero) player.SwitchState(player.runState);
-            else player.SwitchState(player.idleState);
+
+            player.SwitchState(player.landState);
+
+            //if (player.input.movementDirection != Vector2.zero) player.SwitchState(player.runState);
+            //else player.SwitchState(player.idleState);
         }
         else {
             // Checks for player air jump input

@@ -6,15 +6,15 @@ public class PlayerMovementAttributes : MonoBehaviour {
     public float verticalVelocity { get; private set; }
 
     // Movement speed
-    private float baseSpeed = 6.667f;
+    private float baseSpeed = 7.0f;
     private float currentSpeed = 0.0f;
 
     private float runSpeedMultiplaier = 1.0f;
-    private float airSpeedMultiplaier = 1.667f;
+    private float airSpeedMultiplaier = 1.8f;
 
     // Acceleration
-    public float accelerationRate { get; private set; } = 40.0f;
-    public float decelerationRate { get; private set; } = 40.0f;
+    public float accelerationRate { get; private set; } = 36.0f;
+    public float decelerationRate { get; private set; } = 36.0f;
 
     // Gravity
     private float defaultGravity = -50.0f;
