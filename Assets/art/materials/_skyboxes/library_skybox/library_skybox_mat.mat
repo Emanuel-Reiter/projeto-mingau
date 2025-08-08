@@ -55,7 +55,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _StarsPower: 8
-    - _StarsSize: 2
+    - _StarsSize: 0.5
     - _StarsTiling: 1
     m_Colors:
     - _GroundColor: {r: 0.5019608, g: 0.2509804, b: 0.5019608, a: 0}
