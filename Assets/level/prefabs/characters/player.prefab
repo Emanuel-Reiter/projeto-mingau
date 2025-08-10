@@ -98,9 +98,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8858630587070293065}
   - {fileID: 5912807332934396265}
   - {fileID: 2628410067781449997}
+  - {fileID: 8858630587070293065}
   - {fileID: 821109226948490995}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -290,6 +290,8 @@ MonoBehaviour:
   idle_01_anim: {fileID: 786313332296713501, guid: e3885ad4572f145468402a8f242d0533, type: 3}
   run_01_anim: {fileID: 3402012848130686575, guid: bc028665d1f94214795132c44806d727, type: 3}
   fall_01_anim: {fileID: -1355831876327942347, guid: a526c60bc1399d540a4e9c7049169c1c, type: 3}
+  land_heavy_01_anim: {fileID: 0}
+  land_light_01_anim: {fileID: 0}
   jump_01_anim: {fileID: -739041142239481430, guid: 00ad24c6c9ca945479b61d1deeb1278b, type: 3}
   jump_02_anim: {fileID: -3839310128571099303, guid: 9d15c8314bd93bf4a9784d642aac4868, type: 3}
   dash_01_anim: {fileID: 1997658489410615827, guid: de027bdd1bf1bf04fa1cb3724b602d5e, type: 3}

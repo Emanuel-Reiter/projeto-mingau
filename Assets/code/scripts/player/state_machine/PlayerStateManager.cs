@@ -8,7 +8,8 @@ public class PlayerStateManager : MonoBehaviour {
     public PlayerRunState runState = new PlayerRunState();
     public PlayerJumpState jumpState = new PlayerJumpState();
     public PlayerFallState fallState = new PlayerFallState();
-    public PlayerLandState landState = new PlayerLandState();
+    public PlayerLandHeavyState landHeavyState = new PlayerLandHeavyState();
+    public PlayerLandLightState landLightState = new PlayerLandLightState();
     public PlayerDashState dashState = new PlayerDashState();
 
 

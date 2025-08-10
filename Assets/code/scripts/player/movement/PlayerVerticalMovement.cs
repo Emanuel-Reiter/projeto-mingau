@@ -8,7 +8,7 @@ public class PlayerVerticalMovement : MonoBehaviour {
 
     // Slope movement
     private float slopeDetectionsDistance = 0.25f;
-    private float slopeCollisionRadiusOffset = 0.005f;
+    private float slopeCollisionRadiusOffset = 0.001f;
     [SerializeField] private LayerMask groundMask;
 
     private float groundSnapDistance = 0.25f;

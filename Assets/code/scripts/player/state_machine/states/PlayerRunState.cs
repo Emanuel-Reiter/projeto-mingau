@@ -27,7 +27,7 @@ public class PlayerRunState : PlayerBaseState {
 
         player.verticalMovement.ToggleGroundSnaping(true);
 
-        player.animationManager.PlayAnimationInterpolated(player.animationManager.run_01_anim, player.animationManager.interpolationTime_01);
+        player.animationManager.PlayAnimationInterpolated(player.animationManager.run_01_anim, player.animationManager.interpolationTime_02);
     }
 
     public override void UpdateState(PlayerStateManager player) {

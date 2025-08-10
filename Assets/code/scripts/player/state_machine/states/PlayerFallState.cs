@@ -11,14 +11,13 @@ public class PlayerFallState : PlayerBaseState {
         if (player.verticalMovement.GetSlopeRelativeIsGrounded()) {
             // Checks if the player is grounded, then switch to the fitting grounded state
 
-            if (airTime > 0.1f) {
-                player.SwitchState(player.landState);
-            }
-            else {
-                if (player.input.movementDirection != Vector2.zero) player.SwitchState(player.runState);
-                else player.SwitchState(player.idleState);
-            }
+            bool heavyLand = airTime > 0.4f;
+            bool lightLand = airTime > 0.1f && airTime < 0.4f;
+            bool noLand = !lightLand && !heavyLand;
 
+            if (heavyLand) player.SwitchState(player.landHeavyState);
+            if (lightLand) player.SwitchState(player.landLightState);
+            if (noLand) player.SwitchState(player.idleState);
         }
         else {
             // Checks for player air jump input

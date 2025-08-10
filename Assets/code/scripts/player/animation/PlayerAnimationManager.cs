@@ -12,7 +12,8 @@ public class PlayerAnimationManager : MonoBehaviour
     public AnimationClip fall_01_anim;
 
     [Header("Land")]
-    public AnimationClip land_01_anim;
+    public AnimationClip land_heavy_01_anim;
+    public AnimationClip land_light_01_anim;
 
     [Header("jump")]
     public AnimationClip jump_01_anim;
@@ -24,7 +25,7 @@ public class PlayerAnimationManager : MonoBehaviour
     private Animator playerAnimator;
 
     [Header("Animation interpolation times")]
-    public float interpolationTime_00 { get; private set; } = 0.05f;
+    public float interpolationTime_00 { get; private set; } = 0.025f;
     public float interpolationTime_01 { get; private set; } = 0.1f;
     public float interpolationTime_02 { get; private set; } = 0.25f;
     public float interpolationTime_03 { get; private set; } = 0.5f;
