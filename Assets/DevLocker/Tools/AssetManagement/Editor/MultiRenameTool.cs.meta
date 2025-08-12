@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 1b097351617e61140935308948fc6242
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 170616
+  packageName: Multi-Rename Tool
+  packageVersion: 1.1.6
+  assetPath: Assets/DevLocker/Tools/AssetManagement/Editor/MultiRenameTool.cs
+  uploadId: 599561

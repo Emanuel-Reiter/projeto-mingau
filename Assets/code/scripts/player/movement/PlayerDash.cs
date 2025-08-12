@@ -8,7 +8,7 @@ public class PlayerDash : MonoBehaviour {
     private PlayerInputManager input;
     private PlayerMovement movement;
     private PlayerVerticalMovement verticalMovement;
-    private ActionOnTimer timer;
+    private GlobalTimer timer;
 
     public float dashSpeed { get; private set; } = 32.0f;
     public bool isDashing { get; private set; } = false;
@@ -58,7 +58,7 @@ public class PlayerDash : MonoBehaviour {
             movement = GetComponent<PlayerMovement>();
             input = GetComponent<PlayerInputManager>();
             verticalMovement = GetComponent<PlayerVerticalMovement>();
-            timer = GameObject.FindGameObjectWithTag("GlobalTimer").GetComponent<ActionOnTimer>();
+            timer = GameObject.FindGameObjectWithTag("GlobalTimer").GetComponent<GlobalTimer>();
         }
         catch {
             Debug.LogError("Some references were not assigned correctly.\nCheck external tag names and components assigned to this object.");

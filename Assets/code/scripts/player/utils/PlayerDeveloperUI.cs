@@ -15,7 +15,7 @@ public class PlayerDeveloperUI : MonoBehaviour {
 
 
     private void Awake() {
-        frameDeltaTimeArray = new float[128];
+        frameDeltaTimeArray = new float[256];
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 0;
     }
@@ -62,7 +62,7 @@ public class PlayerDeveloperUI : MonoBehaviour {
         GUI.skin.label.fontSize = 24;
 
         // Framerate UI
-        GUI.Label(new Rect(32, 32, 512, 32), $"FPS: {framerate}");
+        GUI.Label(new Rect(32, 32, 512, 32), $"fps: {framerate}");
 
         // Player state
         GUI.Label(new Rect(32, 64, 512, 32), $"currentState: {playerStateManager.currentState}");
@@ -71,7 +71,7 @@ public class PlayerDeveloperUI : MonoBehaviour {
         GUI.Label(new Rect(32, 96, 512, 32), $"currentVelocity: {movementAttributes.horizontalVelocity.magnitude.ToString("F2")}");
 
         // Current player air jumps left
-        GUI.Label(new Rect(32, 128, 512, 32), $"airJumpsLeft: {movementAttributes.GetAmountOfJumpsRemaining()}");
+        GUI.Label(new Rect(32, 128, 512, 32), $"jumpsRemaining: {movementAttributes.GetAmountOfJumpsRemaining()}");
 
         // Ground sanpping
         GUI.Label(new Rect(32, 160, 512, 32), $"groundSnaping: {verticalMovement.isGroundSnapingActive}");

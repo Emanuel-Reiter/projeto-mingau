@@ -35,7 +35,7 @@ public class PlayerMovementAttributes : MonoBehaviour {
 
 
     // Timer
-    private ActionOnTimer timer;
+    private GlobalTimer timer;
 
     private void Start() {
         // Attributes setup
@@ -43,7 +43,7 @@ public class PlayerMovementAttributes : MonoBehaviour {
         gravityAcceleration = defaultGravity;
         ResetAmountOfJumps();
 
-        timer = GameObject.FindGameObjectWithTag("GlobalTimer").GetComponent<ActionOnTimer>();
+        timer = GameObject.FindGameObjectWithTag("GlobalTimer").GetComponent<GlobalTimer>();
     }
 
     // Horizontal movement speed
