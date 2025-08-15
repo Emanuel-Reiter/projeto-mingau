@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerGraphicsRotationSync : MonoBehaviour {
 
     // References
-    private PlayerMovementAttributes movementAttributes;
+    private PlayerLocomotionParams movementAttributes;
     private Transform playerGraphics;
 
     // Rotation attributes
@@ -33,7 +33,7 @@ public class PlayerGraphicsRotationSync : MonoBehaviour {
             playerGraphics = GameObject.FindGameObjectWithTag("PlayerGraphics").transform;
 
             // Object references
-            movementAttributes = GetComponent<PlayerMovementAttributes>();
+            movementAttributes = GetComponent<PlayerLocomotionParams>();
         }
         catch {
             Debug.LogError("Some references were not assigned correctly.\nCheck external tag names and components assigned to this object.");

@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerDeveloperUI : MonoBehaviour {
 
     // Exteral player references
-    private PlayerMovementAttributes movementAttributes;
+    private PlayerLocomotionParams movementAttributes;
     private PlayerStateManager playerStateManager;
     private PlayerHorizontalMovement horizontalMovement;
     private PlayerVerticalMovement verticalMovement;
@@ -48,7 +48,7 @@ public class PlayerDeveloperUI : MonoBehaviour {
     private void InitializeReferences() {
         try {
             // Object references
-            movementAttributes = GetComponent<PlayerMovementAttributes>();
+            movementAttributes = GetComponent<PlayerLocomotionParams>();
             horizontalMovement = GetComponent<PlayerHorizontalMovement>();
             verticalMovement = GetComponent<PlayerVerticalMovement>();
             playerStateManager = GetComponent<PlayerStateManager>();

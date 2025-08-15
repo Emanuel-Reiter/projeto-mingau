@@ -1,15 +1,18 @@
 using UnityEngine;
 
-public class PlayerJump : MonoBehaviour {
+public class PlayerJump : MonoBehaviour
+{
 
-    private PlayerMovementAttributes playerAttributes;
+    private PlayerLocomotionParams playerAttributes;
     private PlayerVerticalMovement verticalMovement;
 
-    private void Start() {
+    private void Start()
+    {
         InitializeReferences();
     }
 
-    public void Jump() {
+    public void Jump()
+    {
         playerAttributes.DecreaseAmountOfJumps();
 
         playerAttributes.TriggerJumpCooldown();
@@ -19,17 +22,20 @@ public class PlayerJump : MonoBehaviour {
         // Resets player vertical velocity in order to enssure full controll of the height of the jump
         playerAttributes.SetVerticalVelocity(0.0f);
 
-        float jumpVelocity = Mathf.Sqrt(-2.0f * playerAttributes.gravityAcceleration * playerAttributes.jumpHeight);
+        float jumpVelocity = Mathf.Sqrt(-2.0f * playerAttributes.AerialGravityAcceleration * playerAttributes.JumpHeight);
         playerAttributes.SetVerticalVelocity(jumpVelocity);
     }
 
-    private void InitializeReferences() {
-        try {
+    private void InitializeReferences()
+    {
+        try
+        {
             // Object references
-            playerAttributes = GetComponent<PlayerMovementAttributes>();
+            playerAttributes = GetComponent<PlayerLocomotionParams>();
             verticalMovement = GetComponent<PlayerVerticalMovement>();
         }
-        catch {
+        catch
+        {
             Debug.LogError("Some references were not assigned correctly.\nCheck external tag names and components assigned to this object.");
         }
     }

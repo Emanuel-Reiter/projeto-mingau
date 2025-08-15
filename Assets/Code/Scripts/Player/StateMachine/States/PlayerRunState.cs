@@ -22,7 +22,7 @@ public class PlayerRunState : PlayerBaseState {
 
     public override void EnterState(PlayerStateManager player) {
         // Reset player jumps and dashes
-        player.movementAttributes.ResetAmountOfJumps();
+        player.locomotionParams.ResetAmountOfJumps();
         player.dash.ResetAmountOfDashes();
 
         player.verticalMovement.ToggleGroundSnaping(true);

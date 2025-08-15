@@ -3,14 +3,14 @@ using UnityEngine.Windows;
 
 public class PlayerDash : MonoBehaviour {
     // Internal references
-    private PlayerMovementAttributes movementAttributes;
+    private PlayerLocomotionParams movementAttributes;
     private PlayerAnimationManager animationManager;
     private PlayerInputManager input;
     private PlayerMovement movement;
     private PlayerVerticalMovement verticalMovement;
     private GlobalTimer timer;
 
-    public float dashSpeed { get; private set; } = 32.0f;
+    public float dashSpeed { get; private set; } = 48.0f;
     public bool isDashing { get; private set; } = false;
     private int maxAmountOfDashes = 1;
     private int currentAmountOfDashes = 0;
@@ -53,7 +53,7 @@ public class PlayerDash : MonoBehaviour {
     private void InitializeReferences() {
         try {
             // Object references
-            movementAttributes = GetComponent<PlayerMovementAttributes>();
+            movementAttributes = GetComponent<PlayerLocomotionParams>();
             animationManager = GetComponent<PlayerAnimationManager>();
             movement = GetComponent<PlayerMovement>();
             input = GetComponent<PlayerInputManager>();

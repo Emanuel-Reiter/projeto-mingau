@@ -19,7 +19,7 @@ public class PlayerStateManager : MonoBehaviour {
 
     // External references
     [HideInInspector] public PlayerInputManager input;
-    [HideInInspector] public PlayerMovementAttributes movementAttributes;
+    [HideInInspector] public PlayerLocomotionParams locomotionParams;
     [HideInInspector] public PlayerAnimationManager animationManager;
     [HideInInspector] public CharacterController characterController;
 
@@ -70,7 +70,7 @@ public class PlayerStateManager : MonoBehaviour {
             jump = GetComponent<PlayerJump>();
             dash = GetComponent<PlayerDash>();
             rotationSync = GetComponent<PlayerGraphicsRotationSync>();
-            movementAttributes = GetComponent<PlayerMovementAttributes>();
+            locomotionParams = GetComponent<PlayerLocomotionParams>();
             characterController = GetComponent<CharacterController>();
             animationManager = GetComponent<PlayerAnimationManager>();
             movement = GetComponent<PlayerMovement>();

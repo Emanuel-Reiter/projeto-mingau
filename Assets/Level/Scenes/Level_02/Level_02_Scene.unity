@@ -11901,9 +11901,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 3
-  m_Color: {r: 1, g: 0.9, b: 0.7, a: 1}
-  m_Intensity: 1
-  m_Range: 34
+  m_Color: {r: 1, g: 0.8901961, b: 0.67058825, a: 1}
+  m_Intensity: 0.5
+  m_Range: 35
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -11944,7 +11944,7 @@ Light:
   m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 5.5, y: 6}
-  m_BounceIntensity: 6
+  m_BounceIntensity: 14
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -16923,7 +16923,7 @@ GameObject:
   - component: {fileID: 1392543930}
   - component: {fileID: 1392543931}
   m_Layer: 0
-  m_Name: AdaptativeProbe_Volume
+  m_Name: Global_AdaptativeProbe_Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25116,7 +25116,7 @@ MonoBehaviour:
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 0.5, y: 0.5}
+  Damping: {x: 0.25, y: 0.25}
   Lookahead:
     Enabled: 0
     Time: 0

@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class PlayerVerticalMovement : MonoBehaviour {
+public class PlayerVerticalMovement : MonoBehaviour
+{
 
     // Internal references
-    private PlayerMovementAttributes playerAttributes;
+    private PlayerLocomotionParams locomotionParams;
     private CharacterController characterController;
 
     // Slope movement
@@ -22,53 +23,67 @@ public class PlayerVerticalMovement : MonoBehaviour {
         InitializeReferences();
     }
 
-    private void Update() {
+    private void Update()
+    {
         // When active calculate movenet when in slopes
         if (isGroundSnapingActive) ApplyGroundSnaping();
     }
 
-    public void CalculateVerticalMovement() {
-        if (characterController.isGrounded && !playerAttributes.isJumping) {
-            playerAttributes.SetVerticalVelocity(playerAttributes.groundedGravityAcceleration);
+    public void CalculateVerticalMovement()
+    {
+        if (characterController.isGrounded && !locomotionParams.isJumping)
+        {
+            locomotionParams.SetVerticalVelocity(locomotionParams.GroundedGravityAcceleration);
             if (isGroundSnapingActive) CalculateSlopeMovement();
         }
-        else {
-            playerAttributes.SetVerticalVelocity(
-                playerAttributes.verticalVelocity + playerAttributes.gravityAcceleration * Time.deltaTime);
+        else
+        {
+            locomotionParams.SetVerticalVelocity(
+                locomotionParams.verticalVelocity + locomotionParams.AerialGravityAcceleration * Time.deltaTime);
         }
     }
 
-    private void CalculateSlopeMovement() {
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, slopeDetectionsDistance)) {
+    private void CalculateSlopeMovement()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, slopeDetectionsDistance))
+        {
             float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
-            if (slopeAngle > characterController.slopeLimit) {
+            if (slopeAngle > characterController.slopeLimit)
+            {
                 // Apply downward force along slope normal
-                playerAttributes.SetVerticalVelocity(
-                    playerAttributes.verticalVelocity + slopeForce * Mathf.Sin(slopeAngle * Mathf.Deg2Rad));
+                locomotionParams.SetVerticalVelocity(
+                    locomotionParams.verticalVelocity + slopeForce * Mathf.Sin(slopeAngle * Mathf.Deg2Rad));
             }
         }
     }
 
-    private void ApplyGroundSnaping() {
-        if (!characterController.isGrounded) {
-            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundSnapDistance)) {
+    private void ApplyGroundSnaping()
+    {
+        if (!characterController.isGrounded)
+        {
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundSnapDistance))
+            {
                 characterController.Move(Vector3.down * hit.distance);
             }
         }
     }
 
-    private void InitializeReferences() {
-        try {
+    private void InitializeReferences()
+    {
+        try
+        {
             // Object references
-            playerAttributes = GetComponent<PlayerMovementAttributes>();
+            locomotionParams = GetComponent<PlayerLocomotionParams>();
             characterController = GetComponent<CharacterController>();
         }
-        catch {
+        catch
+        {
             Debug.LogError("Some references were not assigned correctly.\nCheck external tag names and components assigned to this object.");
         }
     }
 
-    public bool GetSlopeRelativeIsGrounded() {
+    public bool GetSlopeRelativeIsGrounded()
+    {
         Vector3 checkPosition = transform.position + Vector3.down * slopeDetectionsDistance;
         return Physics.CheckSphere(checkPosition, (characterController.radius - slopeCollisionRadiusOffset), groundMask);
     }

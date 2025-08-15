@@ -6,7 +6,7 @@ public class PlayerLandHeavyState : PlayerBaseState
     float exitTimer = 0.1f;
 
     public override void CheckExitState(PlayerStateManager player) {
-        if (player.input.isJumpPressed && player.movementAttributes.HaveRemainingJumps()) {
+        if (player.input.isJumpPressed && player.locomotionParams.HaveRemainingJumps()) {
             player.SwitchState(player.jumpState);
         }
 
@@ -22,7 +22,7 @@ public class PlayerLandHeavyState : PlayerBaseState
     }
 
     public override void EnterState(PlayerStateManager player) {
-        player.movementAttributes.ResetAmountOfJumps();
+        player.locomotionParams.ResetAmountOfJumps();
         player.dash.ResetAmountOfDashes();
 
         player.animationManager.PlayAnimationInterpolated

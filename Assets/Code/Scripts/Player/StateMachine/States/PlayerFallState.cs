@@ -21,7 +21,7 @@ public class PlayerFallState : PlayerBaseState {
         }
         else {
             // Checks for player air jump input
-            if (player.input.isJumpPressed && player.movementAttributes.HaveRemainingJumps()) {
+            if (player.input.isJumpPressed && player.locomotionParams.HaveRemainingJumps()) {
                 player.SwitchState(player.jumpState);
             }
         }
