@@ -6,16 +6,16 @@ public class PlayerLandLightState : PlayerBaseState {
 
     public override void CheckExitState(PlayerStateManager player) {
         if (player.input.isJumpPressed && player.locomotionParams.HaveRemainingJumps()) {
-            player.SwitchState(player.jumpState);
+            player.SwitchState(player.JumpState);
         }
 
         if (exitTimer <= 0.0f) {
             if (player.verticalMovement.GetSlopeRelativeIsGrounded()) {
-                if (player.input.movementDirection != Vector2.zero) player.SwitchState(player.runState);
-                else player.SwitchState(player.idleState);
+                if (player.input.movementDirection != Vector2.zero) player.SwitchState(player.RunState);
+                else player.SwitchState(player._idleState);
             }
             else {
-                player.SwitchState(player.fallState);
+                player.SwitchState(player.FallState);
             }
         }
     }

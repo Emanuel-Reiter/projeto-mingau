@@ -2,41 +2,54 @@ using UnityEngine;
 
 public class PlayerJump : MonoBehaviour
 {
+    private PlayerDependencies _dependencies;
+    private PlayerLocomotion _locomotion;
+    private PlayerPhysics _physics;
 
-    private PlayerLocomotionParams playerAttributes;
-    private PlayerVerticalMovement verticalMovement;
+    [Header("Params")]
+    [SerializeField] private float _jumpHeight = 2.25f;
+    public float JumpHeight => _jumpHeight;
+
+    private bool _isJumping = false;
+    public bool IsJumping => _isJumping;
+
+    private bool _isJumpOnCooldown = false;
+    public bool IsJumpOnCooldown => _isJumpOnCooldown;
+
+    private float _jumpCooldown = 0.067f;
+
+    private int _maxJumpCount = 2;
+
+    private int _currentJumpCount = 0;
+    public int CurrentJumpCount => _currentJumpCount;
 
     private void Start()
     {
-        InitializeReferences();
+        _dependencies = GetComponent<PlayerDependencies>();
+        _locomotion = GetComponent<PlayerLocomotion>();
+        _physics = GetComponent<PlayerPhysics>();
     }
 
-    public void Jump()
+    public void PerformJump()
     {
-        playerAttributes.DecreaseAmountOfJumps();
+        _isJumping = true;
+        _isJumpOnCooldown = true;
 
-        playerAttributes.TriggerJumpCooldown();
-        playerAttributes.SetIsJumping(true);
-        verticalMovement.ToggleGroundSnaping(false);
+        int jumpCooldownTimer = _dependencies.GlobalTimer.StartTimer(_jumpCooldown, () => _isJumpOnCooldown = false);
 
-        // Resets player vertical velocity in order to enssure full controll of the height of the jump
-        playerAttributes.SetVerticalVelocity(0.0f);
+        _physics.ToggleGroundSnaping(false);
 
-        float jumpVelocity = Mathf.Sqrt(-2.0f * playerAttributes.AerialGravityAcceleration * playerAttributes.JumpHeight);
-        playerAttributes.SetVerticalVelocity(jumpVelocity);
+        _locomotion.SetVerticalVelocity(0.0f);
+
+        float jumpVelocity = Mathf.Sqrt(-2.0f * _dependencies.LocomotionParams.AerialGravityAcceleration * JumpHeight);
+        _locomotion.SetVerticalVelocity(jumpVelocity);
     }
 
-    private void InitializeReferences()
-    {
-        try
-        {
-            // Object references
-            playerAttributes = GetComponent<PlayerLocomotionParams>();
-            verticalMovement = GetComponent<PlayerVerticalMovement>();
-        }
-        catch
-        {
-            Debug.LogError("Some references were not assigned correctly.\nCheck external tag names and components assigned to this object.");
-        }
-    }
+    public void SetIsJumping(bool isJumping) { _isJumping = isJumping; }
+
+    public void ResetJumps() { _currentJumpCount = _maxJumpCount; }
+
+    public void AddJump() { _currentJumpCount++; }
+
+    public void ConsumeJump() { _currentJumpCount--; }
 }

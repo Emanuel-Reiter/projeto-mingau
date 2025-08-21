@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     public void Accelerate(Vector3 targetVelocity)
     {
         locomotionParams.SetHorizontalVelocity(
-            Vector3.MoveTowards(locomotionParams.horizontalVelocity, targetVelocity, locomotionParams.AccelerationRate * Time.deltaTime));
+            Vector3.MoveTowards(locomotionParams.horizontalVelocity, targetVelocity, locomotionParams.GroundedAccelerationRate * Time.deltaTime));
     }
 
     public bool ClaculateGreatDifferenceInMovementDirection(Vector3 moveDirection)

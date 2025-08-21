@@ -4,56 +4,44 @@ public class PlayerJumpState : PlayerBaseState
 {
     public override void CheckExitState(PlayerStateManager player)
     {
-        bool negativeVerticalVelocity = player.locomotionParams.verticalVelocity < 0.0f;
+        bool isFalling = player.Locomotion.VerticalVelocity < 0.0f;
+        if (isFalling) player.SwitchState(player.FallState);
 
-        bool isJumpPressed = player.input.isJumpPressed;
-        bool haveRemainingJumps = player.locomotionParams.HaveRemainingJumps();
-        bool jumpIsNotInCooldown = !player.locomotionParams.isJumpOnCooldown;
-        bool canJump = isJumpPressed && haveRemainingJumps && jumpIsNotInCooldown;
+        bool hasRemainingJumps = player.Dependencies.Jump.CurrentJumpCount > 0;
+        bool isJumpOnCooldown = player.Dependencies.Jump.IsJumpOnCooldown;
 
-        if (negativeVerticalVelocity)
-        {
-            player.SwitchState(player.fallState);
-        }
-        else
-        {
-            if (canJump)
-            {
-                player.SwitchState(player.jumpState);
-            }
-        }
+        bool isJumpPressed = player.Dependencies.Input.IsJumpPressed;
+        bool canJump = hasRemainingJumps && !isJumpOnCooldown;
+        if (isJumpPressed && canJump) player.SwitchState(player.JumpState);
     }
 
     public override void EnterState(PlayerStateManager player)
     {
-        player.verticalMovement.ToggleGroundSnaping(false);
-
-        player.jump.Jump();
-
-        // Selects the jump animation and behaviuor based on if the player is grounded or not
-        if (player.characterController.isGrounded)
-        {
-            player.animationManager.PlayAnimation(player.animationManager.jump_01_anim);
-        }
+        player.Dependencies.Jump.ConsumeJump();
+        
+        bool isGrounded = player.Physics.IsGrounded;
+        if (isGrounded)
+            player.Dependencies.AnimationManager.PlayAnimationInterpolated(
+                player.Dependencies.AnimationManager.jump_01_anim,
+                player.Dependencies.AnimationManager.interpolationTime_00);
         else
-        {
-            player.animationManager.PlayAnimationInterpolated(
-                player.animationManager.jump_02_anim,
-                player.animationManager.interpolationTime_00);
-        }
+            player.Dependencies.AnimationManager.PlayAnimationInterpolated(
+                player.Dependencies.AnimationManager.jump_02_anim,
+                player.Dependencies.AnimationManager.interpolationTime_00);
+
+        player.Dependencies.Jump.PerformJump();
     }
 
     public override void UpdateState(PlayerStateManager player)
     {
-        player.horizontalMovement.CalculateHorizontalMovement();
-        player.verticalMovement.CalculateVerticalMovement();
+        player.Locomotion.CalculateHorizontalMovement();
+        player.Locomotion.CalculateVerticalMovement();
     }
 
     public override void PhysicsUpdateState(PlayerStateManager player) { }
 
     public override void ExitState(PlayerStateManager player)
     {
-        player.locomotionParams.SetIsJumping(false);
-        //player.rigManager.SetTailRigWeight(1.0f);
+        player.Dependencies.Jump.SetIsJumping(false);
     }
 }

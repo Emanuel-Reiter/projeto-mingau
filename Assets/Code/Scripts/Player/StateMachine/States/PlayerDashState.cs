@@ -1,39 +1,37 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerDashState : PlayerBaseState {
-    public override void CheckExitState(PlayerStateManager player) {
+public class PlayerDashState : PlayerBaseState
+{
+    public override void CheckExitState(PlayerStateManager player)
+    {
+        bool isDashing = player.Dependencies.Dash.IsDashing;
+        if (isDashing) return;
 
-        if(!player.dash.isDashing) {
-            // Checks if the player is currently grounded
-            if (player.verticalMovement.GetSlopeRelativeIsGrounded()) {
-                // Checks for player movement input
-                if (player.input.movementDirection != Vector2.zero) player.SwitchState(player.runState);
-                else player.SwitchState(player.idleState);
-            }
-            else {
-                // If not grounded switch to fall state
-                player.SwitchState(player.fallState);
-            }
-        }
+        bool isGrounded = player.Physics.IsGrounded;
+        if (!isGrounded) player.SwitchState(player.FallState);
+
+        bool hasInput = player.Dependencies.Input.MovementDirectionInput != Vector2.zero;
+        if (hasInput) player.SwitchState(player.RunState);
+        else player.SwitchState(player.IdleState);
     }
 
-    public override void EnterState(PlayerStateManager player) {
-        player.dash.DecreaseAmountOfDashes();
+    public override void EnterState(PlayerStateManager player)
+    {
+        player.Dependencies.Dash.ConsumeDash();
 
-        player.animationManager.PlayAnimationInterpolated(
-            player.animationManager.dash_01_anim,
-            player.animationManager.interpolationTime_00);
+        player.Dependencies.AnimationManager.PlayAnimationInterpolated(
+            player.Dependencies.AnimationManager.dash_01_anim,
+            player.Dependencies.AnimationManager.interpolationTime_00);
 
-        player.dash.Dash();
+        player.Dependencies.Dash.PerformDash();
     }
 
     public override void ExitState(PlayerStateManager player) { }
 
     public override void PhysicsUpdateState(PlayerStateManager player) { }
 
-    public override void UpdateState(PlayerStateManager player) {
-        //player.verticalMovement.CalculateVerticalMovement();
-        player.movement.Decelerate();
+    public override void UpdateState(PlayerStateManager player)
+    {
+        player.Locomotion.Decelerate(player.Dependencies.LocomotionParams.DashAccelerationRate);
     }
 }

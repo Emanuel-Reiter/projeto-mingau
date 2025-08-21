@@ -1,7 +1,8 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerHorizontalMovement : MonoBehaviour {
+public class PlayerHorizontalMovement : MonoBehaviour
+{
 
     // Internal references
     private PlayerLocomotionParams playerAttributes;
@@ -11,32 +12,39 @@ public class PlayerHorizontalMovement : MonoBehaviour {
 
 
 
-    private void Start() {
+    private void Start()
+    {
         InitializeReferences();
     }
 
-    public void CalculateHorizontalMovement() {
-        Vector2 inputVector = input.movementDirection;
+    public void CalculateHorizontalMovement()
+    {
+        Vector2 inputVector = input._movementDirectionInput;
         Vector3 moveDirection = movement.GetCameraRelativeDirection(inputVector);
 
-        if (inputVector.magnitude > 0.1f) {
+        if (inputVector.magnitude > 0.1f)
+        {
             Vector3 targetVelocity = moveDirection * playerAttributes.GetCurrentSpeed(verticalMovement.GetSlopeRelativeIsGrounded());
             movement.CalculateAcceleration(targetVelocity, moveDirection);
         }
-        else {
+        else
+        {
             movement.Decelerate();
         }
     }
 
-    private void InitializeReferences() {
-        try {
+    private void InitializeReferences()
+    {
+        try
+        {
             // Object references
             playerAttributes = GetComponent<PlayerLocomotionParams>();
             input = GetComponent<PlayerInputManager>();
             verticalMovement = GetComponent<PlayerVerticalMovement>();
             movement = GetComponent<PlayerMovement>();
         }
-        catch {
+        catch
+        {
             Debug.LogError("Some references were not assigned correctly.\nCheck external tag names and components assigned to this object.");
         }
     }

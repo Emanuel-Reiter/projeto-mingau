@@ -1,82 +1,62 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerStateManager : MonoBehaviour {
-
+public class PlayerStateManager : MonoBehaviour
+{
     // Player states
-    public PlayerIdleState idleState = new PlayerIdleState();
-    public PlayerRunState runState = new PlayerRunState();
-    public PlayerJumpState jumpState = new PlayerJumpState();
-    public PlayerFallState fallState = new PlayerFallState();
-    public PlayerLandHeavyState landHeavyState = new PlayerLandHeavyState();
-    public PlayerLandLightState landLightState = new PlayerLandLightState();
-    public PlayerDashState dashState = new PlayerDashState();
-
+    public PlayerIdleState IdleState = new PlayerIdleState();
+    public PlayerRunState RunState = new PlayerRunState();
+    public PlayerDashState DashState = new PlayerDashState();
+    public PlayerJumpState JumpState = new PlayerJumpState();
+    public PlayerFallState FallState = new PlayerFallState();
+    public PlayerLandHeavyState LandHeavyState = new PlayerLandHeavyState();
+    public PlayerLandLightState LandLightState = new PlayerLandLightState();
 
     // State management
-    public PlayerBaseState currentState { get; private set; }
-    public PlayerBaseState previousState { get; private set; }
+    public PlayerBaseState CurrentState { get; private set; }
+    public PlayerBaseState PreviousState { get; private set; }
 
-    // External references
-    [HideInInspector] public PlayerInputManager input;
-    [HideInInspector] public PlayerLocomotionParams locomotionParams;
-    [HideInInspector] public PlayerAnimationManager animationManager;
-    [HideInInspector] public CharacterController characterController;
+    // Dependencies
+    private PlayerDependencies _dependencies;
+    public PlayerDependencies Dependencies => _dependencies;
+    
+    private PlayerPhysics _physics;
+    public PlayerPhysics Physics => _physics;
 
-    [HideInInspector] public PlayerMovement movement;
-    [HideInInspector] public PlayerHorizontalMovement horizontalMovement;
-    [HideInInspector] public PlayerVerticalMovement verticalMovement;
+    private PlayerLocomotion _locomotion;
+    public PlayerLocomotion Locomotion => _locomotion;
 
-    [HideInInspector] public PlayerJump jump;
-    [HideInInspector] public PlayerDash dash;
-
-    [HideInInspector] public PlayerGraphicsRotationSync rotationSync;
-
-    private void Start() {
-        InitializeReferences();
-
-        // Setups the default state implementation to avoid errors
-        currentState = idleState;
-        previousState = currentState;
+    private void Awake()
+    {
+        CurrentState = IdleState;
+        PreviousState = CurrentState;
     }
 
-    private void Update() {
-        currentState.CheckExitState(this);
-        currentState.UpdateState(this);
+    private void Start()
+    {
+        _dependencies = GetComponent<PlayerDependencies>();
+        _physics = GetComponent<PlayerPhysics>();
+        _locomotion = GetComponent<PlayerLocomotion>();
     }
 
-    private void FixedUpdate() {
-        currentState.PhysicsUpdateState(this);
+    private void Update()
+    {
+        CurrentState?.CheckExitState(this);
+        CurrentState?.UpdateState(this);
     }
 
-    public void SwitchState(PlayerBaseState newState) {
-        // Exists the current state
-        currentState.ExitState(this); 
-        previousState = currentState;
-
-        // Eneter the new state
-        currentState = newState;
-        currentState.EnterState(this);
+    private void FixedUpdate()
+    {
+        CurrentState?.PhysicsUpdateState(this);
     }
 
-    private void InitializeReferences() {
-        try {
-            // External references
+    public void SwitchState(PlayerBaseState newState)
+    {
+        if (newState == null) return;
 
-            // Object references
-            input = GetComponent<PlayerInputManager>();
-            horizontalMovement = GetComponent<PlayerHorizontalMovement>();
-            verticalMovement = GetComponent<PlayerVerticalMovement>();
-            jump = GetComponent<PlayerJump>();
-            dash = GetComponent<PlayerDash>();
-            rotationSync = GetComponent<PlayerGraphicsRotationSync>();
-            locomotionParams = GetComponent<PlayerLocomotionParams>();
-            characterController = GetComponent<CharacterController>();
-            animationManager = GetComponent<PlayerAnimationManager>();
-            movement = GetComponent<PlayerMovement>();
-        }
-        catch {
-            Debug.LogError("Some references were not assigned correctly.\nCheck external tag names and components assigned to this object.");
-        }
+        CurrentState?.ExitState(this);
+        PreviousState = CurrentState;
+
+        CurrentState = newState;
+        CurrentState?.EnterState(this);
     }
 }

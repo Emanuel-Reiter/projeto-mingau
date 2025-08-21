@@ -65,7 +65,7 @@ public class PlayerDeveloperUI : MonoBehaviour {
         GUI.Label(new Rect(32, 32, 512, 32), $"fps: {framerate}");
 
         // Player state
-        GUI.Label(new Rect(32, 64, 512, 32), $"currentState: {playerStateManager.currentState}");
+        GUI.Label(new Rect(32, 64, 512, 32), $"currentState: {playerStateManager.CurrentState}");
 
         // Current player horizontal velocity
         GUI.Label(new Rect(32, 96, 512, 32), $"currentVelocity: {movementAttributes.horizontalVelocity.magnitude.ToString("F2")}");

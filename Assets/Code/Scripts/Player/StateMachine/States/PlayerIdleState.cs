@@ -4,19 +4,19 @@ using UnityEngine;
 public class PlayerIdleState : PlayerBaseState {
     public override void CheckExitState(PlayerStateManager player) {
         // Checks for dash input
-        if (player.input.isDashPressed && player.dash.HaveReaminingDashes()) player.SwitchState(player.dashState);
+        if (player.input.isDashPressed && player.dash.HaveReaminingDashes()) player.SwitchState(player.DashState);
 
         // Checks if the player is currently grounded
         if(player.verticalMovement.GetSlopeRelativeIsGrounded()) {
             // Checks for player jump input
-            if (player.input.isJumpPressed) player.SwitchState(player.jumpState);
+            if (player.input.isJumpPressed) player.SwitchState(player.JumpState);
             
             // Checks for player movement input
-            if (player.input.movementDirection != Vector2.zero) player.SwitchState(player.runState);
+            if (player.input.movementDirection != Vector2.zero) player.SwitchState(player.RunState);
         }
         else {
             // If not grounded switch to fall state
-            player.SwitchState(player.fallState);
+            player.SwitchState(player.FallState);
         }
     }
 

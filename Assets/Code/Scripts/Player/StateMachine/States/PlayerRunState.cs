@@ -4,19 +4,19 @@ public class PlayerRunState : PlayerBaseState {
     public override void CheckExitState(PlayerStateManager player) {
 
         // Checks for dash input
-        if (player.input.isDashPressed && player.dash.HaveReaminingDashes()) player.SwitchState(player.dashState);
+        if (player.input.isDashPressed && player.dash.HaveReaminingDashes()) player.SwitchState(player.DashState);
 
         // Checks of the player is currently grounded
         if (player.verticalMovement.GetSlopeRelativeIsGrounded()) {
             // Checks for player jump input
-            if (player.input.isJumpPressed) player.SwitchState(player.jumpState);
+            if (player.input.isJumpPressed) player.SwitchState(player.JumpState);
 
             // Checks for the absence of the movment input
-            if (player.input.movementDirection == Vector2.zero) player.SwitchState(player.idleState);
+            if (player.input.movementDirection == Vector2.zero) player.SwitchState(player._idleState);
         }
         else {
             // If not grounded switch to fall state
-            player.SwitchState(player.fallState);
+            player.SwitchState(player.FallState);
         }
     }
 

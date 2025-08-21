@@ -1,68 +1,55 @@
 using UnityEngine;
-using UnityEngine.Windows;
 
-public class PlayerDash : MonoBehaviour {
-    // Internal references
-    private PlayerLocomotionParams movementAttributes;
-    private PlayerAnimationManager animationManager;
-    private PlayerInputManager input;
-    private PlayerMovement movement;
-    private PlayerVerticalMovement verticalMovement;
-    private GlobalTimer timer;
+public class PlayerDash : MonoBehaviour
+{
+    private PlayerDependencies _dependencies;
+    private PlayerLocomotion _locomotion;
+    private PlayerPhysics _physics;
 
-    public float dashSpeed { get; private set; } = 48.0f;
-    public bool isDashing { get; private set; } = false;
-    private int maxAmountOfDashes = 1;
-    private int currentAmountOfDashes = 0;
+    [Header("Params")]
+    [SerializeField] private float _dashSpeed = 48.0f;
+    public float DashSpeed => _dashSpeed;
 
-    private void Start() {
-        InitializeReferences();
+    private int _maxDashCount = 1;
+    public int MaxDashCount => _maxDashCount;
+
+    private int _currentDashCount = 0;
+    public bool CurrentDashCount => _currentDashCount > 0;
+
+    private bool _isDashing = false;
+    public bool IsDashing => _isDashing;
+
+    private void Start()
+    {
+        _dependencies = GetComponent<PlayerDependencies>();
+        _locomotion = GetComponent<PlayerLocomotion>();
+        _physics = GetComponent<PlayerPhysics>();
     }
 
-    public void Dash() {
-        SetIsDashing(true);
+    public void PerformDash()
+    {
+        _isDashing = true;
 
-        float dashVelocity = Mathf.Sqrt(2.0f * movementAttributes.GetCurrentSpeed(verticalMovement.GetSlopeRelativeIsGrounded()) * dashSpeed);
+        float dashVelocity = Mathf.Sqrt(2.0f * _dependencies.LocomotionParams.GetCurrentSpeed() * _dashSpeed);
 
-        Vector2 inputVector = input.movementDirection;
-        Vector3 dashDirection = movement.GetCameraRelativeDirection(inputVector);
+        Vector2 inputVector = _dependencies.Input.MovementDirectionInput;
+        Vector3 dashDirection = _locomotion.GetCameraRelativeDirection(inputVector);
 
-        movementAttributes.SetHorizontalVelocity(dashDirection * dashVelocity);
+        _locomotion.SetHorizontalVelocity(dashDirection * dashVelocity);
 
+        // TODO: Refactor the dash duration and deceleration loginc
         float dashDuration = 0.0f;
-        if (verticalMovement.GetSlopeRelativeIsGrounded()) dashDuration = animationManager.dash_01_anim.length;
-        else dashDuration = animationManager.dash_01_anim.length / 2.0f;
+        if (_physics.IsGrounded) dashDuration = _dependencies.AnimationManager.dash_01_anim.length;
+        else dashDuration = _dependencies.AnimationManager.dash_01_anim.length / 2.0f;
 
-        int dashEndTimer = timer.StartTimer(dashDuration, () => { SetIsDashing(false); });
+        int dashTimer = _dependencies.GlobalTimer.StartTimer(dashDuration, () => { _isDashing = false; });
     }
 
-    #region Utility methods
-    public void SetIsDashing(bool isDashing) { this.isDashing = isDashing; }
+    #region Dash State Management
+    public void ResetDashCount() { _currentDashCount = _maxDashCount; }
 
-    public int GetAmountOfDashesRemaining() { return currentAmountOfDashes; }
+    public void AddDash() { _currentDashCount++; }
 
-    public bool HaveReaminingDashes() { return currentAmountOfDashes > 0; }
-
-    public void ResetAmountOfDashes() { currentAmountOfDashes = maxAmountOfDashes; }
-
-    public void AddAmountOfDashes() { currentAmountOfDashes++; }
-
-    public void DecreaseAmountOfDashes() { currentAmountOfDashes--; }
+    public void ConsumeDash() { _currentDashCount--; }
     #endregion
-
-    private void InitializeReferences() {
-        try {
-            // Object references
-            movementAttributes = GetComponent<PlayerLocomotionParams>();
-            animationManager = GetComponent<PlayerAnimationManager>();
-            movement = GetComponent<PlayerMovement>();
-            input = GetComponent<PlayerInputManager>();
-            verticalMovement = GetComponent<PlayerVerticalMovement>();
-            timer = GameObject.FindGameObjectWithTag("GlobalTimer").GetComponent<GlobalTimer>();
-        }
-        catch {
-            Debug.LogError("Some references were not assigned correctly.\nCheck external tag names and components assigned to this object.");
-        }
-    }
-
 }

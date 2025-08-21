@@ -2,23 +2,25 @@ using UnityEngine;
 
 public class PlayerLocomotionParams : MonoBehaviour
 {
-    // Movement attributes
-    public Vector3 horizontalVelocity { get; private set; }
-    public float verticalVelocity { get; private set; }
+    [Header("Dependencies")]
+    private PlayerPhysics _physics;
 
     [Header("Movement Speed")]
-    private float baseSpeed = 7.0f;
-    private float currentSpeed = 0.0f;
+    [SerializeField] private float _baseSpeed = 7.0f;
+    public float BaseSpeed => _baseSpeed;
 
     [SerializeField] private float _runSpeedMultiplier = 1.0f;
     [SerializeField] private float _airSpeedMultiplier = 1.8f;
 
     [Header("Acceleration")]
-    [SerializeField] private float _accelerationRate = 50.0f;
-    public float AccelerationRate => _accelerationRate;
+    [SerializeField] private float _groundedAccelerationRate = 35.0f;
+    public float GroundedAccelerationRate => _groundedAccelerationRate;
 
-    [SerializeField] private float _decelerationRate = 50.0f;
-    public float DecelerationRate => _decelerationRate;
+    [SerializeField] private float _aerialAccelerationRate = 60.0f;
+    public float AerialAccelerationRate => _aerialAccelerationRate;
+
+    [SerializeField] private float _dashAccelerationRate = 20.0f;
+    public float DashAccelerationRate => _aerialAccelerationRate;
 
     [Header("Gravity")]
     [SerializeField] private float _aerialGravityAcceleration = -50.0f;
@@ -27,65 +29,23 @@ public class PlayerLocomotionParams : MonoBehaviour
     [SerializeField] private float _groundedGravityAcceleration = -9.81f;
     public float GroundedGravityAcceleration => _groundedGravityAcceleration;
 
-    [Header("Jump")]
-    [SerializeField] private float _jumpHeight = 2.25f;
-    public float JumpHeight => _jumpHeight;
-
-    public bool isJumping { get; private set; } = false;
-
-    private float jumpCooldown = 0.067f;
-    public bool isJumpOnCooldown { get; private set; } = false;
-
-    private int maxAmountOfJumps = 2;
-    private int currentAmountOfJumps = 0;
-
-
-
-    // Timer
-    private GlobalTimer timer;
+    [Header("Character Rotation")]
+    [SerializeField] private float _directionChangeThreshold = 135.0f;
+    public float DirectionChangeThreshold => _directionChangeThreshold;
 
     private void Start()
     {
-        // Attributes setup
-        GetCurrentSpeed(true);
-        ResetAmountOfJumps();
-
-        timer = GameObject.FindGameObjectWithTag("GlobalTimer").GetComponent<GlobalTimer>();
+        _physics = GetComponent<PlayerPhysics>();
     }
 
     // Horizontal movement speed
-    public float GetCurrentSpeed(bool isGrounded)
+    public float GetCurrentSpeed()
     {
-        currentSpeed = baseSpeed * (isGrounded ? _runSpeedMultiplier : _airSpeedMultiplier);
-        return currentSpeed;
+        return _physics.IsGrounded ? _baseSpeed * _runSpeedMultiplier : _baseSpeed * _airSpeedMultiplier;
     }
 
-    #region Velocity
-    public void SetHorizontalVelocity(Vector3 horizontalVelocity) { this.horizontalVelocity = horizontalVelocity; }
-
-    public void SetVerticalVelocity(float verticalVelocity) { this.verticalVelocity = verticalVelocity; }
-    #endregion
-
-    #region Jump
-    public void SetIsJumping(bool isJumping) { this.isJumping = isJumping; }
-
-    public int GetAmountOfJumpsRemaining() { return currentAmountOfJumps; }
-
-    public bool HaveRemainingJumps() { return currentAmountOfJumps > 0; }
-
-    public void ResetAmountOfJumps() { currentAmountOfJumps = maxAmountOfJumps; }
-
-    public void AddAmountOfJumps() { currentAmountOfJumps++; }
-
-    public void DecreaseAmountOfJumps() { currentAmountOfJumps--; }
-
-    public void TriggerJumpCooldown()
+    public float GetGroundedRelativeAccelerationRate()
     {
-        SetIsJumpOnCooldown(true);
-        int jumpCooldownTimer = timer.StartTimer(jumpCooldown, () => SetIsJumpOnCooldown(false));
+        return _physics.IsGrounded ? GroundedAccelerationRate : AerialAccelerationRate;
     }
-
-    private void SetIsJumpOnCooldown(bool isJumpOnCooldown) { this.isJumpOnCooldown = isJumpOnCooldown; }
-    #endregion
-
 }
