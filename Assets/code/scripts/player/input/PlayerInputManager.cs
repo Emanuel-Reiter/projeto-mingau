@@ -2,7 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputManager : MonoBehaviour {
+public class PlayerInputManager : MonoBehaviour
+{
 
     // Input Actions
     private PlayerInputActions playerInputActions;
@@ -22,18 +23,28 @@ public class PlayerInputManager : MonoBehaviour {
     // Other
     public bool isInteractPressed { get; private set; } = false;
 
-    private void Awake() {
+    private void Awake()
+    {
         playerInputActions = new PlayerInputActions();
         playerInputActions.Default.Enable();
         SubscribeToAllActions();
     }
 
-    private void Update() {
+    private void OnDestroy()
+    {
+        UnsubscribeFromAllActions();
+        playerInputActions?.Default.Disable();
+        playerInputActions?.Dispose();
+    }
+
+    private void Update()
+    {
         ProcessMovementDirectionInput();
         ProcessCameraDirectionInput();
     }
 
-    private void SubscribeToAllActions() {
+    private void SubscribeToAllActions()
+    {
         // Jump
         playerInputActions.Default.Jump.started += ProcessPerformedJumpInput;
         playerInputActions.Default.Jump.canceled += ProcessCanceledJumpInput;
@@ -53,6 +64,29 @@ public class PlayerInputManager : MonoBehaviour {
         // Interact
         playerInputActions.Default.Interact.started += ProcessPerformedInteractInput;
         playerInputActions.Default.Interact.canceled += ProcessCanceledInteractInput;
+    }
+
+    private void UnsubscribeFromAllActions()
+    {
+        // Jump
+        playerInputActions.Default.Jump.started -= ProcessPerformedJumpInput;
+        playerInputActions.Default.Jump.canceled -= ProcessCanceledJumpInput;
+
+        // Sprint
+        playerInputActions.Default.Sprint.performed -= ProcessPerformedSprintInput;
+        playerInputActions.Default.Sprint.canceled -= ProcessCanceledSprintInput;
+
+        // Dash
+        playerInputActions.Default.Dash.started -= ProcessPerformedDashInput;
+        playerInputActions.Default.Dash.canceled -= ProcessCanceledDashInput;
+
+        // Attack Light
+        playerInputActions.Default.AttackLight.started -= ProcessPerformedAttackLightInput;
+        playerInputActions.Default.AttackLight.canceled -= ProcessCanceledAttackLightInput;
+
+        // Interact
+        playerInputActions.Default.Interact.started -= ProcessPerformedInteractInput;
+        playerInputActions.Default.Interact.canceled -= ProcessCanceledInteractInput;
     }
 
     // Jump
@@ -76,42 +110,50 @@ public class PlayerInputManager : MonoBehaviour {
     private void ProcessCanceledInteractInput(InputAction.CallbackContext context) { isInteractPressed = false; }
 
     // Movement Direction
-    private void ProcessMovementDirectionInput() {
+    private void ProcessMovementDirectionInput()
+    {
         movementDirection = playerInputActions.Default.Movement.ReadValue<Vector2>();
     }
 
     // Camera Look
-    private void ProcessCameraDirectionInput() {
+    private void ProcessCameraDirectionInput()
+    {
         cameraLookDirection = playerInputActions.Default.CameraLook.ReadValue<Vector2>();
     }
 
-    // Coroutines
-    
     // Jump
-    private IEnumerator ProcessPerformedJumpInputCoroutine() {
+    private IEnumerator ProcessPerformedJumpInputCoroutine()
+    {
         isJumpPressed = true;
         yield return null;
-        isJumpPressed = false;
+        // Check if object still exists
+        if (this != null)
+        {
+            isJumpPressed = false;
+        }
     }
 
     // Dash
-    private IEnumerator ProcessPerformedDashInputCoroutine() {
+    private IEnumerator ProcessPerformedDashInputCoroutine()
+    {
         isDashPressed = true;
         yield return null;
-        isDashPressed = false;
+        if (this != null) isDashPressed = false;
     }
 
     // Attack Light
-    private IEnumerator ProcessPerformedAttackLightInputtCoroutine() {
+    private IEnumerator ProcessPerformedAttackLightInputtCoroutine()
+    {
         isAttackLightPressed = true;
         yield return null;
-        isAttackLightPressed = false;
+        if (this != null) isAttackLightPressed = false;
     }
 
     // Interact
-    private IEnumerator ProcessPerformedInteractInputCoroutine() {
+    private IEnumerator ProcessPerformedInteractInputCoroutine()
+    {
         isInteractPressed = true;
         yield return null;
-        isInteractPressed = false;
+        if (this != null) isInteractPressed = false;
     }
 }
