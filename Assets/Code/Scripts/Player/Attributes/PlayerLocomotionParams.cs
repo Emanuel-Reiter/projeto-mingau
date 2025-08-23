@@ -30,6 +30,9 @@ public class PlayerLocomotionParams : MonoBehaviour
     public float GroundedGravityAcceleration => _groundedGravityAcceleration;
 
     [Header("Character Rotation")]
+    [SerializeField] private float _rotationSpeed = 20.0f;
+    public float RotationSpeed => _rotationSpeed;
+
     [SerializeField] private float _directionChangeThreshold = 135.0f;
     public float DirectionChangeThreshold => _directionChangeThreshold;
 
@@ -39,12 +42,12 @@ public class PlayerLocomotionParams : MonoBehaviour
     }
 
     // Horizontal movement speed
-    public float GetCurrentSpeed()
+    public float GetGroundedRelativeSpeed()
     {
         return _physics.IsGrounded ? _baseSpeed * _runSpeedMultiplier : _baseSpeed * _airSpeedMultiplier;
     }
 
-    public float GetGroundedRelativeAccelerationRate()
+    public float GetGroundedRelativeAcceleration()
     {
         return _physics.IsGrounded ? GroundedAccelerationRate : AerialAccelerationRate;
     }

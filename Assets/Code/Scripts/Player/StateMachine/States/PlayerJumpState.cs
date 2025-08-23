@@ -7,27 +7,25 @@ public class PlayerJumpState : PlayerBaseState
         bool isFalling = player.Locomotion.VerticalVelocity < 0.0f;
         if (isFalling) player.SwitchState(player.FallState);
 
-        bool hasRemainingJumps = player.Dependencies.Jump.CurrentJumpCount > 0;
-        bool isJumpOnCooldown = player.Dependencies.Jump.IsJumpOnCooldown;
-
-        bool isJumpPressed = player.Dependencies.Input.IsJumpPressed;
-        bool canJump = hasRemainingJumps && !isJumpOnCooldown;
-        if (isJumpPressed && canJump) player.SwitchState(player.JumpState);
+        bool canJump = player.Dependencies.Jump.CanJump();
+        bool jumpInput = player.Dependencies.Input.IsJumpPressed;
+        if (jumpInput && canJump) player.SwitchState(player.JumpState);
     }
 
     public override void EnterState(PlayerStateManager player)
     {
+        player.Physics.ToggleGroundSnaping(false);
         player.Dependencies.Jump.ConsumeJump();
         
         bool isGrounded = player.Physics.IsGrounded;
         if (isGrounded)
             player.Dependencies.AnimationManager.PlayAnimationInterpolated(
-                player.Dependencies.AnimationManager.jump_01_anim,
-                player.Dependencies.AnimationManager.interpolationTime_00);
+                player.Dependencies.AnimationManager.Jump[0],
+                player.Dependencies.AnimationManager.ShortInterpolationTime);
         else
             player.Dependencies.AnimationManager.PlayAnimationInterpolated(
-                player.Dependencies.AnimationManager.jump_02_anim,
-                player.Dependencies.AnimationManager.interpolationTime_00);
+                player.Dependencies.AnimationManager.Jump[1],
+                player.Dependencies.AnimationManager.ShortInterpolationTime);
 
         player.Dependencies.Jump.PerformJump();
     }
@@ -36,6 +34,7 @@ public class PlayerJumpState : PlayerBaseState
     {
         player.Locomotion.CalculateHorizontalMovement();
         player.Locomotion.CalculateVerticalMovement();
+        player.Locomotion.CalculateRotation();
     }
 
     public override void PhysicsUpdateState(PlayerStateManager player) { }

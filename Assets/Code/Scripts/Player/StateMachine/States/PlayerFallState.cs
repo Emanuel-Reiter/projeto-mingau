@@ -1,45 +1,53 @@
 using UnityEngine;
 
-public class PlayerFallState : PlayerBaseState {
+public class PlayerFallState : PlayerBaseState
+{
+    private float _airTime;
 
-    private float airTime;
+    private float _lightLandThresholdInSeconds = 0.1f;
+    private float _heavyLandThresholdInSeconds = 0.4f;
 
-    public override void CheckExitState(PlayerStateManager player) {
-        // Checks for dash input
-        if (player.input.isDashPressed && player.dash.HaveReaminingDashes()) player.SwitchState(player.DashState);
+    public override void CheckExitState(PlayerStateManager player)
+    {
+        _airTime += Time.deltaTime;
 
-        if (player.verticalMovement.GetSlopeRelativeIsGrounded()) {
-            // Checks if the player is grounded, then switch to the fitting grounded state
-
-            bool heavyLand = airTime > 0.4f;
-            bool lightLand = airTime > 0.1f && airTime < 0.4f;
+        bool isGrounded = player.Physics.IsGrounded;
+        if (isGrounded)
+        {
+            bool lightLand = _airTime > _lightLandThresholdInSeconds && _airTime < _heavyLandThresholdInSeconds;
+            bool heavyLand = _airTime > _heavyLandThresholdInSeconds;
             bool noLand = !lightLand && !heavyLand;
 
-            if (heavyLand) player.SwitchState(player.LandHeavyState);
             if (lightLand) player.SwitchState(player.LandLightState);
-            if (noLand) player.SwitchState(player._idleState);
+            if (heavyLand) player.SwitchState(player.LandHeavyState);
+            if (noLand) player.SwitchState(player.IdleState);
         }
-        else {
-            // Checks for player air jump input
-            if (player.input.isJumpPressed && player.locomotionParams.HaveRemainingJumps()) {
-                player.SwitchState(player.JumpState);
-            }
-        }
+
+        bool canDash = player.Dependencies.Dash.CurrentDashCount > 0;
+        bool dashInput = player.Dependencies.Input.IsDashPressed;
+        if (canDash && dashInput) player.SwitchState(player.DashState);
+
+        bool canJump = player.Dependencies.Jump.CurrentJumpCount > 0;
+        bool jumpInput = player.Dependencies.Input.IsJumpPressed;
+        if(canJump && jumpInput) player.SwitchState(player.JumpState);
     }
 
-    public override void EnterState(PlayerStateManager player) {
-        player.verticalMovement.ToggleGroundSnaping(true);
+    public override void EnterState(PlayerStateManager player)
+    {
+        _airTime = 0.0f;
 
-        player.animationManager.PlayAnimationInterpolated(player.animationManager.fall_01_anim, player.animationManager.interpolationTime_02);
+        player.Physics.ToggleGroundSnaping(true);
 
-        airTime = 0.0f;
+        player.Dependencies.AnimationManager.PlayAnimationInterpolated(
+            player.Dependencies.AnimationManager.Fall,
+            player.Dependencies.AnimationManager.interpolationTime_02);
     }
 
-    public override void UpdateState(PlayerStateManager player) {
-        player.horizontalMovement.CalculateHorizontalMovement();
-        player.verticalMovement.CalculateVerticalMovement();
-
-        airTime += Time.deltaTime;
+    public override void UpdateState(PlayerStateManager player)
+    {
+        player.Locomotion.CalculateHorizontalMovement();
+        player.Locomotion.CalculateVerticalMovement();
+        player.Locomotion.CalculateRotation();
     }
 
     public override void PhysicsUpdateState(PlayerStateManager player) { }

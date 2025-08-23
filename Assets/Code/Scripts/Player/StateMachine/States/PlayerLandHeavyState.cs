@@ -2,43 +2,45 @@ using UnityEngine;
 
 public class PlayerLandHeavyState : PlayerBaseState
 {
-    // TODO: BAD EXIT IMPLEMENTATION NEEDS REFACTORING
-    float exitTimer = 0.1f;
+    float _exitTime = 0.1f;
 
-    public override void CheckExitState(PlayerStateManager player) {
-        if (player.input.isJumpPressed && player.locomotionParams.HaveRemainingJumps()) {
-            player.SwitchState(player.JumpState);
-        }
+    public override void CheckExitState(PlayerStateManager player)
+    {
+        _exitTime -= Time.deltaTime;
 
-        if (exitTimer <= 0.0f) {
-            if(player.verticalMovement.GetSlopeRelativeIsGrounded()) {
-                if (player.input.movementDirection != Vector2.zero) player.SwitchState(player.RunState);
-                else player.SwitchState(player._idleState);
-            }
-            else {
-                player.SwitchState(player.FallState);
-            }
-        }
+        bool canJump = player.Dependencies.Jump.CurrentJumpCount > 0;
+        bool jumpInput = player.Dependencies.Input.IsJumpPressed;
+        if (canJump && jumpInput) player.SwitchState(player.JumpState);
+
+        if (_exitTime > 0.0f) return;
+
+        bool isGrounded = player.Physics.IsGrounded;
+        if (!isGrounded) player.SwitchState(player.FallState);
+
+        bool isMoving = player.Dependencies.Input.MovementDirectionInput != Vector2.zero;
+        if (isMoving) player.SwitchState(player.RunState);
+        else player.SwitchState(player.IdleState);
     }
 
-    public override void EnterState(PlayerStateManager player) {
-        player.locomotionParams.ResetAmountOfJumps();
-        player.dash.ResetAmountOfDashes();
+    public override void EnterState(PlayerStateManager player)
+    {
+        _exitTime = player.Dependencies.AnimationManager.LandLight.length;
 
-        player.animationManager.PlayAnimationInterpolated
-            (player.animationManager.land_heavy_01_anim, 
-            player.animationManager.interpolationTime_00);
+        player.Dependencies.Jump.ResetJumpCount();
+        player.Dependencies.Dash.ResetDashCount();
 
-        exitTimer = player.animationManager.land_heavy_01_anim.length;
+        player.Dependencies.AnimationManager.PlayAnimationInterpolated
+            (player.Dependencies.AnimationManager.LandHeavy,
+            player.Dependencies.AnimationManager.ShortInterpolationTime);
+    }
+
+    public override void UpdateState(PlayerStateManager player)
+    {
+        player.Locomotion.Decelerate(player.Dependencies.LocomotionParams.GetGroundedRelativeAcceleration());
+        player.Locomotion.CalculateRotation();
     }
 
     public override void ExitState(PlayerStateManager player) { }
 
     public override void PhysicsUpdateState(PlayerStateManager player) { }
-
-    public override void UpdateState(PlayerStateManager player) {
-        player.movement.Decelerate();
-
-        exitTimer -= Time.deltaTime;
-    }
 }

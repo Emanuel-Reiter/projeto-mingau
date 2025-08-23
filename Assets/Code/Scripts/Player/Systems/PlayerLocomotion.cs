@@ -38,7 +38,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         if (inputVector.magnitude > 0.1f)
         {
-            Vector3 targetVelocity = moveDirection * _dependencies.LocomotionParams.GetCurrentSpeed();
+            Vector3 targetVelocity = moveDirection * _dependencies.LocomotionParams.GetGroundedRelativeSpeed();
             HandleAcceleration(targetVelocity, moveDirection);
         }
         else
@@ -49,8 +49,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void CalculateVerticalMovement()
     {
-        // NOTE: add jump check when jump mechanic is implemented
-        if (_physics.IsGrounded)
+        if (_physics.IsGrounded && !_dependencies.Jump.IsJumping)
         {
             _verticalVelocity = _dependencies.LocomotionParams.GroundedGravityAcceleration;
             if (_physics.UseGroundSnapping) _physics.CalculateSlopeMovement();
@@ -58,6 +57,15 @@ public class PlayerLocomotion : MonoBehaviour
         else
         {
             _verticalVelocity = _verticalVelocity + (_dependencies.LocomotionParams.AerialGravityAcceleration * Time.deltaTime);
+        }
+    }
+
+    public void CalculateRotation()
+    {
+        if (_horizontalVelocity.magnitude > 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(_horizontalVelocity.normalized);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _dependencies.LocomotionParams.RotationSpeed * Time.deltaTime);
         }
     }
 

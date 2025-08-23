@@ -3,25 +3,28 @@ using UnityEngine;
 public class PlayerDeveloperUI : MonoBehaviour {
 
     // Exteral player references
-    private PlayerLocomotionParams movementAttributes;
-    private PlayerStateManager playerStateManager;
-    private PlayerHorizontalMovement horizontalMovement;
-    private PlayerVerticalMovement verticalMovement;
+    private PlayerDependencies _dependencies;
+    private PlayerStateManager _stateManager;
+    private PlayerLocomotion _locomotion;
+    private PlayerPhysics _physics;
 
     // Framerate calculation
-    private int lastFrameIndex;
-    private float[] frameDeltaTimeArray;
-    private int framerate;
+    private int _lastFrameIndex;
+    private float[] _frameDeltaTimeArray;
+    private int _framerate;
 
 
     private void Awake() {
-        frameDeltaTimeArray = new float[256];
+        _frameDeltaTimeArray = new float[256];
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 0;
     }
 
     private void Start() {
-        InitializeReferences();
+        _dependencies = GetComponent<PlayerDependencies>();
+        _stateManager = GetComponent<PlayerStateManager>();
+        _locomotion = GetComponent<PlayerLocomotion>();
+        _physics = GetComponent<PlayerPhysics>();
     }
 
     private void Update() {
@@ -29,51 +32,39 @@ public class PlayerDeveloperUI : MonoBehaviour {
     }
 
     private void DisplayFrametate() {
-        frameDeltaTimeArray[lastFrameIndex] = Time.unscaledDeltaTime;
-        lastFrameIndex = (lastFrameIndex + 1) % frameDeltaTimeArray.Length;
+        _frameDeltaTimeArray[_lastFrameIndex] = Time.unscaledDeltaTime;
+        _lastFrameIndex = (_lastFrameIndex + 1) % _frameDeltaTimeArray.Length;
 
-        framerate = Mathf.RoundToInt(CalculateAverageFramerate());
+        _framerate = Mathf.RoundToInt(CalculateAverageFramerate());
     }
 
     private float CalculateAverageFramerate() {
         float total = 0.0f;
 
-        foreach (float deltaTime in frameDeltaTimeArray) {
+        foreach (float deltaTime in _frameDeltaTimeArray) {
             total += deltaTime;
         }
 
-        return frameDeltaTimeArray.Length / total;
-    }
-
-    private void InitializeReferences() {
-        try {
-            // Object references
-            movementAttributes = GetComponent<PlayerLocomotionParams>();
-            horizontalMovement = GetComponent<PlayerHorizontalMovement>();
-            verticalMovement = GetComponent<PlayerVerticalMovement>();
-            playerStateManager = GetComponent<PlayerStateManager>();
-        }
-        catch {
-            Debug.LogError("Some references were not assigned correctly.\nCheck external tag names and components assigned to this object.");
-        }
+        return _frameDeltaTimeArray.Length / total;
     }
 
     private void OnGUI() {
         GUI.skin.label.fontSize = 24;
 
         // Framerate UI
-        GUI.Label(new Rect(32, 32, 512, 32), $"fps: {framerate}");
+        GUI.Label(new Rect(32, 32, 512, 32), $"fps: {_framerate}");
 
         // Player state
-        GUI.Label(new Rect(32, 64, 512, 32), $"currentState: {playerStateManager.CurrentState}");
+        GUI.Label(new Rect(32, 64, 512, 32), $"state: {_stateManager.CurrentState}");
 
         // Current player horizontal velocity
-        GUI.Label(new Rect(32, 96, 512, 32), $"currentVelocity: {movementAttributes.horizontalVelocity.magnitude.ToString("F2")}");
+        GUI.Label(new Rect(32, 96, 512, 32), $"velocity: {_locomotion.HorizontalVelocity.magnitude.ToString("F2")}");
 
-        // Current player air jumps left
-        GUI.Label(new Rect(32, 128, 512, 32), $"jumpsRemaining: {movementAttributes.GetAmountOfJumpsRemaining()}");
+        // Current player jumps left
+        GUI.Label(new Rect(32, 128, 512, 32), $"jumpsRemaining: {_dependencies.Jump.CurrentJumpCount}");
 
-        // Ground sanpping
-        GUI.Label(new Rect(32, 160, 512, 32), $"groundSnaping: {verticalMovement.isGroundSnapingActive}");
+        // Ground
+        GUI.Label(new Rect(32, 160, 512, 32), $"groundSnaping: {_physics.UseGroundSnapping}");
+        GUI.Label(new Rect(32, 192, 512, 32), $"isGrounded: {_physics.IsGrounded}");
     }
 }

@@ -10,8 +10,8 @@ public class PlayerDashState : PlayerBaseState
         bool isGrounded = player.Physics.IsGrounded;
         if (!isGrounded) player.SwitchState(player.FallState);
 
-        bool hasInput = player.Dependencies.Input.MovementDirectionInput != Vector2.zero;
-        if (hasInput) player.SwitchState(player.RunState);
+        bool isMoving = player.Dependencies.Input.MovementDirectionInput != Vector2.zero;
+        if (isMoving) player.SwitchState(player.RunState);
         else player.SwitchState(player.IdleState);
     }
 
@@ -20,8 +20,8 @@ public class PlayerDashState : PlayerBaseState
         player.Dependencies.Dash.ConsumeDash();
 
         player.Dependencies.AnimationManager.PlayAnimationInterpolated(
-            player.Dependencies.AnimationManager.dash_01_anim,
-            player.Dependencies.AnimationManager.interpolationTime_00);
+            player.Dependencies.AnimationManager.Dash,
+            player.Dependencies.AnimationManager.ShortInterpolationTime);
 
         player.Dependencies.Dash.PerformDash();
     }
@@ -33,5 +33,6 @@ public class PlayerDashState : PlayerBaseState
     public override void UpdateState(PlayerStateManager player)
     {
         player.Locomotion.Decelerate(player.Dependencies.LocomotionParams.DashAccelerationRate);
+        player.Locomotion.CalculateRotation();
     }
 }

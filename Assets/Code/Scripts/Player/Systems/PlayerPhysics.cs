@@ -32,7 +32,7 @@ public class PlayerPhysics : MonoBehaviour
     public void GroundCheck()
     {
         Vector3 checkPosition = transform.position + Vector3.down * _slopeDetectionsDistance;
-        Physics.CheckSphere(checkPosition, (_dependencies.Controller.radius - _slopeCollisionRadiusOffset), _groundMask);
+        IsGrounded = Physics.CheckSphere(checkPosition, (_dependencies.Controller.radius - _slopeCollisionRadiusOffset), _groundMask);
     }
 
     public void CalculateSlopeMovement()

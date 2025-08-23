@@ -8,7 +8,6 @@ public class PlayerJump : MonoBehaviour
 
     [Header("Params")]
     [SerializeField] private float _jumpHeight = 2.25f;
-    public float JumpHeight => _jumpHeight;
 
     private bool _isJumping = false;
     public bool IsJumping => _isJumping;
@@ -37,19 +36,19 @@ public class PlayerJump : MonoBehaviour
 
         int jumpCooldownTimer = _dependencies.GlobalTimer.StartTimer(_jumpCooldown, () => _isJumpOnCooldown = false);
 
-        _physics.ToggleGroundSnaping(false);
-
         _locomotion.SetVerticalVelocity(0.0f);
 
-        float jumpVelocity = Mathf.Sqrt(-2.0f * _dependencies.LocomotionParams.AerialGravityAcceleration * JumpHeight);
+        float jumpVelocity = Mathf.Sqrt(-2.0f * _dependencies.LocomotionParams.AerialGravityAcceleration * _jumpHeight);
         _locomotion.SetVerticalVelocity(jumpVelocity);
     }
 
     public void SetIsJumping(bool isJumping) { _isJumping = isJumping; }
 
-    public void ResetJumps() { _currentJumpCount = _maxJumpCount; }
+    public void ResetJumpCount() { _currentJumpCount = _maxJumpCount; }
 
     public void AddJump() { _currentJumpCount++; }
 
     public void ConsumeJump() { _currentJumpCount--; }
+
+    public bool CanJump() { return _currentJumpCount > 0 && !_isJumpOnCooldown; }
 }
