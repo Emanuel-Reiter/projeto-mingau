@@ -13,14 +13,14 @@ public class PlayerLocomotionParams : MonoBehaviour
     [SerializeField] private float _airSpeedMultiplier = 1.8f;
 
     [Header("Acceleration")]
-    [SerializeField] private float _groundedAccelerationRate = 35.0f;
+    [SerializeField] private float _groundedAccelerationRate = 36.0f;
     public float GroundedAccelerationRate => _groundedAccelerationRate;
 
     [SerializeField] private float _aerialAccelerationRate = 60.0f;
     public float AerialAccelerationRate => _aerialAccelerationRate;
 
-    [SerializeField] private float _dashAccelerationRate = 20.0f;
-    public float DashAccelerationRate => _aerialAccelerationRate;
+    [SerializeField] private float _landAccelerationRate = 1.0f;
+    public float LandingAccelerationRate => _aerialAccelerationRate;
 
     [Header("Gravity")]
     [SerializeField] private float _aerialGravityAcceleration = -50.0f;
@@ -32,6 +32,9 @@ public class PlayerLocomotionParams : MonoBehaviour
     [Header("Character Rotation")]
     [SerializeField] private float _rotationSpeed = 20.0f;
     public float RotationSpeed => _rotationSpeed;
+
+    [SerializeField] private float _rotationDeadzone = 0.1f;
+    public float RotaionDeadzone => _rotationDeadzone;
 
     [SerializeField] private float _directionChangeThreshold = 135.0f;
     public float DirectionChangeThreshold => _directionChangeThreshold;

@@ -5,18 +5,26 @@ public class PlayerJumpState : PlayerBaseState
     public override void CheckExitState(PlayerStateManager player)
     {
         bool isFalling = player.Locomotion.VerticalVelocity < 0.0f;
-        if (isFalling) player.SwitchState(player.FallState);
+        if (isFalling)
+        {
+            player.SwitchState(player.FallState);
+            return;
+        }
 
         bool canJump = player.Dependencies.Jump.CanJump();
         bool jumpInput = player.Dependencies.Input.IsJumpPressed;
-        if (jumpInput && canJump) player.SwitchState(player.JumpState);
+        if (jumpInput && canJump)
+        {
+            player.SwitchState(player.JumpState);
+            return;
+        }
     }
 
     public override void EnterState(PlayerStateManager player)
     {
         player.Physics.ToggleGroundSnaping(false);
-        player.Dependencies.Jump.ConsumeJump();
-        
+        player.Dependencies.Jump.ConsumeAirJump();
+
         bool isGrounded = player.Physics.IsGrounded;
         if (isGrounded)
             player.Dependencies.AnimationManager.PlayAnimationInterpolated(

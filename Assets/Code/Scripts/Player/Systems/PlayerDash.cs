@@ -52,5 +52,7 @@ public class PlayerDash : MonoBehaviour
     public void AddDash() { _currentDashCount++; }
 
     public void ConsumeDash() { _currentDashCount--; }
+
+    public bool CanDash() { return _currentDashCount > 0 && !_physics.GetOnSteepSlope(); }
     #endregion
 }

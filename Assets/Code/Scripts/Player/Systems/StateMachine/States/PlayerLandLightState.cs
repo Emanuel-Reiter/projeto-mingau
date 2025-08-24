@@ -6,16 +6,23 @@ public class PlayerLandLightState : PlayerBaseState
 
     public override void CheckExitState(PlayerStateManager player)
     {
-        _exitTime -= Time.deltaTime;
-
-        bool canJump = player.Dependencies.Jump.CurrentJumpCount > 0;
+        bool canJump = player.Dependencies.Jump.CanJump();
         bool jumpInput = player.Dependencies.Input.IsJumpPressed;
-        if (canJump && jumpInput) player.SwitchState(player.JumpState);
+        if (canJump && jumpInput)
+        { 
+            player.SwitchState(player.JumpState);
+            return;
+        }
 
+        _exitTime -= Time.deltaTime;
         if (_exitTime > 0.0f) return;
 
         bool isGrounded = player.Physics.IsGrounded;
-        if (!isGrounded) player.SwitchState(player.FallState);
+        if (!isGrounded)
+        {
+            player.SwitchState(player.FallState);
+            return;
+        }
 
         bool isMoving = player.Dependencies.Input.MovementDirectionInput != Vector2.zero;
         if (isMoving) player.SwitchState(player.RunState);
@@ -36,7 +43,7 @@ public class PlayerLandLightState : PlayerBaseState
 
     public override void UpdateState(PlayerStateManager player)
     {
-        player.Locomotion.Decelerate(player.Dependencies.LocomotionParams.GetGroundedRelativeAcceleration());
+        player.Locomotion.Decelerate(player.Dependencies.LocomotionParams.LandingAccelerationRate);
         player.Locomotion.CalculateRotation();
     }
 

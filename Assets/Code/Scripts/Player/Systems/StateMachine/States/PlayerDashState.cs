@@ -8,7 +8,11 @@ public class PlayerDashState : PlayerBaseState
         if (isDashing) return;
 
         bool isGrounded = player.Physics.IsGrounded;
-        if (!isGrounded) player.SwitchState(player.FallState);
+        if (!isGrounded)
+        {
+            player.SwitchState(player.FallState);
+            return;
+        }
 
         bool isMoving = player.Dependencies.Input.MovementDirectionInput != Vector2.zero;
         if (isMoving) player.SwitchState(player.RunState);
@@ -32,7 +36,7 @@ public class PlayerDashState : PlayerBaseState
 
     public override void UpdateState(PlayerStateManager player)
     {
-        player.Locomotion.Decelerate(player.Dependencies.LocomotionParams.DashAccelerationRate);
+        player.Locomotion.Decelerate(player.Dependencies.LocomotionParams.LandingAccelerationRate);
         player.Locomotion.CalculateRotation();
     }
 }

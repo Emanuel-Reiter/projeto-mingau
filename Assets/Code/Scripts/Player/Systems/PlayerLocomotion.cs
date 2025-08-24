@@ -52,7 +52,6 @@ public class PlayerLocomotion : MonoBehaviour
         if (_physics.IsGrounded && !_dependencies.Jump.IsJumping)
         {
             _verticalVelocity = _dependencies.LocomotionParams.GroundedGravityAcceleration;
-            if (_physics.UseGroundSnapping) _physics.CalculateSlopeMovement();
         }
         else
         {
@@ -62,7 +61,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void CalculateRotation()
     {
-        if (_horizontalVelocity.magnitude > 0.1f)
+        if (_horizontalVelocity.magnitude > _dependencies.LocomotionParams.RotaionDeadzone)
         {
             Quaternion targetRotation = Quaternion.LookRotation(_horizontalVelocity.normalized);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _dependencies.LocomotionParams.RotationSpeed * Time.deltaTime);

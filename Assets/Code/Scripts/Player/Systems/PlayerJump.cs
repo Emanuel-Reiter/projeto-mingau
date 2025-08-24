@@ -17,10 +17,10 @@ public class PlayerJump : MonoBehaviour
 
     private float _jumpCooldown = 0.067f;
 
-    private int _maxJumpCount = 2;
+    private int _maxAirJumpsCount = 1;
 
-    private int _currentJumpCount = 0;
-    public int CurrentJumpCount => _currentJumpCount;
+    private int _currentAirJumpsCount = 0;
+    public int CurrentAirJumpsCount => _currentAirJumpsCount;
 
     private void Start()
     {
@@ -44,11 +44,16 @@ public class PlayerJump : MonoBehaviour
 
     public void SetIsJumping(bool isJumping) { _isJumping = isJumping; }
 
-    public void ResetJumpCount() { _currentJumpCount = _maxJumpCount; }
+    public void ResetJumpCount() { _currentAirJumpsCount = _maxAirJumpsCount; }
 
-    public void AddJump() { _currentJumpCount++; }
+    public void AddJump() { _currentAirJumpsCount++; }
 
-    public void ConsumeJump() { _currentJumpCount--; }
+    public void ConsumeAirJump() 
+    { 
+        if (!_physics.IsGrounded) _currentAirJumpsCount--; 
+    }
 
-    public bool CanJump() { return _currentJumpCount > 0 && !_isJumpOnCooldown; }
+    public bool CanJump() { 
+        return (_physics.IsGrounded || _currentAirJumpsCount > 0) && !_isJumpOnCooldown && !_physics.GetOnSteepSlope();
+    }
 }

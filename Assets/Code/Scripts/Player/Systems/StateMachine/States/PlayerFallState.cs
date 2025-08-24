@@ -21,15 +21,25 @@ public class PlayerFallState : PlayerBaseState
             if (lightLand) player.SwitchState(player.LandLightState);
             if (heavyLand) player.SwitchState(player.LandHeavyState);
             if (noLand) player.SwitchState(player.IdleState);
+
+            return;
         }
 
-        bool canDash = player.Dependencies.Dash.CurrentDashCount > 0;
+        bool canDash = player.Dependencies.Dash.CanDash();
         bool dashInput = player.Dependencies.Input.IsDashPressed;
-        if (canDash && dashInput) player.SwitchState(player.DashState);
+        if (canDash && dashInput)
+        {
+            player.SwitchState(player.DashState);
+            return;
+        }
 
-        bool canJump = player.Dependencies.Jump.CurrentJumpCount > 0;
+        bool canJump = player.Dependencies.Jump.CanJump();
         bool jumpInput = player.Dependencies.Input.IsJumpPressed;
-        if(canJump && jumpInput) player.SwitchState(player.JumpState);
+        if(canJump && jumpInput)
+        {
+            player.SwitchState(player.JumpState);
+            return;
+        }
     }
 
     public override void EnterState(PlayerStateManager player)
@@ -45,6 +55,13 @@ public class PlayerFallState : PlayerBaseState
 
     public override void UpdateState(PlayerStateManager player)
     {
+
+        if (player.Physics.GetOnSteepSlope())
+        {
+            player.Physics.CalculateSlopeMovement();
+            return;
+        }
+
         player.Locomotion.CalculateHorizontalMovement();
         player.Locomotion.CalculateVerticalMovement();
         player.Locomotion.CalculateRotation();

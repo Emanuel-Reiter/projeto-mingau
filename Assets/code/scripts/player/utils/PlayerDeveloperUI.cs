@@ -51,20 +51,21 @@ public class PlayerDeveloperUI : MonoBehaviour {
     private void OnGUI() {
         GUI.skin.label.fontSize = 24;
 
-        // Framerate UI
         GUI.Label(new Rect(32, 32, 512, 32), $"fps: {_framerate}");
 
-        // Player state
         GUI.Label(new Rect(32, 64, 512, 32), $"state: {_stateManager.CurrentState}");
 
-        // Current player horizontal velocity
         GUI.Label(new Rect(32, 96, 512, 32), $"velocity: {_locomotion.HorizontalVelocity.magnitude.ToString("F2")}");
 
-        // Current player jumps left
-        GUI.Label(new Rect(32, 128, 512, 32), $"jumpsRemaining: {_dependencies.Jump.CurrentJumpCount}");
+        GUI.Label(new Rect(32, 128, 512, 32), $"airJumpsRemaining: {_dependencies.Jump.CurrentAirJumpsCount}");
+        GUI.Label(new Rect(32, 160, 512, 32), $"dashRemaining: {_dependencies.Dash.CurrentDashCount}");
 
-        // Ground
-        GUI.Label(new Rect(32, 160, 512, 32), $"groundSnaping: {_physics.UseGroundSnapping}");
-        GUI.Label(new Rect(32, 192, 512, 32), $"isGrounded: {_physics.IsGrounded}");
+        GUI.Label(new Rect(32, 192, 512, 32), $"groundSnapping: {_physics.UseGroundSnapping}");
+        GUI.Label(new Rect(32, 224, 512, 32), $"isGrounded: {_physics.IsGrounded}");
+        GUI.Label(new Rect(32, 256, 512, 32), $"onSteepSlope: {_physics.GetOnSteepSlope()}");
+
+        float slopeAngle = Vector3.Angle(_physics.CurrentGroundNormal, Vector3.up); 
+
+        GUI.Label(new Rect(32, 286, 512, 32), $"slopeAngle: {slopeAngle}");
     }
 }

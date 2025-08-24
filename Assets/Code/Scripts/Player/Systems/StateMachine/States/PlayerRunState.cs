@@ -5,15 +5,27 @@ public class PlayerRunState : PlayerBaseState
     public override void CheckExitState(PlayerStateManager player)
     {
         bool isGrounded = player.Physics.IsGrounded;
-        if (!isGrounded) player.SwitchState(player.FallState);
+        if (!isGrounded)
+        {
+            player.SwitchState(player.FallState);
+            return;
+        }
 
-        bool canJump = player.Dependencies.Jump.CurrentJumpCount > 0;
+        bool canJump = player.Dependencies.Jump.CanJump();
         bool jumpInput = player.Dependencies.Input.IsJumpPressed;
-        if (canJump && jumpInput) player.SwitchState(player.JumpState);
+        if (canJump && jumpInput)
+        {
+            player.SwitchState(player.JumpState);
+            return;
+        }
 
-        bool canDash = player.Dependencies.Dash.CurrentDashCount > 0;
+        bool canDash = player.Dependencies.Dash.CanDash();
         bool dashInput = player.Dependencies.Input.IsDashPressed;
-        if (canDash && dashInput) player.SwitchState(player.DashState);
+        if (canDash && dashInput)
+        {
+            player.SwitchState(player.DashState);
+            return;
+        }
 
         bool isMoving = player.Dependencies.Input.MovementDirectionInput != Vector2.zero;
         if (!isMoving) player.SwitchState(player.IdleState);
@@ -36,6 +48,7 @@ public class PlayerRunState : PlayerBaseState
         player.Locomotion.CalculateHorizontalMovement();
         player.Locomotion.CalculateVerticalMovement();
         player.Locomotion.CalculateRotation();
+        player.Physics.CalculateSlopeMovement();
     }
 
     public override void PhysicsUpdateState(PlayerStateManager player) { }

@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3847a1501a89e064b84b1f8ad323d768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetBone: {fileID: 3110520153469494813}
+  targetBone: {fileID: 4689683103247426324}
 --- !u!1001 &7367348838948880744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -391,9 +391,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6766342762944836471}
   m_SourcePrefab: {fileID: 100100000, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
---- !u!4 &3110520153469494813 stripped
+--- !u!4 &4689683103247426324 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5554307393045751669, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
+  m_CorrespondingSourceObject: {fileID: -6401007794038136196, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
   m_PrefabInstance: {fileID: 7367348838948880744}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7040443163258005123 stripped
@@ -560,6 +560,7 @@ MonoBehaviour:
   _aerialGravityAcceleration: -50
   _groundedGravityAcceleration: -9.81
   _rotationSpeed: 20
+  _rotationDeadzone: 0.1
   _directionChangeThreshold: 135
 --- !u!114 &5912456618424892093
 MonoBehaviour:
