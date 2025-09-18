@@ -14,15 +14,15 @@ public class PlayerLandLightState : PlayerBaseState
             return;
         }
 
-        _exitTime -= Time.deltaTime;
-        if (_exitTime > 0.0f) return;
-
         bool isGrounded = player.Physics.IsGrounded;
         if (!isGrounded)
         {
             player.SwitchState(player.FallState);
             return;
         }
+
+        _exitTime -= Time.deltaTime;
+        if (_exitTime > 0.0f) return;
 
         bool isMoving = player.Dependencies.Input.MovementDirectionInput != Vector2.zero;
         if (isMoving) player.SwitchState(player.RunState);

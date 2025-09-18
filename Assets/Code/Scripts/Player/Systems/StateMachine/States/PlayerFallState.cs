@@ -55,6 +55,11 @@ public class PlayerFallState : PlayerBaseState
 
     public override void UpdateState(PlayerStateManager player)
     {
+        if(player.Physics.StandingOnEntity)
+        {
+            player.Physics.CalculateEntityMovement();
+            return;
+        }
 
         if (player.Physics.GetOnSteepSlope())
         {
