@@ -12,7 +12,7 @@ public class PlayerPhysics : MonoBehaviour
     [SerializeField] private Vector3 _slopeDetectionOffset = Vector3.zero;
     [SerializeField] private float _slopeCollisionRadiusOffset = 0.0001f;
     [SerializeField] private LayerMask _slopeMask;
-    [SerializeField] private LayerMask _entitiesMask;
+    [SerializeField] private LayerMask _unstableGroundMask;
 
     private float _groundSnapDistance = 0.25f;
     private float _slopeSlideForce = 5.0f;
@@ -22,8 +22,8 @@ public class PlayerPhysics : MonoBehaviour
     public bool UseGroundSnapping { get; private set; } = true;
     public bool IsGrounded { get; private set; }
 
-    private bool _standingOnEntity = false;
-    public bool StandingOnEntity => _standingOnEntity;
+    private bool _standingOnUnstableGround = false;
+    public bool StandingOnUnstableGround => _standingOnUnstableGround;
 
     private Vector3 _groundNormal = Vector3.zero;
     public Vector3 GroundNormal => _groundNormal;
@@ -52,9 +52,9 @@ public class PlayerPhysics : MonoBehaviour
         float radius = _dependencies.Controller.radius - _slopeCollisionRadiusOffset;
         bool isGrounded = Physics.CheckSphere(origin, radius, _slopeMask);
 
-        _standingOnEntity = Physics.CheckSphere(origin, radius, _entitiesMask);
+        _standingOnUnstableGround = Physics.CheckSphere(origin, radius, _unstableGroundMask);
 
-        if (isGrounded && !onSteepSlope && !_standingOnEntity) IsGrounded = true;
+        if (isGrounded && !onSteepSlope && !_standingOnUnstableGround) IsGrounded = true;
         else IsGrounded = false;
     }
 
@@ -104,7 +104,7 @@ public class PlayerPhysics : MonoBehaviour
         ProcessSlopeMovement();
     }
 
-    public void CalculateEntityMovement()
+    public void CalculateUnstableGroundMovement()
     {
         _slopeForceMultiplier = 2.0f;
         ProcessSlopeMovement();

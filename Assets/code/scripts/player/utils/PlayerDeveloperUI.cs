@@ -67,6 +67,6 @@ public class PlayerDeveloperUI : MonoBehaviour {
         float slopeAngle = Vector3.Angle(_physics.GroundNormal, Vector3.up);
         slopeAngle = Mathf.CeilToInt(slopeAngle);
         GUI.Label(new Rect(32, 286, 512, 32), $"slopeAngle: {slopeAngle}");
-        GUI.Label(new Rect(32, 318, 512, 32), $"standingOnEntity: {_physics.StandingOnEntity}");
+        GUI.Label(new Rect(32, 318, 512, 32), $"standingOnEntity: {_physics.StandingOnUnstableGround}");
     }
 }

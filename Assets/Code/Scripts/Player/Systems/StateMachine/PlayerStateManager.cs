@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class PlayerStateManager : MonoBehaviour
 {
@@ -9,11 +10,13 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerJumpState JumpState = new PlayerJumpState();
     public PlayerFallState FallState = new PlayerFallState();
     public PlayerLandHeavyState LandHeavyState = new PlayerLandHeavyState();
-    public PlayerLandLightState LandLightState = new PlayerLandLightState();
 
     // State management
     public PlayerBaseState CurrentState { get; private set; }
     public PlayerBaseState PreviousState { get; private set; }
+
+    public Type CurrentStateType => CurrentState?.GetType();
+    public Type PreviousStateType => PreviousState?.GetType();
 
     // Dependencies
     private PlayerDependencies _dependencies;
@@ -56,4 +59,8 @@ public class PlayerStateManager : MonoBehaviour
         CurrentState = newState;
         CurrentState?.EnterState(this);
     }
+
+    public bool WasPreviousState<T>() where T : PlayerBaseState { return PreviousState is T; }
+
+    public bool IsCurrentState<T>() where T : PlayerBaseState { return CurrentState is T; }
 }
