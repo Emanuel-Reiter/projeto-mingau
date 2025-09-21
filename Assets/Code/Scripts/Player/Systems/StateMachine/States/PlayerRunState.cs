@@ -33,6 +33,9 @@ public class PlayerRunState : PlayerBaseState
 
     public override void EnterState(PlayerStateManager player)
     {
+        bool wasAirborne = player.WasPreviousState<PlayerFallState>();
+        if (wasAirborne) player.Dependencies.Land.TriggerLandAnimation();
+
         player.Dependencies.Jump.ResetJumpCount();
         player.Dependencies.Dash.ResetDashCount();
 

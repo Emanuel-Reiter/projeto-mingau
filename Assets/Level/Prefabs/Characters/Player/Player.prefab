@@ -303,7 +303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -9.95
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -389,11 +389,19 @@ PrefabInstance:
       addedObject: {fileID: 2380609372113632550}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 2191774520754221171}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 6766342762944836471}
   m_SourcePrefab: {fileID: 100100000, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
 --- !u!4 &4689683103247426324 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6401007794038136196, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
+  m_PrefabInstance: {fileID: 7367348838948880744}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5489437020921815966 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -6192324835586923786, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
   m_PrefabInstance: {fileID: 7367348838948880744}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7040443163258005123 stripped
@@ -426,11 +434,11 @@ CharacterController:
   serializedVersion: 3
   m_Height: 1.6
   m_Radius: 0.4
-  m_SlopeLimit: 45
+  m_SlopeLimit: 60.1
   m_StepOffset: 0.333
-  m_SkinWidth: 0.015
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.8, z: 0}
+  m_SkinWidth: 0.03
+  m_MinMoveDistance: 0
+  m_Center: {x: 0, y: 0.83, z: 0}
 --- !u!95 &1284225487129111661
 Animator:
   serializedVersion: 7
@@ -498,6 +506,7 @@ MonoBehaviour:
   GlobalTimer: {fileID: 0}
   Dash: {fileID: 0}
   Jump: {fileID: 0}
+  Land: {fileID: 0}
 --- !u!114 &8685238301907562621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,11 +531,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9799061453da6384f845f20c8fd75588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slopeDetectionsDistance: 0.25
-  _slopeCollisionRadiusOffset: 0.0005
-  _groundMask:
+  _slopeDetectionDistance: 0.2
+  _slopeDetectionOffset: {x: 0, y: 0.025, z: 0}
+  _slopeCollisionRadiusOffset: 0.005
+  _slopeMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 9216
+  _unstableGroundMask:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!114 &742253431091665020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,7 +569,7 @@ MonoBehaviour:
   _airSpeedMultiplier: 1.8
   _groundedAccelerationRate: 35
   _aerialAccelerationRate: 60
-  _dashAccelerationRate: 20
+  _landAccelerationRate: 0
   _aerialGravityAcceleration: -50
   _groundedGravityAcceleration: -9.81
   _rotationSpeed: 20
@@ -588,6 +601,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dashSpeed: 48
+--- !u!114 &2191774520754221171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7710018997774875705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a141a2e37ea8484a90eb54eb2de1857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerRig: {fileID: 5489437020921815966}
+  _landAnimationLength: 0.3
+  _landAnimationScale: {x: 1.4, y: 0.6, z: 1.4}
 --- !u!114 &6766342762944836471
 MonoBehaviour:
   m_ObjectHideFlags: 0

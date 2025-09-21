@@ -17,6 +17,7 @@ public class PlayerDependencies : MonoBehaviour
     // Player actions
     [HideInInspector] public PlayerDash Dash;
     [HideInInspector] public PlayerJump Jump;
+    [HideInInspector] public PlayerLand Land;
 
     private void Awake()
     {
@@ -41,6 +42,7 @@ public class PlayerDependencies : MonoBehaviour
 
             Dash = GetComponent<PlayerDash>();
             Jump = GetComponent<PlayerJump>();
+            Land = GetComponent<PlayerLand>();
         }
         catch 
         {

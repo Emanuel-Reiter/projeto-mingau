@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6000696189833800081}
-  m_Layer: 0
-  m_Name: Enemy_01
+  m_Layer: 13
+  m_Name: NPC_Enemy_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5060241009391767402}
   - component: {fileID: 7387005499978659723}
   - component: {fileID: 3897219947072139027}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -3,9 +3,7 @@ using UnityEngine;
 public class PlayerFallState : PlayerBaseState
 {
     private float _airTime;
-
-    private float _lightLandThresholdInSeconds = 0.1f;
-    private float _heavyLandThresholdInSeconds = 0.4f;
+    private float _heavyLandThresholdInSeconds = 0.5f;
 
     public override void CheckExitState(PlayerStateManager player)
     {
@@ -14,13 +12,15 @@ public class PlayerFallState : PlayerBaseState
         bool isGrounded = player.Physics.IsGrounded;
         if (isGrounded)
         {
-            bool lightLand = _airTime > _lightLandThresholdInSeconds && _airTime < _heavyLandThresholdInSeconds;
             bool heavyLand = _airTime > _heavyLandThresholdInSeconds;
-            bool noLand = !lightLand && !heavyLand;
 
-            if (lightLand) player.SwitchState(player.LandLightState);
             if (heavyLand) player.SwitchState(player.LandHeavyState);
-            if (noLand) player.SwitchState(player.IdleState);
+            else
+            {
+                bool isMoving = player.Dependencies.Input.MovementDirectionInput != Vector2.zero;
+                if (isMoving) player.SwitchState(player.RunState);
+                else player.SwitchState(player.IdleState);
+            }
 
             return;
         }
@@ -55,6 +55,11 @@ public class PlayerFallState : PlayerBaseState
 
     public override void UpdateState(PlayerStateManager player)
     {
+        if(player.Physics.StandingOnUnstableGround)
+        {
+            player.Physics.CalculateUnstableGroundMovement();
+            return;
+        }
 
         if (player.Physics.GetOnSteepSlope())
         {
