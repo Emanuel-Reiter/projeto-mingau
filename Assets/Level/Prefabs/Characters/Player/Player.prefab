@@ -615,7 +615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerRig: {fileID: 5489437020921815966}
   _landAnimationLength: 0.3
-  _landAnimationScale: {x: 1.4, y: 0.6, z: 1.4}
+  _landAnimationScale: {x: 1.25, y: 0.75, z: 1.25}
 --- !u!114 &6766342762944836471
 MonoBehaviour:
   m_ObjectHideFlags: 0

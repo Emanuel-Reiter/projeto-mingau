@@ -1,0 +1,28 @@
+using UnityEngine;
+using UnityEngine.AI;
+
+[RequireComponent(typeof(NavMeshAgent), typeof(NPCTargetDetection))]
+public class NPCDependencies : MonoBehaviour
+{
+    public NavMeshAgent NavMeshAgent { get; private set; }
+    public NPCTargetDetection TargetDetection { get; private set; }
+    public GlobalTimer GlobalTimer { get; private set; }
+
+    public Vector3 SpawnPosition { get; private set; }
+
+    private void Start()
+    {
+        try
+        {
+            NavMeshAgent = GetComponent<NavMeshAgent>();
+            TargetDetection = GetComponent<NPCTargetDetection>();
+            GlobalTimer = GameObject.FindGameObjectWithTag("GlobalTimer").GetComponent<GlobalTimer>();
+            
+            SpawnPosition = transform.position;
+        }
+        catch
+        {
+            Debug.LogError("Failed to load NPC dependencies");
+        }
+    }
+}

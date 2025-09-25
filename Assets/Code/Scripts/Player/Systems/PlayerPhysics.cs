@@ -126,8 +126,7 @@ public class PlayerPhysics : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        bool isApplicationRunning = Application.isPlaying;
-        if (!isApplicationRunning) return;
+        if (!Application.isPlaying) return;
         
         Vector3 origin = transform.position + _slopeDetectionOffset;
         float radius = _dependencies.Controller.radius - _slopeCollisionRadiusOffset;
