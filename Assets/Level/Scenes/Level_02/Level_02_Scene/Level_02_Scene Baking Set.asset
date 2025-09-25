@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level_02_Scene Baking Set
   m_EditorClassIdentifier: 
   singleSceneMode: 1
-  dialogNoProbeVolumeInSetShown: 0
+  dialogNoProbeVolumeInSetShown: 1
   settings:
     m_Version: 1
     dilationSettings:
@@ -124,7 +124,7 @@ MonoBehaviour:
     m_Keys:
     - 98b3b7ec2f59ca4439f0cc8849211457
     m_Values:
-    - hasProbeVolume: 1
+    - hasProbeVolume: 0
       bakeScene: 1
       bounds:
         m_Center: {x: -40.5, y: 0, z: 81}
