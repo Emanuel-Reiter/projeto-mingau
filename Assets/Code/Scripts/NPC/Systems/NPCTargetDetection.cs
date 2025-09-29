@@ -32,13 +32,11 @@ public class NPCTargetDetection : MonoBehaviour
     {
         if (toggle)
         {
-            Debug.Log("Enabled target detection!");
             _isTargetSearchEnabled = true;
             StartCoroutine(FindTargetsWithDelay(_targetSearchDelay));
         }
         else
         {
-            Debug.Log("Disabled target detection!");
             _isTargetSearchEnabled = false;
             StopCoroutine(FindTargetsWithDelay(_targetSearchDelay));
             ForgetCurrentTarget();

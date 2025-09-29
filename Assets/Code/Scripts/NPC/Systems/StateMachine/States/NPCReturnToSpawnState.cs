@@ -10,7 +10,6 @@ public class NPCReturnToSpawnState : NPCBaseState
     public override void CheckExitState(NPCStateManager npc)
     {
         bool hasReachedSpawn = Vector3.Distance(transform.position, npc.Dependencies.SpawnPosition) < _spawnDistanceTreshold;
-        Debug.Log(Vector3.Distance(transform.position, npc.Dependencies.SpawnPosition));
         if(hasReachedSpawn)
         {
             npc.SwitchState(_idleState);
