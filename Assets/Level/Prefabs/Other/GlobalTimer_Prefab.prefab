@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 794774821940612626}
   - component: {fileID: 1301523839177050637}
   m_Layer: 0
-  m_Name: GlobalTimer
+  m_Name: GlobalTimer_Prefab
   m_TagString: GlobalTimer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

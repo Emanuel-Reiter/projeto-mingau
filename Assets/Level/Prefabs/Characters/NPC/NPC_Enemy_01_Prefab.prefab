@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 1737434666514542786}
   - component: {fileID: 1734245191418588981}
   m_Layer: 13
-  m_Name: NPC_Enemy_01
+  m_Name: NPC_Enemy_01_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

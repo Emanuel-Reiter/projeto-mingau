@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3583532277042874666}
   - component: {fileID: 8945117791209039742}
   m_Layer: 10
-  m_Name: GiantBook_Red_01
+  m_Name: Structure_GiantBook_Yellow_A_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 689dab5dfc04988408a0f11f4ec4a974, type: 2}
+  - {fileID: 2100000, guid: b0d3cdc709b661b4b8542bca8eebc763, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
