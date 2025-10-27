@@ -100,7 +100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (10)
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -162,7 +162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -224,7 +224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (18)
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -244,58 +244,58 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3312260354739194499}
     m_Modifications:
-    - target: {fileID: 1370028569772188939, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
+    - target: {fileID: 1370028569772188939, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -144.55602
       objectReference: {fileID: 0}
-    - target: {fileID: 1370028569772188939, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
+    - target: {fileID: 1370028569772188939, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_LocalPosition.y
       value: 9.295
       objectReference: {fileID: 0}
-    - target: {fileID: 1370028569772188939, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
+    - target: {fileID: 1370028569772188939, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_LocalPosition.z
       value: 196.72398
       objectReference: {fileID: 0}
-    - target: {fileID: 1370028569772188939, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
+    - target: {fileID: 1370028569772188939, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.8946251
       objectReference: {fileID: 0}
-    - target: {fileID: 1370028569772188939, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
+    - target: {fileID: 1370028569772188939, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0.058910653
       objectReference: {fileID: 0}
-    - target: {fileID: 1370028569772188939, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
+    - target: {fileID: 1370028569772188939, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0.4252222
       objectReference: {fileID: 0}
-    - target: {fileID: 1370028569772188939, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
+    - target: {fileID: 1370028569772188939, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.123942144
       objectReference: {fileID: 0}
-    - target: {fileID: 1370028569772188939, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
+    - target: {fileID: 1370028569772188939, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1370028569772188939, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
+    - target: {fileID: 1370028569772188939, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -50.844
       objectReference: {fileID: 0}
-    - target: {fileID: 1370028569772188939, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
+    - target: {fileID: 1370028569772188939, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 15.775
       objectReference: {fileID: 0}
-    - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
+    - target: {fileID: 2317154677319645110, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (2)
+      value: Structure_GiantBook_Red_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
 --- !u!4 &1818067055606153297 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 1370028569772188939, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1370028569772188939, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
   m_PrefabInstance: {fileID: 736413183364212058}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &763230512272764953
@@ -348,7 +348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (3)
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -410,7 +410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (14)
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -472,7 +472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (9)
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -534,7 +534,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (7)
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -596,7 +596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (1)
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -658,7 +658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (19)
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -720,7 +720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (6)
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -782,7 +782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (4)
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -844,7 +844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (17)
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -906,7 +906,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (12)
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -968,7 +968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (5)
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1030,7 +1030,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (15)
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1092,7 +1092,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (11)
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1154,7 +1154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (8)
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1216,7 +1216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_Name
-      value: GiantBook_Blue_01 (13)
+      value: Structure_GiantBook_Blue_A_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
