@@ -4,7 +4,6 @@ public class PlayerDash : MonoBehaviour
 {
     private PlayerDependencies _dependencies;
     private PlayerLocomotion _locomotion;
-    private PlayerPhysics _physics;
 
     [Header("Params")]
     [SerializeField] private float _dashSpeed = 48.0f;
@@ -22,25 +21,25 @@ public class PlayerDash : MonoBehaviour
     {
         _dependencies = GetComponent<PlayerDependencies>();
         _locomotion = GetComponent<PlayerLocomotion>();
-        _physics = GetComponent<PlayerPhysics>();
     }
 
     public void PerformDash()
     {
         _isDashing = true;
 
-        float dashVelocity = Mathf.Sqrt(2.0f * _dependencies.LocomotionParams.GetGroundedRelativeSpeed() * _dashSpeed);
+        float dashVelocity = Mathf.Sqrt(2.0f * _locomotion.GetCurrentMovementSpeed() * _dashSpeed);
 
         Vector2 inputVector = _dependencies.Input.MovementDirectionInput;
 
         Vector3 dashDirection = transform.forward;
         if (inputVector != Vector2.zero) dashDirection = _locomotion.GetCameraRelativeDirection(inputVector);
 
+        _locomotion.SetVerticalVelocity(0.0f);
         _locomotion.SetHorizontalVelocity(dashDirection * dashVelocity);
 
         // TODO: Refactor the dash duration and deceleration loginc
         float dashDuration = 0.0f;
-        if (_physics.IsGrounded) dashDuration = _dependencies.AnimationManager.Dash.length;
+        if (_locomotion.IsGrounded) dashDuration = _dependencies.AnimationManager.Dash.length;
         else dashDuration = _dependencies.AnimationManager.Dash.length / 2.0f;
 
         int dashTimer = _dependencies.GlobalTimer.StartTimer(dashDuration, () => { _isDashing = false; });
@@ -53,6 +52,6 @@ public class PlayerDash : MonoBehaviour
 
     public void ConsumeDash() { _currentDashCount--; }
 
-    public bool CanDash() { return _currentDashCount > 0 && !_physics.GetOnSteepSlope(); }
+    public bool CanDash() { return _currentDashCount > 0 && !_locomotion.OnSteepSlope; }
     #endregion
 }

@@ -4,7 +4,7 @@ public class PlayerIdleState : PlayerBaseState
 { 
     public override void CheckExitState(PlayerStateManager player)
     {
-        bool isGrounded = player.Physics.IsGrounded;
+        bool isGrounded = player.Locomotion.IsGrounded;
         if (!isGrounded)
         {
             player.SwitchState(player.FallState);
@@ -39,8 +39,6 @@ public class PlayerIdleState : PlayerBaseState
         player.Dependencies.Jump.ResetJumpCount();
         player.Dependencies.Dash.ResetDashCount();
 
-        player.Physics.ToggleGroundSnaping(true);
-
         player.Dependencies.AnimationManager.PlayAnimationInterpolated(
             player.Dependencies.AnimationManager.Idle,
             player.Dependencies.AnimationManager.interpolationTime_02);
@@ -48,9 +46,9 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void UpdateState(PlayerStateManager player)
     {
-        player.Locomotion.Decelerate(player.Dependencies.LocomotionParams.GetGroundedRelativeAcceleration());
-        player.Locomotion.CalculateRotation();
-        player.Physics.CalculateSlopeMovement();
+        player.Locomotion.Decelerate();
+        player.Locomotion.CalculateSlopeVelocity();
+        player.Locomotion.RotateTowardsMovementDirection();
     }
 
     public override void PhysicsUpdateState(PlayerStateManager player) { }

@@ -22,16 +22,12 @@ public class PlayerStateManager : MonoBehaviour
     private PlayerDependencies _dependencies;
     public PlayerDependencies Dependencies => _dependencies;
 
-    private PlayerPhysics _physics;
-    public PlayerPhysics Physics => _physics;
-
     private PlayerLocomotion _locomotion;
     public PlayerLocomotion Locomotion => _locomotion;
 
     private void Start()
     {
         _dependencies = GetComponent<PlayerDependencies>();
-        _physics = GetComponent<PlayerPhysics>();
         _locomotion = GetComponent<PlayerLocomotion>();
 
         // Set the initial state

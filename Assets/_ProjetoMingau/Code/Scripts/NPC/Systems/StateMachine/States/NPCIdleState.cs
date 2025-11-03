@@ -5,6 +5,10 @@ public class NPCIdleState : NPCBaseState
     [Header("State tranisitions")]
     [SerializeField] private NPCTargetChaseState _targetChaseState;
 
+    [Header("State params")]
+    [SerializeField] private AnimationClip _idleAnim;
+    [SerializeField] private float _interpolationTime = 0.1f;
+
     public override void CheckExitState(NPCStateManager npc)
     {
         if (!IsComplete) return;
@@ -14,7 +18,7 @@ public class NPCIdleState : NPCBaseState
 
     public override void EnterState(NPCStateManager npc)
     {
-        
+        npc.Dependencies.Animation.PlayAnimationInterpolated(_idleAnim, _interpolationTime);
     }
 
     public override void UpdateState(NPCStateManager npc)

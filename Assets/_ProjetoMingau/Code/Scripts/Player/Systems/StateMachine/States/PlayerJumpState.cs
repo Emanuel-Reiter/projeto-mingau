@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerBaseState
 {
+
+    Vector3 startPos;
+    Vector3 endPos;
+
     public override void CheckExitState(PlayerStateManager player)
     {
         bool isFalling = player.Locomotion.VerticalVelocity < 0.0f;
@@ -18,14 +22,21 @@ public class PlayerJumpState : PlayerBaseState
             player.SwitchState(player.JumpState);
             return;
         }
+
+        bool canDash = player.Dependencies.Dash.CanDash();
+        bool dashInput = player.Dependencies.Input.IsDashPressed;
+        if (canDash && dashInput)
+        {
+            player.SwitchState(player.DashState);
+            return;
+        }
     }
 
     public override void EnterState(PlayerStateManager player)
     {
-        player.Physics.ToggleGroundSnaping(false);
         player.Dependencies.Jump.ConsumeAirJump();
 
-        bool isGrounded = player.Physics.IsGrounded;
+        bool isGrounded = player.Locomotion.IsGrounded;
         if (isGrounded)
             player.Dependencies.AnimationManager.PlayAnimationInterpolated(
                 player.Dependencies.AnimationManager.Jump[0],
@@ -36,13 +47,15 @@ public class PlayerJumpState : PlayerBaseState
                 player.Dependencies.AnimationManager.ShortInterpolationTime);
 
         player.Dependencies.Jump.PerformJump();
+
+        startPos = player.transform.position;
     }
 
     public override void UpdateState(PlayerStateManager player)
     {
-        player.Locomotion.CalculateHorizontalMovement();
-        player.Locomotion.CalculateVerticalMovement();
-        player.Locomotion.CalculateRotation();
+        player.Locomotion.CalculateHorizontalVelocity();
+        player.Locomotion.CalculateVerticalVelocity();
+        player.Locomotion.RotateTowardsMovementDirection();
     }
 
     public override void PhysicsUpdateState(PlayerStateManager player) { }
@@ -50,5 +63,10 @@ public class PlayerJumpState : PlayerBaseState
     public override void ExitState(PlayerStateManager player)
     {
         player.Dependencies.Jump.SetIsJumping(false);
+
+        endPos = player.transform.position;
+
+        float distance = Vector3.Distance(startPos, endPos);
+        // Debug.Log($"Jump distance: {distance}");
     }
 }

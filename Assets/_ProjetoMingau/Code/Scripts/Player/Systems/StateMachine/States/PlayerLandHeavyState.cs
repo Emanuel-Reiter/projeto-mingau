@@ -17,7 +17,7 @@ public class PlayerLandHeavyState : PlayerBaseState
         _exitTime -= Time.deltaTime;
         if (_exitTime > 0.0f) return;
 
-        bool isGrounded = player.Physics.IsGrounded;
+        bool isGrounded = player.Locomotion.IsGrounded;
         if (!isGrounded)
         {
             player.SwitchState(player.FallState);
@@ -43,8 +43,8 @@ public class PlayerLandHeavyState : PlayerBaseState
 
     public override void UpdateState(PlayerStateManager player)
     {
-        player.Locomotion.Decelerate(player.Dependencies.LocomotionParams.GetGroundedRelativeAcceleration());
-        player.Locomotion.CalculateRotation();
+        player.Locomotion.Decelerate();
+        player.Locomotion.RotateTowardsMovementDirection();
     }
 
     public override void ExitState(PlayerStateManager player) { }

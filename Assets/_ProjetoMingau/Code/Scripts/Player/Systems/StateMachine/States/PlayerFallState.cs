@@ -9,7 +9,7 @@ public class PlayerFallState : PlayerBaseState
     {
         _airTime += Time.deltaTime;
 
-        bool isGrounded = player.Physics.IsGrounded;
+        bool isGrounded = player.Locomotion.IsGrounded;
         if (isGrounded)
         {
             bool heavyLand = _airTime > _heavyLandThresholdInSeconds;
@@ -46,8 +46,6 @@ public class PlayerFallState : PlayerBaseState
     {
         _airTime = 0.0f;
 
-        player.Physics.ToggleGroundSnaping(true);
-
         player.Dependencies.AnimationManager.PlayAnimationInterpolated(
             player.Dependencies.AnimationManager.Fall,
             player.Dependencies.AnimationManager.interpolationTime_02);
@@ -55,21 +53,9 @@ public class PlayerFallState : PlayerBaseState
 
     public override void UpdateState(PlayerStateManager player)
     {
-        if(player.Physics.StandingOnUnstableGround)
-        {
-            player.Physics.CalculateUnstableGroundMovement();
-            return;
-        }
-
-        if (player.Physics.GetOnSteepSlope())
-        {
-            player.Physics.CalculateSlopeMovement();
-            return;
-        }
-
-        player.Locomotion.CalculateHorizontalMovement();
-        player.Locomotion.CalculateVerticalMovement();
-        player.Locomotion.CalculateRotation();
+        player.Locomotion.CalculateHorizontalVelocity();
+        player.Locomotion.CalculateVerticalVelocity();
+        player.Locomotion.RotateTowardsMovementDirection();
     }
 
     public override void PhysicsUpdateState(PlayerStateManager player) { }

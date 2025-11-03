@@ -1,24 +1,25 @@
 using System.Collections;
-using Unity.Jobs;
 using UnityEngine;
 
 public class NPCTargetChaseState : NPCBaseState
 {
     [Header("State tranisitions")]
-    [SerializeField] private NPCIdleState _idleState;
+    [SerializeField] private NPCAttackState _attackState;
     [SerializeField] private NPCReturnToSpawnState _returnToSpawnState;
 
     [Header("State params")]
     [SerializeField] private float _destinationRecalculationCooldown = 0.333f;
     [SerializeField] private float _targetMemoryDuration = 1.0f;
     [SerializeField] private float _targetStopingDistance = 1.8f;
+    [SerializeField] private AnimationClip _movementAnim;
+    [SerializeField] private float _interpolationTime = 0.05f;
 
     public override void CheckExitState(NPCStateManager npc)
     {
         bool isTargetInAtcionRange = npc.Dependencies.TargetDetection.GetDistanceFromTarget() <= npc.Dependencies.NavMeshAgent.stoppingDistance;
         if(isTargetInAtcionRange)
         {
-            npc.SwitchState(_idleState);
+            npc.SwitchState(_attackState);
             return;
         }
 
@@ -36,6 +37,8 @@ public class NPCTargetChaseState : NPCBaseState
 
         StartCoroutine(RecalculateDestinationCoroutine(_destinationRecalculationCooldown, npc));
         npc.Dependencies.NavMeshAgent.SetDestination(npc.Dependencies.TargetDetection.CurrentTarget.position);
+
+        npc.Dependencies.Animation.PlayAnimationInterpolated(_movementAnim, _interpolationTime);
     }
 
     public override void UpdateState(NPCStateManager npc)
@@ -51,7 +54,7 @@ public class NPCTargetChaseState : NPCBaseState
     public override void ExitState(NPCStateManager npc)
     {
         StopAllCoroutines();
-        SetTargetStopingDistance(npc, 0.0f);
+        //SetTargetStopingDistance(npc, 0.0f);
     }
 
     private void SetTargetStopingDistance(NPCStateManager npc, float stopingDistance)

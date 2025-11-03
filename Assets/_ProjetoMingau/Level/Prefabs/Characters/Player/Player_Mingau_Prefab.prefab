@@ -335,7 +335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Player_Mingau_Prefab
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
       propertyPath: m_TagString
@@ -372,9 +372,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8685238301907562621}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8890541909411182119}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 742253431091665020}
@@ -519,27 +516,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d8c3a9c99a82594484c2dbaf3cf9600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8890541909411182119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7710018997774875705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9799061453da6384f845f20c8fd75588, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _slopeDetectionDistance: 0.2
-  _slopeDetectionOffset: {x: 0, y: 0.025, z: 0}
-  _slopeCollisionRadiusOffset: 0.005
-  _slopeMask:
-    serializedVersion: 2
-    m_Bits: 9216
-  _unstableGroundMask:
-    serializedVersion: 2
-    m_Bits: 8192
 --- !u!114 &742253431091665020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,6 +528,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72e199507898a6244854471884a20598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &7671891425708902396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -564,16 +543,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b1cc943bc91d94b98f7f820d743a4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseSpeed: 7
-  _runSpeedMultiplier: 1
-  _airSpeedMultiplier: 1.8
-  _groundedAccelerationRate: 35
-  _aerialAccelerationRate: 60
-  _landAccelerationRate: 0
-  _aerialGravityAcceleration: -50
-  _groundedGravityAcceleration: -9.81
+  _groundedMovementSpeed: 8
+  _groundedMovementAcceleration: 30
+  _aerialMovementSpeed: 12
+  _aerialMovementAcceleration: 45
+  _maxVerticalVelocity: 50
+  _gravity: -20
+  _groundedGravity: -10
+  _slopeAcceleration: 20
+  _maxSlopeVelocity: 50
   _rotationSpeed: 20
-  _rotationDeadzone: 0.1
   _directionChangeThreshold: 135
 --- !u!114 &5912456618424892093
 MonoBehaviour:

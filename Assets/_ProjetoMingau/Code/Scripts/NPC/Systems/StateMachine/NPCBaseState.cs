@@ -26,4 +26,6 @@ public abstract class NPCBaseState : MonoBehaviour
     {
         return _hasExitTime && _currentTime >= _duration;
     }
+
+    public void SetDuration(float duration) { _duration = duration; }
 }
