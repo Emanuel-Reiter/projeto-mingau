@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ee2eb545e1226ff42b39a2accd4429d4
+guid: 00ad24c6c9ca945479b61d1deeb1278b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -12,7 +12,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleCurves: 0
+    resampleCurves: 1
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
@@ -93,7 +93,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: a3f77e1284defa64db358012ca889977, type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: ce0268d72af5281429d055762b29dd1c, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1

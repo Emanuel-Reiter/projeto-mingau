@@ -34203,10 +34203,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC_Char_PaperCat_01_Prefab
       objectReference: {fileID: 0}
-    - target: {fileID: 8954224076347151898, guid: 7822d21e15c1f73468b567701a4565a9, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34268,6 +34264,10 @@ PrefabInstance:
       propertyPath: _groundMask.m_Bits
       value: 1024
       objectReference: {fileID: 0}
+    - target: {fileID: 1284225487129111661, guid: 56741755db25387439eca179c0018031, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: ce0268d72af5281429d055762b29dd1c, type: 3}
     - target: {fileID: 1325672202975038180, guid: 56741755db25387439eca179c0018031, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -34460,6 +34460,38 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6766342762944836471, guid: 56741755db25387439eca179c0018031, type: 3}
+      propertyPath: Run
+      value: 
+      objectReference: {fileID: -5396020727712036333, guid: bc028665d1f94214795132c44806d727, type: 3}
+    - target: {fileID: 6766342762944836471, guid: 56741755db25387439eca179c0018031, type: 3}
+      propertyPath: Dash
+      value: 
+      objectReference: {fileID: -8640064155897775101, guid: de027bdd1bf1bf04fa1cb3724b602d5e, type: 3}
+    - target: {fileID: 6766342762944836471, guid: 56741755db25387439eca179c0018031, type: 3}
+      propertyPath: Fall
+      value: 
+      objectReference: {fileID: 1689052684957102768, guid: a526c60bc1399d540a4e9c7049169c1c, type: 3}
+    - target: {fileID: 6766342762944836471, guid: 56741755db25387439eca179c0018031, type: 3}
+      propertyPath: Idle
+      value: 
+      objectReference: {fileID: -2981708780575860567, guid: e3885ad4572f145468402a8f242d0533, type: 3}
+    - target: {fileID: 6766342762944836471, guid: 56741755db25387439eca179c0018031, type: 3}
+      propertyPath: LandHeavy
+      value: 
+      objectReference: {fileID: 1730024222568048869, guid: 019b241e240a3ea49a23be412233ade2, type: 3}
+    - target: {fileID: 6766342762944836471, guid: 56741755db25387439eca179c0018031, type: 3}
+      propertyPath: LandLight
+      value: 
+      objectReference: {fileID: 1859437901795092179, guid: ee2eb545e1226ff42b39a2accd4429d4, type: 3}
+    - target: {fileID: 6766342762944836471, guid: 56741755db25387439eca179c0018031, type: 3}
+      propertyPath: 'Jump.Array.data[0]'
+      value: 
+      objectReference: {fileID: -965245400335265369, guid: 00ad24c6c9ca945479b61d1deeb1278b, type: 3}
+    - target: {fileID: 6766342762944836471, guid: 56741755db25387439eca179c0018031, type: 3}
+      propertyPath: 'Jump.Array.data[1]'
+      value: 
+      objectReference: {fileID: -5741448058177849834, guid: 9d15c8314bd93bf4a9784d642aac4868, type: 3}
     - target: {fileID: 6788684144658892080, guid: 56741755db25387439eca179c0018031, type: 3}
       propertyPath: m_Layer
       value: 3

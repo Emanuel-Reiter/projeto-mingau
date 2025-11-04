@@ -100,7 +100,7 @@ MonoBehaviour:
   _returnToSpawnState: {fileID: 7779467447993813676}
   _destinationRecalculationCooldown: 0.333
   _targetMemoryDuration: 1
-  _targetStopingDistance: 1.8
+  _targetStopingDistance: 3
   _movementAnim: {fileID: 3159481895870928937, guid: 7ea641dfcd2f8cf4d903081d255f8162, type: 3}
   _interpolationTime: 0.05
 --- !u!1 &4226334545518193028
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hasExitTime: 1
-  _duration: 3
+  _duration: 0.5
   _targetChaseState: {fileID: 1487203598174762693}
   _idleAnim: {fileID: -2020021097405960656, guid: 9a726509a2890c0409ca7e28f5340409, type: 3}
   _interpolationTime: 0.1
@@ -432,7 +432,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: f9401af19a6ae3c42af5978619e5e700, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
