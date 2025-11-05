@@ -4,6 +4,9 @@ public class PlayerLandHeavyState : PlayerBaseState
 {
     float _exitTime = 0.1f;
 
+    [Header("State transitions")]
+    [SerializeField] private PlayerIdleState _idleState;
+
     public override void CheckExitState(PlayerStateManager player)
     {
         bool canJump = player.Dependencies.Jump.CanJump();
@@ -36,9 +39,9 @@ public class PlayerLandHeavyState : PlayerBaseState
         player.Dependencies.Jump.ResetJumpCount();
         player.Dependencies.Dash.ResetDashCount();
 
-        player.Dependencies.AnimationManager.PlayAnimationInterpolated
+        player.Dependencies.AnimationManager.PlayInterpolated
             (player.Dependencies.AnimationManager.LandHeavy,
-            player.Dependencies.AnimationManager.ShortInterpolationTime);
+            player.Dependencies.AnimationManager.InstantTransitionTime);
     }
 
     public override void UpdateState(PlayerStateManager player)

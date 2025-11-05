@@ -46,9 +46,9 @@ public class PlayerFallState : PlayerBaseState
     {
         _airTime = 0.0f;
 
-        player.Dependencies.AnimationManager.PlayAnimationInterpolated(
+        player.Dependencies.AnimationManager.PlayInterpolated(
             player.Dependencies.AnimationManager.Fall,
-            player.Dependencies.AnimationManager.interpolationTime_02);
+            player.Dependencies.AnimationManager.FastTransitionTime);
     }
 
     public override void UpdateState(PlayerStateManager player)

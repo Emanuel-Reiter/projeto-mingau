@@ -37,7 +37,7 @@ public class PlayerDash : MonoBehaviour
         _locomotion.SetVerticalVelocity(0.0f);
         _locomotion.SetHorizontalVelocity(dashDirection * dashVelocity);
 
-        // TODO: Refactor the dash duration and deceleration loginc
+        // TODO: Refactor the dash duration and deceleration logic
         float dashDuration = 0.0f;
         if (_locomotion.IsGrounded) dashDuration = _dependencies.AnimationManager.Dash.length;
         else dashDuration = _dependencies.AnimationManager.Dash.length / 2.0f;

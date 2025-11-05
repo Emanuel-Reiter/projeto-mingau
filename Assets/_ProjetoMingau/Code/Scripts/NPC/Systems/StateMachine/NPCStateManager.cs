@@ -3,10 +3,9 @@ using System;
 
 public class NPCStateManager : MonoBehaviour
 {
-    // NPC states
-    public NPCBaseState[] States;
 
     // State management
+    [SerializeField] private NPCBaseState _initialState;
     public NPCBaseState CurrentState { get; private set; }
     public NPCBaseState PreviousState { get; private set; }
 
@@ -21,7 +20,7 @@ public class NPCStateManager : MonoBehaviour
         Dependencies = GetComponent<NPCDependencies>();
 
         // Set the initial state
-        SwitchState(States[0]);
+        SwitchState(_initialState);
     }
 
     private void Update()

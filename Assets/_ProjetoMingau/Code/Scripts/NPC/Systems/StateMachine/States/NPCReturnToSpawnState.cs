@@ -15,8 +15,6 @@ public class NPCReturnToSpawnState : NPCBaseState
         float distanceToSpawn = Vector3.Distance(npc.transform.position, npc.Dependencies.SpawnPosition);
         bool hasReachedSpawn = distanceToSpawn < _spawnDistanceTreshold;
 
-        Debug.Log($"distance to spawn: {distanceToSpawn}");
-
         if(hasReachedSpawn)
         {
             npc.SwitchState(_idleState);

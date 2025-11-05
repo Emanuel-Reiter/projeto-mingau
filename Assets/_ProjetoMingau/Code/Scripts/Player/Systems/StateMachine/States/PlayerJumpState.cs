@@ -38,13 +38,13 @@ public class PlayerJumpState : PlayerBaseState
 
         bool isGrounded = player.Locomotion.IsGrounded;
         if (isGrounded)
-            player.Dependencies.AnimationManager.PlayAnimationInterpolated(
+            player.Dependencies.AnimationManager.PlayInterpolated(
                 player.Dependencies.AnimationManager.Jump[0],
-                player.Dependencies.AnimationManager.ShortInterpolationTime);
+                player.Dependencies.AnimationManager.InstantTransitionTime);
         else
-            player.Dependencies.AnimationManager.PlayAnimationInterpolated(
+            player.Dependencies.AnimationManager.PlayInterpolated(
                 player.Dependencies.AnimationManager.Jump[1],
-                player.Dependencies.AnimationManager.ShortInterpolationTime);
+                player.Dependencies.AnimationManager.InstantTransitionTime);
 
         player.Dependencies.Jump.PerformJump();
 

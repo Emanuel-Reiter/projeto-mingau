@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class BaseAttributeSystem
+public class BaseAttribute
 {
     // Core values
     private float _baseValue;
@@ -65,7 +65,7 @@ public class BaseAttributeSystem
         }
     }
 
-    public BaseAttributeSystem(float baseValue)
+    public BaseAttribute(float baseValue)
     {
         _baseValue = baseValue;
         RecalculateMaxValue();

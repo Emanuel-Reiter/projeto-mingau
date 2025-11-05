@@ -27,6 +27,11 @@ public class PlayerIdleState : PlayerBaseState
             return;
         }
 
+        if (player.Dependencies.Input.IsAttackLightPressed)
+        {
+            player.SwitchState(player.AttackLightState);
+        }
+
         bool isMoving = player.Dependencies.Input.MovementDirectionInput != Vector2.zero;
         if (isMoving) player.SwitchState(player.RunState);
     }
@@ -39,9 +44,9 @@ public class PlayerIdleState : PlayerBaseState
         player.Dependencies.Jump.ResetJumpCount();
         player.Dependencies.Dash.ResetDashCount();
 
-        player.Dependencies.AnimationManager.PlayAnimationInterpolated(
+        player.Dependencies.AnimationManager.PlayInterpolated(
             player.Dependencies.AnimationManager.Idle,
-            player.Dependencies.AnimationManager.interpolationTime_02);
+            player.Dependencies.AnimationManager.FastTransitionTime);
     }
 
     public override void UpdateState(PlayerStateManager player)

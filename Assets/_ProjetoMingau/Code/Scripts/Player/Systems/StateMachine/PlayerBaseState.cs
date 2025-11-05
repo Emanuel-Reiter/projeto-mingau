@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class PlayerBaseState {
+public abstract class PlayerBaseState : MonoBehaviour {
     public abstract void CheckExitState(PlayerStateManager player);
     public abstract void EnterState(PlayerStateManager player);
     public abstract void UpdateState(PlayerStateManager player);

@@ -3,15 +3,8 @@ using System;
 
 public class PlayerStateManager : MonoBehaviour
 {
-    // Player states
-    public PlayerIdleState IdleState = new PlayerIdleState();
-    public PlayerRunState RunState = new PlayerRunState();
-    public PlayerDashState DashState = new PlayerDashState();
-    public PlayerJumpState JumpState = new PlayerJumpState();
-    public PlayerFallState FallState = new PlayerFallState();
-    public PlayerLandHeavyState LandHeavyState = new PlayerLandHeavyState();
-
     // State management
+    [SerializeField] private PlayerBaseState _initialState;
     public PlayerBaseState CurrentState { get; private set; }
     public PlayerBaseState PreviousState { get; private set; }
 
@@ -31,7 +24,7 @@ public class PlayerStateManager : MonoBehaviour
         _locomotion = GetComponent<PlayerLocomotion>();
 
         // Set the initial state
-        SwitchState(IdleState);
+        SwitchState(_initialState);
     }
 
     private void Update()

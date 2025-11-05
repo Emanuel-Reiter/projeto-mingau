@@ -6,7 +6,7 @@ public class AttributesManager : MonoBehaviour
     private bool _isDead = false;
     public bool IsDead => _isDead;
 
-    private BaseAttributeSystem _health = new BaseAttributeSystem(100.0f);
+    private BaseAttribute _health = new BaseAttribute(100.0f);
 
     public void TakeDamage(float amount)
     {
