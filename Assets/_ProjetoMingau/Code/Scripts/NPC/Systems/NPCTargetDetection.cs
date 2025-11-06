@@ -17,14 +17,14 @@ public class NPCTargetDetection : MonoBehaviour
 
     public Transform CurrentTarget { get; private set; }
 
-    private GlobalTimer _timer;
+    private TimerSingleton _timer;
     private int _currentTimer = 0;
 
     private float _targetSearchDelay = 0.2f;
 
     private void Start()
     {
-        _timer = GameObject.FindGameObjectWithTag("GlobalTimer").GetComponent<GlobalTimer>();
+        _timer = GameObject.FindGameObjectWithTag("GlobalTimer").GetComponent<TimerSingleton>();
         ToggleTargetSearch(_isTargetSearchEnabled);
     }
 

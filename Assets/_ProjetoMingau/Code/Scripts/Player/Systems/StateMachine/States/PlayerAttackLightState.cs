@@ -45,7 +45,7 @@ public class PlayerAttackLightState : PlayerBaseState
         // Sets the state duration to the current attack anim
         SetDuration(_attckDuration[_currentCombo]);
 
-        player.Dependencies.GlobalTimer.CancelTimer(_timerIndex);
+        TimerSingleton.Instance.CancelTimer(_timerIndex);
 
         player.Dependencies.AnimationManager.PlayInterpolated(_attackAnim[_currentCombo], _transitionTime);
 
@@ -83,7 +83,7 @@ public class PlayerAttackLightState : PlayerBaseState
         _currentCombo++;
         if (_currentCombo >= _attackAnim.Length) ResetCombo();
 
-        _timerIndex = player.Dependencies.GlobalTimer.StartTimer(_comboResetTimer, () => ResetCombo());
+        _timerIndex = TimerSingleton.Instance.StartTimer(_comboResetTimer, () => ResetCombo());
     }
 
     private void ResetCombo()

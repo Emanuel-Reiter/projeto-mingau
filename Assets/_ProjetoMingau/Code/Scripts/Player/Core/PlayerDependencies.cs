@@ -12,8 +12,6 @@ public class PlayerDependencies : MonoBehaviour
 
     [HideInInspector] public PlayerLocomotionParams LocomotionParams;
 
-    [HideInInspector] public GlobalTimer GlobalTimer;
-
     // Player actions
     [HideInInspector] public PlayerDash Dash;
     [HideInInspector] public PlayerJump Jump;
@@ -37,8 +35,6 @@ public class PlayerDependencies : MonoBehaviour
             AnimationManager = GetComponent<PlayerAnimationManager>();
 
             LocomotionParams = GetComponent<PlayerLocomotionParams>();
-
-            GlobalTimer = GameObject.FindGameObjectWithTag("GlobalTimer").GetComponent<GlobalTimer>();
 
             Dash = GetComponent<PlayerDash>();
             Jump = GetComponent<PlayerJump>();

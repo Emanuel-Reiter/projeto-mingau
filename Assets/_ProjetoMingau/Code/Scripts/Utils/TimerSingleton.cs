@@ -2,8 +2,10 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class GlobalTimer : MonoBehaviour
+public class TimerSingleton : MonoBehaviour
 {
+    public static TimerSingleton Instance { get; private set; }
+
     private Dictionary<int, TimerData> _activeTimers = new Dictionary<int, TimerData>();
     private int _nextTimerId = 1;
 
@@ -14,6 +16,13 @@ public class GlobalTimer : MonoBehaviour
         public float TimeRemaining;
         public Action Callback;
         public bool IsActive = true;
+    }
+
+    private void Awake()
+    {
+        // Instance initialization
+        if (Instance != null && Instance != this) Destroy(this);
+        else Instance = this;
     }
 
     public int StartTimer(float duration, Action callback)

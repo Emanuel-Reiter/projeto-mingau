@@ -20,8 +20,8 @@ TagManager:
   - KillPlane
   - SoftBones
   - Entities
-  - ObjectLoadingTrigger
-  - 
+  - LoadTrigger
+  - Items
   - 
   - 
   - 

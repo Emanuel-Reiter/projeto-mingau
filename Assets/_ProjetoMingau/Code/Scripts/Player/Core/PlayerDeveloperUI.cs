@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerDeveloperUI : MonoBehaviour
 {
-
     // Exteral player references
     private PlayerDependencies _dependencies;
     private PlayerStateManager _stateManager;
@@ -15,6 +14,10 @@ public class PlayerDeveloperUI : MonoBehaviour
 
     private bool _isCursorLocked = false;
     public bool IsCursorLocked => _isCursorLocked;
+
+    [Header("Params")]
+    [SerializeField] private bool _showFPS = true;
+    [SerializeField] private bool _showPlayerMetrics = true;
 
     private void Awake()
     {
@@ -85,7 +88,9 @@ public class PlayerDeveloperUI : MonoBehaviour
 
         GUI.skin.label.fontSize = 24;
 
-        GUI.Label(new Rect(xOffset, GUIPositionY(1, height), width, height), $"fps: {_framerate}");
+        if (_showFPS) GUI.Label(new Rect(xOffset, GUIPositionY(1, height), width, height), $"fps: {_framerate}");
+
+        if (!_showPlayerMetrics) return;
 
         GUI.Label(new Rect(xOffset, GUIPositionY(2, height), width, height), $"curState: {_stateManager.CurrentState}");
 

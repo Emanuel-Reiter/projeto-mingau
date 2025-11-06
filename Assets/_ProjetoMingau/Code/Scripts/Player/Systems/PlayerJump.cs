@@ -39,7 +39,7 @@ public class PlayerJump : MonoBehaviour
         // Deactivate the gravity calc for a split second to allow the player to get off the ground
         StartCoroutine(GravityToggleCoroutine());
 
-        int jumpCooldownTimer = _dependencies.GlobalTimer.StartTimer(_jumpCooldown, () => _isJumpOnCooldown = false);
+        int jumpCooldownTimer = TimerSingleton.Instance.StartTimer(_jumpCooldown, () => _isJumpOnCooldown = false);
         _locomotion.SetVerticalVelocity(0.0f);
 
         float jumpVelocity = Mathf.Sqrt(-2.0f * _dependencies.LocomotionParams.Gravity * _jumpHeight);
