@@ -3,15 +3,24 @@ using UnityEngine;
 public class PlayerJumpState : PlayerBaseState
 {
 
-    Vector3 startPos;
-    Vector3 endPos;
+    Vector3 _startPos;
+    Vector3 _endPos;
+
+    [Header("Animation params")]
+    [SerializeField] private AnimationClip[] _jumpAnim;
+    [SerializeField] private float _transitionTime;
+
+    [Header("State transitions")]
+    [SerializeField] private PlayerFallState _fallState;
+    [SerializeField] private PlayerJumpState _jumpState;
+    [SerializeField] private PlayerDashState _dashState;
 
     public override void CheckExitState(PlayerStateManager player)
     {
         bool isFalling = player.Locomotion.VerticalVelocity < 0.0f;
         if (isFalling)
         {
-            player.SwitchState(player.FallState);
+            player.SwitchState(_fallState);
             return;
         }
 
@@ -19,7 +28,7 @@ public class PlayerJumpState : PlayerBaseState
         bool jumpInput = player.Dependencies.Input.IsJumpPressed;
         if (jumpInput && canJump)
         {
-            player.SwitchState(player.JumpState);
+            player.SwitchState(_jumpState);
             return;
         }
 
@@ -27,7 +36,7 @@ public class PlayerJumpState : PlayerBaseState
         bool dashInput = player.Dependencies.Input.IsDashPressed;
         if (canDash && dashInput)
         {
-            player.SwitchState(player.DashState);
+            player.SwitchState(_dashState);
             return;
         }
     }
@@ -38,17 +47,13 @@ public class PlayerJumpState : PlayerBaseState
 
         bool isGrounded = player.Locomotion.IsGrounded;
         if (isGrounded)
-            player.Dependencies.AnimationManager.PlayInterpolated(
-                player.Dependencies.AnimationManager.Jump[0],
-                player.Dependencies.AnimationManager.InstantTransitionTime);
+            player.Dependencies.AnimationManager.PlayInterpolated(_jumpAnim[0], _transitionTime);
         else
-            player.Dependencies.AnimationManager.PlayInterpolated(
-                player.Dependencies.AnimationManager.Jump[1],
-                player.Dependencies.AnimationManager.InstantTransitionTime);
+            player.Dependencies.AnimationManager.PlayInterpolated(_jumpAnim[1], _transitionTime);
 
         player.Dependencies.Jump.PerformJump();
 
-        startPos = player.transform.position;
+        _startPos = player.transform.position;
     }
 
     public override void UpdateState(PlayerStateManager player)
@@ -58,15 +63,18 @@ public class PlayerJumpState : PlayerBaseState
         player.Locomotion.RotateTowardsMovementDirection();
     }
 
-    public override void PhysicsUpdateState(PlayerStateManager player) { }
+    public override void PhysicsUpdateState(PlayerStateManager player) 
+    { 
+    
+    }
 
     public override void ExitState(PlayerStateManager player)
     {
         player.Dependencies.Jump.SetIsJumping(false);
 
-        endPos = player.transform.position;
+        _endPos = player.transform.position;
 
-        float distance = Vector3.Distance(startPos, endPos);
+        float distance = Vector3.Distance(_startPos, _endPos);
         // Debug.Log($"Jump distance: {distance}");
     }
 }

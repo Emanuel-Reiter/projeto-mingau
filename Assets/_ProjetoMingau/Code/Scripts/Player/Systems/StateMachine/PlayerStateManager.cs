@@ -8,9 +8,6 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerBaseState CurrentState { get; private set; }
     public PlayerBaseState PreviousState { get; private set; }
 
-    public Type CurrentStateType => CurrentState?.GetType();
-    public Type PreviousStateType => PreviousState?.GetType();
-
     // Dependencies
     private PlayerDependencies _dependencies;
     public PlayerDependencies Dependencies => _dependencies;
@@ -46,6 +43,7 @@ public class PlayerStateManager : MonoBehaviour
         PreviousState = CurrentState;
 
         CurrentState = newState;
+        CurrentState.InitializeState();
         CurrentState?.EnterState(this);
     }
 

@@ -9,29 +9,47 @@ public class PlayerAttackLightState : PlayerBaseState
     float _comboResetTimer = 1.0f;
     int _timerIndex;
 
+    [Header("Animation params")]
+    [SerializeField] private AnimationClip[] _attackAnim;
+    [SerializeField] private float _transitionTime;
+    [SerializeField] private float[] _attckDuration;
+
+    [Header("State transitions")]
+    [SerializeField] private PlayerAttackLightState _attackLightState;
+    [SerializeField] private PlayerFallState _fallState;
+    [SerializeField] private PlayerIdleState _idleState;
+
+
     public override void CheckExitState(PlayerStateManager player)
     {
-        if (_attackTime < player.Dependencies.AnimationManager.AttackLight[_currentCombo].length)
+        if (!CompletedExitTime()) return;
+
+        if (!player.Locomotion.IsGrounded)
         {
+            player.SwitchState(_fallState);
             return;
         }
 
-        if (_queueAttack) player.SwitchState(player.AttackLightState);
-        else player.SwitchState(player.IdleState);
+        if (_queueAttack) player.SwitchState(_attackLightState);
+        else player.SwitchState(_idleState);
     }
 
     public override void EnterState(PlayerStateManager player)
     {
+        float speedMultiplier = _attackAnim[_currentCombo].length / _attckDuration[_currentCombo];
+        player.Dependencies.AnimationManager.SetFloat("AttackSpeedMuitlplaier", speedMultiplier);
+
+        // Sets the state duration to the current attack anim
+        SetDuration(_attckDuration[_currentCombo]);
+
         player.Dependencies.GlobalTimer.CancelTimer(_timerIndex);
 
         // Checks if the previous state was dash in order to use the last animation of the attack combo
-        if (player.WasPreviousState<PlayerDashState>()) _currentCombo = player.Dependencies.AnimationManager.AttackLight.Length - 1;
+        if (player.WasPreviousState<PlayerDashState>()) _currentCombo = _attackAnim.Length - 1;
 
-        player.Dependencies.AnimationManager.PlayInterpolated(
-            player.Dependencies.AnimationManager.AttackLight[_currentCombo],
-            player.Dependencies.AnimationManager.FastTransitionTime);
+        player.Dependencies.AnimationManager.PlayInterpolated(_attackAnim[_currentCombo], _transitionTime);
 
-        _attackLength = player.Dependencies.AnimationManager.AttackLight[_currentCombo].length;
+        _attackLength = _attckDuration[_currentCombo];
         _attackTime = 0.0f;
         _queueAttack = false;
     }
@@ -63,7 +81,7 @@ public class PlayerAttackLightState : PlayerBaseState
     public override void ExitState(PlayerStateManager player)
     {
         _currentCombo++;
-        if (_currentCombo >= player.Dependencies.AnimationManager.AttackLight.Length) ResetCombo();
+        if (_currentCombo >= _attackAnim.Length) ResetCombo();
 
         _timerIndex = player.Dependencies.GlobalTimer.StartTimer(_comboResetTimer, () => ResetCombo());
     }

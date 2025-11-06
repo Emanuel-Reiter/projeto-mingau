@@ -5,6 +5,17 @@ public class PlayerFallState : PlayerBaseState
     private float _airTime;
     private float _heavyLandThresholdInSeconds = 0.5f;
 
+    [Header("Animation params")]
+    [SerializeField] private AnimationClip _fallAnim;
+    [SerializeField] private float _transitionTime;
+
+    [Header("State transitions")]
+    [SerializeField] private PlayerLandHeavyState _heavyLandHeavyState;
+    [SerializeField] private PlayerRunState _runState;
+    [SerializeField] private PlayerIdleState _idleState;
+    [SerializeField] private PlayerDashState _dashState;
+    [SerializeField] private PlayerJumpState _jumpState;
+
     public override void CheckExitState(PlayerStateManager player)
     {
         _airTime += Time.deltaTime;
@@ -14,12 +25,12 @@ public class PlayerFallState : PlayerBaseState
         {
             bool heavyLand = _airTime > _heavyLandThresholdInSeconds;
 
-            if (heavyLand) player.SwitchState(player.LandHeavyState);
+            if (heavyLand) player.SwitchState(_heavyLandHeavyState);
             else
             {
                 bool isMoving = player.Dependencies.Input.MovementDirectionInput != Vector2.zero;
-                if (isMoving) player.SwitchState(player.RunState);
-                else player.SwitchState(player.IdleState);
+                if (isMoving) player.SwitchState(_runState);
+                else player.SwitchState(_idleState);
             }
 
             return;
@@ -29,15 +40,15 @@ public class PlayerFallState : PlayerBaseState
         bool dashInput = player.Dependencies.Input.IsDashPressed;
         if (canDash && dashInput)
         {
-            player.SwitchState(player.DashState);
+            player.SwitchState(_dashState);
             return;
         }
 
         bool canJump = player.Dependencies.Jump.CanJump();
         bool jumpInput = player.Dependencies.Input.IsJumpPressed;
-        if(canJump && jumpInput)
+        if (canJump && jumpInput)
         {
-            player.SwitchState(player.JumpState);
+            player.SwitchState(_jumpState);
             return;
         }
     }
@@ -46,9 +57,7 @@ public class PlayerFallState : PlayerBaseState
     {
         _airTime = 0.0f;
 
-        player.Dependencies.AnimationManager.PlayInterpolated(
-            player.Dependencies.AnimationManager.Fall,
-            player.Dependencies.AnimationManager.FastTransitionTime);
+        player.Dependencies.AnimationManager.PlayInterpolated(_fallAnim, _transitionTime);
     }
 
     public override void UpdateState(PlayerStateManager player)
@@ -58,7 +67,13 @@ public class PlayerFallState : PlayerBaseState
         player.Locomotion.RotateTowardsMovementDirection();
     }
 
-    public override void PhysicsUpdateState(PlayerStateManager player) { }
+    public override void PhysicsUpdateState(PlayerStateManager player) 
+    {
 
-    public override void ExitState(PlayerStateManager player) { }
+    }
+
+    public override void ExitState(PlayerStateManager player) 
+    {
+    
+    }
 }

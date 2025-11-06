@@ -9,13 +9,7 @@ public class PlayerDash : MonoBehaviour
     [SerializeField] private float _dashSpeed = 48.0f;
 
     private int _maxDashCount = 1;
-    public int MaxDashCount => _maxDashCount;
-
     private int _currentDashCount = 0;
-    public int CurrentDashCount => _currentDashCount;
-
-    private bool _isDashing = false;
-    public bool IsDashing => _isDashing;
 
     private void Start()
     {
@@ -25,8 +19,6 @@ public class PlayerDash : MonoBehaviour
 
     public void PerformDash()
     {
-        _isDashing = true;
-
         float dashVelocity = Mathf.Sqrt(2.0f * _locomotion.GetCurrentMovementSpeed() * _dashSpeed);
 
         Vector2 inputVector = _dependencies.Input.MovementDirectionInput;
@@ -36,13 +28,6 @@ public class PlayerDash : MonoBehaviour
 
         _locomotion.SetVerticalVelocity(0.0f);
         _locomotion.SetHorizontalVelocity(dashDirection * dashVelocity);
-
-        // TODO: Refactor the dash duration and deceleration logic
-        float dashDuration = 0.0f;
-        if (_locomotion.IsGrounded) dashDuration = _dependencies.AnimationManager.Dash.length;
-        else dashDuration = _dependencies.AnimationManager.Dash.length / 2.0f;
-
-        int dashTimer = _dependencies.GlobalTimer.StartTimer(dashDuration, () => { _isDashing = false; });
     }
 
     #region Dash State Management

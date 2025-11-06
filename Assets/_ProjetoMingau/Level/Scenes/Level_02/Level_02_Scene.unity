@@ -4458,7 +4458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1377346638196657753, guid: d6d81ef4bfb820b40a4106fede114950, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5836545555190314451, guid: d6d81ef4bfb820b40a4106fede114950, type: 3}
       propertyPath: targetBone
@@ -7317,7 +7317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1377346638196657753, guid: cbe11b757b3813b40b2a29b8593ef995, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5836545555190314451, guid: cbe11b757b3813b40b2a29b8593ef995, type: 3}
       propertyPath: targetBone
@@ -9237,6 +9237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 564855150}
+  - component: {fileID: 564855151}
   m_Layer: 3
   m_Name: LandHeavy
   m_TagString: Untagged
@@ -9259,6 +9260,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 559356129}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &564855151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564855149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b963b506f74354da2567a06240bb45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hasExitTime: 1
+  _duration: 1
+  _landHeavyAnim: {fileID: 1730024222568048869, guid: 019b241e240a3ea49a23be412233ade2, type: 3}
+  _transitionTime: 0.125
+  _jumpState: {fileID: 1823283243}
+  _fallState: {fileID: 1670457469}
+  _runState: {fileID: 1210063040}
+  _idleState: {fileID: 580395827}
 --- !u!1001 &565727751
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9945,6 +9966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 580395826}
+  - component: {fileID: 580395827}
   m_Layer: 3
   m_Name: Idle
   m_TagString: Untagged
@@ -9967,6 +9989,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 559356129}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &580395827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580395825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a77f99937f35be5438a483f550335ac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hasExitTime: 0
+  _duration: 1
+  _idleAnim: {fileID: -2981708780575860567, guid: e3885ad4572f145468402a8f242d0533, type: 3}
+  _transitionTime: 0.25
+  _fallState: {fileID: 1670457469}
+  _jumpState: {fileID: 1823283243}
+  _dashState: {fileID: 830068631}
+  _attackLightState: {fileID: 1867926516}
+  _runState: {fileID: 1210063040}
 --- !u!1001 &583558082
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12663,6 +12706,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4212981146194023201, guid: d8a3912017ca8f94a88501fd8286ddb9, type: 3}
   m_PrefabInstance: {fileID: 742318197}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &746043996 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7710018997774875705, guid: 56741755db25387439eca179c0018031, type: 3}
+  m_PrefabInstance: {fileID: 1761804297173313501}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &746044009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746043996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f912a0ea2a5c83e4abd77a04994eba86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rightHandattackVFX:
+  - {fileID: 864314115}
+  _leftHandattackVFX:
+  - {fileID: 1449941634}
 --- !u!1001 &749119398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14130,6 +14194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 830068630}
+  - component: {fileID: 830068631}
   m_Layer: 3
   m_Name: Dash
   m_TagString: Untagged
@@ -14152,6 +14217,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 559356129}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &830068631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830068629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2971912dfa9bc5d48b96fe57c655be9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hasExitTime: 1
+  _duration: 1
+  _dashAnim: {fileID: -8640064155897775101, guid: de027bdd1bf1bf04fa1cb3724b602d5e, type: 3}
+  _transitionTime: 0.05
+  _attackLightState: {fileID: 1867926516}
+  _fallState: {fileID: 1670457469}
+  _runState: {fileID: 1210063040}
+  _idleState: {fileID: 580395827}
 --- !u!1001 &842317671
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14888,6 +14973,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7332590143412264550, guid: d88ce27f66ca8cc4891077683fd01bb0, type: 3}
   m_PrefabInstance: {fileID: 863988739}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &864314115 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6840426587792387967, guid: cbe11b757b3813b40b2a29b8593ef995, type: 3}
+  m_PrefabInstance: {fileID: 443336268}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &865199794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15519,7 +15609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1377346638196657753, guid: d6d81ef4bfb820b40a4106fede114950, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5836545555190314451, guid: d6d81ef4bfb820b40a4106fede114950, type: 3}
       propertyPath: targetBone
@@ -19187,7 +19277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1377346638196657753, guid: cbe11b757b3813b40b2a29b8593ef995, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5836545555190314451, guid: cbe11b757b3813b40b2a29b8593ef995, type: 3}
       propertyPath: targetBone
@@ -19610,6 +19700,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1210063039}
+  - component: {fileID: 1210063040}
   m_Layer: 3
   m_Name: Run
   m_TagString: Untagged
@@ -19632,6 +19723,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 559356129}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1210063040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210063038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90438516e5fdde74f929c13c93e67d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hasExitTime: 0
+  _duration: 1
+  _runAnim: {fileID: -5396020727712036333, guid: bc028665d1f94214795132c44806d727, type: 3}
+  _transitionTime: 0.125
+  _fallState: {fileID: 1670457469}
+  _jumpState: {fileID: 1823283243}
+  _dashState: {fileID: 830068631}
+  _attackLightState: {fileID: 1867926516}
+  _idleState: {fileID: 580395827}
 --- !u!1001 &1230915702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23005,7 +23117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1377346638196657753, guid: 61816b92faf2bc248a9d225b6b520e76, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5836545555190314451, guid: 61816b92faf2bc248a9d225b6b520e76, type: 3}
       propertyPath: targetBone
@@ -23265,6 +23377,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3324908395973415368, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
   m_PrefabInstance: {fileID: 1448133807}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1449941634 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6840426587792387967, guid: cbe11b757b3813b40b2a29b8593ef995, type: 3}
+  m_PrefabInstance: {fileID: 1187063690}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1451654990
 PrefabInstance:
@@ -26627,6 +26744,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1670457468}
+  - component: {fileID: 1670457469}
   m_Layer: 3
   m_Name: Fall
   m_TagString: Untagged
@@ -26649,6 +26767,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 559356129}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1670457469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670457467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63dbe2d1a1f9ee7448101c009d89b7dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hasExitTime: 0
+  _duration: 1
+  _fallAnim: {fileID: 1689052684957102768, guid: a526c60bc1399d540a4e9c7049169c1c, type: 3}
+  _transitionTime: 0.25
+  _heavyLandHeavyState: {fileID: 564855151}
+  _runState: {fileID: 1210063040}
+  _idleState: {fileID: 580395827}
+  _dashState: {fileID: 830068631}
+  _jumpState: {fileID: 1823283243}
 --- !u!1001 &1673347111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28733,6 +28872,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1823283242}
+  - component: {fileID: 1823283243}
   m_Layer: 3
   m_Name: Jump
   m_TagString: Untagged
@@ -28755,6 +28895,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 559356129}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1823283243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823283241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63341d189bdf048499153afe68cad030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hasExitTime: 0
+  _duration: 1
+  _jumpAnim:
+  - {fileID: -965245400335265369, guid: 00ad24c6c9ca945479b61d1deeb1278b, type: 3}
+  - {fileID: -5741448058177849834, guid: 9d15c8314bd93bf4a9784d642aac4868, type: 3}
+  _transitionTime: 0.025
+  _fallState: {fileID: 1670457469}
+  _jumpState: {fileID: 1823283243}
+  _dashState: {fileID: 830068631}
 --- !u!1001 &1824497937
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29795,6 +29956,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1867926515}
+  - component: {fileID: 1867926516}
   m_Layer: 3
   m_Name: AttackLight
   m_TagString: Untagged
@@ -29817,6 +29979,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 559356129}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1867926516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867926514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 956ea6cdcacc9dd4ebf12889d64333cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hasExitTime: 1
+  _duration: 1
+  _attackAnim:
+  - {fileID: -6312385070225137235, guid: fcdafe9fded9da74da55b90271c86d31, type: 3}
+  - {fileID: -2316783409079895592, guid: 99bb027715a2c9b4db6fa8ea80b71299, type: 3}
+  - {fileID: -4673040247341248275, guid: c1caf19930cefda4fb137dcd2ecfd718, type: 3}
+  _transitionTime: 0.125
+  _attckDuration:
+  - 0.5
+  - 0.5
+  - 0.8
+  _attackLightState: {fileID: 1867926516}
+  _fallState: {fileID: 1670457469}
+  _idleState: {fileID: 580395827}
 --- !u!1001 &1868048922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32521,7 +32709,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1377346638196657753, guid: 61816b92faf2bc248a9d225b6b520e76, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5836545555190314451, guid: 61816b92faf2bc248a9d225b6b520e76, type: 3}
       propertyPath: targetBone
@@ -35218,6 +35406,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5494580770016335067, guid: 56741755db25387439eca179c0018031, type: 3}
+      propertyPath: _initialState
+      value: 
+      objectReference: {fileID: 580395827}
     - target: {fileID: 5636680089627974620, guid: 56741755db25387439eca179c0018031, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -35472,7 +35664,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7040443163258005123, guid: 56741755db25387439eca179c0018031, type: 3}
       insertIndex: -1
       addedObject: {fileID: 403726620}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7710018997774875705, guid: 56741755db25387439eca179c0018031, type: 3}
+      insertIndex: 12
+      addedObject: {fileID: 746044009}
   m_SourcePrefab: {fileID: 100100000, guid: 56741755db25387439eca179c0018031, type: 3}
 --- !u!1001 &2747580360562517854
 PrefabInstance:
