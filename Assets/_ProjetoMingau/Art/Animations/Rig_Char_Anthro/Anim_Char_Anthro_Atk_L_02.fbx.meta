@@ -55,14 +55,14 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.4020767
+      - time: 0.4568712
         functionName: PlayVFX
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 1
         messageOptions: 0
-      - time: 0.7523932
+      - time: 0.5488707
         functionName: StopVFX
         data: 
         objectReferenceParameter: {instanceID: 0}

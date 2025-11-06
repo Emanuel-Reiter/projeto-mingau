@@ -36,6 +36,9 @@ public class PlayerAttackLightState : PlayerBaseState
 
     public override void EnterState(PlayerStateManager player)
     {
+        // Checks if the previous state was dash in order to use the last animation of the attack combo
+        if (player.WasPreviousState<PlayerDashState>()) _currentCombo = _attackAnim.Length - 1;
+
         float speedMultiplier = _attackAnim[_currentCombo].length / _attckDuration[_currentCombo];
         player.Dependencies.AnimationManager.SetFloat("AttackSpeedMuitlplaier", speedMultiplier);
 
@@ -43,9 +46,6 @@ public class PlayerAttackLightState : PlayerBaseState
         SetDuration(_attckDuration[_currentCombo]);
 
         player.Dependencies.GlobalTimer.CancelTimer(_timerIndex);
-
-        // Checks if the previous state was dash in order to use the last animation of the attack combo
-        if (player.WasPreviousState<PlayerDashState>()) _currentCombo = _attackAnim.Length - 1;
 
         player.Dependencies.AnimationManager.PlayInterpolated(_attackAnim[_currentCombo], _transitionTime);
 
@@ -60,7 +60,7 @@ public class PlayerAttackLightState : PlayerBaseState
         player.Locomotion.CalculateSlopeVelocity();
         player.Locomotion.Decelerate();
 
-        bool canAimAttack = _attackTime < _attackLength * 0.25f;
+        bool canAimAttack = _attackTime < _attackLength * 0.2f;
         if (canAimAttack) player.Locomotion.RotateTowardsInputDirection(10.0f);
 
         _attackTime += Time.deltaTime;
