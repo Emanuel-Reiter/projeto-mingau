@@ -4,6 +4,7 @@ public class NPCIdleState : NPCBaseState
 {
     [Header("State tranisitions")]
     [SerializeField] private NPCTargetChaseState _targetChaseState;
+    [SerializeField] private NPCFlinchState _flinchState;
 
     [Header("State params")]
     [SerializeField] private AnimationClip _idleAnim;
@@ -11,6 +12,12 @@ public class NPCIdleState : NPCBaseState
 
     public override void CheckExitState(NPCStateManager npc)
     {
+        if (npc.Dependencies.Attributes.IsPostureBroken)
+        {
+            npc.SwitchState(_flinchState);
+            return;
+        }
+
         if (!IsComplete) return;
 
         npc.SwitchState(_targetChaseState);
@@ -24,7 +31,7 @@ public class NPCIdleState : NPCBaseState
     public override void UpdateState(NPCStateManager npc)
     {
         bool haveTarget = npc.Dependencies.TargetDetection.HaveTarget();
-        IsComplete = haveTarget && CheckCompletedExitTime();
+        IsComplete = haveTarget && CompletedExitTime();
     }
 
     public override void PhysicsUpdateState(NPCStateManager npc)

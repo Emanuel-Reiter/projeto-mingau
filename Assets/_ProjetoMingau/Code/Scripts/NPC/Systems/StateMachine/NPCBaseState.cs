@@ -4,6 +4,7 @@ public abstract class NPCBaseState : MonoBehaviour
 {
     public bool IsComplete { get; protected set; } = false;
 
+    [Header("Exit params")]
     [SerializeField] private bool _hasExitTime = false;
     [SerializeField] private float _duration = 1.0f;
 
@@ -22,9 +23,9 @@ public abstract class NPCBaseState : MonoBehaviour
         IsComplete = false;
     }
 
-    public bool CheckCompletedExitTime()
+    public bool CompletedExitTime()
     {
-        return _hasExitTime && _currentTime >= _duration;
+        return _hasExitTime && (_currentTime >= _duration);
     }
 
     public void SetDuration(float duration) { _duration = duration; }

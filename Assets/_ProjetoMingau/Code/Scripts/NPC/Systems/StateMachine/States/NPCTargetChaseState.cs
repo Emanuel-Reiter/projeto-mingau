@@ -5,6 +5,7 @@ public class NPCTargetChaseState : NPCBaseState
 {
     [Header("State tranisitions")]
     [SerializeField] private NPCAttackState _attackState;
+    [SerializeField] private NPCFlinchState _flinchState;
     [SerializeField] private NPCReturnToSpawnState _returnToSpawnState;
 
     [Header("State params")]
@@ -16,15 +17,21 @@ public class NPCTargetChaseState : NPCBaseState
 
     public override void CheckExitState(NPCStateManager npc)
     {
+        if (npc.Dependencies.Attributes.IsPostureBroken)
+        {
+            npc.SwitchState(_flinchState);
+            return;
+        }
+
         bool isTargetInAtcionRange = npc.Dependencies.TargetDetection.GetDistanceFromTarget() <= npc.Dependencies.NavMeshAgent.stoppingDistance;
-        if(isTargetInAtcionRange)
+        if (isTargetInAtcionRange)
         {
             npc.SwitchState(_attackState);
             return;
         }
 
         bool isTargetInSight = npc.Dependencies.TargetDetection.HaveTarget();
-        if(!isTargetInSight)
+        if (!isTargetInSight)
         {
             npc.SwitchState(_returnToSpawnState);
             return;

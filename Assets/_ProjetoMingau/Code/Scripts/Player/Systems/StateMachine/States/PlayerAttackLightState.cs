@@ -6,7 +6,7 @@ public class PlayerAttackLightState : PlayerBaseState
     bool _queueAttack = false;
 
     int _currentCombo = 0;
-    float _comboResetTimer = 1.0f;
+    [SerializeField] private float _comboResetTimer = 0.5f;
     int _timerIndex;
 
     [Header("Animation params")]
@@ -82,6 +82,7 @@ public class PlayerAttackLightState : PlayerBaseState
     {
         _currentCombo++;
         if (_currentCombo >= _attackAnim.Length) ResetCombo();
+        player.Dependencies.Attack.SetCurrentCombo(_currentCombo);
 
         _timerIndex = TimerSingleton.Instance.StartTimer(_comboResetTimer, () => ResetCombo());
     }

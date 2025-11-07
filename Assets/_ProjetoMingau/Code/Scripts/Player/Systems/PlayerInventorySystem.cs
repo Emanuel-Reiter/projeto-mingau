@@ -1,27 +1,38 @@
 using DG.Tweening;
 using TMPro;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class PlayerInventorySystem : MonoBehaviour
 {
-    private int _collectables = 0;
+    private int _collectables;
 
     [Header("Params")]
     [SerializeField] private float _collectRadius = 0.667f;
     [SerializeField] private LayerMask _colletablesLayer;
 
     [SerializeField] private TMP_Text _collectablesCountText;
+    [SerializeField] private TMP_Text _collectablesComboText;
+    private float _baseComboTextSize;
     [SerializeField] private GameObject _collectablesContainer;
 
     [Header("Audio params")]
     [SerializeField] private AudioSource _collectAudio;
     [SerializeField] private float _audioPitchResetTime = 1.0f;
-    private float _currentPitch = 1.0f;
-    private int _pitchTimerIndex;
+    private float _basePitch = 1.0f;
+    private int _currentColletCombo = -1;
+    private int _comboTimerIndex;
 
     private void Start()
     {
+        if (_collectablesComboText != null)
+        {
+            _baseComboTextSize = _collectablesComboText.fontSize;
+
+            _collectablesComboText.transform.DOScale(1.25f, 0.25f)
+                .SetEase(Ease.InOutSine)
+                .SetLoops(-1, LoopType.Yoyo);
+        }
+
         UpdateCollectablesUI();
 
         // _collectablesContainer idle anim
@@ -47,24 +58,69 @@ public class PlayerInventorySystem : MonoBehaviour
 
         Collider[] objectsInRange = Physics.OverlapSphere(origin, _collectRadius, _colletablesLayer);
 
-        foreach (Collider obj in objectsInRange) 
+        foreach (Collider obj in objectsInRange)
         {
+
             BaseCollectable collectable = obj.gameObject.GetComponent<BaseCollectable>();
             collectable.Collect();
             _collectables += collectable.Value;
-            UpdateCollectablesUI();
-            PlayCollectSFX();
-        }
 
+            ManageCollectCombo();
+            PlayCollectSFX(_currentColletCombo);
+            UpdateCollectablesUI();
+        }
+    }
+
+    private void ManageCollectCombo()
+    {
+        TimerSingleton.Instance.CancelTimer(_comboTimerIndex);
+
+        _currentColletCombo++;
+
+        _comboTimerIndex = TimerSingleton.Instance.StartTimer(_audioPitchResetTime, () => HandleComboReset());
+    }
+
+    private void HandleComboReset()
+    {
+        int tempCombo = _currentColletCombo;
+
+        _collectables += _currentColletCombo;
+        _currentColletCombo = -1;
+
+        if (tempCombo <= 0) return;
+        UpdateCollectablesUI();
+        PlayCollectSFX(0);
     }
 
     private void UpdateCollectablesUI()
     {
-        if (_collectablesCountText != null) _collectablesCountText.text = $"x {_collectables}";
-        
+        // Collectables count text
+        if (_collectablesCountText != null) _collectablesCountText.text = $"{_collectables}";
+
+        // Collectables combo text
+        if (_collectablesComboText != null)
+        {
+            if (_currentColletCombo > 0)
+            {
+                _collectablesComboText.DOFade(1.0f, 0.2f).SetEase(Ease.InOutSine);
+                _collectablesComboText.text = $"x {_currentColletCombo}";
+                
+                // Increase size of the collect combo text by combo ammount capped at 10
+                _collectablesComboText.fontSize = _baseComboTextSize + (Mathf.Clamp(_currentColletCombo, 0, 10) * 2f);
+            }
+            else
+            {
+                _collectablesComboText.text = "";
+                _collectablesComboText.DOFade(0.0f, 0.2f).SetEase(Ease.InOutSine);
+            }
+        }
+
         // UI bounce when collecting items
         if (_collectablesContainer != null && _collectables > 0)
         {
+            _collectablesContainer.transform.localScale = Vector3.one;
+            _collectablesContainer.transform.rotation = Quaternion.identity;
+
             _collectablesContainer.transform.DOScale(2.0f, 0.1f)
                 .SetEase(Ease.InOutSine)
                 .SetLoops(2, LoopType.Yoyo);
@@ -76,19 +132,13 @@ public class PlayerInventorySystem : MonoBehaviour
         }
     }
 
-    private void PlayCollectSFX()
+    private void PlayCollectSFX(int comboDepth)
     {
         if (_collectAudio == null) return;
 
-        TimerSingleton.Instance.CancelTimer(_pitchTimerIndex);
-
+        // Plays sfx with increasing pitch clamped at 10 by collecting items in sequence
+        _collectAudio.pitch = _basePitch + (Mathf.Clamp(comboDepth, 0, 10) * 0.1f);
         _collectAudio.Play();
-
-        // Play sfx with increasing pitch by collecting items in sequence
-        _collectAudio.pitch += 0.1f;
-        _collectAudio.pitch = Mathf.Clamp(_collectAudio.pitch, 1.0f, 2.0f);
-
-        _pitchTimerIndex = TimerSingleton.Instance.StartTimer(_audioPitchResetTime, () => { _collectAudio.pitch = 1.0f; });
     }
 
 #if UNITY_EDITOR

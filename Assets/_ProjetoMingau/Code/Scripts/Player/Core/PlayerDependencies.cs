@@ -12,10 +12,13 @@ public class PlayerDependencies : MonoBehaviour
 
     [HideInInspector] public PlayerLocomotionParams LocomotionParams;
 
+    [HideInInspector] public AttributesManager Attributes;
+
     // Player actions
     [HideInInspector] public PlayerDash Dash;
     [HideInInspector] public PlayerJump Jump;
     [HideInInspector] public PlayerLand Land;
+    [HideInInspector] public PlayerAttack Attack;
 
     private void Awake()
     {
@@ -36,9 +39,12 @@ public class PlayerDependencies : MonoBehaviour
 
             LocomotionParams = GetComponent<PlayerLocomotionParams>();
 
+            Attributes = GetComponent<AttributesManager>();
+
             Dash = GetComponent<PlayerDash>();
             Jump = GetComponent<PlayerJump>();
             Land = GetComponent<PlayerLand>();
+            Attack = GetComponent<PlayerAttack>();
         }
         catch 
         {

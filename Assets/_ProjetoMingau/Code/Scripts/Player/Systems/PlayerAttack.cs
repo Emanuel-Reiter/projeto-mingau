@@ -1,7 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    private PlayerDependencies _dependencies;
+
+    [Header("Attack params")]
+    [SerializeField] private Transform _attackOrigin;
+    [SerializeField] private float _attackRadius = 0.5f;
+    [SerializeField] private LayerMask _targetLayer;
+
     [Header("VFX params")]
     [SerializeField] private ParticleSystem[] _rightHandattackVFX;
     [SerializeField] private ParticleSystem[] _leftHandattackVFX;
@@ -11,6 +19,50 @@ public class PlayerAttack : MonoBehaviour
 
     private bool _isHitDetectionEnabled = false;
     public bool IsHitDetectionEnabled => _isHitDetectionEnabled;
+
+    private int _currentCombo = 0;
+
+    private HashSet<AttributesManager> _damagedTargets = new HashSet<AttributesManager>();
+
+    private void Start()
+    {
+        try
+        {
+            _dependencies = GetComponent<PlayerDependencies>();
+        }
+        catch
+        {
+            Debug.LogError("Missing PlayerDependencies component!");
+        }
+    }
+
+    private void Update()
+    {
+        if (_isHitDetectionEnabled) SearchTargets();
+    }
+
+    private void SearchTargets()
+    {
+        Collider[] targets = Physics.OverlapSphere(_attackOrigin.position, _attackRadius, _targetLayer);
+
+        foreach (Collider target in targets) 
+        {
+            AttributesManager targetAttributes = target.gameObject.GetComponent<AttributesManager>();
+                
+            if (targetAttributes == null) continue;
+            if (_damagedTargets.Contains(targetAttributes)) continue;
+            
+            try
+            {
+                targetAttributes.TakeDamage(_dependencies.Attributes.Damage);
+                _damagedTargets.Add(targetAttributes);
+            }
+            catch 
+            {
+                continue;
+            }
+        }
+    }
 
     public void PlayVFX(int handIndex)
     {
@@ -32,6 +84,8 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    public void SetCurrentCombo(int currentCombo) { _currentCombo = currentCombo; }
+
     public void StopVFX()
     {
         if (_rightHandattackVFX == null || _leftHandattackVFX == null) return;
@@ -39,21 +93,30 @@ public class PlayerAttack : MonoBehaviour
         foreach (ParticleSystem vfx in _leftHandattackVFX) vfx.Stop();
     }
 
-    public void EnableHitDetection()
+    public void ToggleHitDetection(int toggle)
     {
-        _isHitDetectionEnabled = true;
-    }
-
-    public void DisableHitDetection()
-    {
-        _isHitDetectionEnabled = false;
+        if (toggle == 1)
+        {
+            _isHitDetectionEnabled = true;
+            _damagedTargets.Clear();
+        }
+        else _isHitDetectionEnabled = false;
     }
 
     public void PlaySFX()
     {
         if (_attackAudio == null) return;
 
-        _attackAudio.pitch = Random.Range(0.9f, 1.2f);
+        _attackAudio.pitch = 1.0f + (_currentCombo * 0.2f);
         _attackAudio.Play();
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (!Application.isPlaying) return;
+
+        Gizmos.DrawWireSphere(_attackOrigin.position, _attackRadius);
+    }
+#endif
 }

@@ -4,6 +4,7 @@ public class NPCAttackState : NPCBaseState
 {
     [Header("State tranisitions")]
     [SerializeField] private NPCIdleState _idleState;
+    [SerializeField] private NPCFlinchState _flinchState;
 
     [Header("State params")]
     [SerializeField] private AnimationClip _attackAnim;
@@ -11,7 +12,13 @@ public class NPCAttackState : NPCBaseState
 
     public override void CheckExitState(NPCStateManager npc)
     {
-        if (!CheckCompletedExitTime())
+        if (npc.Dependencies.Attributes.IsPostureBroken)
+        {
+            npc.SwitchState(_flinchState);
+            return;
+        }
+
+        if (!CompletedExitTime())
         {
             return;
         }

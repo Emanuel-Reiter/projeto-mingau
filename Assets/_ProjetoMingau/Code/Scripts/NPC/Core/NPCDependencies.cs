@@ -8,6 +8,7 @@ public class NPCDependencies : MonoBehaviour
     public NPCTargetDetection TargetDetection { get; private set; }
     public TimerSingleton GlobalTimer { get; private set; }
     public NPCAnimationManager Animation { get; private set; }
+    public AttributesManager Attributes { get; private set; }
 
     public Vector3 SpawnPosition { get; private set; }
 
@@ -19,6 +20,7 @@ public class NPCDependencies : MonoBehaviour
             TargetDetection = GetComponent<NPCTargetDetection>();
             GlobalTimer = GameObject.FindGameObjectWithTag("GlobalTimer").GetComponent<TimerSingleton>();
             Animation = GetComponent<NPCAnimationManager>();
+            Attributes = GetComponent<AttributesManager>();
 
             SpawnPosition = transform.position;
         }
