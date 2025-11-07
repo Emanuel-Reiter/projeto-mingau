@@ -11,11 +11,7 @@ public class NPCFlinchState : NPCBaseState
 
     public override void CheckExitState(NPCStateManager npc)
     {
-        Debug.Log(CompletedExitTime());
-        if (!CompletedExitTime())
-        {
-            return;
-        }
+        if (!CompletedExitTime()) return;
 
         npc.SwitchState(_idleState);
     }
