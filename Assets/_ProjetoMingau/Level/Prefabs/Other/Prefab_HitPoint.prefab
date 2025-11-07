@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3917178372954395427}
   - component: {fileID: 3344405487308159986}
   m_Layer: 0
-  m_Name: HitPoint_Prefab
+  m_Name: Prefab_HitPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

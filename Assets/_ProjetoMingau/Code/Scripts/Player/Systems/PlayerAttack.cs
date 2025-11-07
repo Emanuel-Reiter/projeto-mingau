@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [Header("VFX params")]
     [SerializeField] private ParticleSystem[] _rightHandattackVFX;
     [SerializeField] private ParticleSystem[] _leftHandattackVFX;
+
+    [Header("Audio params")]
+    [SerializeField] private AudioSource _attackAudio;
 
     private bool _isHitDetectionEnabled = false;
     public bool IsHitDetectionEnabled => _isHitDetectionEnabled;
@@ -12,14 +16,17 @@ public class PlayerAttack : MonoBehaviour
     {
         if (handIndex == 0)
         {
+            if (_rightHandattackVFX == null) return;
             foreach (ParticleSystem vfx in _rightHandattackVFX) vfx.Play();
         }
         else if (handIndex == 1)
         {
+            if (_leftHandattackVFX == null) return;
             foreach (ParticleSystem vfx in _leftHandattackVFX) vfx.Play();
         }
         else
         {
+            if (_rightHandattackVFX == null || _leftHandattackVFX == null) return;
             foreach (ParticleSystem vfx in _rightHandattackVFX) vfx.Play();
             foreach (ParticleSystem vfx in _leftHandattackVFX) vfx.Play();
         }
@@ -27,6 +34,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void StopVFX()
     {
+        if (_rightHandattackVFX == null || _leftHandattackVFX == null) return;
         foreach (ParticleSystem vfx in _rightHandattackVFX) vfx.Stop();
         foreach (ParticleSystem vfx in _leftHandattackVFX) vfx.Stop();
     }
@@ -43,6 +51,9 @@ public class PlayerAttack : MonoBehaviour
 
     public void PlaySFX()
     {
+        if (_attackAudio == null) return;
 
+        _attackAudio.pitch = Random.Range(0.9f, 1.2f);
+        _attackAudio.Play();
     }
 }
