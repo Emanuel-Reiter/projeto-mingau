@@ -63,6 +63,7 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
+    public void SetCurrentCombo(int currentCombo) { _currentCombo = currentCombo; }
 
     public void PlayVFX(int handIndex)
     {
@@ -83,8 +84,6 @@ public class PlayerAttack : MonoBehaviour
             foreach (ParticleSystem vfx in _leftHandattackVFX) vfx.Play();
         }
     }
-
-    public void SetCurrentCombo(int currentCombo) { _currentCombo = currentCombo; }
 
     public void StopVFX()
     {

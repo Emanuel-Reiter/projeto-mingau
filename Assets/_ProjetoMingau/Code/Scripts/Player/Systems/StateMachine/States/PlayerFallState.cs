@@ -65,6 +65,7 @@ public class PlayerFallState : PlayerBaseState
         player.Locomotion.CalculateHorizontalVelocity();
         player.Locomotion.CalculateVerticalVelocity();
         player.Locomotion.RotateTowardsMovementDirection();
+        player.Locomotion.CalculateOnEntitiesVelocity();
     }
 
     public override void PhysicsUpdateState(PlayerStateManager player) 

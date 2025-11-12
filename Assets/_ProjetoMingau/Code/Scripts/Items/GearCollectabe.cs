@@ -58,7 +58,7 @@ public class GearCollectabe : BaseCollectable
         sequence.Append(transform.DOScale(0.0f, 0.25f).SetEase(Ease.InOutCubic));
         sequence.OnComplete(() => _mesh.enabled = false);
 
-        TimerSingleton.Instance.StartTimer(_collectDuration, () => Disable());
+        GlobalTimer.Instance.StartTimer(_collectDuration, () => Disable());
     }
 
 

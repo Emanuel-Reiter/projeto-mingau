@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -19,7 +20,9 @@ public class PlayerLocomotion : MonoBehaviour
 
     // Ground
     [Header("Params")]
-    [SerializeField] private LayerMask _groundMask;
+    [SerializeField] private LayerMask _groundLayer;
+    [SerializeField] private LayerMask _entitiesLayer;
+
     [SerializeField] private float _checkDistance = 0.067f;
 
     private Vector3 _groundNormal = Vector3.zero;
@@ -109,6 +112,29 @@ public class PlayerLocomotion : MonoBehaviour
         _dependencies.Controller.Move(_slopeVelocity * Time.deltaTime);
     }
 
+    public void CalculateOnEntitiesVelocity()
+    {
+        if (_dependencies.Jump.IsJumping) return;
+
+        float radius = _dependencies.Controller.radius;
+        Vector3 origin = new Vector3(transform.position.x, transform.position.y + radius, transform.position.z);
+        Vector3 direction = Vector3.down;
+        RaycastHit hit;
+
+        bool hitSurface = Physics.SphereCast(origin, radius, direction, out hit, _checkDistance, _entitiesLayer);
+        if (hitSurface)
+        {
+            Vector3 slopeDirection = Vector3.ProjectOnPlane(Vector3.down, hit.normal).normalized;
+
+            float slopeVelocityMultiplaier = 12.0f;
+
+            Vector3 targetSlopeVelocity = slopeDirection * _dependencies.LocomotionParams.MaxSlopeVelocity * slopeVelocityMultiplaier;
+            _slopeVelocity = Vector3.MoveTowards(_slopeVelocity, targetSlopeVelocity, (_dependencies.LocomotionParams.SlopeAcceleration * slopeVelocityMultiplaier) * Time.deltaTime);
+            
+            _dependencies.Controller.Move(_slopeVelocity * Time.deltaTime);
+        }
+    }
+
     private float GetAngleVelocityMultiplaier()
     {
         float minAngle = _dependencies.Controller.slopeLimit;
@@ -166,6 +192,13 @@ public class PlayerLocomotion : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(input);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
+
+    public void RotateTowardsMouseInput()
+    {
+        Vector3 input = GetCameraRelativeDirection(new Vector2(0.0f, 1.0f));
+        Quaternion targetRotation = Quaternion.LookRotation(input);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _dependencies.LocomotionParams.RotationSpeed * Time.deltaTime);
+    }
     #endregion
 
     #region Helper
@@ -190,9 +223,9 @@ public class PlayerLocomotion : MonoBehaviour
         float radius = _dependencies.Controller.radius;
         Vector3 origin = new Vector3(transform.position.x, transform.position.y + radius, transform.position.z);
         Vector3 direction = Vector3.down;
-
         RaycastHit hit;
-        bool hitSurface = Physics.SphereCast(origin, radius, direction, out hit, _checkDistance, _groundMask);
+
+        bool hitSurface = Physics.SphereCast(origin, radius, direction, out hit, _checkDistance, _groundLayer);
         if (hitSurface)
         {
             IsGrounded = true;

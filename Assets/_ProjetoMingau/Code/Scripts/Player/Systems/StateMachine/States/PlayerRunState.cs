@@ -63,6 +63,7 @@ public class PlayerRunState : PlayerBaseState
         player.Locomotion.CalculateHorizontalVelocity();
         player.Locomotion.CalculateVerticalVelocity();
         player.Locomotion.CalculateSlopeVelocity();
+        player.Locomotion.CalculateOnEntitiesVelocity();
         player.Locomotion.RotateTowardsMovementDirection();
     }
 

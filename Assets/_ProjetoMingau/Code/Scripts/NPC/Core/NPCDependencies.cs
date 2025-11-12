@@ -6,7 +6,7 @@ public class NPCDependencies : MonoBehaviour
 {
     public NavMeshAgent NavMeshAgent { get; private set; }
     public NPCTargetDetection TargetDetection { get; private set; }
-    public TimerSingleton GlobalTimer { get; private set; }
+    public GlobalTimer GlobalTimer { get; private set; }
     public NPCAnimationManager Animation { get; private set; }
     public AttributesManager Attributes { get; private set; }
 
@@ -18,7 +18,7 @@ public class NPCDependencies : MonoBehaviour
         {
             NavMeshAgent = GetComponent<NavMeshAgent>();
             TargetDetection = GetComponent<NPCTargetDetection>();
-            GlobalTimer = GameObject.FindGameObjectWithTag("GlobalTimer").GetComponent<TimerSingleton>();
+            GlobalTimer = GameObject.FindGameObjectWithTag("GlobalTimer").GetComponent<GlobalTimer>();
             Animation = GetComponent<NPCAnimationManager>();
             Attributes = GetComponent<AttributesManager>();
 

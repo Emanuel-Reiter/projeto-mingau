@@ -29,12 +29,13 @@ public class AttributesManager : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        Debug.Log("Took damage");
         _currentHP = Mathf.Clamp(_currentHP - amount, 0, _maxHP);
 
         CheckIsDead();
         UpdateHealthUI();
         DamagePosture();
+
+        Debug.Log($"{gameObject.name} took {amount} of damage! Current HP: {_currentHP}");
     }
 
     private void DamagePosture()
@@ -60,8 +61,9 @@ public class AttributesManager : MonoBehaviour
     {
         bool isDead = _currentHP <= 0;
 
-        if (isDead) Die();
         _isDead = isDead;
+
+        if (isDead) Die();
     }
 
     public void Die()

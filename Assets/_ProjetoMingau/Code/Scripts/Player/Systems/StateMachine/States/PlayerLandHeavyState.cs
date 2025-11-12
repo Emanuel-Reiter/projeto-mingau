@@ -42,6 +42,8 @@ public class PlayerLandHeavyState : PlayerBaseState
     {
         player.Locomotion.Decelerate();
         player.Locomotion.RotateTowardsMovementDirection();
+
+        player.Locomotion.CalculateOnEntitiesVelocity();
     }
 
     public override void ExitState(PlayerStateManager player)

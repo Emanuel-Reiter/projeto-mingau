@@ -7,7 +7,7 @@ public class PlayerAttackLightState : PlayerBaseState
 
     int _currentCombo = 0;
     [SerializeField] private float _comboResetTimer = 0.5f;
-    int _timerIndex;
+    int _comboTimerIndex;
 
     [Header("Animation params")]
     [SerializeField] private AnimationClip[] _attackAnim;
@@ -36,6 +36,9 @@ public class PlayerAttackLightState : PlayerBaseState
 
     public override void EnterState(PlayerStateManager player)
     {
+        // Resets combo timer
+        GlobalTimer.Instance.CancelTimer(_comboTimerIndex);
+        
         // Checks if the previous state was dash in order to use the last animation of the attack combo
         if (player.WasPreviousState<PlayerDashState>()) _currentCombo = _attackAnim.Length - 1;
 
@@ -44,8 +47,6 @@ public class PlayerAttackLightState : PlayerBaseState
 
         // Sets the state duration to the current attack anim
         SetDuration(_attckDuration[_currentCombo]);
-
-        TimerSingleton.Instance.CancelTimer(_timerIndex);
 
         player.Dependencies.AnimationManager.PlayInterpolated(_attackAnim[_currentCombo], _transitionTime);
 
@@ -58,10 +59,11 @@ public class PlayerAttackLightState : PlayerBaseState
     {
         player.Locomotion.CalculateVerticalVelocity();
         player.Locomotion.CalculateSlopeVelocity();
+        player.Locomotion.CalculateOnEntitiesVelocity();
         player.Locomotion.Decelerate();
 
         bool canAimAttack = _attackTime < _attackLength * 0.2f;
-        if (canAimAttack) player.Locomotion.RotateTowardsInputDirection(10.0f);
+        if (canAimAttack) player.Locomotion.RotateTowardsMouseInput();
 
         _attackTime += Time.deltaTime;
 
@@ -84,7 +86,7 @@ public class PlayerAttackLightState : PlayerBaseState
         if (_currentCombo >= _attackAnim.Length) ResetCombo();
         player.Dependencies.Attack.SetCurrentCombo(_currentCombo);
 
-        _timerIndex = TimerSingleton.Instance.StartTimer(_comboResetTimer, () => ResetCombo());
+        _comboTimerIndex = GlobalTimer.Instance.StartTimer(_comboResetTimer, () => ResetCombo());
     }
 
     private void ResetCombo()
