@@ -1,22 +1,46 @@
 using UnityEngine;
 
-public class CursorLock : MonoBehaviour {
-    private bool _isCursorLocked = false;
-    public bool IsCursorLocked => _isCursorLocked;
-
-    private void Start () {
-        ToggleCursorLock();
+public class CursorLock : BaseUI
+{
+    public override void Initialize()
+    {
+        GameManager.Instance.OnGameStateChanged += UpdateLockCursor;
+        UpdateLockCursor(GameManager.Instance.GameState);
     }
 
-    private void ToggleCursorLock() {
-        if (!_isCursorLocked) {
+    private void UpdateLockCursor(GameStateEnum gameState)
+    {
+        switch (gameState)
+        {
+            case GameStateEnum.Running:
+                LockCursor(true);
+                break;
+
+            case GameStateEnum.Loading:
+                LockCursor(true);
+                break;
+            default:
+                LockCursor(false);
+                break;
+        }
+    }
+
+    private void LockCursor(bool lockCursor)
+    {
+        if (lockCursor) 
+        {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-        else {
+        else
+        {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
-        _isCursorLocked = !_isCursorLocked;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnGameStateChanged -= UpdateLockCursor;
     }
 }
