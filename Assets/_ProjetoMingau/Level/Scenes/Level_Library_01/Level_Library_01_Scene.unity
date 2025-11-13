@@ -37187,6 +37187,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 302053019649464250, guid: 56741755db25387439eca179c0018031, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 39bd49886e264de428891ed52f424062, type: 2}
+    - target: {fileID: 302053019649464250, guid: 56741755db25387439eca179c0018031, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9fa6fb1bc9b3611409ad7965481d12c9, type: 2}
     - target: {fileID: 5068305502601986632, guid: 56741755db25387439eca179c0018031, type: 3}
       propertyPath: _collectablesComboText
       value: 
