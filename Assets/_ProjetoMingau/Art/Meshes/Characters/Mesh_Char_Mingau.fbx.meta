@@ -3,7 +3,27 @@ guid: 84ffb4fd5c467f54187a75703fe661f3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Char_Mingau_Base
+    second: {fileID: 2100000, guid: 39bd49886e264de428891ed52f424062, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Char_Mingau_Clothes
+    second: {fileID: 2100000, guid: b6b60154be2d74d4694b06fab1110a8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Char_Mingau_Eyes
+    second: {fileID: 2100000, guid: ec91f2ebe17fab14b93adc12e4a23217, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Char_Mingau_Hair
+    second: {fileID: 2100000, guid: 9fa6fb1bc9b3611409ad7965481d12c9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

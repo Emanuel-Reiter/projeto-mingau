@@ -6,7 +6,9 @@ public class PlayerDash : MonoBehaviour
     private PlayerLocomotion _locomotion;
 
     [Header("Params")]
-    [SerializeField] private float _dashSpeed = 48.0f;
+    [SerializeField] private float _groundedDashSpeed = 45.0f;
+    [SerializeField] private float _airDashSpeed = 30.0f;
+
 
     private int _maxDashCount = 1;
     private int _currentDashCount = 0;
@@ -19,7 +21,8 @@ public class PlayerDash : MonoBehaviour
 
     public void PerformDash()
     {
-        float dashVelocity = Mathf.Sqrt(2.0f * _locomotion.GetCurrentMovementSpeed() * _dashSpeed);
+        float targetDashSpeed = _locomotion.IsGrounded ? _groundedDashSpeed : _airDashSpeed;
+        float dashVelocity = Mathf.Sqrt(2.0f * _locomotion.GetCurrentMovementSpeed() * targetDashSpeed);
 
         Vector2 inputVector = _dependencies.Input.MovementDirectionInput;
 
