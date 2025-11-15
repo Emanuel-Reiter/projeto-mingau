@@ -1,14 +1,23 @@
-using UnityEngine.SceneManagement;
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum GameStateEnum
 {
     Running,
     Loading,
     Paused,
-    GameMenu,
-    MainMenu
+}
+
+public enum GameContextEnum
+{
+    Playing,
+    Dilaogue,
+    MainMenu,
+    ConfigMenu,
+    LoadingScreen,
 }
 
 public class GameManager : MonoBehaviour
@@ -17,14 +26,13 @@ public class GameManager : MonoBehaviour
 
     [Header("Game state")]
     private GameStateEnum _gameState;
-
     public GameStateEnum PreviousGameState { get; private set; }
     public GameStateEnum GameState
     {
         get => _gameState;
         set
         {
-            PreviousGameState = GameState;
+            PreviousGameState = _gameState;
             _gameState = value;
 
             OnGameStateChanged?.Invoke(_gameState);
@@ -36,23 +44,57 @@ public class GameManager : MonoBehaviour
     public delegate void OnGameStateChangedDelegate(GameStateEnum gameState);
     public event OnGameStateChangedDelegate OnGameStateChanged;
 
-    [Header("UI")]
-    [SerializeField] private GameObject _UIPrefab;
-    [SerializeField] private GameObject _UIEventPrefab;
+    [Header("Game context")]
+    private GameContextEnum _gameContext;
+    public GameContextEnum PreviousGameContext { get; private set; }
+    public GameContextEnum GameContext
+    {
+        get => _gameContext;
+        set
+        {
+            PreviousGameContext = _gameContext;
+            _gameContext = value;
 
-    private GameObject _ui;
-    private GameObject _uiEvent;
-    private HUD _hud;
-    private CursorLock _cursorLock;
-    private MainMenu _mainMenu;
+            OnGameContextChanged?.Invoke(_gameContext);
+        }
+    }
+
+    public delegate void OnGameContextChangedDelegate(GameContextEnum gameContext);
+    public event OnGameContextChangedDelegate OnGameContextChanged;
+
+
+    [Header("Params")]
+    [SerializeField] private bool _showLogs = false;
+
+    [Header("UI")]
+    [SerializeField] private GameObject _canvasPrefab;
+    [SerializeField] private GameObject _eventSystemPrefab;
+
+    public GameObject CanvasRef { get; private set; }
+    public GameObject EventSystemRef { get; private set; }
+    public HUD HUDRef { get; private set; }
+    public InterationPopup InterationPopupRef { get; private set; }
+    public CursorLock CursorLockRef { get; private set; }
 
     [Header("Player")]
-    [SerializeField] private GameObject _playerPrefab;
-
+    [SerializeField] private GameObject _playerPackPrefab;
+    private GameObject _playerPack;
     private GameObject _player;
 
+    [Header("Dependencies")]
+    [SerializeField] private Camera _mainCamera;
+    [SerializeField] private GameObject _globalTimerPrefab;
+    private GameObject _globalTimer;
+
+    [Header("Level loading")]
+    [SerializeField] private GameObject _loadingScreenCanvas;
+    [SerializeField] private Slider _loadingBar;
+
+    private float _targetLoadingValue = 0.0f;
+
     [Header("Level")]
-    [SerializeField] private Scene _startLevel;
+    [SerializeField] private string _mainMenuScene;
+    [SerializeField] private string _startLevelScene;
 
     private void Awake()
     {
@@ -61,76 +103,135 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // Instance initialization
-        if (Instance != null && Instance != this) Destroy(this);
+        if (Instance != null && Instance != this) Destroy(gameObject);
         else Instance = this;
 
-        // Set start game state
-        GameState = GameStateEnum.Running;
+        // Set start game state and context
+        ChangeGameState(GameStateEnum.Running);
+        ChangeGameContext(GameContextEnum.MainMenu);
 
-        InitializeGame();
+        _loadingScreenCanvas.SetActive(false);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P)) 
+        // Temp
+        if (Input.GetKeyDown(KeyCode.P)) ReturnToMainMenu();
+
+        float loadingMaxDelta = 1.0f;
+        if (GameState == GameStateEnum.Loading)
         {
-            if (GameState != GameStateEnum.Running)
-            {
-                Debug.Log("Changing game state to running!");
-                GameState = GameStateEnum.Running;
-            }
-            else
-            {
-                Debug.Log("Changing game state to menu!");
-                GameState = GameStateEnum.MainMenu;
-            }
+            _loadingBar.value = Mathf.MoveTowards(_loadingBar.value, _targetLoadingValue, loadingMaxDelta * Time.deltaTime);
         }
     }
 
     private void InitializeGame()
     {
-        if (_UIPrefab != null) InitializeUI();
-        if (_playerPrefab != null) InitializePlayer();
+        if (_playerPackPrefab != null) InitializePlayer();
+        if (_canvasPrefab != null) InitializeUI();
+
+        InitializeDependencies();
     }
 
     private void InitializeUI()
     {
-        _ui = Instantiate(_UIPrefab, null);
-        DontDestroyOnLoad(_ui);
+        CanvasRef = Instantiate(_canvasPrefab, null);
+        DontDestroyOnLoad(CanvasRef);
 
-        _uiEvent = Instantiate(_UIEventPrefab, null);
-        DontDestroyOnLoad(_uiEvent);
+        EventSystemRef = Instantiate(_eventSystemPrefab, null);
+        DontDestroyOnLoad(EventSystemRef);
 
         // Activates all UI elements before fetching refferences
         // Pass true as a parameter to get inactive objects
-        Transform[] uiDescendants = _ui.GetComponentsInChildren<Transform>(true); 
+        Transform[] uiDescendants = CanvasRef.GetComponentsInChildren<Transform>(true);
         foreach (Transform t in uiDescendants) t.gameObject.SetActive(true);
 
-        _cursorLock = _ui.GetComponent<CursorLock>();
-        if (_cursorLock != null) _cursorLock.Initialize();
+        CursorLockRef = CanvasRef.GetComponent<CursorLock>();
+        if (CursorLockRef != null) CursorLockRef.Initialize();
 
-        _hud = _ui.GetComponentInChildren<HUD>();
-        if (_hud != null) _hud.Initialize();
+        HUDRef = CanvasRef.GetComponentInChildren<HUD>();
+        if (HUDRef != null) HUDRef.Initialize();
 
-        _mainMenu = _ui.GetComponentInChildren<MainMenu>();
-        if (_mainMenu != null) _mainMenu.Initialize();
+        InterationPopupRef = HUDRef.GetComponentInChildren<InterationPopup>();
     }
 
     private void InitializePlayer()
     {
-        _player = Instantiate(_playerPrefab, null);
-        DontDestroyOnLoad(_player);
+        if (_playerPack != null) return;
 
-        _player.SetActive(false);
+        _playerPack = Instantiate(_playerPackPrefab, Vector3.up, Quaternion.identity, null);
+        DontDestroyOnLoad(_playerPack);
+
+        // Unpack the player pack prefab
+        //foreach(Transform child in _playerPack.transform) child.parent = null;
+
+        _player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    private void InitializeDependencies()
+    {
+        if (_globalTimer != null) return;
+
+        if (_globalTimerPrefab != null) _globalTimer = Instantiate(_globalTimerPrefab, null);
+        DontDestroyOnLoad(_globalTimer);
     }
 
     public void StartGame()
     {
+        LoadScene(_startLevelScene, () => InitializeGame());
+    }
+
+    public void ReturnToMainMenu()
+    {
+        LoadScene(_mainMenuScene, () => UnloadGame());
+    }
+
+    private void TogglePlayer(bool toggle)
+    {
+        PlayerLocomotion locomotion = _player.GetComponent<PlayerLocomotion>();
+        locomotion.ToggleController(toggle);
+    }
+
+    public async void LoadScene(string sceneName, Action callback)
+    {
+        // Wait a bit in order to interactions animations and sfx
+        await Task.Delay(500);
+
+        ChangeGameState(GameStateEnum.Loading);
+        ChangeGameContext(GameContextEnum.LoadingScreen);
+
+        if (_player != null) TogglePlayer(false);
+
+        var scene = SceneManager.LoadSceneAsync(sceneName);
+        scene.allowSceneActivation = false;
+
+        // Resets laoding bar
+        _targetLoadingValue = 0.0f;
+        _loadingBar.value = 0.0f;
+
+        _loadingScreenCanvas.SetActive(true);
+
+        do
+        {
+            await Task.Delay(100);
+            // Added .1 to the progress bar to counter unity .9 scene loading threshold
+            _targetLoadingValue = scene.progress + 0.1f;
+        }
+        while (scene.progress < 0.9f);
+
+        callback?.Invoke();
+        scene.allowSceneActivation = true;
+
+        // Small delay to disable loading screen to
+        // ensrure correct loading and avoid screen flasing
+        await Task.Delay(2000);
+
+        // Finalize loading
+        _loadingScreenCanvas.SetActive(false);
         ChangeGameState(GameStateEnum.Running);
+        ChangeGameContext(GameContextEnum.Playing);
 
-        SceneManager.LoadScene(_startLevel.name);
-
-        _player.SetActive(true);
+        if (_player != null) TogglePlayer(true);
     }
 
     private void HandleGameState()
@@ -143,14 +244,6 @@ public class GameManager : MonoBehaviour
 
             case GameStateEnum.Paused:
                 Time.timeScale = 0.0f;
-                break;
-
-            case GameStateEnum.GameMenu:
-                Time.timeScale = 1.0f;
-                break;
-
-            case GameStateEnum.MainMenu:
-                Time.timeScale = 1.0f;
                 break;
 
             case GameStateEnum.Loading:
@@ -168,12 +261,23 @@ public class GameManager : MonoBehaviour
         int height = 32;
 
         GUI.skin.label.fontSize = 24;
-        
-        bool useLogs = false; 
-        if (!useLogs) return;
-        
+
+        if (!_showLogs) return;
+
         GUI.Label(new Rect(xOffset, GUIPositionY(1, height), width, height), $"gameState: {GameState}");
+        GUI.Label(new Rect(xOffset, GUIPositionY(2, height), width, height), $"gameContext: {GameContext}");
     }
 
     public void ChangeGameState(GameStateEnum gameState) { GameState = gameState; }
+    public void ChangeGameContext(GameContextEnum gameContext) { GameContext = gameContext; }
+
+    private void UnloadGame()
+    {
+        Destroy(CanvasRef);
+        Destroy(EventSystemRef);
+
+        Destroy(_globalTimer);
+
+        Destroy(_playerPack);
+    }
 }

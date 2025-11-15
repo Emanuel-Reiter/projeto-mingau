@@ -5,15 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/_ProjetoMingau/Level/Scenes/Development_01/Development_01_Scene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/_ProjetoMingau/Level/Scenes/Development_02/Development_02_Scene.unity
-    guid: b2cf8f52453574445a8ead984838168f
   - enabled: 1
-    path: Assets/Level/Scenes/Level_02/Level_02_Scene.unity
-    guid: 98b3b7ec2f59ca4439f0cc8849211457
+    path: Assets/_ProjetoMingau/Level/Scenes/Scene_Menu_Main.unity
+    guid: 72b419021d6b45d4382d3a9a04e33db1
+  - enabled: 1
+    path: Assets/_ProjetoMingau/Level/Scenes/Scene_Level_CampusIFMS_01.unity
+    guid: 630f61c2e5af15940baff17a22260a42
+  - enabled: 1
+    path: Assets/_ProjetoMingau/Level/Scenes/Scene_Level_Library_01.unity
+    guid: aad6fbf3345473446827be812e452891
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

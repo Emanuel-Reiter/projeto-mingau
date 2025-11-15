@@ -1,50 +1,33 @@
-using DG.Tweening;
-using TMPro;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
     private int _collectables;
+    public int Colletables
+    {
+        get => _collectables;
+        set
+        {
+            _collectables = value;
+            OnCollectablesChanged?.Invoke();
+        }
+    }
+
+    public delegate void OnCollectablesChangedDelegate();
+    public event OnCollectablesChangedDelegate OnCollectablesChanged;
 
     [Header("Params")]
     [SerializeField] private float _collectRadius = 0.667f;
     [SerializeField] private LayerMask _colletablesLayer;
 
-    [SerializeField] private TMP_Text _collectablesCountText;
-    [SerializeField] private TMP_Text _collectablesComboText;
-    private float _baseComboTextSize;
-    [SerializeField] private GameObject _collectablesContainer;
 
     [Header("Audio params")]
     [SerializeField] private AudioSource _collectAudio;
     [SerializeField] private float _audioPitchResetTime = 1.0f;
     private float _basePitch = 1.0f;
     private int _currentColletCombo = -1;
+    public int CurrentColletCombo => _currentColletCombo;
     private int _comboTimerIndex;
-
-    private void Start()
-    {
-        if (_collectablesComboText != null)
-        {
-            _baseComboTextSize = _collectablesComboText.fontSize;
-
-            _collectablesComboText.transform.DOScale(1.25f, 0.25f)
-                .SetEase(Ease.InOutSine)
-                .SetLoops(-1, LoopType.Yoyo);
-        }
-
-        UpdateCollectablesUI();
-
-        // _collectablesContainer idle anim
-        if(_collectablesCountText != null)
-        {
-            Vector3 startPos = _collectablesContainer.transform.position;
-            Vector3 targetPos = new Vector3(startPos.x + -36.0f, startPos.y + 24.0f, 0.0f);
-            _collectablesContainer.transform.DOMove(targetPos, 3.0f)
-                .SetEase(Ease.InOutSine)
-                .SetLoops(-1, LoopType.Yoyo);
-        }
-    }
 
     private void Update()
     {
@@ -67,16 +50,13 @@ public class PlayerInventory : MonoBehaviour
 
             ManageCollectCombo();
             PlayCollectSFX(_currentColletCombo);
-            UpdateCollectablesUI();
         }
     }
 
     private void ManageCollectCombo()
     {
         GlobalTimer.Instance.CancelTimer(_comboTimerIndex);
-
         _currentColletCombo++;
-
         _comboTimerIndex = GlobalTimer.Instance.StartTimer(_audioPitchResetTime, () => HandleComboReset());
     }
 
@@ -88,54 +68,7 @@ public class PlayerInventory : MonoBehaviour
         _currentColletCombo = -1;
 
         if (tempCombo <= 0) return;
-        UpdateCollectablesUI();
         PlayCollectSFX(0);
-    }
-
-    private void UpdateCollectablesUI()
-    {
-        // Collectables count text
-        if (_collectablesCountText != null) _collectablesCountText.text = $"{_collectables}";
-
-        // Collectables combo text
-        if (_collectablesComboText != null)
-        {
-            if (_currentColletCombo > 0)
-            {
-                _collectablesComboText.DOFade(1.0f, 0.2f).SetEase(Ease.InOutSine);
-                _collectablesComboText.text = $"x {_currentColletCombo}";
-                
-                // Increase size of the collect combo text by combo ammount capped at 10
-                _collectablesComboText.fontSize = _baseComboTextSize + (Mathf.Clamp(_currentColletCombo, 0, 20) * 2f);
-            }
-            else
-            {
-                _collectablesComboText.text = "";
-                _collectablesComboText.DOFade(0.0f, 0.2f).SetEase(Ease.InOutSine);
-            }
-        }
-
-        // UI bounce when collecting items
-        if (_collectablesContainer != null && _collectables > 0)
-        {
-            ResetCollectablesUITransform();
-
-            _collectablesContainer.transform.DOScale(2.0f, 0.1f)
-                .SetEase(Ease.InOutSine)
-                .SetLoops(2, LoopType.Yoyo);
-
-            float rotation = _collectables % 2 == 0 ? 22.5f : -22.5f;
-            _collectablesContainer.transform.DORotate(new Vector3(0.0f, 0.0f, rotation), 0.1f)
-                .SetEase(Ease.InOutSine)
-                .SetLoops(2, LoopType.Yoyo)
-                .OnComplete(() => ResetCollectablesUITransform());
-        }
-    }
-
-    private void ResetCollectablesUITransform()
-    {
-        _collectablesContainer.transform.localScale = Vector3.one;
-        _collectablesContainer.transform.rotation = Quaternion.identity;
     }
 
     private void PlayCollectSFX(int comboDepth)

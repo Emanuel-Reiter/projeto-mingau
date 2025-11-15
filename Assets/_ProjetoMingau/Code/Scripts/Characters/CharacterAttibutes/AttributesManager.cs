@@ -34,8 +34,6 @@ public class AttributesManager : MonoBehaviour
         CheckIsDead();
         UpdateHealthUI();
         DamagePosture();
-
-        Debug.Log($"{gameObject.name} took {amount} of damage! Current HP: {_currentHP}");
     }
 
     private void DamagePosture()

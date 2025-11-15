@@ -4,15 +4,15 @@ public class MainMenu : BaseUI
 {
     public override void Initialize()
     {
-        GameManager.Instance.OnGameStateChanged += UpdadateMainMenu;
-        UpdadateMainMenu(GameManager.Instance.GameState);
+        GameManager.Instance.OnGameContextChanged += UpdateContext;
+        UpdateContext(GameManager.Instance.GameContext);
     }
 
-    private void UpdadateMainMenu(GameStateEnum gameState)
+    public override void UpdateContext(GameContextEnum gameContext)
     {
-        switch (gameState)
+        switch (gameContext)
         {
-            case GameStateEnum.MainMenu:
+            case GameContextEnum.MainMenu:
                 gameObject.SetActive(true);
                 break;
             default:
@@ -21,13 +21,10 @@ public class MainMenu : BaseUI
         }
     }
 
-    public void PlayButtonEvent()
-    {
-        GameManager.Instance.ChangeGameState(GameStateEnum.Running);
-    }
+    public void StartButtonEvent() { GameManager.Instance.StartGame(); }
 
     private void OnDestroy()
     {
-        GameManager.Instance.OnGameStateChanged -= UpdadateMainMenu;
+        GameManager.Instance.OnGameContextChanged -= UpdateContext;
     }
 }

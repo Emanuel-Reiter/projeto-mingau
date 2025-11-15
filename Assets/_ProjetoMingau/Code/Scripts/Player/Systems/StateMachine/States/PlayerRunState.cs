@@ -55,7 +55,8 @@ public class PlayerRunState : PlayerBaseState
         player.Dependencies.Jump.ResetJumpCount();
         player.Dependencies.Dash.ResetDashCount();
 
-        player.Dependencies.AnimationManager.PlayInterpolated(_runAnim, _transitionTime);
+        float transitionMultiplaier = wasAirborne ? 0.5f : 1.0f;
+        player.Dependencies.AnimationManager.PlayInterpolated(_runAnim, _transitionTime * transitionMultiplaier);
     }
 
     public override void UpdateState(PlayerStateManager player)

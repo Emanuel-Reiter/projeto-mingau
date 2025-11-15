@@ -4,19 +4,15 @@ public class CursorLock : BaseUI
 {
     public override void Initialize()
     {
-        GameManager.Instance.OnGameStateChanged += UpdateLockCursor;
-        UpdateLockCursor(GameManager.Instance.GameState);
+        GameManager.Instance.OnGameContextChanged += UpdateContext;
+        UpdateContext(GameManager.Instance.GameContext);
     }
 
-    private void UpdateLockCursor(GameStateEnum gameState)
+    public override void UpdateContext(GameContextEnum gameContext)
     {
-        switch (gameState)
+        switch (gameContext)
         {
-            case GameStateEnum.Running:
-                LockCursor(true);
-                break;
-
-            case GameStateEnum.Loading:
+            case GameContextEnum.Playing:
                 LockCursor(true);
                 break;
             default:
@@ -41,6 +37,6 @@ public class CursorLock : BaseUI
 
     private void OnDestroy()
     {
-        GameManager.Instance.OnGameStateChanged -= UpdateLockCursor;
+        GameManager.Instance.OnGameContextChanged -= UpdateContext;
     }
 }

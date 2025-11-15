@@ -28,13 +28,18 @@ public class PlayerLocomotion : MonoBehaviour
     private Vector3 _groundNormal = Vector3.zero;
     public float GroundAngle { get; private set; } = 0.0f;
 
+    private bool _isControllerEnabled = true;
+
     private void Start()
     {
         _dependencies = GetComponent<PlayerDependencies>();
+        ToggleController(false);
     }
 
     private void Update()
     {
+        if (!_isControllerEnabled) return;
+
         ApplyMovement();
 
         GroundCheck();
@@ -70,7 +75,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void CalculateVerticalVelocity()
     {
-        if (_dependencies.Jump.IsGravityDisabled) return;
+        if (_dependencies.Jump.IsGravityDisabled ) return;
 
         if (IsGrounded)
         {
@@ -202,6 +207,9 @@ public class PlayerLocomotion : MonoBehaviour
     #endregion
 
     #region Helper
+
+    public void ToggleController(bool toggle) { _isControllerEnabled = toggle; }
+
     public float GetCurrentMovementSpeed()
     {
         return IsGrounded ? _dependencies.LocomotionParams.GroundedMovementSpeed : _dependencies.LocomotionParams.AerialMovementSpeed;
