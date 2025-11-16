@@ -8,10 +8,10 @@ public class HUD : BaseUI
 
     [Header("Collectables params")]
     [SerializeField] private GameObject _collectablesContainer;
-    
+
     [SerializeField] private TMP_Text _collectablesCountText;
     [SerializeField] private TMP_Text _collectablesComboText;
-    
+
     private float _baseComboTextSize;
 
     public override void Initialize()
@@ -23,13 +23,24 @@ public class HUD : BaseUI
         try
         {
             _playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
-            Debug.Log($"Got player ref: {_playerInventory}");
-            _playerInventory.OnCollectablesChanged += UpdateHUD;
+
+            _playerInventory.OnCollectablesChanged += UpdateCollectablesCounter;
+            _playerInventory.OnCollectComboChanged += UpdateCollectComboCounter;
         }
-        catch 
+        catch
         {
             Debug.LogError("Player Inventory not found!");
             return;
+        }
+
+        // Collectables idle anim idle anim
+        if (_collectablesCountText != null)
+        {
+            Vector3 startPos = _collectablesContainer.transform.position;
+            Vector3 targetPos = new Vector3(startPos.x + -36.0f, startPos.y + 24.0f, 0.0f);
+            _collectablesContainer.transform.DOMove(targetPos, 3.0f)
+                .SetEase(Ease.InOutSine)
+                .SetLoops(-1, LoopType.Yoyo);
         }
 
         if (_collectablesComboText != null)
@@ -41,17 +52,9 @@ public class HUD : BaseUI
                 .SetLoops(-1, LoopType.Yoyo);
         }
 
-        UpdateHUD();
-
-        // _collectablesContainer idle anim
-        if (_collectablesCountText != null)
-        {
-            Vector3 startPos = _collectablesContainer.transform.position;
-            Vector3 targetPos = new Vector3(startPos.x + -36.0f, startPos.y + 24.0f, 0.0f);
-            _collectablesContainer.transform.DOMove(targetPos, 3.0f)
-                .SetEase(Ease.InOutSine)
-                .SetLoops(-1, LoopType.Yoyo);
-        }
+        // Initialize UI values
+        UpdateCollectablesCounter();
+        UpdateCollectComboCounter();
     }
 
     public override void UpdateContext(GameContextEnum gameContext)
@@ -68,37 +71,14 @@ public class HUD : BaseUI
         }
     }
 
-    private void UpdateHUD()
+    private void UpdateCollectablesCounter()
     {
-        UpdateCollectables();
-    }
+        if (_collectablesCountText == null || _collectablesContainer == null) return;
 
-    private void UpdateCollectables()
-    {
-        Debug.Log("Updating hud!");
-        // Collectables count text
-        if (_collectablesCountText != null) _collectablesCountText.text = $"{_playerInventory.Colletables}";
-
-        // Collectables combo text
-        if (_collectablesComboText != null)
-        {
-            if (_playerInventory.CurrentColletCombo > 0)
-            {
-                _collectablesComboText.DOFade(1.0f, 0.2f).SetEase(Ease.InOutSine);
-                _collectablesComboText.text = $"x {_playerInventory.CurrentColletCombo}";
-
-                // Increase size of the collect combo text by combo ammount capped at 10
-                _collectablesComboText.fontSize = _baseComboTextSize + (Mathf.Clamp(_playerInventory.CurrentColletCombo, 0, 20) * 2f);
-            }
-            else
-            {
-                _collectablesComboText.text = "";
-                _collectablesComboText.DOFade(0.0f, 0.2f).SetEase(Ease.InOutSine);
-            }
-        }
+       _collectablesCountText.text = $"{_playerInventory.Colletables}";
 
         // UI bounce when collecting items
-        if (_collectablesContainer != null && _playerInventory.Colletables > 0)
+        if  (_playerInventory.Colletables > 0)
         {
             ResetCollectablesUITransform();
 
@@ -114,6 +94,26 @@ public class HUD : BaseUI
         }
     }
 
+    private void UpdateCollectComboCounter()
+    {
+        // Collectables combo text
+        if (_collectablesComboText == null) return;
+        
+        if (_playerInventory.CurrentColletCombo < 1)
+        {
+            _collectablesComboText.text = "";
+            _collectablesComboText.DOFade(0.0f, 0.2f).SetEase(Ease.InOutSine);
+            return;
+        }
+
+        Debug.Log($"Updating current combo! {_playerInventory.CurrentColletCombo}");
+        _collectablesComboText.DOFade(1.0f, 0.2f).SetEase(Ease.InOutSine);
+        _collectablesComboText.text = $"x {_playerInventory.CurrentColletCombo}";
+
+        // Increase size of the collect combo text by combo ammount capped at 10
+        _collectablesComboText.fontSize = _baseComboTextSize + (Mathf.Clamp(_playerInventory.CurrentColletCombo, 0, 20) * 2f);
+    }
+
     private void ResetCollectablesUITransform()
     {
         _collectablesContainer.transform.localScale = Vector3.one;
@@ -123,9 +123,11 @@ public class HUD : BaseUI
     private void OnDestroy()
     {
         GameManager.Instance.OnGameContextChanged -= UpdateContext;
-        
-        if(_playerInventory != null) _playerInventory.OnCollectablesChanged -= UpdateHUD;
 
-        Debug.Log("Unsibscribing to all events!");
+        if (_playerInventory != null)
+        {
+            _playerInventory.OnCollectablesChanged -= UpdateCollectablesCounter;
+            _playerInventory.OnCollectComboChanged -= UpdateCollectComboCounter;
+        }
     }
 }

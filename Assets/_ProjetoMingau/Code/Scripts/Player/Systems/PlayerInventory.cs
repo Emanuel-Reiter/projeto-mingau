@@ -20,13 +20,26 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private float _collectRadius = 0.667f;
     [SerializeField] private LayerMask _colletablesLayer;
 
-
     [Header("Audio params")]
     [SerializeField] private AudioSource _collectAudio;
     [SerializeField] private float _audioPitchResetTime = 1.0f;
     private float _basePitch = 1.0f;
-    private int _currentColletCombo = -1;
-    public int CurrentColletCombo => _currentColletCombo;
+
+    [Header("Collect combo")]
+    private int _currentColletCombo = 0;
+    public int CurrentColletCombo 
+    {
+        get => _currentColletCombo;
+        set
+        {
+            _currentColletCombo = value;
+            OnCollectComboChanged?.Invoke();
+        }
+    }
+
+    public delegate void OnCollectComboChangedDelegate();
+    public event OnCollectComboChangedDelegate OnCollectComboChanged;
+    
     private int _comboTimerIndex;
 
     private void Update()
@@ -46,29 +59,35 @@ public class PlayerInventory : MonoBehaviour
 
             BaseCollectable collectable = obj.gameObject.GetComponent<BaseCollectable>();
             collectable.Collect();
-            _collectables += collectable.Value;
+            Colletables += collectable.Value;
 
             ManageCollectCombo();
-            PlayCollectSFX(_currentColletCombo);
+            PlayCollectSFX(CurrentColletCombo);
         }
     }
 
     private void ManageCollectCombo()
     {
         GlobalTimer.Instance.CancelTimer(_comboTimerIndex);
-        _currentColletCombo++;
+        CurrentColletCombo++;
         _comboTimerIndex = GlobalTimer.Instance.StartTimer(_audioPitchResetTime, () => HandleComboReset());
     }
 
     private void HandleComboReset()
     {
-        int tempCombo = _currentColletCombo;
+        int tempCombo = CurrentColletCombo;
 
-        _collectables += _currentColletCombo;
-        _currentColletCombo = -1;
+        Colletables += CurrentColletCombo;
+        CurrentColletCombo = 0;
 
         if (tempCombo <= 0) return;
         PlayCollectSFX(0);
+    }
+
+    public void HardResetCollectCombo()
+    {
+        GlobalTimer.Instance.CancelTimer(_comboTimerIndex);
+        CurrentColletCombo = 0;
     }
 
     private void PlayCollectSFX(int comboDepth)

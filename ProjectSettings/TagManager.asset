@@ -8,6 +8,7 @@ TagManager:
   - MenuCamera
   - PlayerCameraTarget
   - LoadingBar
+  - LevelSpawnPoint
   layers:
   - Default
   - TransparentFX

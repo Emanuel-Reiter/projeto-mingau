@@ -1,11 +1,14 @@
-using NUnit.Framework;
 using System.Collections;
+using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AttributesManager : MonoBehaviour
 {
     private bool _isDead = false;
     public bool IsDead => _isDead;
+
+    private bool _isPlayer = false;
 
     [Header("Damage params")]
     [SerializeField] private int _damage = 1;
@@ -25,11 +28,16 @@ public class AttributesManager : MonoBehaviour
     {
         _currentHP = _maxHP;
         _currentPosture = _maxPosture;
+
+        // Checks if the attributes manager is owned by the player
+        _isPlayer = gameObject.CompareTag("Player") ? true : false;
     }
 
     public void TakeDamage(int amount)
     {
         _currentHP = Mathf.Clamp(_currentHP - amount, 0, _maxHP);
+
+        if (_isPlayer) Debug.Log($"Took {amount} of damage!");
 
         CheckIsDead();
         UpdateHealthUI();
@@ -41,11 +49,11 @@ public class AttributesManager : MonoBehaviour
         if (!_enablePostureDamage) return;
 
         _currentPosture--;
-        if(_currentPosture <= 0) IsPostureBroken = true;
+        if (_currentPosture <= 0) IsPostureBroken = true;
     }
 
-    public void ResetPosture() 
-    { 
+    public void ResetPosture()
+    {
         _currentPosture = _maxPosture;
         IsPostureBroken = false;
     }
@@ -64,16 +72,38 @@ public class AttributesManager : MonoBehaviour
         if (isDead) Die();
     }
 
-    public void Die()
+    private void Die()
     {
-        if(!_isDead) return;
+        if (!_isDead) return;
         StartCoroutine(DieCoroutine());
+    }
+
+    public void Revive()
+    {
+        _isDead = true;
     }
 
     private IEnumerator DieCoroutine()
     {
+        if (_isPlayer)
+        {
+            try
+            {
+                Scene scene = SceneManager.GetActiveScene();
+
+                if (scene != null)
+                {
+                    GameManager.Instance.LoadLevel(scene.name, () => Revive());
+                }
+            }
+            catch
+            {
+                Debug.LogError("Error during scene loading!");
+            }
+        }
+
         yield return null;
-        gameObject.SetActive(false);
+        if (!_isPlayer) gameObject.SetActive(false);
     }
 
     private void UpdateHealthUI()

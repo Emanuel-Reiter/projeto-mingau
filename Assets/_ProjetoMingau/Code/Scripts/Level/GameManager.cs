@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -77,9 +78,10 @@ public class GameManager : MonoBehaviour
     public CursorLock CursorLockRef { get; private set; }
 
     [Header("Player")]
-    [SerializeField] private GameObject _playerPackPrefab;
-    private GameObject _playerPack;
+    [SerializeField] private GameObject _playerPrefab;
+    [SerializeField] private GameObject _cinemachinePrefab;
     private GameObject _player;
+    private GameObject _cinemachine;
 
     [Header("Dependencies")]
     [SerializeField] private Camera _mainCamera;
@@ -127,7 +129,7 @@ public class GameManager : MonoBehaviour
 
     private void InitializeGame()
     {
-        if (_playerPackPrefab != null) InitializePlayer();
+        if (_playerPrefab != null) InitializePlayer();
         if (_canvasPrefab != null) InitializeUI();
 
         InitializeDependencies();
@@ -157,15 +159,26 @@ public class GameManager : MonoBehaviour
 
     private void InitializePlayer()
     {
-        if (_playerPack != null) return;
+        if (_player != null) return;
 
-        _playerPack = Instantiate(_playerPackPrefab, Vector3.up, Quaternion.identity, null);
-        DontDestroyOnLoad(_playerPack);
+        _player = Instantiate(_playerPrefab, Vector3.up, Quaternion.identity, null);
+        DontDestroyOnLoad(_player);
 
-        // Unpack the player pack prefab
-        //foreach(Transform child in _playerPack.transform) child.parent = null;
+        _cinemachine = Instantiate(_cinemachinePrefab, null);
+        DontDestroyOnLoad(_cinemachine);
 
-        _player = GameObject.FindGameObjectWithTag("Player");
+        try
+        {
+            Transform cameraTarget = GameObject.FindGameObjectWithTag("PlayerCameraTarget").transform;
+
+            CinemachineCamera cinemachineCamera = _cinemachine.GetComponent<CinemachineCamera>();
+            cinemachineCamera.Follow = cameraTarget;
+            cinemachineCamera.LookAt = cameraTarget;
+        }
+        catch
+        {
+            Debug.LogError("Player camera target not found!");
+        }
     }
 
     private void InitializeDependencies()
@@ -178,29 +191,41 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        LoadScene(_startLevelScene, () => InitializeGame());
+        LoadLevel(_startLevelScene, () => InitializeGame());
     }
 
     public void ReturnToMainMenu()
     {
-        LoadScene(_mainMenuScene, () => UnloadGame());
+        LoadLevel(_mainMenuScene, () => UnloadGame());
     }
 
     private void TogglePlayer(bool toggle)
     {
-        PlayerLocomotion locomotion = _player.GetComponent<PlayerLocomotion>();
-        locomotion.ToggleController(toggle);
+        if (!toggle)
+        {
+            PlayerLocomotion locomotion = _player.GetComponent<PlayerLocomotion>();
+            locomotion.SetHorizontalVelocity(Vector3.zero);
+        }
+
+        PlayerInputManager input = _player.GetComponent<PlayerInputManager>();
+        input.enabled = toggle;
+
+        PlayerInventory inventory = _player.GetComponent<PlayerInventory>();
+        inventory.HardResetCollectCombo();
     }
 
-    public async void LoadScene(string sceneName, Action callback)
+    public async void LoadLevel(string sceneName, Action callback)
     {
+        if (_player != null)
+        {
+            TogglePlayer(false);
+        }
+
         // Wait a bit in order to interactions animations and sfx
         await Task.Delay(500);
 
         ChangeGameState(GameStateEnum.Loading);
         ChangeGameContext(GameContextEnum.LoadingScreen);
-
-        if (_player != null) TogglePlayer(false);
 
         var scene = SceneManager.LoadSceneAsync(sceneName);
         scene.allowSceneActivation = false;
@@ -221,6 +246,23 @@ public class GameManager : MonoBehaviour
 
         callback?.Invoke();
         scene.allowSceneActivation = true;
+        
+        // Wait for scene to be fully active
+        await Task.Delay(100);
+
+        // reset player position after scene is fully loaded and active
+        if (_player != null)
+        {
+            Transform spawnPoint = GameObject.FindGameObjectWithTag("LevelSpawnPoint").transform;
+            if(spawnPoint != null)
+            {
+                TogglePlayerMovement(false);
+
+                _player.transform.position = spawnPoint.transform.position;
+                _player.transform.rotation = spawnPoint.transform.rotation;
+            }
+            
+        }
 
         // Small delay to disable loading screen to
         // ensrure correct loading and avoid screen flasing
@@ -228,10 +270,22 @@ public class GameManager : MonoBehaviour
 
         // Finalize loading
         _loadingScreenCanvas.SetActive(false);
+        TogglePlayerMovement(true);
         ChangeGameState(GameStateEnum.Running);
         ChangeGameContext(GameContextEnum.Playing);
 
         if (_player != null) TogglePlayer(true);
+    }
+
+    private void TogglePlayerMovement(bool toggle)
+    {
+        PlayerLocomotion locomotion = _player.GetComponent<PlayerLocomotion>();
+        locomotion.ToggleMovement(toggle);
+
+        CharacterController controller = _player.GetComponent<CharacterController>();
+        if (controller == null) return;
+
+        controller.enabled = toggle;
     }
 
     private void HandleGameState()
@@ -278,6 +332,7 @@ public class GameManager : MonoBehaviour
 
         Destroy(_globalTimer);
 
-        Destroy(_playerPack);
+        Destroy(_player);
+        Destroy(_cinemachine);
     }
 }

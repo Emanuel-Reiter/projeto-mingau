@@ -1293,7 +1293,8 @@ MonoBehaviour:
   _showLogs: 0
   _canvasPrefab: {fileID: 2659611021433290011, guid: 139155df2ac1b7d468230839e34a1c22, type: 3}
   _eventSystemPrefab: {fileID: 181548163574357761, guid: 42771175cee57704ea3a6356d811602a, type: 3}
-  _playerPackPrefab: {fileID: 5689496640571556633, guid: 6244b4b2469043248859922f30c2962a, type: 3}
+  _playerPrefab: {fileID: 7710018997774875705, guid: 56741755db25387439eca179c0018031, type: 3}
+  _cinemachinePrefab: {fileID: 6161251262426001547, guid: cd6f98db697bee348bcc928a7a9fac3a, type: 3}
   _mainCamera: {fileID: 6972620141646006976}
   _globalTimerPrefab: {fileID: 9054128746465634700, guid: ef4b74fdcc262f047bab72b99b682f2f, type: 3}
   _loadingScreenCanvas: {fileID: 659500422}
