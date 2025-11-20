@@ -1,12 +1,11 @@
 using System.Collections;
-using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class AttributesManager : MonoBehaviour
 {
-    private bool _isDead = false;
-    public bool IsDead => _isDead;
+    private bool _isAlive = true;
+    public bool IsAlive => _isAlive;
 
     private bool _isPlayer = false;
 
@@ -65,22 +64,22 @@ public class AttributesManager : MonoBehaviour
 
     public void CheckIsDead()
     {
-        bool isDead = _currentHP <= 0;
+        bool hasDied= _currentHP <= 0;
 
-        _isDead = isDead;
+        _isAlive = !hasDied;
 
-        if (isDead) Die();
+        if (hasDied) Die();
     }
 
     private void Die()
     {
-        if (!_isDead) return;
+        if (_isAlive) return;
         StartCoroutine(DieCoroutine());
     }
 
     public void Revive()
     {
-        _isDead = true;
+        _isAlive = true;
     }
 
     private IEnumerator DieCoroutine()
@@ -90,11 +89,7 @@ public class AttributesManager : MonoBehaviour
             try
             {
                 Scene scene = SceneManager.GetActiveScene();
-
-                if (scene != null)
-                {
-                    GameManager.Instance.LoadLevel(scene.name, () => Revive());
-                }
+                if (scene != null) LevelLoader.Instance.LoadLevel(scene.name, () => Revive());
             }
             catch
             {

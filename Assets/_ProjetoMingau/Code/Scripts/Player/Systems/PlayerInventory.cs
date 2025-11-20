@@ -33,9 +33,15 @@ public class PlayerInventory : MonoBehaviour
         set
         {
             _currentColletCombo = value;
+
+            // Calculate rate of the combo bonus
+            CollectComboBonus = Mathf.FloorToInt(CurrentColletCombo / 4);
+
             OnCollectComboChanged?.Invoke();
         }
     }
+
+    public int CollectComboBonus { get; private set; } = 0;
 
     public delegate void OnCollectComboChangedDelegate();
     public event OnCollectComboChangedDelegate OnCollectComboChanged;
@@ -62,7 +68,7 @@ public class PlayerInventory : MonoBehaviour
             Colletables += collectable.Value;
 
             ManageCollectCombo();
-            PlayCollectSFX(CurrentColletCombo);
+            PlayCollectSFX(CollectComboBonus);
         }
     }
 
@@ -75,19 +81,20 @@ public class PlayerInventory : MonoBehaviour
 
     private void HandleComboReset()
     {
-        int tempCombo = CurrentColletCombo;
+        int collectBonus = CollectComboBonus;
 
-        Colletables += CurrentColletCombo;
+        Colletables += CollectComboBonus;
         CurrentColletCombo = 0;
+        CollectComboBonus = 0;
 
-        if (tempCombo <= 0) return;
-        PlayCollectSFX(0);
+        if (collectBonus > 0) PlayCollectSFX(CollectComboBonus);
     }
 
     public void HardResetCollectCombo()
     {
         GlobalTimer.Instance.CancelTimer(_comboTimerIndex);
         CurrentColletCombo = 0;
+        CollectComboBonus = 0;
     }
 
     private void PlayCollectSFX(int comboDepth)
@@ -95,7 +102,7 @@ public class PlayerInventory : MonoBehaviour
         if (_collectAudio == null) return;
 
         // Plays sfx with increasing pitch clamped at 10 by collecting items in sequence
-        _collectAudio.pitch = _basePitch + (Mathf.Clamp(comboDepth, 0, 20) * 0.05f);
+        _collectAudio.pitch = _basePitch + (Mathf.Clamp(comboDepth, 0, 10) * 0.1f);
         _collectAudio.Play();
     }
 

@@ -80,23 +80,13 @@ public class GameManager : MonoBehaviour
     [Header("Player")]
     [SerializeField] private GameObject _playerPrefab;
     [SerializeField] private GameObject _cinemachinePrefab;
-    private GameObject _player;
+    public GameObject Player { get; private set; }
     private GameObject _cinemachine;
 
     [Header("Dependencies")]
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private GameObject _globalTimerPrefab;
     private GameObject _globalTimer;
-
-    [Header("Level loading")]
-    [SerializeField] private GameObject _loadingScreenCanvas;
-    [SerializeField] private Slider _loadingBar;
-
-    private float _targetLoadingValue = 0.0f;
-
-    [Header("Level")]
-    [SerializeField] private string _mainMenuScene;
-    [SerializeField] private string _startLevelScene;
 
     private void Awake()
     {
@@ -111,23 +101,9 @@ public class GameManager : MonoBehaviour
         // Set start game state and context
         ChangeGameState(GameStateEnum.Running);
         ChangeGameContext(GameContextEnum.MainMenu);
-
-        _loadingScreenCanvas.SetActive(false);
     }
 
-    private void Update()
-    {
-        // Temp
-        if (Input.GetKeyDown(KeyCode.P)) ReturnToMainMenu();
-
-        float loadingMaxDelta = 1.0f;
-        if (GameState == GameStateEnum.Loading)
-        {
-            _loadingBar.value = Mathf.MoveTowards(_loadingBar.value, _targetLoadingValue, loadingMaxDelta * Time.deltaTime);
-        }
-    }
-
-    private void InitializeGame()
+    public void InitializeGame()
     {
         if (_playerPrefab != null) InitializePlayer();
         if (_canvasPrefab != null) InitializeUI();
@@ -159,10 +135,10 @@ public class GameManager : MonoBehaviour
 
     private void InitializePlayer()
     {
-        if (_player != null) return;
+        if (Player != null) return;
 
-        _player = Instantiate(_playerPrefab, Vector3.up, Quaternion.identity, null);
-        DontDestroyOnLoad(_player);
+        Player = Instantiate(_playerPrefab, Vector3.up, Quaternion.identity, null);
+        DontDestroyOnLoad(Player);
 
         _cinemachine = Instantiate(_cinemachinePrefab, null);
         DontDestroyOnLoad(_cinemachine);
@@ -189,100 +165,26 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(_globalTimer);
     }
 
-    public void StartGame()
-    {
-        LoadLevel(_startLevelScene, () => InitializeGame());
-    }
-
-    public void ReturnToMainMenu()
-    {
-        LoadLevel(_mainMenuScene, () => UnloadGame());
-    }
-
-    private void TogglePlayer(bool toggle)
+    public void TogglePlayer(bool toggle)
     {
         if (!toggle)
         {
-            PlayerLocomotion locomotion = _player.GetComponent<PlayerLocomotion>();
+            PlayerLocomotion locomotion = Player.GetComponent<PlayerLocomotion>();
             locomotion.SetHorizontalVelocity(Vector3.zero);
         }
 
-        PlayerInputManager input = _player.GetComponent<PlayerInputManager>();
+        PlayerInputManager input = Player.GetComponent<PlayerInputManager>();
         input.enabled = toggle;
 
-        PlayerInventory inventory = _player.GetComponent<PlayerInventory>();
+        PlayerInventory inventory = Player.GetComponent<PlayerInventory>();
         inventory.HardResetCollectCombo();
     }
-
-    public async void LoadLevel(string sceneName, Action callback)
+    public void TogglePlayerMovement(bool toggle)
     {
-        if (_player != null)
-        {
-            TogglePlayer(false);
-        }
-
-        // Wait a bit in order to interactions animations and sfx
-        await Task.Delay(500);
-
-        ChangeGameState(GameStateEnum.Loading);
-        ChangeGameContext(GameContextEnum.LoadingScreen);
-
-        var scene = SceneManager.LoadSceneAsync(sceneName);
-        scene.allowSceneActivation = false;
-
-        // Resets laoding bar
-        _targetLoadingValue = 0.0f;
-        _loadingBar.value = 0.0f;
-
-        _loadingScreenCanvas.SetActive(true);
-
-        do
-        {
-            await Task.Delay(100);
-            // Added .1 to the progress bar to counter unity .9 scene loading threshold
-            _targetLoadingValue = scene.progress + 0.1f;
-        }
-        while (scene.progress < 0.9f);
-
-        callback?.Invoke();
-        scene.allowSceneActivation = true;
-        
-        // Wait for scene to be fully active
-        await Task.Delay(100);
-
-        // reset player position after scene is fully loaded and active
-        if (_player != null)
-        {
-            Transform spawnPoint = GameObject.FindGameObjectWithTag("LevelSpawnPoint").transform;
-            if(spawnPoint != null)
-            {
-                TogglePlayerMovement(false);
-
-                _player.transform.position = spawnPoint.transform.position;
-                _player.transform.rotation = spawnPoint.transform.rotation;
-            }
-            
-        }
-
-        // Small delay to disable loading screen to
-        // ensrure correct loading and avoid screen flasing
-        await Task.Delay(2000);
-
-        // Finalize loading
-        _loadingScreenCanvas.SetActive(false);
-        TogglePlayerMovement(true);
-        ChangeGameState(GameStateEnum.Running);
-        ChangeGameContext(GameContextEnum.Playing);
-
-        if (_player != null) TogglePlayer(true);
-    }
-
-    private void TogglePlayerMovement(bool toggle)
-    {
-        PlayerLocomotion locomotion = _player.GetComponent<PlayerLocomotion>();
+        PlayerLocomotion locomotion = Player.GetComponent<PlayerLocomotion>();
         locomotion.ToggleMovement(toggle);
 
-        CharacterController controller = _player.GetComponent<CharacterController>();
+        CharacterController controller = Player.GetComponent<CharacterController>();
         if (controller == null) return;
 
         controller.enabled = toggle;
@@ -325,14 +227,14 @@ public class GameManager : MonoBehaviour
     public void ChangeGameState(GameStateEnum gameState) { GameState = gameState; }
     public void ChangeGameContext(GameContextEnum gameContext) { GameContext = gameContext; }
 
-    private void UnloadGame()
+    public void UnloadGame()
     {
         Destroy(CanvasRef);
         Destroy(EventSystemRef);
 
         Destroy(_globalTimer);
 
-        Destroy(_player);
+        Destroy(Player);
         Destroy(_cinemachine);
     }
 }

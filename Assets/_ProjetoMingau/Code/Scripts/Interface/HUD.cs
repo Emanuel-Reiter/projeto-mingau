@@ -106,12 +106,14 @@ public class HUD : BaseUI
             return;
         }
 
-        Debug.Log($"Updating current combo! {_playerInventory.CurrentColletCombo}");
+        bool showComboBonus = _playerInventory.CollectComboBonus > 0;
+
         _collectablesComboText.DOFade(1.0f, 0.2f).SetEase(Ease.InOutSine);
-        _collectablesComboText.text = $"x {_playerInventory.CurrentColletCombo}";
+        if(showComboBonus) _collectablesComboText.text = $"x {_playerInventory.CurrentColletCombo}\n+ {_playerInventory.CollectComboBonus}";
+        else _collectablesComboText.text = $"x {_playerInventory.CurrentColletCombo}";
 
         // Increase size of the collect combo text by combo ammount capped at 10
-        _collectablesComboText.fontSize = _baseComboTextSize + (Mathf.Clamp(_playerInventory.CurrentColletCombo, 0, 20) * 2f);
+        _collectablesComboText.fontSize = _baseComboTextSize + (Mathf.Clamp(_playerInventory.CollectComboBonus, 0, 10) * 2f);
     }
 
     private void ResetCollectablesUITransform()

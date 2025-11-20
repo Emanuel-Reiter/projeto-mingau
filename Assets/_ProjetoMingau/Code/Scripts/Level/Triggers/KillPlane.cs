@@ -10,7 +10,7 @@ public class KillPlane : MonoBehaviour
         
         if (attributes == null) return;
         
-        if(attributes.IsDead) return;
+        if(!attributes.IsAlive) return;
 
         attributes.TakeDamage(999999);
     }
