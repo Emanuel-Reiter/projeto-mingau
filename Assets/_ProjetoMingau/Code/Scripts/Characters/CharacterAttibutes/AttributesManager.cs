@@ -23,6 +23,9 @@ public class AttributesManager : MonoBehaviour
     private int _currentPosture;
     public bool IsPostureBroken = false;
 
+    [Header("Other")]
+    [SerializeField] private ParticleSystem _dieVFX;
+
     private void Start()
     {
         _currentHP = _maxHP;
@@ -98,6 +101,14 @@ public class AttributesManager : MonoBehaviour
         }
 
         yield return null;
+
+        if (_dieVFX != null)
+        {
+            ParticleSystem vfx = Instantiate(_dieVFX, transform.position, Quaternion.identity, null);
+            vfx.Play();
+            Destroy(vfx.gameObject, _dieVFX.main.duration);
+        }
+
         if (!_isPlayer) gameObject.SetActive(false);
     }
 
