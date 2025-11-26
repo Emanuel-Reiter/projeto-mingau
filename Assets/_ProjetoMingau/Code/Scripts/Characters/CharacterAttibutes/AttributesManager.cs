@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class AttributesManager : MonoBehaviour
 {
@@ -17,33 +19,98 @@ public class AttributesManager : MonoBehaviour
     [SerializeField] private int _maxHP = 5;
     private int _currentHP;
 
+    public int CurrentHP => _currentHP;
+
+
     [Header("Posture params")]
     [SerializeField] private bool _enablePostureDamage = true;
     [SerializeField] private int _maxPosture = 1;
     private int _currentPosture;
     public bool IsPostureBroken = false;
 
-    [Header("Other")]
+    [Header("UI params")]
+    [SerializeField] private Transform _heartContainer;
+    [SerializeField] private GameObject _heartPrefab;
+
+    [SerializeField] private Sprite _heartFullSprite;
+    [SerializeField] private Sprite _heartEmptySprite;
+
+    private List<GameObject> _currentHearts = new List<GameObject>();
+
+
+    [Header("Other params")]
     [SerializeField] private ParticleSystem _dieVFX;
 
     private void Start()
     {
+        // Checks if the attributes manager is owned by the player
+        _isPlayer = gameObject.CompareTag("Player") ? true : false;
+
+        if (_isPlayer)
+        {
+            try
+            {
+                GridLayoutGroup[] gridLayoutGroups = Resources.FindObjectsOfTypeAll<GridLayoutGroup>();
+
+                foreach (GridLayoutGroup group in gridLayoutGroups)
+                {
+                    if (group.CompareTag("PlayerHealthBar"))
+                    {
+                        _heartContainer = group.transform;
+                        break;
+                    }
+                }
+            }
+            catch
+            {
+                Debug.LogError("Player health bar not found!");
+            }
+        }
+
         _currentHP = _maxHP;
         _currentPosture = _maxPosture;
 
-        // Checks if the attributes manager is owned by the player
-        _isPlayer = gameObject.CompareTag("Player") ? true : false;
+        UpdateUI();
     }
 
     public void TakeDamage(int amount)
     {
-        _currentHP = Mathf.Clamp(_currentHP - amount, 0, _maxHP);
-
-        if (_isPlayer) Debug.Log($"Took {amount} of damage!");
+        _currentHP = Mathf.Clamp(CurrentHP - amount, 0, _maxHP);
 
         CheckIsDead();
-        UpdateHealthUI();
         DamagePosture();
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        if (_heartContainer == null || _heartFullSprite == null || _heartEmptySprite == null) return;
+
+        ClearHearts();
+
+        for (int i = 0; i < _maxHP; i++)
+        {
+            GameObject newHeart = Instantiate(_heartPrefab, _heartContainer);
+            _currentHearts.Add(newHeart);
+
+            if (i < CurrentHP)
+            {
+                newHeart.GetComponent<Image>().sprite = _heartFullSprite;
+            }
+            else
+            {
+                newHeart.GetComponent<Image>().sprite = _heartEmptySprite;
+            }
+        }
+    }
+
+    private void ClearHearts()
+    {
+        foreach (GameObject heart in _currentHearts)
+        {
+            Destroy(heart);
+        }
+        _currentHearts.Clear();
     }
 
     private void DamagePosture()
@@ -62,12 +129,13 @@ public class AttributesManager : MonoBehaviour
 
     public void Heal(int amount)
     {
-        _currentHP = Mathf.Clamp((_currentHP + amount), 0, _maxHP);
+        _currentHP = Mathf.Clamp((CurrentHP + amount), 0, _maxHP);
+        UpdateUI();
     }
 
     public void CheckIsDead()
     {
-        bool hasDied= _currentHP <= 0;
+        bool hasDied= CurrentHP <= 0;
 
         _isAlive = !hasDied;
 
@@ -83,6 +151,8 @@ public class AttributesManager : MonoBehaviour
     public void Revive()
     {
         _isAlive = true;
+        Heal(99999);
+        UpdateUI();
     }
 
     private IEnumerator DieCoroutine()
@@ -110,10 +180,5 @@ public class AttributesManager : MonoBehaviour
         }
 
         if (!_isPlayer) gameObject.SetActive(false);
-    }
-
-    private void UpdateHealthUI()
-    {
-        return;
     }
 }

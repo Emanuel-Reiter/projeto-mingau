@@ -1976,6 +1976,11 @@ MonoBehaviour:
   _enablePostureDamage: 1
   _maxPosture: 1
   IsPostureBroken: 0
+  _heartContainer: {fileID: 0}
+  _heartPrefab: {fileID: 8724383900002723021, guid: d5cce9846fa21c9409317099f11b0650, type: 3}
+  _heartFullSprite: {fileID: 21300000, guid: 9357eed76366a104cb5a94ac595cf027, type: 3}
+  _heartEmptySprite: {fileID: 21300000, guid: ff45bd71b9b88c04eb15365720f03e18, type: 3}
+  _dieVFX: {fileID: 0}
 --- !u!114 &816950799331357684
 MonoBehaviour:
   m_ObjectHideFlags: 0

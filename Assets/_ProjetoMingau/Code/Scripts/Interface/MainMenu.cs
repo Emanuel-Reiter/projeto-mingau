@@ -44,26 +44,33 @@ public class MainMenu : BaseUI
         LevelLoader.Instance.StartGame();
     }
 
-    public void OnMouseEnterEvent()
+    public void QuitButtonEvent()
     {
-        if (!_startButton.interactable) return;
+        UIManager.Instance.PlayConfirmSFX();
 
         _startButton.transform.localScale = Vector3.one;
+        _startButton.transform.DOScale(_buttonConfirmScale, _buttonTransitionTime)
+        .SetEase(Ease.InOutSine)
+        .SetLoops(2, LoopType.Yoyo);
 
-        _startButton.transform.DOScale(_buttonSelectScale, _buttonTransitionTime)
-                .SetEase(Ease.InOutSine);
+        GlobalTimer.Instance.StartTimer(1.0f, () => { Application.Quit(); });
+    }
 
+    public void OnMouseEnterEvent(GameObject target)
+    {
+        if (target == null) return;
+
+        target.transform.localScale = Vector3.one;
+        target.transform.DOScale(_buttonSelectScale, _buttonTransitionTime).SetEase(Ease.InOutSine);
         UIManager.Instance.PlaySelectSFX();
     }
 
-    public void OnMouseExitEvent()
+    public void OnMouseExitEvent(GameObject target)
     {
-        if (!_startButton.interactable) return;
+        if (target == null) return;
 
-        _startButton.transform.localScale = Vector3.one * _buttonSelectScale;
-
-        _startButton.transform.DOScale(1.0f, _buttonTransitionTime)
-        .SetEase(Ease.InOutSine);
+        target.transform.localScale = Vector3.one * _buttonSelectScale;
+        target.transform.DOScale(1.0f, _buttonTransitionTime).SetEase(Ease.InOutSine);
     }
 
     private void OnDestroy()

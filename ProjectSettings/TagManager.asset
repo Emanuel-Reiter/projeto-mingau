@@ -9,6 +9,7 @@ TagManager:
   - PlayerCameraTarget
   - LoadingBar
   - LevelSpawnPoint
+  - PlayerHealthBar
   layers:
   - Default
   - TransparentFX

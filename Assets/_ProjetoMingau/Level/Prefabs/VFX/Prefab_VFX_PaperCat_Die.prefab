@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3635741227648072210}
   - component: {fileID: 2701024825103208068}
   m_Layer: 13
-  m_Name: Prefab_VFX_Char_PaperCat_Die
+  m_Name: Prefab_VFX_PaperCat_Die
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

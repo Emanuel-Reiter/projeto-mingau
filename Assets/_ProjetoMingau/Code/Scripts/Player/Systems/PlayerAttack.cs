@@ -63,6 +63,7 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
+
     public void SetCurrentCombo(int currentCombo) { _currentCombo = currentCombo; }
 
     public void PlayVFX(int handIndex)

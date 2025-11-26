@@ -19,6 +19,7 @@ public enum GameContextEnum
     MainMenu,
     ConfigMenu,
     LoadingScreen,
+    CutScene,
 }
 
 public class GameManager : MonoBehaviour
@@ -101,14 +102,24 @@ public class GameManager : MonoBehaviour
         // Set start game state and context
         ChangeGameState(GameStateEnum.Running);
         ChangeGameContext(GameContextEnum.MainMenu);
+
+
+        // Instantiate the global timer
+        try
+        {
+            if (_globalTimerPrefab != null) _globalTimer = Instantiate(_globalTimerPrefab, null);
+            DontDestroyOnLoad(_globalTimer);
+        }
+        catch
+        {
+            Debug.LogError("Missing global timer object reference.");
+        }
     }
 
     public void InitializeGame()
     {
         if (_playerPrefab != null) InitializePlayer();
         if (_canvasPrefab != null) InitializeUI();
-
-        InitializeDependencies();
     }
 
     private void InitializeUI()
@@ -155,14 +166,6 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("Player camera target not found!");
         }
-    }
-
-    private void InitializeDependencies()
-    {
-        if (_globalTimer != null) return;
-
-        if (_globalTimerPrefab != null) _globalTimer = Instantiate(_globalTimerPrefab, null);
-        DontDestroyOnLoad(_globalTimer);
     }
 
     public void TogglePlayer(bool toggle)

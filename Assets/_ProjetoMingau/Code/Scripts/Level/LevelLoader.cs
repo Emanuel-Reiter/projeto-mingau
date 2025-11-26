@@ -44,7 +44,11 @@ public class LevelLoader : MonoBehaviour
     private void Update()
     {
         // Temp
-        if (Input.GetKeyDown(KeyCode.P)) ReturnToMainMenu();
+        bool canReturn = GameManager.Instance.GameContext != GameContextEnum.CutScene 
+            && GameManager.Instance.GameContext != GameContextEnum.MainMenu 
+            && GameManager.Instance.GameContext != GameContextEnum.LoadingScreen;
+
+        if (Input.GetKeyDown(KeyCode.Escape) && canReturn) ReturnToMainMenu();
 
         float loadingMaxDelta = 1.0f;
         if (GameManager.Instance.GameState == GameStateEnum.Loading)
