@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7070668272444425542}
   - component: {fileID: 8393412326701367816}
   m_Layer: 0
-  m_Name: Prefab_EventSystem
+  m_Name: Prefab_EventSystem_Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

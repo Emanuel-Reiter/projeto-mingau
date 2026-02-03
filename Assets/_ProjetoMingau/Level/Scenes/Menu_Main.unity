@@ -561,6 +561,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 524938321}
   m_CullTransparentMesh: 1
+--- !u!1 &591636369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 591636370}
+  - component: {fileID: 591636371}
+  m_Layer: 0
+  m_Name: LevelLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &591636370
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591636369}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 659500427}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &591636371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591636369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3054ad1f441330c4d9b0f40258d58de0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loadingScreen: {fileID: 3849547}
+  _loadingBar: {fileID: 951086060}
+  _mainMenuScene: Menu_Main
+  _startLevelScene: Intro
 --- !u!1 &659500422
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,7 +622,6 @@ GameObject:
   - component: {fileID: 659500426}
   - component: {fileID: 659500425}
   - component: {fileID: 659500424}
-  - component: {fileID: 659500428}
   m_Layer: 5
   m_Name: Canvas_LoadingScreen
   m_TagString: Untagged
@@ -657,29 +705,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3849546}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 591636370}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &659500428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 659500422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3054ad1f441330c4d9b0f40258d58de0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _loadingScreen: {fileID: 3849547}
-  _loadingBar: {fileID: 951086060}
-  _mainMenuScene: Menu_Main
-  _startLevelScene: Intro
 --- !u!1 &913944676
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,6 +1390,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7068071412103699492}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: OnConfirmButtonEvent
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2047744819}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2047744820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1927,11 +1971,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _showLogs: 0
-  _canvasPrefab: {fileID: 2659611021433290011, guid: 139155df2ac1b7d468230839e34a1c22, type: 3}
-  _eventSystemPrefab: {fileID: 181548163574357761, guid: 42771175cee57704ea3a6356d811602a, type: 3}
+  _playerCanvasPrefab: {fileID: 2659611021433290011, guid: 139155df2ac1b7d468230839e34a1c22, type: 3}
+  _playerEventSystemPrefab: {fileID: 181548163574357761, guid: 42771175cee57704ea3a6356d811602a, type: 3}
   _playerPrefab: {fileID: 7710018997774875705, guid: 56741755db25387439eca179c0018031, type: 3}
   _cinemachinePrefab: {fileID: 6161251262426001547, guid: cd6f98db697bee348bcc928a7a9fac3a, type: 3}
-  _mainCamera: {fileID: 6972620141646006976}
   _globalTimerPrefab: {fileID: 9054128746465634700, guid: ef4b74fdcc262f047bab72b99b682f2f, type: 3}
 --- !u!114 &5175666411606169018
 MonoBehaviour:
@@ -2132,7 +2175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7ad24ec64ec564a9753f88b0bb5c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startButton: {fileID: 8256957178546165191}
 --- !u!114 &7614973450630330849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2238,6 +2280,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7068071412103699492}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: OnConfirmButtonEvent
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8256957178546165191}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8256957178546165192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2304,9 +2358,9 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 215921803}
-  - {fileID: 3527728904388539044}
-  - {fileID: 659500427}
   - {fileID: 587464899037450490}
   - {fileID: 3201726568076000928}
+  - {fileID: 591636370}
   - {fileID: 497361090}
+  - {fileID: 3527728904388539044}
+  - {fileID: 215921803}

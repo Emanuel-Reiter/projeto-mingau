@@ -17,14 +17,14 @@ public class HUD : BaseUI
     public override void Initialize()
     {
         GameManager.Instance.OnGameContextChanged += UpdateContext;
-        UpdateContext(GameManager.Instance.GameContext);
+        UpdateContext(GameManager.Instance.CurrentGameContext);
 
         // Try loading player inventory
         try
         {
             _playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
 
-            _playerInventory.OnCollectablesChanged += UpdateCollectablesCounter;
+            _playerInventory.OnLevelCollectablesChanged += UpdateCollectablesCounter;
             _playerInventory.OnCollectComboChanged += UpdateCollectComboCounter;
         }
         catch
@@ -57,11 +57,11 @@ public class HUD : BaseUI
         UpdateCollectComboCounter();
     }
 
-    public override void UpdateContext(GameContextEnum gameContext)
+    public override void UpdateContext(GameContext gameContext)
     {
         switch (gameContext)
         {
-            case GameContextEnum.Playing:
+            case GameContext.Playing:
                 gameObject.SetActive(true);
                 break;
 
@@ -75,10 +75,10 @@ public class HUD : BaseUI
     {
         if (_collectablesCountText == null || _collectablesContainer == null) return;
 
-       _collectablesCountText.text = $"{_playerInventory.Colletables}";
+       _collectablesCountText.text = $"{_playerInventory.LevelColletables}";
 
         // UI bounce when collecting items
-        if  (_playerInventory.Colletables > 0)
+        if  (_playerInventory.LevelColletables > 0)
         {
             ResetCollectablesUITransform();
 
@@ -86,7 +86,7 @@ public class HUD : BaseUI
                 .SetEase(Ease.InOutSine)
                 .SetLoops(2, LoopType.Yoyo);
 
-            float rotation = _playerInventory.Colletables % 2 == 0 ? 22.5f : -22.5f;
+            float rotation = _playerInventory.LevelColletables % 2 == 0 ? 22.5f : -22.5f;
             _collectablesContainer.transform.DORotate(new Vector3(0.0f, 0.0f, rotation), 0.1f)
                 .SetEase(Ease.InOutSine)
                 .SetLoops(2, LoopType.Yoyo)
@@ -128,7 +128,7 @@ public class HUD : BaseUI
 
         if (_playerInventory != null)
         {
-            _playerInventory.OnCollectablesChanged -= UpdateCollectablesCounter;
+            _playerInventory.OnLevelCollectablesChanged -= UpdateCollectablesCounter;
             _playerInventory.OnCollectComboChanged -= UpdateCollectComboCounter;
         }
     }

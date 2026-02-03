@@ -61,8 +61,6 @@ public class GearCollectabe : BaseCollectable
         GlobalTimer.Instance.StartTimer(_collectDuration, () => Disable());
     }
 
-
-
     private void Disable()
     {
         if (_collectVFX != null) _collectVFX.Stop();

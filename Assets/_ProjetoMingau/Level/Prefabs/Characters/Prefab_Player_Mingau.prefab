@@ -937,7 +937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1377346638196657753, guid: cbe11b757b3813b40b2a29b8593ef995, type: 3}
       propertyPath: m_Name
-      value: VFX_ClawTarils_03_Prefab_RightHand
+      value: Prafab_VFX_ClawTarils_R
       objectReference: {fileID: 0}
     - target: {fileID: 1377346638196657753, guid: cbe11b757b3813b40b2a29b8593ef995, type: 3}
       propertyPath: m_IsActive
@@ -1052,7 +1052,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1377346638196657753, guid: cbe11b757b3813b40b2a29b8593ef995, type: 3}
       propertyPath: m_Name
-      value: VFX_ClawTarils_03_Prefab_LeftHand
+      value: Prafab_VFX_ClawTarils_L
       objectReference: {fileID: 0}
     - target: {fileID: 1377346638196657753, guid: cbe11b757b3813b40b2a29b8593ef995, type: 3}
       propertyPath: m_IsActive

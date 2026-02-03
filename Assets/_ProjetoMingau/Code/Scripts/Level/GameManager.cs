@@ -5,21 +5,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public enum GameStateEnum
+public enum GameState
 {
     Running,
     Loading,
     Paused,
 }
 
-public enum GameContextEnum
+public enum GameContext
 {
     Playing,
     Dilaogue,
     MainMenu,
-    ConfigMenu,
+    GeneralMenu,
     LoadingScreen,
-    CutScene,
+    Cutscene,
 }
 
 public class GameManager : MonoBehaviour
@@ -27,56 +27,55 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [Header("Game state")]
-    private GameStateEnum _gameState;
-    public GameStateEnum PreviousGameState { get; private set; }
-    public GameStateEnum GameState
+    private GameState _currentGameState;
+    public GameState PreviousGameState { get; private set; }
+    public GameState CurrentGameState
     {
-        get => _gameState;
+        get => _currentGameState;
         set
         {
-            PreviousGameState = _gameState;
-            _gameState = value;
+            PreviousGameState = _currentGameState;
+            _currentGameState = value;
 
-            OnGameStateChanged?.Invoke(_gameState);
+            OnGameStateChanged?.Invoke(_currentGameState);
 
             HandleGameState();
         }
     }
 
-    public delegate void OnGameStateChangedDelegate(GameStateEnum gameState);
+    public delegate void OnGameStateChangedDelegate(GameState gameState);
     public event OnGameStateChangedDelegate OnGameStateChanged;
 
     [Header("Game context")]
-    private GameContextEnum _gameContext;
-    public GameContextEnum PreviousGameContext { get; private set; }
-    public GameContextEnum GameContext
+    private GameContext _currentGameContext;
+    public GameContext PreviousGameContext { get; private set; }
+    public GameContext CurrentGameContext
     {
-        get => _gameContext;
+        get => _currentGameContext;
         set
         {
-            PreviousGameContext = _gameContext;
-            _gameContext = value;
+            PreviousGameContext = _currentGameContext;
+            _currentGameContext = value;
 
-            OnGameContextChanged?.Invoke(_gameContext);
+            OnGameContextChanged?.Invoke(_currentGameContext);
         }
     }
-
-    public delegate void OnGameContextChangedDelegate(GameContextEnum gameContext);
+    // Evenet callbacks
+    public delegate void OnGameContextChangedDelegate(GameContext gameContext);
     public event OnGameContextChangedDelegate OnGameContextChanged;
-
 
     [Header("Params")]
     [SerializeField] private bool _showLogs = false;
 
     [Header("UI")]
-    [SerializeField] private GameObject _canvasPrefab;
-    [SerializeField] private GameObject _eventSystemPrefab;
+    [SerializeField] private GameObject _playerCanvasPrefab;
+    [SerializeField] private GameObject _playerEventSystemPrefab;
 
-    public GameObject CanvasRef { get; private set; }
-    public GameObject EventSystemRef { get; private set; }
-    public HUD HUDRef { get; private set; }
-    public InterationPopup InterationPopupRef { get; private set; }
-    public CursorLock CursorLockRef { get; private set; }
+    public GameObject PlayerCanvas { get; private set; }
+    public GameObject PlayerEventSystem { get; private set; }
+    public HUD HUD { get; private set; }
+    public InteractionPrompt InterationPrompt { get; private set; }
+    public CursorLock CursorLock { get; private set; }
 
     [Header("Player")]
     [SerializeField] private GameObject _playerPrefab;
@@ -85,7 +84,7 @@ public class GameManager : MonoBehaviour
     private GameObject _cinemachine;
 
     [Header("Dependencies")]
-    [SerializeField] private Camera _mainCamera;
+    private Camera _mainCamera;
     [SerializeField] private GameObject _globalTimerPrefab;
     private GameObject _globalTimer;
 
@@ -100,9 +99,11 @@ public class GameManager : MonoBehaviour
         else Instance = this;
 
         // Set start game state and context
-        ChangeGameState(GameStateEnum.Running);
-        ChangeGameContext(GameContextEnum.MainMenu);
-
+        ChangeGameState(GameState.Running);
+        ChangeGameContext(GameContext.MainMenu);
+    
+        // Initialize main camera
+        _mainCamera = Camera.main;
 
         // Instantiate the global timer
         try
@@ -119,29 +120,29 @@ public class GameManager : MonoBehaviour
     public void InitializeGame()
     {
         if (_playerPrefab != null) InitializePlayer();
-        if (_canvasPrefab != null) InitializeUI();
+        if (_playerCanvasPrefab != null) InitializePlayerUI();
     }
 
-    private void InitializeUI()
+    private void InitializePlayerUI()
     {
-        CanvasRef = Instantiate(_canvasPrefab, null);
-        DontDestroyOnLoad(CanvasRef);
+        PlayerCanvas = Instantiate(_playerCanvasPrefab, null);
+        DontDestroyOnLoad(PlayerCanvas);
 
-        EventSystemRef = Instantiate(_eventSystemPrefab, null);
-        DontDestroyOnLoad(EventSystemRef);
+        PlayerEventSystem = Instantiate(_playerEventSystemPrefab, null);
+        DontDestroyOnLoad(PlayerEventSystem);
 
         // Activates all UI elements before fetching refferences
-        // Pass true as a parameter to get inactive objects
-        Transform[] uiDescendants = CanvasRef.GetComponentsInChildren<Transform>(true);
+        // Pass true as a parameter in GetComponentsInChildren to get inactive objects as well
+        Transform[] uiDescendants = PlayerCanvas.GetComponentsInChildren<Transform>(true);
         foreach (Transform t in uiDescendants) t.gameObject.SetActive(true);
 
-        CursorLockRef = CanvasRef.GetComponent<CursorLock>();
-        if (CursorLockRef != null) CursorLockRef.Initialize();
+        CursorLock = PlayerCanvas.GetComponent<CursorLock>();
+        if (CursorLock != null) CursorLock.Initialize();
 
-        HUDRef = CanvasRef.GetComponentInChildren<HUD>();
-        if (HUDRef != null) HUDRef.Initialize();
+        HUD = PlayerCanvas.GetComponentInChildren<HUD>();
+        if (HUD != null) HUD.Initialize();
 
-        InterationPopupRef = HUDRef.GetComponentInChildren<InterationPopup>();
+        InterationPrompt = HUD.GetComponentInChildren<InteractionPrompt>();
     }
 
     private void InitializePlayer()
@@ -154,6 +155,7 @@ public class GameManager : MonoBehaviour
         _cinemachine = Instantiate(_cinemachinePrefab, null);
         DontDestroyOnLoad(_cinemachine);
 
+        // Cinemachine camera setup
         try
         {
             Transform cameraTarget = GameObject.FindGameObjectWithTag("PlayerCameraTarget").transform;
@@ -170,22 +172,18 @@ public class GameManager : MonoBehaviour
 
     public void TogglePlayer(bool toggle)
     {
-        if (!toggle)
-        {
-            PlayerLocomotion locomotion = Player.GetComponent<PlayerLocomotion>();
-            locomotion.SetHorizontalVelocity(Vector3.zero);
-        }
-
         PlayerInputManager input = Player.GetComponent<PlayerInputManager>();
         input.enabled = toggle;
 
         PlayerInventory inventory = Player.GetComponent<PlayerInventory>();
         inventory.HardResetCollectCombo();
     }
+
     public void TogglePlayerMovement(bool toggle)
     {
         PlayerLocomotion locomotion = Player.GetComponent<PlayerLocomotion>();
         locomotion.ToggleMovement(toggle);
+        locomotion.SetHorizontalVelocity(Vector3.zero);
 
         CharacterController controller = Player.GetComponent<CharacterController>();
         if (controller == null) return;
@@ -195,24 +193,27 @@ public class GameManager : MonoBehaviour
 
     private void HandleGameState()
     {
-        switch (GameState)
+        switch (CurrentGameState)
         {
-            case GameStateEnum.Running:
+            case GameState.Running:
                 Time.timeScale = 1.0f;
                 break;
 
-            case GameStateEnum.Paused:
+            case GameState.Paused:
                 Time.timeScale = 0.0f;
                 break;
 
-            case GameStateEnum.Loading:
+            case GameState.Loading:
                 Time.timeScale = 1.0f;
                 break;
         }
     }
+    public void ChangeGameState(GameState gameState) { CurrentGameState = gameState; }
+    public void ChangeGameContext(GameContext gameContext) { CurrentGameContext = gameContext; }
 
+    #region Debug
     private int GUIPositionY(int row, int height) => row * height;
-
+    
     private void OnGUI()
     {
         int xOffset = 32;
@@ -223,21 +224,19 @@ public class GameManager : MonoBehaviour
 
         if (!_showLogs) return;
 
-        GUI.Label(new Rect(xOffset, GUIPositionY(1, height), width, height), $"gameState: {GameState}");
-        GUI.Label(new Rect(xOffset, GUIPositionY(2, height), width, height), $"gameContext: {GameContext}");
+        GUI.Label(new Rect(xOffset, GUIPositionY(1, height), width, height), $"gameState: {CurrentGameState}");
+        GUI.Label(new Rect(xOffset, GUIPositionY(2, height), width, height), $"gameContext: {CurrentGameContext}");
     }
-
-    public void ChangeGameState(GameStateEnum gameState) { GameState = gameState; }
-    public void ChangeGameContext(GameContextEnum gameContext) { GameContext = gameContext; }
 
     public void UnloadGame()
     {
-        Destroy(CanvasRef);
-        Destroy(EventSystemRef);
+        Destroy(PlayerCanvas);
+        Destroy(PlayerEventSystem);
 
         Destroy(_globalTimer);
 
         Destroy(Player);
         Destroy(_cinemachine);
     }
+    #endregion
 }

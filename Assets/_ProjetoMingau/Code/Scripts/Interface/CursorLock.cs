@@ -5,14 +5,14 @@ public class CursorLock : BaseUI
     public override void Initialize()
     {
         GameManager.Instance.OnGameContextChanged += UpdateContext;
-        UpdateContext(GameManager.Instance.GameContext);
+        UpdateContext(GameManager.Instance.CurrentGameContext);
     }
 
-    public override void UpdateContext(GameContextEnum gameContext)
+    public override void UpdateContext(GameContext gameContext)
     {
         switch (gameContext)
         {
-            case GameContextEnum.Playing:
+            case GameContext.Playing:
                 LockCursor(true);
                 break;
             default:

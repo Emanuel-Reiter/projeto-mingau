@@ -7,6 +7,6 @@ public class PortalInteractable : BaseInteractable
     public override void Interact()
     {
         SetHasBeenInteracted(true);
-        LevelLoader.Instance.LoadLevel(_targetLevel, () => { });
+        LevelLoader.Instance.LoadLevel(_targetLevel, () => { }, GameContext.Playing);
     }
 }

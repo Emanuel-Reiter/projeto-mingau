@@ -8,12 +8,12 @@ public class PlayerInteract : MonoBehaviour
 
     private PlayerDependencies _dependencies;
 
-    private InterationPopup _popup;
+    private InteractionPrompt _interactionPrompt;
 
     private void Start()
     {
         _dependencies = GetComponent<PlayerDependencies>();
-        _popup = GameManager.Instance.InterationPopupRef;
+        _interactionPrompt = GameManager.Instance.InterationPrompt;
     }
 
     private void Update()
@@ -35,17 +35,17 @@ public class PlayerInteract : MonoBehaviour
             if (interactable == null) return;
             if (interactable.HasBeenInteracted) return;
 
-            _popup.ShowPopup();
+            _interactionPrompt.Show();
 
             if (_dependencies.Input.InteractPressed)
             {
                 interactable.Interact();
-                _popup.Interact();
+                _interactionPrompt.Interact();
             }
         }
         else
         {
-            _popup.HidePopup();
+            _interactionPrompt.Hide();
         }
     }
 }

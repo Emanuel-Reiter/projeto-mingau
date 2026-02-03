@@ -147,7 +147,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5876985291268018637}
-  - component: {fileID: 5751312358708572358}
+  - component: {fileID: 5732368760855024348}
   m_Layer: 5
   m_Name: Container_Interaction
   m_TagString: Untagged
@@ -175,7 +175,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5751312358708572358
+--- !u!114 &5732368760855024348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,11 +184,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2042923910119224550}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c251b718c0e7b3488102b1b917ec6a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 0459c28d4970cd34c819baa4b5e9b0b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _panel: {fileID: 5514244742938169484}
-  _label: {fileID: 5992150183166157371}
+  _canvasGroup: {fileID: 8329738117930416433}
 --- !u!1 &2637102260360644149
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,6 +990,7 @@ GameObject:
   - component: {fileID: 7363117462784894225}
   - component: {fileID: 5455598120116503540}
   - component: {fileID: 5514244742938169484}
+  - component: {fileID: 8329738117930416433}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -1056,3 +1056,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &8329738117930416433
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9075839842316111242}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

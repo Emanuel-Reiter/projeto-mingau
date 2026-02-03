@@ -14,6 +14,8 @@ public class PlayerDependencies : MonoBehaviour
 
     [HideInInspector] public AttributesManager Attributes;
 
+    [HideInInspector] public PlayerInventory Inventory;
+
     // Player actions
     [HideInInspector] public PlayerDash Dash;
     [HideInInspector] public PlayerJump Jump;
@@ -40,6 +42,8 @@ public class PlayerDependencies : MonoBehaviour
             LocomotionParams = GetComponent<PlayerLocomotionParams>();
 
             Attributes = GetComponent<AttributesManager>();
+
+            Inventory = GetComponent<PlayerInventory>();
 
             Dash = GetComponent<PlayerDash>();
             Jump = GetComponent<PlayerJump>();

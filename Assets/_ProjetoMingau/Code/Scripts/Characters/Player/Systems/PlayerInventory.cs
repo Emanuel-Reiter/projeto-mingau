@@ -2,8 +2,22 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
+    private int _levelCollectables;
+    public int LevelColletables
+    {
+        get => _levelCollectables;
+        set
+        {
+            _levelCollectables = value;
+            OnLevelCollectablesChanged?.Invoke();
+        }
+    }
+
+    public delegate void OnLevelCollectablesChangedDelegate();
+    public event OnLevelCollectablesChangedDelegate OnLevelCollectablesChanged;
+
     private int _collectables;
-    public int Colletables
+    public int Collectables
     {
         get => _collectables;
         set
@@ -65,7 +79,7 @@ public class PlayerInventory : MonoBehaviour
 
             BaseCollectable collectable = obj.gameObject.GetComponent<BaseCollectable>();
             collectable.Collect();
-            Colletables += collectable.Value;
+            LevelColletables += collectable.Value;
 
             ManageCollectCombo();
             PlayCollectSFX(CollectComboBonus);
@@ -83,7 +97,7 @@ public class PlayerInventory : MonoBehaviour
     {
         int collectBonus = CollectComboBonus;
 
-        Colletables += CollectComboBonus;
+        LevelColletables += CollectComboBonus;
         CurrentColletCombo = 0;
         CollectComboBonus = 0;
 
@@ -104,6 +118,12 @@ public class PlayerInventory : MonoBehaviour
         // Plays sfx with increasing pitch clamped at 10 by collecting items in sequence
         _collectAudio.pitch = _basePitch + (Mathf.Clamp(comboDepth, 0, 10) * 0.1f);
         _collectAudio.Play();
+    }
+    
+    public void AddCollctablesFromLevel()
+    {
+        _collectables = LevelColletables;
+        LevelColletables = 0;
     }
 
 #if UNITY_EDITOR

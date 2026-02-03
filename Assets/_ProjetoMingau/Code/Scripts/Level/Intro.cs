@@ -19,13 +19,12 @@ public class Intro : MonoBehaviour
         clipDuration += 2.0f;
 
         GlobalTimer.Instance.StartTimer(_startTime, () => {
-            GameManager.Instance.ChangeGameContext(GameContextEnum.CutScene);
             _video.Play();
             _canSkipIntro = true;
         });
 
         timerIndex = GlobalTimer.Instance.StartTimer(clipDuration, () => {
-            LevelLoader.Instance.LoadLevel(_targetLevel, () => { });
+            LevelLoader.Instance.LoadLevel(_targetLevel, () => { }, GameContext.Playing);
         });
     }
 
@@ -37,6 +36,6 @@ public class Intro : MonoBehaviour
     private void SkipIntro()
     {
         GlobalTimer.Instance.CancelTimer(timerIndex);
-        LevelLoader.Instance.LoadLevel(_targetLevel, () => { });
+        LevelLoader.Instance.LoadLevel(_targetLevel, () => { }, GameContext.Playing);
     }
 }

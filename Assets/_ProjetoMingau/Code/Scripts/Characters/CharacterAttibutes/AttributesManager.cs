@@ -162,7 +162,7 @@ public class AttributesManager : MonoBehaviour
             try
             {
                 Scene scene = SceneManager.GetActiveScene();
-                if (scene != null) LevelLoader.Instance.LoadLevel(scene.name, () => Revive());
+                if (scene != null) LevelLoader.Instance.LoadLevel(scene.name, () => Revive(), GameContext.Playing);
             }
             catch
             {
