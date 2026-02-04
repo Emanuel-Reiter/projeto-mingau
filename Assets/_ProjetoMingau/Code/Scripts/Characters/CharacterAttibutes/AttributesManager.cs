@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class AttributesManager : MonoBehaviour
@@ -29,14 +27,10 @@ public class AttributesManager : MonoBehaviour
     public bool IsPostureBroken = false;
 
     [Header("UI params")]
-    [SerializeField] private Transform _heartContainer;
     [SerializeField] private GameObject _heartPrefab;
 
     [SerializeField] private Sprite _heartFullSprite;
     [SerializeField] private Sprite _heartEmptySprite;
-
-    private List<GameObject> _currentHearts = new List<GameObject>();
-
 
     [Header("Other params")]
     [SerializeField] private ParticleSystem _dieVFX;
@@ -46,31 +40,8 @@ public class AttributesManager : MonoBehaviour
         // Checks if the attributes manager is owned by the player
         _isPlayer = gameObject.CompareTag("Player") ? true : false;
 
-        if (_isPlayer)
-        {
-            try
-            {
-                GridLayoutGroup[] gridLayoutGroups = Resources.FindObjectsOfTypeAll<GridLayoutGroup>();
-
-                foreach (GridLayoutGroup group in gridLayoutGroups)
-                {
-                    if (group.CompareTag("PlayerHealthBar"))
-                    {
-                        _heartContainer = group.transform;
-                        break;
-                    }
-                }
-            }
-            catch
-            {
-                Debug.LogError("Player health bar not found!");
-            }
-        }
-
         _currentHP = _maxHP;
         _currentPosture = _maxPosture;
-
-        UpdateUI();
     }
 
     public void TakeDamage(int amount)
@@ -79,38 +50,6 @@ public class AttributesManager : MonoBehaviour
 
         CheckIsDead();
         DamagePosture();
-        UpdateUI();
-    }
-
-    private void UpdateUI()
-    {
-        if (_heartContainer == null || _heartFullSprite == null || _heartEmptySprite == null) return;
-
-        ClearHearts();
-
-        for (int i = 0; i < _maxHP; i++)
-        {
-            GameObject newHeart = Instantiate(_heartPrefab, _heartContainer);
-            _currentHearts.Add(newHeart);
-
-            if (i < CurrentHP)
-            {
-                newHeart.GetComponent<Image>().sprite = _heartFullSprite;
-            }
-            else
-            {
-                newHeart.GetComponent<Image>().sprite = _heartEmptySprite;
-            }
-        }
-    }
-
-    private void ClearHearts()
-    {
-        foreach (GameObject heart in _currentHearts)
-        {
-            Destroy(heart);
-        }
-        _currentHearts.Clear();
     }
 
     private void DamagePosture()
@@ -130,12 +69,11 @@ public class AttributesManager : MonoBehaviour
     public void Heal(int amount)
     {
         _currentHP = Mathf.Clamp((CurrentHP + amount), 0, _maxHP);
-        UpdateUI();
     }
 
     public void CheckIsDead()
     {
-        bool hasDied= CurrentHP <= 0;
+        bool hasDied = CurrentHP <= 0;
 
         _isAlive = !hasDied;
 
@@ -152,33 +90,10 @@ public class AttributesManager : MonoBehaviour
     {
         _isAlive = true;
         Heal(99999);
-        UpdateUI();
     }
 
     private IEnumerator DieCoroutine()
     {
-        if (_isPlayer)
-        {
-            try
-            {
-                Scene scene = SceneManager.GetActiveScene();
-                if (scene != null) LevelLoader.Instance.LoadLevel(scene.name, () => Revive(), GameContext.Playing);
-            }
-            catch
-            {
-                Debug.LogError("Error during scene loading!");
-            }
-        }
-
         yield return null;
-
-        if (_dieVFX != null)
-        {
-            ParticleSystem vfx = Instantiate(_dieVFX, transform.position, Quaternion.identity, null);
-            vfx.Play();
-            Destroy(vfx.gameObject, _dieVFX.main.duration);
-        }
-
-        if (!_isPlayer) gameObject.SetActive(false);
     }
 }

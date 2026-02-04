@@ -10,7 +10,6 @@ public class NPCTargetChaseState : NPCBaseState
 
     [Header("State params")]
     [SerializeField] private float _destinationRecalculationCooldown = 0.333f;
-    [SerializeField] private float _targetMemoryDuration = 1.0f;
     [SerializeField] private float _targetStopingDistance = 1.8f;
     [SerializeField] private AnimationClip _movementAnim;
     [SerializeField] private float _interpolationTime = 0.05f;
@@ -61,7 +60,6 @@ public class NPCTargetChaseState : NPCBaseState
     public override void ExitState(NPCStateManager npc)
     {
         StopAllCoroutines();
-        //SetTargetStopingDistance(npc, 0.0f);
     }
 
     private void SetTargetStopingDistance(NPCStateManager npc, float stopingDistance)
