@@ -364,6 +364,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4220197002022506539}
+  - component: {fileID: 3232087369884583613}
   m_Layer: 3
   m_Name: CameraTarget
   m_TagString: PlayerCameraTarget
@@ -386,6 +387,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7040443163258005123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3232087369884583613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4418045189180619294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c90a45898f4dfca4fbbdb1ab7d79d6d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4543043865477687859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1681,7 +1694,7 @@ PrefabInstance:
       addedObject: {fileID: 2585441963879319846}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 816950799331357684}
+      addedObject: {fileID: 3246938948783061766}
   m_SourcePrefab: {fileID: 100100000, guid: 84ffb4fd5c467f54187a75703fe661f3, type: 3}
 --- !u!4 &1742453691770808846 stripped
 Transform:
@@ -1806,6 +1819,7 @@ MonoBehaviour:
   AnimationManager: {fileID: 0}
   LocomotionParams: {fileID: 0}
   Attributes: {fileID: 0}
+  Inventory: {fileID: 0}
   Dash: {fileID: 0}
   Jump: {fileID: 0}
   Land: {fileID: 0}
@@ -1957,8 +1971,6 @@ MonoBehaviour:
   _colletablesLayer:
     serializedVersion: 2
     m_Bits: 32768
-  _collectAudio: {fileID: 78196875743566356}
-  _audioPitchResetTime: 2
 --- !u!114 &2585441963879319846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1976,12 +1988,11 @@ MonoBehaviour:
   _enablePostureDamage: 1
   _maxPosture: 1
   IsPostureBroken: 0
-  _heartContainer: {fileID: 0}
   _heartPrefab: {fileID: 8724383900002723021, guid: d5cce9846fa21c9409317099f11b0650, type: 3}
   _heartFullSprite: {fileID: 21300000, guid: 9357eed76366a104cb5a94ac595cf027, type: 3}
   _heartEmptySprite: {fileID: 21300000, guid: ff45bd71b9b88c04eb15365720f03e18, type: 3}
   _dieVFX: {fileID: 0}
---- !u!114 &816950799331357684
+--- !u!114 &3246938948783061766
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1990,10 +2001,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7710018997774875705}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32dca64c6367dc042849e4e1c60b7ba3, type: 3}
+  m_Script: {fileID: 11500000, guid: 5239004eaab484a46abf83277cacc587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionRadius: 1
-  _interactableLayer:
+  _interactionRange: 1
+  _interactionLayer:
     serializedVersion: 2
     m_Bits: 65536

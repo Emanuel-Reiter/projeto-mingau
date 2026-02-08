@@ -29,31 +29,24 @@ public class PlayerDependencies : MonoBehaviour
 
     private void LoadReferences()
     {
-        try
-        {
-            Input = GetComponent<PlayerInputManager>();
-            Controller = GetComponent<CharacterController>();
+        Input = GetComponent<PlayerInputManager>();
+        Controller = GetComponent<CharacterController>();
 
-            MainCamera = Camera.main;
+        MainCamera = Camera.main;
 
-            Animator = GetComponent<Animator>();
-            AnimationManager = GetComponent<PlayerAnimationManager>();
+        Animator = GetComponent<Animator>();
+        AnimationManager = GetComponent<PlayerAnimationManager>();
 
-            LocomotionParams = GetComponent<PlayerLocomotionParams>();
+        LocomotionParams = GetComponent<PlayerLocomotionParams>();
 
-            Attributes = GetComponent<AttributesManager>();
+        Attributes = GetComponent<AttributesManager>();
 
-            Inventory = GetComponent<PlayerInventory>();
+        Inventory = GetComponent<PlayerInventory>();
 
-            Dash = GetComponent<PlayerDash>();
-            Jump = GetComponent<PlayerJump>();
-            Land = GetComponent<PlayerLand>();
-            Attack = GetComponent<PlayerAttack>();
-        }
-        catch 
-        {
-            Debug.LogError("Some references were not assigned correctly.\nCheck external tag names and components assigned to this object.");
-        }
+        Dash = GetComponent<PlayerDash>();
+        Jump = GetComponent<PlayerJump>();
+        Land = GetComponent<PlayerLand>();
+        Attack = GetComponent<PlayerAttack>();
 
     }
 }

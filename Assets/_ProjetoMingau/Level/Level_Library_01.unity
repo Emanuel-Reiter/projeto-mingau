@@ -3691,14 +3691,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1403030242}
     m_Modifications:
-    - target: {fileID: 3891239791843113549, guid: d88ce27f66ca8cc4891077683fd01bb0, type: 3}
-      propertyPath: _npcsToDisableDetection.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3891239791843113549, guid: d88ce27f66ca8cc4891077683fd01bb0, type: 3}
-      propertyPath: '_npcsToDisableDetection.Array.data[0]'
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1093762549718841154, guid: 0669ec8e01b40a04a833b03afab6a040, type: 3}
       propertyPath: m_Size.x
       value: 8
@@ -3774,6 +3766,14 @@ PrefabInstance:
     - target: {fileID: 7608846858198836623, guid: 0669ec8e01b40a04a833b03afab6a040, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891239791843113549, guid: d88ce27f66ca8cc4891077683fd01bb0, type: 3}
+      propertyPath: _npcsToDisableDetection.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891239791843113549, guid: d88ce27f66ca8cc4891077683fd01bb0, type: 3}
+      propertyPath: '_npcsToDisableDetection.Array.data[0]'
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8781,10 +8781,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 571183095}
     m_Modifications:
-    - target: {fileID: 1161853018785798142, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1370028569772188939, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.9300003
@@ -8848,6 +8844,10 @@ PrefabInstance:
     - target: {fileID: 2317154677319645110, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161853018785798142, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9721,14 +9721,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1403030242}
     m_Modifications:
-    - target: {fileID: 1161853018785798142, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
-      propertyPath: m_ScaleInLightmap
-      value: 0.333
-      objectReference: {fileID: 0}
     - target: {fileID: 1093762549718841154, guid: 0669ec8e01b40a04a833b03afab6a040, type: 3}
       propertyPath: m_Size.x
       value: 22
@@ -9796,6 +9788,14 @@ PrefabInstance:
     - target: {fileID: 7608846858198836623, guid: 0669ec8e01b40a04a833b03afab6a040, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161853018785798142, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.333
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13422,8 +13422,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8969586002490228873, guid: d6e6e7dce0a42f248adc0bf106ca641d, type: 3}
       propertyPath: _targetLevel
-      value: Level_CampusIFMS_01
-      objectReference: {fileID: 0}
+      value: 
+      objectReference: {fileID: 11400000, guid: fbc5181dc3df552419b1b720d94fcb35, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18091,8 +18091,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8969586002490228873, guid: d6e6e7dce0a42f248adc0bf106ca641d, type: 3}
       propertyPath: _targetLevel
-      value: Level_CampusIFMS_01
-      objectReference: {fileID: 0}
+      value: 
+      objectReference: {fileID: 11400000, guid: fbc5181dc3df552419b1b720d94fcb35, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27237,14 +27237,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1403030242}
     m_Modifications:
-    - target: {fileID: 3891239791843113549, guid: d88ce27f66ca8cc4891077683fd01bb0, type: 3}
-      propertyPath: _npcsToDisableDetection.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3891239791843113549, guid: d88ce27f66ca8cc4891077683fd01bb0, type: 3}
-      propertyPath: '_npcsToDisableDetection.Array.data[0]'
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1093762549718841154, guid: 0669ec8e01b40a04a833b03afab6a040, type: 3}
       propertyPath: m_Size.x
       value: 8
@@ -27320,6 +27312,14 @@ PrefabInstance:
     - target: {fileID: 7608846858198836623, guid: 0669ec8e01b40a04a833b03afab6a040, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891239791843113549, guid: d88ce27f66ca8cc4891077683fd01bb0, type: 3}
+      propertyPath: _npcsToDisableDetection.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891239791843113549, guid: d88ce27f66ca8cc4891077683fd01bb0, type: 3}
+      propertyPath: '_npcsToDisableDetection.Array.data[0]'
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -40858,8 +40858,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8969586002490228873, guid: d6e6e7dce0a42f248adc0bf106ca641d, type: 3}
       propertyPath: _targetLevel
-      value: Level_CampusIFMS_01
-      objectReference: {fileID: 0}
+      value: 
+      objectReference: {fileID: 11400000, guid: fbc5181dc3df552419b1b720d94fcb35, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -1,13 +1,17 @@
 using System.Threading.Tasks;
+using Unity.Cinemachine;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : Singleton<LevelManager>
 {
-    [SerializeField] private GameObject _playerPrefab;
-    public GameObject PlayerRef { get; private set; }
-
+    [Header("Level params")]
+    [SerializeField] private LevelData _initialLevel;
     private LevelData _currentLoadedLevel;
+    
+    [Header("Level Spwan params")]
+    [TagField] [SerializeField] private string _levelSpawnTag;
 
     // On level loading trigger
     public delegate void OnLevelLoadingDelegate();
@@ -19,8 +23,9 @@ public class LevelManager : Singleton<LevelManager>
         get => _isLevelLoading;
         set
         {
-            OnLevelLoadingChanged?.Invoke();
+            if (_isLevelLoading == value) return;
             _isLevelLoading = value;
+            OnLevelLoadingChanged?.Invoke();
         }
     }
 
@@ -34,56 +39,131 @@ public class LevelManager : Singleton<LevelManager>
         get => _levelLoadPercent;
         set
         {
+            float v = Mathf.Clamp01(value);
+            if (Mathf.Approximately(_levelLoadPercent, v)) return;
+            _levelLoadPercent = v;
             OnLevelLoadPercentChanged?.Invoke();
-            _levelLoadPercent = Mathf.Clamp(value, 0f, 1f);
         }
     }
 
-    public async void LoadLevel(LevelData levelToLoad)
+    private int _playerAnimSyncTime = 500;
+
+    public async Task StartGame()
     {
-        int playerAnimationsSyncUpWaitTime = 500;
+        if(_initialLevel == null)
+        {
+            Debug.LogError("Initial level not assinged.");
+            return;
+        }
 
-        _levelLoadPercent = 0f;
-        _isLevelLoading = true;
+        if (!_initialLevel.IsValid)
+        {
+            Debug.LogError("LevelData invalid.");
+            return;
+        }
 
-        await Task.Delay(playerAnimationsSyncUpWaitTime);
+        LevelLoadPercent = 0f;
+        IsLevelLoading = true;
 
-        await SceneManager.UnloadSceneAsync(_currentLoadedLevel.SceneName);
-        _levelLoadPercent = 0.33f;
-
-        await SceneManager.LoadSceneAsync(levelToLoad.SceneName);
-        _levelLoadPercent = 0.67f;
+        await Task.Delay(_playerAnimSyncTime);
 
         try
         {
-            Transform spawnPoint = GameObject.FindGameObjectWithTag("LevelSpawPoint").transform;
-            TogglePlayerMovement(false);
-            SetupPlayerSpawnTransform(spawnPoint.position, spawnPoint.rotation);
+            await GameManager.I.InitializeGame();
         }
-        catch
+        catch(InitializationException e)
         {
-            TogglePlayerMovement(false);
-            SetupPlayerSpawnTransform(Vector3.zero, Quaternion.identity);
+            Debug.LogError($"Game initialization error. {e}");
+            return;
+        }
+
+        GameManager.I.TogglePlayerMovement(false);
+
+        GameContext.I.LoadPlayerRefs();
+        UIManager.I.InitializeInteractPrompt();
+
+        await SceneManager.LoadSceneAsync(_initialLevel.SceneName, LoadSceneMode.Additive);
+        _currentLoadedLevel = _initialLevel;
+
+        var loadedScene = SceneManager.GetSceneByName(_currentLoadedLevel.SceneName);
+        SceneManager.SetActiveScene(loadedScene);
+
+        LevelLoadPercent = 0.5f;
+
+        GameManager.I.MovePlayerToSpawn(GetSpawnPoint());
+
+        LevelLoadPercent = 1f;
+        await Task.Delay(_playerAnimSyncTime);
+
+        IsLevelLoading = false;
+        GameManager.I.TogglePlayerMovement(true);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P)) _ = StartGame();
+    }
+
+    public async Task LoadLevel(LevelData levelToLoad)
+    {
+        if (levelToLoad == null)
+        {
+            Debug.LogError("Level to load is null.");
+            return;
+        }
+
+        if (!levelToLoad.IsValid)
+        {
+            Debug.LogError("LevelData invalid.");
+            return;
+        }
+
+        LevelLoadPercent = 0f;
+        IsLevelLoading = true;
+
+        GameManager.I.TogglePlayerMovement(false);
+
+        await Task.Delay(_playerAnimSyncTime);
+
+        if (_currentLoadedLevel != null)
+        {
+            var scene = SceneManager.GetSceneByName(_currentLoadedLevel.SceneName);
+            if (scene.isLoaded) await SceneManager.UnloadSceneAsync(scene);
+        }
+
+        LevelLoadPercent = 0.33f;
+
+        await SceneManager.LoadSceneAsync(levelToLoad.SceneName, LoadSceneMode.Additive);
+        _currentLoadedLevel = levelToLoad;
+        
+        var loadedScene = SceneManager.GetSceneByName(_currentLoadedLevel.SceneName);
+        SceneManager.SetActiveScene(loadedScene);
+
+        LevelLoadPercent = 0.67f;
+
+        GameManager.I.MovePlayerToSpawn(GetSpawnPoint());
+
+        LevelLoadPercent = 1f;
+        await Task.Delay(_playerAnimSyncTime);
+        
+        IsLevelLoading = false;
+        GameManager.I.TogglePlayerMovement(true);
+    }
+
+    public Transform GetSpawnPoint()
+    {
+        GameObject go = GameObject.FindGameObjectWithTag(_levelSpawnTag);
+
+        if (go != null)
+        {
+            return go.transform;
+        }
+        else
+        {
+            Debug.LogWarning("Spawn point not found. Using fallback at world origin.");
+            GameObject fallback = new GameObject("SpawnPoint_Fallback");
+            fallback.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+            return fallback.transform;
         }
     }
-
-    #region Player
-    public void TogglePlayerMovement(bool toggle)
-    {
-        PlayerLocomotion locomotion = PlayerRef.GetComponent<PlayerLocomotion>();
-        locomotion.ToggleMovement(toggle);
-        locomotion.SetHorizontalVelocity(Vector3.zero);
-
-        CharacterController controller = PlayerRef.GetComponent<CharacterController>();
-        if (controller == null) return;
-
-        controller.enabled = toggle;
-    }
-
-    public void SetupPlayerSpawnTransform(Vector3 position, Quaternion rotation)
-    {
-        PlayerRef.transform.position = position;
-        PlayerRef.transform.rotation = rotation;
-    }
-    #endregion
 }

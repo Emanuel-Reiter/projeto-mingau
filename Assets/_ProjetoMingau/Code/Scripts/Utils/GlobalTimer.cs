@@ -2,27 +2,17 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class GlobalTimer : MonoBehaviour
+public class GlobalTimer : Singleton<GlobalTimer>
 {
-    public static GlobalTimer Instance { get; private set; }
-
     private Dictionary<int, TimerData> _activeTimers = new Dictionary<int, TimerData>();
     private int _nextTimerId = 1;
 
-    // Internal data structure to store timer information
     private class TimerData
     {
         public float Duration;
         public float TimeRemaining;
         public Action Callback;
         public bool IsActive = true;
-    }
-
-    private void Awake()
-    {
-        // Instance initialization
-        if (Instance != null && Instance != this) Destroy(gameObject);
-        else Instance = this;
     }
 
     public int StartTimer(float duration, Action callback)
@@ -78,11 +68,10 @@ public class GlobalTimer : MonoBehaviour
     {
         List<int> completedTimers = new List<int>();
 
-        // Update all active timers
-        foreach (var kvp in _activeTimers)
+        foreach (var key in _activeTimers)
         {
-            int timerId = kvp.Key;
-            TimerData timer = kvp.Value;
+            int timerId = key.Key;
+            TimerData timer = key.Value;
 
             if (timer.IsActive)
             {
@@ -98,7 +87,6 @@ public class GlobalTimer : MonoBehaviour
             }
         }
 
-        // Cleanup completed timers
         foreach (int timerId in completedTimers)
         {
             _activeTimers.Remove(timerId);

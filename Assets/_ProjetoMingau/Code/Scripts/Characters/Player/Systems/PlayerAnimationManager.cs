@@ -1,10 +1,11 @@
 using UnityEngine;
 
+[RequireComponent (typeof(Animator))]
 public class PlayerAnimationManager : MonoBehaviour
 {
     private Animator _animator;
 
-    private void Start() {
+    private void Awake() {
         _animator = GetComponent<Animator>();
     }
 

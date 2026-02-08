@@ -14,19 +14,11 @@ public class NPCDependencies : MonoBehaviour
 
     private void Awake()
     {
-        try
-        {
-            NavMeshAgent = GetComponent<NavMeshAgent>();
-            TargetDetection = GetComponent<NPCTargetDetection>();
-            GlobalTimer = GameObject.FindGameObjectWithTag("GlobalTimer").GetComponent<GlobalTimer>();
-            Animation = GetComponent<NPCAnimationManager>();
-            Attributes = GetComponent<AttributesManager>();
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+        TargetDetection = GetComponent<NPCTargetDetection>();
+        Animation = GetComponent<NPCAnimationManager>();
+        Attributes = GetComponent<AttributesManager>();
 
-            SpawnPosition = transform.position;
-        }
-        catch
-        {
-            Debug.LogError("Failed to load NPC dependencies");
-        }
+        SpawnPosition = transform.position;
     }
 }

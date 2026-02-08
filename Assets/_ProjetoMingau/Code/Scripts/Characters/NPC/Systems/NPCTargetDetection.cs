@@ -24,7 +24,6 @@ public class NPCTargetDetection : MonoBehaviour
 
     private void Start()
     {
-        _timer = GameObject.FindGameObjectWithTag("GlobalTimer").GetComponent<GlobalTimer>();
         ToggleTargetSearch(_isTargetSearchEnabled);
     }
 
@@ -105,12 +104,12 @@ public class NPCTargetDetection : MonoBehaviour
 
         if (hasLostTarget)
         {
-            if (_currentTimer != 0) _timer.CancelTimer(_currentTimer);
-            _currentTimer = _timer.StartTimer(_targetMemoryTimer, () => ForgetCurrentTarget());
+            if (_currentTimer != 0) GlobalTimer.I.CancelTimer(_currentTimer);
+            _currentTimer = GlobalTimer.I.StartTimer(_targetMemoryTimer, () => ForgetCurrentTarget());
         }
         else
         {
-            if (_currentTimer != 0) _timer.CancelTimer(_currentTimer);
+            if (_currentTimer != 0) GlobalTimer.I.CancelTimer(_currentTimer);
         }
     }
 

@@ -37,7 +37,7 @@ public class PlayerAttackLightState : PlayerBaseState
     public override void EnterState(PlayerStateManager player)
     {
         // Resets combo timer
-        GlobalTimer.Instance.CancelTimer(_comboTimerIndex);
+        GlobalTimer.I.CancelTimer(_comboTimerIndex);
         
         // Checks if the previous state was dash in order to use the last animation of the attack combo
         if (player.WasPreviousState<PlayerDashState>()) _currentCombo = _attackAnim.Length - 1;
@@ -86,7 +86,7 @@ public class PlayerAttackLightState : PlayerBaseState
         if (_currentCombo >= _attackAnim.Length) ResetCombo();
         player.Dependencies.Attack.SetCurrentCombo(_currentCombo);
 
-        _comboTimerIndex = GlobalTimer.Instance.StartTimer(_comboResetTimer, () => ResetCombo());
+        _comboTimerIndex = GlobalTimer.I.StartTimer(_comboResetTimer, () => ResetCombo());
     }
 
     private void ResetCombo()

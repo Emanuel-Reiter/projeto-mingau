@@ -2,17 +2,17 @@ using UnityEngine;
 
 public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    public static T Instance { get; private set; }
+    public static T I { get; private set; }
 
     protected virtual void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (I != null && I != this)
         {
             Destroy(this.gameObject);
             return;
         }
 
-        Instance = this as T;
+        I = this as T;
         DontDestroyOnLoad(this.gameObject);
     }
 }

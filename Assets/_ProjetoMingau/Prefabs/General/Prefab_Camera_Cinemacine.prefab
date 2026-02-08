@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 897942860890419131}
   - component: {fileID: 873354265339379871}
   m_Layer: 0
-  m_Name: Prefab_Camera_Cinemacine_FreeLook
+  m_Name: Prefab_Camera_Cinemacine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

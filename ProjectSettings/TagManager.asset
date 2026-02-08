@@ -4,12 +4,7 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - GlobalTimer
-  - MenuCamera
-  - PlayerCameraTarget
-  - LoadingBar
   - LevelSpawnPoint
-  - PlayerHealthBar
   layers:
   - Default
   - TransparentFX
