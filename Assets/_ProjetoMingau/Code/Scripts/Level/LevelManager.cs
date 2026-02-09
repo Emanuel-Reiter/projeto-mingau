@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using Unity.Cinemachine;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -30,7 +29,7 @@ public class LevelManager : Singleton<LevelManager>
     }
 
     // Level loading percent trigger
-    public delegate void OnLevelLoadPercentDelegate();
+    public delegate void OnLevelLoadPercentDelegate(float loadPercent);
     public event OnLevelLoadPercentDelegate OnLevelLoadPercentChanged;
 
     private float _levelLoadPercent = 0f;
@@ -42,13 +41,13 @@ public class LevelManager : Singleton<LevelManager>
             float v = Mathf.Clamp01(value);
             if (Mathf.Approximately(_levelLoadPercent, v)) return;
             _levelLoadPercent = v;
-            OnLevelLoadPercentChanged?.Invoke();
+            OnLevelLoadPercentChanged?.Invoke(LevelLoadPercent);
         }
     }
 
     private int _playerAnimSyncTime = 500;
 
-    public async Task StartGame()
+    public async Task InitalizeGame()
     {
         if(_initialLevel == null)
         {
@@ -81,6 +80,7 @@ public class LevelManager : Singleton<LevelManager>
 
         GameContext.I.LoadPlayerRefs();
         UIManager.I.InitializeInteractPrompt();
+        UIManager.I.InitializeHUD();
 
         await SceneManager.LoadSceneAsync(_initialLevel.SceneName, LoadSceneMode.Additive);
         _currentLoadedLevel = _initialLevel;
@@ -92,16 +92,11 @@ public class LevelManager : Singleton<LevelManager>
 
         GameManager.I.MovePlayerToSpawn(GetSpawnPoint());
 
-        LevelLoadPercent = 1f;
         await Task.Delay(_playerAnimSyncTime);
+        LevelLoadPercent = 1f;
 
         IsLevelLoading = false;
         GameManager.I.TogglePlayerMovement(true);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P)) _ = StartGame();
     }
 
     public async Task LoadLevel(LevelData levelToLoad)

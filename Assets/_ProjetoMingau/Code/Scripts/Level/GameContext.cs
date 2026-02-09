@@ -13,9 +13,14 @@ public class GameContext : Singleton<GameContext>
     public void SetPlayerRef(GameObject value) { PlayerRef = value; }
 
     public PlayerInteract PlayerInteract { get; private set; }
-    
+    public PlayerActionCombo PlayerCombo { get; private set; }
+    public PlayerSimpleInventory PlayerInventory { get; private set; }
+
+
     public void LoadPlayerRefs()
     {
         PlayerInteract = PlayerRef.GetComponent<PlayerInteract>();
+        PlayerCombo = PlayerRef.GetComponent<PlayerActionCombo>();
+        PlayerInventory = PlayerRef.GetComponent<PlayerSimpleInventory>();
     }
 }

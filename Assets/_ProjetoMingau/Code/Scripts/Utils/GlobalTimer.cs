@@ -7,6 +7,9 @@ public class GlobalTimer : Singleton<GlobalTimer>
     private Dictionary<int, TimerData> _activeTimers = new Dictionary<int, TimerData>();
     private int _nextTimerId = 1;
 
+    private readonly List<int> _completedTimers = new List<int>(64);
+    private readonly List<Action> _pendingCallbacks = new List<Action>(64);
+
     private class TimerData
     {
         public float Duration;
@@ -66,30 +69,34 @@ public class GlobalTimer : Singleton<GlobalTimer>
 
     private void Update()
     {
-        List<int> completedTimers = new List<int>();
+        _completedTimers.Clear();
+        _pendingCallbacks.Clear();
 
-        foreach (var key in _activeTimers)
+        foreach (var kvp in _activeTimers)
         {
-            int timerId = key.Key;
-            TimerData timer = key.Value;
+            int timerId = kvp.Key;
+            TimerData timer = kvp.Value;
 
-            if (timer.IsActive)
+            if (!timer.IsActive) continue;
+
+            timer.TimeRemaining -= Time.deltaTime;
+
+            if (timer.TimeRemaining <= 0f)
             {
-                timer.TimeRemaining -= Time.deltaTime;
+                timer.TimeRemaining = 0f;
+                timer.IsActive = false;
 
-                if (timer.TimeRemaining <= 0.0f)
-                {
-                    timer.TimeRemaining = 0.0f;
-                    timer.IsActive = false;
-                    timer.Callback?.Invoke();
-                    completedTimers.Add(timerId);
-                }
+                if (timer.Callback != null)
+                    _pendingCallbacks.Add(timer.Callback);
+
+                _completedTimers.Add(timerId);
             }
         }
 
-        foreach (int timerId in completedTimers)
-        {
-            _activeTimers.Remove(timerId);
-        }
+        for (int i = 0; i < _completedTimers.Count; i++)
+            _activeTimers.Remove(_completedTimers[i]);
+
+        for (int i = 0; i < _pendingCallbacks.Count; i++)
+            _pendingCallbacks[i].Invoke();
     }
 }

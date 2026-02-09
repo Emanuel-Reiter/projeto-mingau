@@ -1,24 +1,20 @@
 using UnityEngine;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerCollect : MonoBehaviour
 {
-    public delegate void OnCollectablesChangedDelegate();
-    public event OnCollectablesChangedDelegate OnCollectablesChanged;
-
-    private int _collectables;
-    public int Collectables
-    {
-        get => _collectables;
-        set
-        {
-            _collectables = value;
-            OnCollectablesChanged?.Invoke();
-        }
-    }
+    private PlayerDependencies _deps;
 
     [Header("Params")]
     [SerializeField] private float _collectRadius = 0.667f;
     [SerializeField] private LayerMask _colletablesLayer;
+
+    [Header("SFX params")]
+    [SerializeField] private AudioSfxDef _collectSFX;
+
+    private void Start()
+    {
+        _deps = GetComponent<PlayerDependencies>();
+    }
 
     private void Update()
     {
@@ -34,10 +30,11 @@ public class PlayerInventory : MonoBehaviour
 
         foreach (Collider obj in objectsInRange)
         {
-
             BaseCollectable collectable = obj.gameObject.GetComponent<BaseCollectable>();
             collectable.Collect();
-            Collectables += collectable.Value;
+            _deps.Inventory.Collectables += collectable.Value;
+
+            
         }
     }
 

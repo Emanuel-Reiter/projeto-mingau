@@ -14,7 +14,8 @@ public class PlayerDependencies : MonoBehaviour
 
     [HideInInspector] public AttributesManager Attributes;
 
-    [HideInInspector] public PlayerInventory Inventory;
+    [HideInInspector] public PlayerCollect Collect;
+    [HideInInspector] public PlayerSimpleInventory Inventory;
 
     // Player actions
     [HideInInspector] public PlayerDash Dash;
@@ -41,12 +42,12 @@ public class PlayerDependencies : MonoBehaviour
 
         Attributes = GetComponent<AttributesManager>();
 
-        Inventory = GetComponent<PlayerInventory>();
+        Collect = GetComponent<PlayerCollect>();
+        Inventory = GetComponent<PlayerSimpleInventory>();
 
         Dash = GetComponent<PlayerDash>();
         Jump = GetComponent<PlayerJump>();
         Land = GetComponent<PlayerLand>();
         Attack = GetComponent<PlayerAttack>();
-
     }
 }

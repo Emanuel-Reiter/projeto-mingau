@@ -1,26 +1,25 @@
 using UnityEngine;
 
-public class UIInteractionPrompt : MonoBehaviour
+public class UIInteractionPrompt : UIBase
 {
-    [SerializeField] private GameObject _interactionPrompt;
-
-    public void Initialize()
-    {
-        GameContext.I.PlayerInteract.OnInteractionAvailableChanged += Toggle;
-    }
-
-    private void OnDisable()
-    {
-        GameContext.I.PlayerInteract.OnInteractionAvailableChanged -= Toggle;
-    }
+    [SerializeField] private CanvasGroup _interactionCanvas;
 
     private void Start()
     {
         Toggle(false);
     }
 
-    private void Toggle(bool value)
+    public override void Initialize()
     {
-        _interactionPrompt.SetActive(value);
+        GameContext.I.PlayerInteract.OnInteractionAvailableChanged += Toggle;
+    }
+    private void OnDisable()
+    {
+        GameContext.I.PlayerInteract.OnInteractionAvailableChanged -= Toggle;
+    }
+
+    public override void Toggle(bool toggle)
+    {
+        _interactionCanvas.gameObject.SetActive(toggle);
     }
 }
