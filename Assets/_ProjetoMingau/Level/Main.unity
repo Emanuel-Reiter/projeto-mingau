@@ -899,6 +899,7 @@ GameObject:
   - component: {fileID: 633172891}
   - component: {fileID: 633172890}
   - component: {fileID: 633172889}
+  - component: {fileID: 633172892}
   m_Layer: 5
   m_Name: Button_Exit
   m_TagString: Untagged
@@ -951,7 +952,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.76666665, g: 0.85530764, b: 0.9019608, a: 1}
     m_PressedColor: {r: 0.56, g: 0.68, b: 0.8, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 0.8, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -970,6 +971,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1526910384}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OnConfirmButtonEvent
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 633172889}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1334132444}
         m_TargetAssemblyTypeName: UITitleScreen, Assembly-CSharp
         m_MethodName: ExitGameEvent
@@ -1020,6 +1033,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633172887}
   m_CullTransparentMesh: 1
+--- !u!114 &633172892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633172887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1526910384}
+          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+          m_MethodName: OnMouseEnterEvent
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 633172889}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1526910384}
+          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+          m_MethodName: OnMouseExitEvent
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 633172889}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &747256001
 GameObject:
   m_ObjectHideFlags: 0
@@ -1515,6 +1573,7 @@ GameObject:
   - component: {fileID: 1110471783}
   - component: {fileID: 1110471782}
   - component: {fileID: 1110471781}
+  - component: {fileID: 1110471784}
   m_Layer: 5
   m_Name: Button_Play
   m_TagString: Untagged
@@ -1567,7 +1626,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.76666665, g: 0.85530764, b: 0.9019608, a: 1}
     m_PressedColor: {r: 0.56, g: 0.68, b: 0.8, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 0.8, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1586,6 +1645,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1526910384}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OnConfirmButtonEvent
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1110471781}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1334132444}
         m_TargetAssemblyTypeName: UITitleScreen, Assembly-CSharp
         m_MethodName: StartGameEvent
@@ -1636,6 +1707,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110471779}
   m_CullTransparentMesh: 1
+--- !u!114 &1110471784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110471779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1526910384}
+          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+          m_MethodName: OnMouseEnterEvent
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1110471781}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1526910384}
+          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+          m_MethodName: OnMouseExitEvent
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1110471781}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1112752859
 GameObject:
   m_ObjectHideFlags: 0
@@ -2176,6 +2292,7 @@ GameObject:
   - component: {fileID: 1335514189}
   - component: {fileID: 1335514188}
   - component: {fileID: 1335514187}
+  - component: {fileID: 1335514190}
   m_Layer: 5
   m_Name: Button_Settings
   m_TagString: Untagged
@@ -2228,7 +2345,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.76666665, g: 0.85530764, b: 0.9019608, a: 1}
     m_PressedColor: {r: 0.56, g: 0.68, b: 0.8, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 0.8, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -2246,7 +2363,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1335514188}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1526910384}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OnConfirmButtonEvent
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1335514187}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1335514188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2285,6 +2414,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1335514185}
   m_CullTransparentMesh: 1
+--- !u!114 &1335514190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335514185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1526910384}
+          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+          m_MethodName: OnMouseEnterEvent
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1335514187}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1526910384}
+          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+          m_MethodName: OnMouseExitEvent
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1335514187}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1364292491
 GameObject:
   m_ObjectHideFlags: 0
@@ -2657,11 +2831,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3faf731cf83b64349af28093d0c64a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buttonSelectScale: 1.05
-  _buttonConfirmScale: 1.1
-  _buttonTransitionTime: 0.1
-  _confirmAudio: {fileID: 0}
-  _selectAudio: {fileID: 0}
+  _buttonSelectScale: 1.1
+  _buttonConfirmScale: 1.2
+  _buttonTransitionTime: 0.2
+  _confirmAudio: {fileID: 11400000, guid: 392f71fb0b224ee4a85a851a901271cd, type: 2}
+  _selectAudio: {fileID: 11400000, guid: 44bf0d052d22e9c4bbb5996fa3c9e373, type: 2}
 --- !u!4 &1526910385
 Transform:
   m_ObjectHideFlags: 0

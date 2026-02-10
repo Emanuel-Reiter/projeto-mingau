@@ -15,9 +15,9 @@ public class UIManager : Singleton<UIManager>
     private UITitleScreen _titleScreenMenu;
 
     [Header("UI visual params")]
-    [SerializeField] private float _buttonSelectScale = 1.05f;
-    [SerializeField] private float _buttonConfirmScale = 1.1f;
-    [SerializeField] private float _buttonTransitionTime = 0.1f;
+    [SerializeField] private float _buttonSelectScale = 1.1f;
+    [SerializeField] private float _buttonConfirmScale = 1.2f;
+    [SerializeField] private float _buttonTransitionTime = 0.2f;
 
     [Header("UI SFX")]
     [SerializeField] private AudioSfxDef _confirmAudio;
@@ -86,20 +86,20 @@ public class UIManager : Singleton<UIManager>
     }
     #endregion
 
-    public void OnConfirmButtonEvent(Button button)
+    public void OnConfirmButtonEvent(Button target)
     {
         PlayConfirmSFX();
 
-        button.interactable = false;
+        target.interactable = false;
 
-        button.transform.localScale = Vector3.one;
-        button.transform.DOScale(_buttonConfirmScale, _buttonTransitionTime)
+        target.transform.localScale = Vector3.one;
+        target.transform.DOScale(_buttonConfirmScale, _buttonTransitionTime)
         .SetEase(Ease.InOutSine)
         .SetLoops(2, LoopType.Yoyo)
-        .OnComplete(() => button.transform.DOKill());
+        .OnComplete(() => target.transform.DOKill());
     }
 
-    public void OnMouseEnterEvent(GameObject target)
+    public void OnMouseEnterEvent(Button target)
     {
         if (target == null) return;
 
@@ -110,7 +110,7 @@ public class UIManager : Singleton<UIManager>
         PlaySelectAudio();
     }
 
-    public void OnMouseExitEvent(GameObject target)
+    public void OnMouseExitEvent(Button target)
     {
         if (target == null) return;
 
@@ -123,12 +123,16 @@ public class UIManager : Singleton<UIManager>
     #region Audio
     private void PlayConfirmSFX()
     {
+        if(_confirmAudio == null) return;
+
         AudioSfxDef audio = Instantiate(_confirmAudio);
         AudioPool.Play(audio);
     }
 
     private void PlaySelectAudio()
     {
+        if (_selectAudio == null) return;
+
         AudioSfxDef audio = Instantiate(_selectAudio);
         AudioPool.Play(audio);
     }
