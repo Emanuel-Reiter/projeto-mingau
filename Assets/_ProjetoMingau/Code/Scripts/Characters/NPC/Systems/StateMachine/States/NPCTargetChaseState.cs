@@ -16,20 +16,28 @@ public class NPCTargetChaseState : NPCBaseState
 
     public override void CheckExitState(NPCStateManager npc)
     {
-        if (npc.Dependencies.Attributes.IsPostureBroken)
+        if (!npc.Deps.Attributes.IsAlive)
+        {
+            if (_dieState == null) return;
+
+            npc.SwitchState(_dieState);
+            return;
+        }
+
+        if (npc.Deps.Attributes.IsPostureBroken)
         {
             npc.SwitchState(_flinchState);
             return;
         }
 
-        bool isTargetInAtcionRange = npc.Dependencies.TargetDetection.GetDistanceFromTarget() <= npc.Dependencies.NavMeshAgent.stoppingDistance;
+        bool isTargetInAtcionRange = npc.Deps.TargetDetection.GetDistanceFromTarget() <= npc.Deps.NavMeshAgent.stoppingDistance;
         if (isTargetInAtcionRange)
         {
             npc.SwitchState(_attackState);
             return;
         }
 
-        bool isTargetInSight = npc.Dependencies.TargetDetection.HaveTarget();
+        bool isTargetInSight = npc.Deps.TargetDetection.HaveTarget();
         if (!isTargetInSight)
         {
             npc.SwitchState(_returnToSpawnState);
@@ -42,9 +50,9 @@ public class NPCTargetChaseState : NPCBaseState
         SetTargetStopingDistance(npc, _targetStopingDistance);
 
         StartCoroutine(RecalculateDestinationCoroutine(_destinationRecalculationCooldown, npc));
-        npc.Dependencies.NavMeshAgent.SetDestination(npc.Dependencies.TargetDetection.CurrentTarget.position);
+        npc.Deps.NavMeshAgent.SetDestination(npc.Deps.TargetDetection.CurrentTarget.position);
 
-        npc.Dependencies.Animation.PlayAnimationInterpolated(_movementAnim, _interpolationTime);
+        npc.Deps.Animation.PlayAnimationInterpolated(_movementAnim, _interpolationTime);
     }
 
     public override void UpdateState(NPCStateManager npc)
@@ -64,7 +72,7 @@ public class NPCTargetChaseState : NPCBaseState
 
     private void SetTargetStopingDistance(NPCStateManager npc, float stopingDistance)
     {
-        npc.Dependencies.NavMeshAgent.stoppingDistance = stopingDistance;
+        npc.Deps.NavMeshAgent.stoppingDistance = stopingDistance;
     }
 
     private IEnumerator RecalculateDestinationCoroutine(float delay, NPCStateManager npc)
@@ -73,8 +81,8 @@ public class NPCTargetChaseState : NPCBaseState
         {
             yield return new WaitForSeconds(delay);
 
-            if (npc.Dependencies.TargetDetection.CurrentTarget == null) break;
-            else npc.Dependencies.NavMeshAgent.SetDestination(npc.Dependencies.TargetDetection.CurrentTarget.position);
+            if (npc.Deps.TargetDetection.CurrentTarget == null) break;
+            else npc.Deps.NavMeshAgent.SetDestination(npc.Deps.TargetDetection.CurrentTarget.position);
         }
     }
 }

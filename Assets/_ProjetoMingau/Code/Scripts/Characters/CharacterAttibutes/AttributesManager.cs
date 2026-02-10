@@ -1,13 +1,20 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AttributesManager : MonoBehaviour
 {
-    private bool _isAlive = true;
-    public bool IsAlive => _isAlive;
-
     private bool _isPlayer = false;
+    
+    private bool _isAlive = true;
+    public bool IsAlive
+    {
+        get => _isAlive;
+        set
+        {
+            if (value == _isAlive) return;
+            _isAlive = value;
+        }
+    }
 
     [Header("Damage params")]
     [SerializeField] private int _damage = 1;
@@ -17,83 +24,89 @@ public class AttributesManager : MonoBehaviour
     [SerializeField] private int _maxHP = 5;
     private int _currentHP;
 
-    public int CurrentHP => _currentHP;
+    public int CurrentHP
+    {
+        get => _currentHP;
+        set
+        {
+            if (value == _currentHP) return;
+            _currentHP = Mathf.Clamp(value, 0, _maxHP);
+
+            CheckIsAlive();
+            DamagePosture();
+        }
+    }
 
 
     [Header("Posture params")]
     [SerializeField] private bool _enablePostureDamage = true;
     [SerializeField] private int _maxPosture = 1;
     private int _currentPosture;
-    public bool IsPostureBroken = false;
+    public int CurrentPosture
+    {
+        get => _currentPosture;
+        set
+        {
+            if(value == _currentPosture) return;
+            _currentPosture = Mathf.Clamp(value, 0, _maxPosture);
+        }
+    }
 
-    [Header("UI params")]
-    [SerializeField] private GameObject _heartPrefab;
-
-    [SerializeField] private Sprite _heartFullSprite;
-    [SerializeField] private Sprite _heartEmptySprite;
-
-    [Header("Other params")]
-    [SerializeField] private ParticleSystem _dieVFX;
+    private bool _isPostureBroken = false;
+    public bool IsPostureBroken
+    {
+        get => _isPostureBroken;
+        set 
+        {
+            if( value == _isPostureBroken) return;
+            _isPostureBroken = value;
+        }
+    }
 
     private void Start()
     {
-        // Checks if the attributes manager is owned by the player
         _isPlayer = gameObject.CompareTag("Player") ? true : false;
 
-        _currentHP = _maxHP;
-        _currentPosture = _maxPosture;
+        CurrentHP = _maxHP;
+        CurrentPosture = _maxPosture;
     }
 
-    public void TakeDamage(int amount)
+    #region HP
+    public void TakeDamage(int amount) { CurrentHP -= amount; }
+    public void Heal(int amount) { CurrentHP += amount; }
+    
+    public void CheckIsAlive()
     {
-        _currentHP = Mathf.Clamp(CurrentHP - amount, 0, _maxHP);
-
-        CheckIsDead();
-        DamagePosture();
+        IsAlive = CurrentHP > 0;
+        if (!IsAlive) Die();
     }
 
+    private void Die() { StartCoroutine(DieCoroutine()); }
+
+    public void Revive() { Heal(99999); }
+    #endregion
+
+    #region Posture
     private void DamagePosture()
     {
         if (!_enablePostureDamage) return;
 
-        _currentPosture--;
-        if (_currentPosture <= 0) IsPostureBroken = true;
+        CurrentPosture--;
+        if (CurrentPosture <= 0) IsPostureBroken = true;
     }
 
     public void ResetPosture()
     {
-        _currentPosture = _maxPosture;
+        CurrentPosture = _maxPosture;
         IsPostureBroken = false;
     }
-
-    public void Heal(int amount)
-    {
-        _currentHP = Mathf.Clamp((CurrentHP + amount), 0, _maxHP);
-    }
-
-    public void CheckIsDead()
-    {
-        bool hasDied = CurrentHP <= 0;
-
-        _isAlive = !hasDied;
-
-        if (hasDied) Die();
-    }
-
-    private void Die()
-    {
-        if (_isAlive) return;
-        StartCoroutine(DieCoroutine());
-    }
-
-    public void Revive()
-    {
-        _isAlive = true;
-        Heal(99999);
-    }
+    #endregion
 
     private IEnumerator DieCoroutine()
     {
-        yield return null;
+        if (!_isPlayer) yield break;
+
+        _ = LevelManager.I.LoadLevel(LevelManager.I.CurrentLoadedLevel);
+        Revive();
     }
 }

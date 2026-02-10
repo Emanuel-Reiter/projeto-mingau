@@ -12,7 +12,15 @@ public class NPCIdleState : NPCBaseState
 
     public override void CheckExitState(NPCStateManager npc)
     {
-        if (npc.Dependencies.Attributes.IsPostureBroken)
+        if (!npc.Deps.Attributes.IsAlive)
+        {
+            if (_dieState == null) return;
+
+            npc.SwitchState(_dieState);
+            return;
+        }
+
+        if (npc.Deps.Attributes.IsPostureBroken)
         {
             npc.SwitchState(_flinchState);
             return;
@@ -25,12 +33,12 @@ public class NPCIdleState : NPCBaseState
 
     public override void EnterState(NPCStateManager npc)
     {
-        npc.Dependencies.Animation.PlayAnimationInterpolated(_idleAnim, _interpolationTime);
+        npc.Deps.Animation.PlayAnimationInterpolated(_idleAnim, _interpolationTime);
     }
 
     public override void UpdateState(NPCStateManager npc)
     {
-        bool haveTarget = npc.Dependencies.TargetDetection.HaveTarget();
+        bool haveTarget = npc.Deps.TargetDetection.HaveTarget();
         IsComplete = haveTarget && CompletedExitTime();
     }
 

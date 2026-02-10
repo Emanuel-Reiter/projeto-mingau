@@ -6,12 +6,11 @@ public class KillPlane : MonoBehaviour
     {
         if (other == null) return;
 
-        AttributesManager attributes = other.GetComponent<AttributesManager>();
+        AttributesManager entity = other.GetComponent<AttributesManager>();
         
-        if (attributes == null) return;
-        
-        if(!attributes.IsAlive) return;
+        if (entity == null) return;
+        if(!entity.IsAlive) return;
 
-        attributes.TakeDamage(999999);
+        entity.TakeDamage(999999);
     }
 }

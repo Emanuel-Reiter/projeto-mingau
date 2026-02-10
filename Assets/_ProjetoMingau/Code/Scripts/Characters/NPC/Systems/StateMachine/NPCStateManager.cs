@@ -13,11 +13,11 @@ public class NPCStateManager : MonoBehaviour
     public Type PreviousStateType => PreviousState?.GetType();
 
     // Dependencies
-    public NPCDependencies Dependencies { get; private set; }
+    public NPCDependencies Deps { get; private set; }
 
     private void Start()
     {
-        Dependencies = GetComponent<NPCDependencies>();
+        Deps = GetComponent<NPCDependencies>();
 
         // Set the initial state
         SwitchState(_initialState);

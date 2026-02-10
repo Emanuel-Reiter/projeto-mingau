@@ -7,7 +7,9 @@ public class LevelManager : Singleton<LevelManager>
 {
     [Header("Level params")]
     [SerializeField] private LevelData _initialLevel;
+    
     private LevelData _currentLoadedLevel;
+    public LevelData CurrentLoadedLevel => _currentLoadedLevel;
     
     [Header("Level Spwan params")]
     [TagField] [SerializeField] private string _levelSpawnTag;
@@ -80,6 +82,7 @@ public class LevelManager : Singleton<LevelManager>
 
         GameContext.I.LoadPlayerRefs();
         UIManager.I.InitializeInteractPrompt();
+        UIManager.I.InitializeMenus();
         UIManager.I.InitializeHUD();
 
         await SceneManager.LoadSceneAsync(_initialLevel.SceneName, LoadSceneMode.Additive);

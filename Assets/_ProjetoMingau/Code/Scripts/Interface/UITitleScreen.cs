@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UIMainMenu : UIBase
+public class UITitleScreen : UIBase
 {
     [SerializeField] private CanvasGroup _titleScreenCanvas;
 
@@ -14,7 +14,7 @@ public class UIMainMenu : UIBase
         LevelManager.I.OnLevelLoadPercentChanged -= DisableTitleScreen;
     }
 
-    public void StartGame()
+    public void StartGameEvent()
     {
         _ = LevelManager.I.InitalizeGame();
     }
@@ -26,15 +26,13 @@ public class UIMainMenu : UIBase
 
     private void DisableTitleScreen(float loadPercent)
     {
-        Debug.Log($"Entrou! {loadPercent}");
-
         if (loadPercent < 1f) return;
 
         Toggle(false);
     }
 
-    public void ExitGame()
+    public void ExitGameEvent()
     {
-        Application.Quit();
+        GlobalTimer.I.StartTimer(1.0f, () => { Application.Quit(); });
     }
 }

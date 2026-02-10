@@ -8,6 +8,9 @@ public abstract class NPCBaseState : MonoBehaviour
     [SerializeField] private bool _hasExitTime = false;
     [SerializeField] private float _duration = 1.0f;
 
+    [Header("Die state")]
+    [SerializeField] protected NPCBaseState _dieState;
+
     private float _startTime;
     private float _currentTime => Time.time - _startTime;
 

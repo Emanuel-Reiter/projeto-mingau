@@ -12,7 +12,15 @@ public class NPCAttackState : NPCBaseState
 
     public override void CheckExitState(NPCStateManager npc)
     {
-        if (npc.Dependencies.Attributes.IsPostureBroken)
+        if (!npc.Deps.Attributes.IsAlive)
+        {
+            if (_dieState == null) return;
+
+            npc.SwitchState(_dieState);
+            return;
+        }
+
+        if (npc.Deps.Attributes.IsPostureBroken)
         {
             npc.SwitchState(_flinchState);
             return;
@@ -29,7 +37,7 @@ public class NPCAttackState : NPCBaseState
     public override void EnterState(NPCStateManager npc)
     {
         SetDuration(_attackAnim.length);
-        npc.Dependencies.Animation.PlayAnimationInterpolated(_attackAnim, _interpolationTime);
+        npc.Deps.Animation.PlayAnimationInterpolated(_attackAnim, _interpolationTime);
     }
 
     public override void ExitState(NPCStateManager npc)

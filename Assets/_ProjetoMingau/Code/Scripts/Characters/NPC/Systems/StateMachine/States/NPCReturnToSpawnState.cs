@@ -13,13 +13,21 @@ public class NPCReturnToSpawnState : NPCBaseState
 
     public override void CheckExitState(NPCStateManager npc)
     {
-        if (npc.Dependencies.Attributes.IsPostureBroken)
+        if (!npc.Deps.Attributes.IsAlive)
+        {
+            if (_dieState == null) return;
+
+            npc.SwitchState(_dieState);
+            return;
+        }
+
+        if (npc.Deps.Attributes.IsPostureBroken)
         {
             npc.SwitchState(_flinchState);
             return;
         }
 
-        float distanceToSpawn = Vector3.Distance(npc.transform.position, npc.Dependencies.SpawnPosition);
+        float distanceToSpawn = Vector3.Distance(npc.transform.position, npc.Deps.SpawnPosition);
         bool hasReachedSpawn = distanceToSpawn < _spawnDistanceTreshold;
 
         if(hasReachedSpawn)
@@ -31,9 +39,9 @@ public class NPCReturnToSpawnState : NPCBaseState
 
     public override void EnterState(NPCStateManager npc)
     {
-        npc.Dependencies.NavMeshAgent.SetDestination(npc.Dependencies.SpawnPosition);
+        npc.Deps.NavMeshAgent.SetDestination(npc.Deps.SpawnPosition);
 
-        npc.Dependencies.Animation.PlayAnimationInterpolated(_movementAnim, _interpolationTime);
+        npc.Deps.Animation.PlayAnimationInterpolated(_movementAnim, _interpolationTime);
     }
 
     public override void UpdateState(NPCStateManager npc)

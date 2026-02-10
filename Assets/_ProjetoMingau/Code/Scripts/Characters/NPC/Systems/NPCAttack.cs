@@ -14,7 +14,7 @@ public class NPCAttack : MonoBehaviour
     [SerializeField] private ParticleSystem _attackVFX;
 
     [Header("Audio params")]
-    [SerializeField] private AudioSource _attackAudio;
+    [SerializeField] private AudioSfxDef _attackAudio;
 
     private bool _isHitDetectionEnabled = false;
     public bool IsHitDetectionEnabled => _isHitDetectionEnabled;
@@ -78,8 +78,10 @@ public class NPCAttack : MonoBehaviour
     {
         if (_attackAudio == null) return;
 
-        _attackAudio.pitch = Random.Range(0.9f, 1.1f);
-        _attackAudio.Play();
+        AudioSfxDef audioCopy = Instantiate(_attackAudio);
+        Vector3 auidoPos = transform.position + Vector3.up;
+        audioCopy.Pitch = Random.Range(0.9f, 1.1f);
+        AudioPool.Play(audioCopy, auidoPos);
     }
 
 #if UNITY_EDITOR

@@ -15,12 +15,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private ParticleSystem[] _leftHandattackVFX;
 
     [Header("Audio params")]
-    [SerializeField] private AudioSource _attackAudio;
+    [SerializeField] private AudioSfxDef _attackAudio;
 
     private bool _isHitDetectionEnabled = false;
     public bool IsHitDetectionEnabled => _isHitDetectionEnabled;
 
-    private int _currentCombo = 0;
+    private int _currentAtkCombo = 0;
 
     private HashSet<AttributesManager> _damagedTargets = new HashSet<AttributesManager>();
 
@@ -64,7 +64,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    public void SetCurrentCombo(int currentCombo) { _currentCombo = currentCombo; }
+    public void SetCurrentCombo(int currentCombo) { _currentAtkCombo = currentCombo; }
 
     public void PlayVFX(int handIndex)
     {
@@ -107,8 +107,10 @@ public class PlayerAttack : MonoBehaviour
     {
         if (_attackAudio == null) return;
 
-        _attackAudio.pitch = 1.0f + (_currentCombo * 0.2f);
-        _attackAudio.Play();
+        AudioSfxDef audioCopy = Instantiate(_attackAudio);
+        audioCopy.Pitch = 1.0f + (_currentAtkCombo * 0.2f);
+        Vector3 audioPos = transform.position + new Vector3(0f, 1.25f, 0.5f);
+        AudioPool.Play(audioCopy, audioPos);
     }
 
 #if UNITY_EDITOR

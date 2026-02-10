@@ -22,6 +22,9 @@ public class GameManager : Singleton<GameManager>
 
         bool cameraConfigured = SetupPlayerCamera();
         if (!cameraConfigured) throw new InitializationException("Camera not configured correctly.");
+
+        // Small delay just to get rid of the console alert
+        await Task.Delay(100);
     }
 
     private bool LoadPlayer()
@@ -39,12 +42,25 @@ public class GameManager : Singleton<GameManager>
         }
 
         GameContext.I.SetPlayerRef(Instantiate(_playerPrefab, Vector3.zero, Quaternion.identity, null));
-        Debug.Log("Player successfully loaded.");
         return true;
     }
 
     private bool LoadCameras()
     {
+        GameContext.I.SetMainCameraRef(Camera.main);
+        if (GameContext.I.MainCameraRef == null)
+        {
+            Debug.LogError("Main camera not found.");
+            return false;
+        }
+
+        // Disable audio listener to use the player one instead
+        AudioListener cameraListener = GameContext.I.MainCameraRef.GetComponent<AudioListener>();
+        if (cameraListener != null) 
+        {
+            cameraListener.enabled = false;
+        }
+
         if (_cinemachinePrefab == null)
         {
             Debug.LogError("Cinemachine camera prefab not assinged.");
@@ -57,17 +73,9 @@ public class GameManager : Singleton<GameManager>
             return true;
         }
 
-        GameContext.I.SetMainCameraRef(Camera.main);
-        if (GameContext.I.MainCameraRef == null)
-        {
-            Debug.LogError("Main camera not found.");
-            return false;
-        }
-
         GameObject go = Instantiate(_cinemachinePrefab, Vector3.zero, Quaternion.identity, null);
         GameContext.I.SetCinemachineRef(go.GetComponent<CinemachineCamera>());
 
-        Debug.Log("Cinemachine camera successfully loaded.");
         return true;
     }
 
