@@ -30,11 +30,13 @@ public class PlayerActionCombo : MonoBehaviour
         _deps = GetComponent<PlayerDependencies>();
 
         _deps.Inventory.OnCollectablesChanged += AddComboByCollect;
+        _deps.Attack.OnAttackHit += AddComboByAttack;
     }
 
     private void OnDisable()
     {
         _deps.Inventory.OnCollectablesChanged -= AddComboByCollect;
+        _deps.Attack.OnAttackHit -= AddComboByAttack;
     }
 
     private void HandleComboReset()
@@ -45,6 +47,12 @@ public class PlayerActionCombo : MonoBehaviour
 
     private void AddComboByCollect(int value)
     {
+        // ignore value
         ComboIndex++;
+    }
+
+    public void AddComboByAttack()
+    {
+        ComboIndex++; 
     }
 }

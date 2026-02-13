@@ -37,6 +37,9 @@ public class AttributesManager : MonoBehaviour
         }
     }
 
+    public delegate void OnTakeDamageDelegate();
+    public event OnTakeDamageDelegate OnTakeDamage;
+
 
     [Header("Posture params")]
     [SerializeField] private bool _enablePostureDamage = true;
@@ -72,7 +75,7 @@ public class AttributesManager : MonoBehaviour
     }
 
     #region HP
-    public void TakeDamage(int amount) { CurrentHP -= amount; }
+    public void TakeDamage(int amount) { CurrentHP -= amount; OnTakeDamage?.Invoke(); }
     public void Heal(int amount) { CurrentHP += amount; }
     
     public void CheckIsAlive()

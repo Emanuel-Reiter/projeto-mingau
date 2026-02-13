@@ -14,6 +14,9 @@ public class UIManager : Singleton<UIManager>
     // Menus
     private UITitleScreen _titleScreenMenu;
 
+    // Loading screen
+    private UILoadingScreen _loadingScreen;
+
     [Header("UI visual params")]
     [SerializeField] private float _buttonSelectScale = 1.1f;
     [SerializeField] private float _buttonConfirmScale = 1.2f;
@@ -38,9 +41,9 @@ public class UIManager : Singleton<UIManager>
     private bool LoadInteractionPrompt()
     {
         _interactionPrompt = FindFirstObjectByType<UIInteractionPrompt>();
-        if (_interactionPrompt == null) return false;
-
-        return true;
+        
+        if (CheckNull(_interactionPrompt)) return false;
+        else return true;
     }
 
     public void InitializeHUD()
@@ -58,12 +61,10 @@ public class UIManager : Singleton<UIManager>
     private bool LoadHUD()
     {
         _comboHUD = FindFirstObjectByType<UICombo>();
-        if (_comboHUD == null ) return false;
-
         _collectablesHUD = FindFirstObjectByType<UICollectables>();
-        if (_collectablesHUD == null) return false;
 
-        return true;
+        if (CheckNull(_comboHUD, _collectablesHUD)) return false;
+        else return true;
     }
 
     public void InitializeMenus()
@@ -75,14 +76,28 @@ public class UIManager : Singleton<UIManager>
         }
 
         _titleScreenMenu.Initialize();
+        _loadingScreen.Initialize();
     }
 
     private bool LoadMenus()
     {
         _titleScreenMenu = FindFirstObjectByType<UITitleScreen>();
-        if(_titleScreenMenu == null) return false;
+        _loadingScreen = FindFirstObjectByType<UILoadingScreen>();
+        
+        if (CheckNull(_titleScreenMenu, _loadingScreen)) return false;
+        else return true;
+    }
 
-        return true;
+    public static bool CheckNull(params Object[] objects)
+    {
+        foreach (var obj in objects)
+        {
+            if (obj == null)
+            {
+                return true;
+            }
+        }
+        return false;
     }
     #endregion
 

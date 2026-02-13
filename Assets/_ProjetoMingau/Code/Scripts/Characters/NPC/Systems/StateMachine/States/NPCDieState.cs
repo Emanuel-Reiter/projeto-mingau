@@ -17,13 +17,9 @@ public class NPCDieState : NPCBaseState
     {
         npc.Deps.Animation.PlayAnimationInterpolated(_dieAnim, _interpolationTime);
 
-        if (_dieAudio != null)
-        {
-            Vector3 audioPos = transform.position + Vector3.up;
-            AudioPool.Play(_dieAudio, audioPos);
-        }
+        PlaySFX();
 
-        if(_dieVFX  != null)
+        if (_dieVFX  != null)
         {
             _dieVFX.gameObject.SetActive(true);
             _dieVFX.transform.parent = null;
@@ -33,6 +29,16 @@ public class NPCDieState : NPCBaseState
 
         // Disables the root NPC parent
         npc.Deps.Attributes.gameObject.SetActive(false);
+    }
+
+    private void PlaySFX()
+    {
+        if (_dieAudio == null) return;
+
+        Vector3 audioPos = transform.position + Vector3.up;
+        AudioSfxDef audio = Instantiate(_dieAudio);
+        audio.Pitch = Random.Range(0.9f, 1.1f);
+        AudioPool.Play(audio, audioPos);
     }
 
     private void DisableVFX()

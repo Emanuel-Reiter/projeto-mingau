@@ -15,7 +15,7 @@ public class LevelManager : Singleton<LevelManager>
     [TagField] [SerializeField] private string _levelSpawnTag;
 
     // On level loading trigger
-    public delegate void OnLevelLoadingDelegate();
+    public delegate void OnLevelLoadingDelegate(bool isLevelLoading);
     public event OnLevelLoadingDelegate OnLevelLoadingChanged;
 
     private bool _isLevelLoading = false;
@@ -26,7 +26,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             if (_isLevelLoading == value) return;
             _isLevelLoading = value;
-            OnLevelLoadingChanged?.Invoke();
+            OnLevelLoadingChanged?.Invoke(IsLevelLoading);
         }
     }
 
@@ -47,7 +47,7 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
-    private int _playerAnimSyncTime = 500;
+    private int _playerAnimSyncTime = 1500;
 
     public async Task InitalizeGame()
     {
@@ -63,11 +63,14 @@ public class LevelManager : Singleton<LevelManager>
             return;
         }
 
-        LevelLoadPercent = 0f;
-        IsLevelLoading = true;
 
         await Task.Delay(_playerAnimSyncTime);
 
+        UIManager.I.InitializeMenus();
+        
+        LevelLoadPercent = 0f;
+        IsLevelLoading = true;
+        
         try
         {
             await GameManager.I.InitializeGame();
@@ -82,7 +85,6 @@ public class LevelManager : Singleton<LevelManager>
 
         GameContext.I.LoadPlayerRefs();
         UIManager.I.InitializeInteractPrompt();
-        UIManager.I.InitializeMenus();
         UIManager.I.InitializeHUD();
 
         await SceneManager.LoadSceneAsync(_initialLevel.SceneName, LoadSceneMode.Additive);
@@ -95,8 +97,8 @@ public class LevelManager : Singleton<LevelManager>
 
         GameManager.I.MovePlayerToSpawn(GetSpawnPoint());
 
-        await Task.Delay(_playerAnimSyncTime);
         LevelLoadPercent = 1f;
+        await Task.Delay(_playerAnimSyncTime);
 
         IsLevelLoading = false;
         GameManager.I.TogglePlayerMovement(true);
@@ -116,8 +118,8 @@ public class LevelManager : Singleton<LevelManager>
             return;
         }
 
-        LevelLoadPercent = 0f;
         IsLevelLoading = true;
+        LevelLoadPercent = 0f;
 
         GameManager.I.TogglePlayerMovement(false);
 

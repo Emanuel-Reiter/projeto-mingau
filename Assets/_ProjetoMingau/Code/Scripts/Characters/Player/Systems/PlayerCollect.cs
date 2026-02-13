@@ -31,11 +31,26 @@ public class PlayerCollect : MonoBehaviour
         foreach (Collider obj in objectsInRange)
         {
             BaseCollectable collectable = obj.gameObject.GetComponent<BaseCollectable>();
+
+            if(collectable == null) continue;
+
             collectable.Collect();
             _deps.Inventory.Collectables += collectable.Value;
 
-            
+            // Temp sfx implementation
+            // TODO: Refator
+            PlayCollectSFX();
         }
+    }
+
+    private void PlayCollectSFX()
+    {
+        if (_collectSFX == null) return;
+
+        Vector3 audioPos = transform.position + Vector3.up;
+        AudioSfxDef audio = Instantiate(_collectSFX);
+        audio.Pitch = Random.Range(1f, 1.5f);
+        AudioPool.Play(audio, audioPos);
     }
 
 #if UNITY_EDITOR

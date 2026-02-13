@@ -4,6 +4,11 @@ public class UITitleScreen : UIBase
 {
     [SerializeField] private CanvasGroup _titleScreenCanvas;
 
+    private void Start()
+    {
+        Toggle(true);
+    }
+
     public override void Initialize()
     {
         LevelManager.I.OnLevelLoadPercentChanged += DisableTitleScreen;

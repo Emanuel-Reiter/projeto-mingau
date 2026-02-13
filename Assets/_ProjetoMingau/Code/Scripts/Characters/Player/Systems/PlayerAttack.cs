@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,6 +25,9 @@ public class PlayerAttack : MonoBehaviour
 
     private HashSet<AttributesManager> _damagedTargets = new HashSet<AttributesManager>();
 
+    public delegate void OnAttackHitDelegate();
+    public event OnAttackHitDelegate OnAttackHit;
+
     private void Start()
     {
         try
@@ -38,10 +42,10 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (_isHitDetectionEnabled) SearchTargets();
+        if (_isHitDetectionEnabled) AttackTargets();
     }
 
-    private void SearchTargets()
+    private void AttackTargets()
     {
         Collider[] targets = Physics.OverlapSphere(_attackOrigin.position, _attackRadius, _targetLayer);
 
@@ -56,6 +60,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 targetAttributes.TakeDamage(_dependencies.Attributes.Damage);
                 _damagedTargets.Add(targetAttributes);
+                OnAttackHit?.Invoke();
             }
             catch 
             {

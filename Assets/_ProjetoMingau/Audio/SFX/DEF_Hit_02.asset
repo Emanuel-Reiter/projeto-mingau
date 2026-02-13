@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e80f2ff39715204c81aec78d9f3166d, type: 3}
-  m_Name: DEF_ItemCollect_01
+  m_Name: DEF_Hit_02
   m_EditorClassIdentifier: 
-  Clip: {fileID: 8300000, guid: 00889cc4412ac964b99271b019a1d2c0, type: 3}
+  Clip: {fileID: 8300000, guid: 4f9e5e96c8ee41b478991e694cb81d4b, type: 3}
   Priority: 128
-  is3D: 0
+  is3D: 1
   Volume: 1
   Pitch: 1
   MinDistance: 1

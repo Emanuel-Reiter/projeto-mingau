@@ -1893,7 +1893,7 @@ MonoBehaviour:
   _colletablesLayer:
     serializedVersion: 2
     m_Bits: 32768
-  _collectSFX: {fileID: 0}
+  _collectSFX: {fileID: 11400000, guid: ff6387e4ab25be34f89b1370ec525137, type: 2}
 --- !u!114 &2645911589788859393
 MonoBehaviour:
   m_ObjectHideFlags: 0
