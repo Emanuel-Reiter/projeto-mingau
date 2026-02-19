@@ -43,14 +43,27 @@ public class PlayerCollect : MonoBehaviour
         }
     }
 
+    float collectPitch = 0f;
+    int collectPitchTimer;
     private void PlayCollectSFX()
     {
         if (_collectSFX == null) return;
 
+        GlobalTimer.I.CancelTimer(collectPitchTimer);
+
         Vector3 audioPos = transform.position + Vector3.up;
         AudioSfxDef audio = Instantiate(_collectSFX);
-        audio.Pitch = Random.Range(1f, 1.5f);
+        audio.Pitch = 1f + Mathf.Clamp(collectPitch, 0f, 1f);
         AudioPool.Play(audio, audioPos);
+
+        collectPitch += 0.1f;
+
+        collectPitchTimer = GlobalTimer.I.StartTimer(1f, () => { ResetCollectPitch(); });
+    }
+
+    private void ResetCollectPitch()
+    {
+        collectPitch = 0;
     }
 
 #if UNITY_EDITOR

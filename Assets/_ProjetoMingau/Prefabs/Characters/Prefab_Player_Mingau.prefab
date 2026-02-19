@@ -349,8 +349,8 @@ MonoBehaviour:
   - {fileID: -4673040247341248275, guid: c1caf19930cefda4fb137dcd2ecfd718, type: 3}
   _transitionTime: 0.125
   _attckDuration:
-  - 0.5
-  - 0.5
+  - 0.4
+  - 0.4
   - 0.8
   _attackLightState: {fileID: 7619942582750050186}
   _fallState: {fileID: 6213655973565422009}
