@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 992ffa5e009ae6947ab1962c0202bb83, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 992ffa5e009ae6947ab1962c0202bb83, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -58,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 9c920c8b6acf33d439878eb5c34c62b8, type: 2}
     - target: {fileID: 919132149155446097, guid: 992ffa5e009ae6947ab1962c0202bb83, type: 3}
       propertyPath: m_Name
-      value: Mesh_Terrain_Island_02
+      value: Prefab_Terrain_Island_02
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 992ffa5e009ae6947ab1962c0202bb83, type: 3}
       propertyPath: m_Layer

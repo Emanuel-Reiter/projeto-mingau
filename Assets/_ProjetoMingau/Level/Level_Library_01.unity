@@ -15,8 +15,8 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 1
-  m_FogColor: {r: 0.4039216, g: 0.18431373, b: 0.427451, a: 1}
-  m_FogMode: 1
+  m_FogColor: {r: 0.3666667, g: 0.2, b: 0.4, a: 1}
+  m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 4
   m_LinearFogEnd: 256
@@ -179,9 +179,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -28.751
       objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Name
-      value: Prop_GiantTable_Default_A_Prefab
+      value: Prefab_Prop_GiantTable_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Layer
@@ -189,7 +193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -337,6 +341,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -419,7 +427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -427,7 +435,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -1205,9 +1213,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -34.727
       objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Name
-      value: Prop_GiantTable_Default_A_Prefab
+      value: Prefab_Prop_GiantTable_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Layer
@@ -1215,7 +1227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1853,6 +1865,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1935,7 +1951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -1943,7 +1959,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -2132,13 +2148,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 85952655}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15755907, y: 0.76632047, z: -0.20533499, w: 0.5880184}
+  m_LocalRotation: {x: 0.09904577, y: 0.89239913, z: -0.23911765, w: 0.3696438}
   m_LocalPosition: {x: 0, y: 25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1831765461}
-  m_LocalEulerAnglesHint: {x: 30, y: 105, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 135, z: 0}
 --- !u!114 &85952657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2212,7 +2228,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 3
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -2388,6 +2404,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -2470,7 +2490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -2478,7 +2498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -2553,9 +2573,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -21.584
       objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Name
-      value: Prop_GiantTable_Default_A_Prefab
+      value: Prefab_Prop_GiantTable_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Layer
@@ -2563,7 +2587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3356,7 +3380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_Name
-      value: Structure_GiantBook_Red_A_Prefab (1)
+      value: Structure_GiantBook_Red_A_Prefab
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_Layer
@@ -3364,7 +3388,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3583532277042874666, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3478,13 +3506,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 571183095}
     m_Modifications:
+    - target: {fileID: 7972258439427879631, guid: 59bc2a366ff81e744b9067578ca163f5, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8476859441358754586, guid: 59bc2a366ff81e744b9067578ca163f5, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Empty_C_Prefab
+      value: Prefab_Prop_Bookshelf_Empty_C
       objectReference: {fileID: 0}
     - target: {fileID: 8476859441358754586, guid: 59bc2a366ff81e744b9067578ca163f5, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9144570122238331296, guid: 59bc2a366ff81e744b9067578ca163f5, type: 3}
       propertyPath: m_LocalScale.x
@@ -6124,6 +6156,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -6206,7 +6242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -6214,7 +6250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -6294,9 +6330,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 12.369
       objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Name
-      value: Prop_GiantTable_Default_A_Prefab
+      value: Prefab_Prop_GiantTable_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Layer
@@ -6304,7 +6344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6322,6 +6362,10 @@ PrefabInstance:
     - target: {fileID: 747669956902840378, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -6405,7 +6449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -6413,7 +6457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -6595,6 +6639,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 571183095}
     m_Modifications:
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3324908395973415368, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_LocalScale.x
       value: 9
@@ -6653,7 +6701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -6661,7 +6709,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7675,6 +7723,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -7757,7 +7809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -7765,7 +7817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -8192,6 +8244,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 571183095}
     m_Modifications:
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3324908395973415368, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_LocalScale.x
       value: 9
@@ -8250,7 +8306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -8258,7 +8314,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8781,6 +8837,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 571183095}
     m_Modifications:
+    - target: {fileID: 1161853018785798142, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1370028569772188939, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.9300003
@@ -8843,11 +8903,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
-    - target: {fileID: 1161853018785798142, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
+    - target: {fileID: 3583532277042874666, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8995,6 +9055,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -9077,7 +9141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -9085,7 +9149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -9721,6 +9785,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1403030242}
     m_Modifications:
+    - target: {fileID: 1161853018785798142, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.333
+      objectReference: {fileID: 0}
     - target: {fileID: 1093762549718841154, guid: 0669ec8e01b40a04a833b03afab6a040, type: 3}
       propertyPath: m_Size.x
       value: 22
@@ -9788,14 +9860,6 @@ PrefabInstance:
     - target: {fileID: 7608846858198836623, guid: 0669ec8e01b40a04a833b03afab6a040, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 1161853018785798142, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
-      propertyPath: m_ScaleInLightmap
-      value: 0.333
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9924,9 +9988,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -21.584
       objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Name
-      value: Prop_GiantTable_Default_A_Prefab
+      value: Prefab_Prop_GiantTable_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Layer
@@ -9934,7 +10002,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12492,7 +12560,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3583532277042874666, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12567,6 +12639,10 @@ PrefabInstance:
     - target: {fileID: 747669956902840378, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -12650,7 +12726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -12658,7 +12734,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -13096,6 +13172,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -13178,7 +13258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -13186,7 +13266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -13442,6 +13522,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 571183095}
     m_Modifications:
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3324908395973415368, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_LocalScale.x
       value: 10.8297
@@ -13500,7 +13584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -13508,7 +13592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14257,6 +14341,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -14339,7 +14427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -14347,7 +14435,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -14431,6 +14519,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -14513,7 +14605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -14521,7 +14613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -14767,7 +14859,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2917694043738634184, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Empty_B_Prefab
+      value: Prefab_Prop_Bookshelf_Empty_B
       objectReference: {fileID: 0}
     - target: {fileID: 2917694043738634184, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_Layer
@@ -14775,7 +14867,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2917694043738634184, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710199965394392605, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14867,11 +14963,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5020917985127872793, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_D_Prefab
+      value: Prefab_Prop_Bookshelf_Default_D
       objectReference: {fileID: 0}
     - target: {fileID: 5020917985127872793, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5685287528787796899, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_LocalScale.x
@@ -14924,6 +15020,10 @@ PrefabInstance:
     - target: {fileID: 5685287528787796899, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 37.932
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822142262227835084, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15048,9 +15148,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 21.181
       objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Name
-      value: Prop_GiantTable_Default_A_Prefab
+      value: Prefab_Prop_GiantTable_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Layer
@@ -15058,7 +15162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16709,6 +16813,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -16791,7 +16899,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -16799,7 +16907,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -17867,7 +17975,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5020917985127872793, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_D_Prefab
+      value: Prefab_Prop_Bookshelf_Default_D
       objectReference: {fileID: 0}
     - target: {fileID: 5020917985127872793, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_Layer
@@ -17875,7 +17983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5020917985127872793, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5685287528787796899, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_LocalScale.x
@@ -17931,7 +18039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6822142262227835084, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_ScaleInLightmap
-      value: 0.25
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18442,7 +18550,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3583532277042874666, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18895,9 +19007,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 25.091
       objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Name
-      value: Prop_GiantTable_Default_A_Prefab
+      value: Prefab_Prop_GiantTable_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Layer
@@ -18905,7 +19021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22882,7 +22998,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5394018942478898046, guid: 44ada4e78e9a94349abf5d1a07d9c98a, type: 3}
       propertyPath: m_Name
-      value: Prop_LibraryLadder_Default_A_Prefab
+      value: Prefab_Prop_LibraryLadder_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5394018942478898046, guid: 44ada4e78e9a94349abf5d1a07d9c98a, type: 3}
       propertyPath: m_Layer
@@ -22890,7 +23006,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5394018942478898046, guid: 44ada4e78e9a94349abf5d1a07d9c98a, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5898479482351743659, guid: 44ada4e78e9a94349abf5d1a07d9c98a, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24418,9 +24538,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -9.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Name
-      value: Prop_GiantTable_Default_A_Prefab
+      value: Prefab_Prop_GiantTable_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Layer
@@ -24428,7 +24552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25853,6 +25977,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 571183095}
     m_Modifications:
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3324908395973415368, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_LocalScale.x
       value: 9
@@ -25911,7 +26039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -25919,7 +26047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27565,13 +27693,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182391840}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.9980812, y: 0, z: 0, w: 0.06191965}
+  m_LocalRotation: {x: 0.99737805, y: 0, z: 0, w: 0.07236793}
   m_LocalPosition: {x: 0.49, y: 6.12, z: 16.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1650246532}
-  m_LocalEulerAnglesHint: {x: 172.9, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 171.7, y: 0, z: 0}
 --- !u!114 &1182391842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27648,7 +27776,7 @@ Light:
   m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 5.5, y: 6}
-  m_BounceIntensity: 64
+  m_BounceIntensity: 128
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -27995,7 +28123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2917694043738634184, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Empty_B_Prefab
+      value: Prefab_Prop_Bookshelf_Empty_B
       objectReference: {fileID: 0}
     - target: {fileID: 2917694043738634184, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_Layer
@@ -28003,7 +28131,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2917694043738634184, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710199965394392605, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28363,9 +28495,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 20.225
       objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Name
-      value: Prop_GiantTable_Default_A_Prefab
+      value: Prefab_Prop_GiantTable_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Layer
@@ -28373,7 +28509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28501,9 +28637,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -9.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Name
-      value: Prop_GiantTable_Default_A_Prefab
+      value: Prefab_Prop_GiantTable_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Layer
@@ -28511,7 +28651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28869,7 +29009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5394018942478898046, guid: 44ada4e78e9a94349abf5d1a07d9c98a, type: 3}
       propertyPath: m_Name
-      value: Prop_LibraryLadder_Default_A_Prefab
+      value: Prefab_Prop_LibraryLadder_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5394018942478898046, guid: 44ada4e78e9a94349abf5d1a07d9c98a, type: 3}
       propertyPath: m_Layer
@@ -28877,7 +29017,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5394018942478898046, guid: 44ada4e78e9a94349abf5d1a07d9c98a, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5898479482351743659, guid: 44ada4e78e9a94349abf5d1a07d9c98a, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29946,6 +30090,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -30028,7 +30176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -30036,7 +30184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -30072,6 +30220,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 627451675}
     m_Modifications:
+    - target: {fileID: 747669956902840378, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b5fb10503e89603498e09681aee26d7d, type: 2}
+    - target: {fileID: 4965837944535088452, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_Size.y
+      value: 3.686018
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965837944535088452, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_Center.y
+      value: 1.843009
+      objectReference: {fileID: 0}
+    - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7965318511904158377, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 7965318511904158377, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.86
+      objectReference: {fileID: 0}
     - target: {fileID: 2537334095703190898, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.95581
@@ -30143,34 +30319,6 @@ PrefabInstance:
     - target: {fileID: 3710199965394392605, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_ScaleInLightmap
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 747669956902840378, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: b5fb10503e89603498e09681aee26d7d, type: 2}
-    - target: {fileID: 4965837944535088452, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_Size.y
-      value: 3.686018
-      objectReference: {fileID: 0}
-    - target: {fileID: 4965837944535088452, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_Center.y
-      value: 1.843009
-      objectReference: {fileID: 0}
-    - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 7965318511904158377, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3.72
-      objectReference: {fileID: 0}
-    - target: {fileID: 7965318511904158377, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.86
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30535,9 +30683,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -17.786
       objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Name
-      value: Prop_GiantTable_Default_A_Prefab
+      value: Prefab_Prop_GiantTable_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Layer
@@ -30545,7 +30697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30666,9 +30818,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.412
       objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Name
-      value: Prop_GiantTable_Default_A_Prefab
+      value: Prefab_Prop_GiantTable_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Layer
@@ -30676,7 +30832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31132,7 +31288,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3583532277042874666, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31188,6 +31348,10 @@ PrefabInstance:
     - target: {fileID: 747669956902840378, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -31271,7 +31435,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -31279,7 +31443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -31359,9 +31523,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 12.369
       objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Name
-      value: Prop_GiantTable_Default_A_Prefab
+      value: Prefab_Prop_GiantTable_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Layer
@@ -31369,7 +31537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31389,13 +31557,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 571183095}
     m_Modifications:
+    - target: {fileID: 7972258439427879631, guid: 59bc2a366ff81e744b9067578ca163f5, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8476859441358754586, guid: 59bc2a366ff81e744b9067578ca163f5, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Empty_C_Prefab
+      value: Prefab_Prop_Bookshelf_Empty_C
       objectReference: {fileID: 0}
     - target: {fileID: 8476859441358754586, guid: 59bc2a366ff81e744b9067578ca163f5, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9144570122238331296, guid: 59bc2a366ff81e744b9067578ca163f5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -32009,11 +32181,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5020917985127872793, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_D_Prefab
+      value: Prefab_Prop_Bookshelf_Default_D
       objectReference: {fileID: 0}
     - target: {fileID: 5020917985127872793, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5685287528787796899, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_LocalScale.x
@@ -32066,6 +32238,10 @@ PrefabInstance:
     - target: {fileID: 5685287528787796899, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 37.932
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822142262227835084, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32362,7 +32538,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 126
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1400938900
 Transform:
@@ -33662,6 +33838,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 627451675}
     m_Modifications:
+    - target: {fileID: 747669956902840378, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b5fb10503e89603498e09681aee26d7d, type: 2}
+    - target: {fileID: 4965837944535088452, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_Size.y
+      value: 3.686018
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965837944535088452, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_Center.y
+      value: 1.843009
+      objectReference: {fileID: 0}
+    - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7965318511904158377, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 7965318511904158377, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.86
+      objectReference: {fileID: 0}
     - target: {fileID: 7972258439427879631, guid: 59bc2a366ff81e744b9067578ca163f5, type: 3}
       propertyPath: m_ScaleInLightmap
       value: 0.5
@@ -33733,34 +33937,6 @@ PrefabInstance:
     - target: {fileID: 9144570122238331296, guid: 59bc2a366ff81e744b9067578ca163f5, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 747669956902840378, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: b5fb10503e89603498e09681aee26d7d, type: 2}
-    - target: {fileID: 4965837944535088452, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_Size.y
-      value: 3.686018
-      objectReference: {fileID: 0}
-    - target: {fileID: 4965837944535088452, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_Center.y
-      value: 1.843009
-      objectReference: {fileID: 0}
-    - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 7965318511904158377, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3.72
-      objectReference: {fileID: 0}
-    - target: {fileID: 7965318511904158377, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.86
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33838,7 +34014,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2917694043738634184, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Empty_B_Prefab
+      value: Prefab_Prop_Bookshelf_Empty_B
       objectReference: {fileID: 0}
     - target: {fileID: 2917694043738634184, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_Layer
@@ -33846,11 +34022,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2917694043738634184, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3710199965394392605, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_ScaleInLightmap
-      value: 0.25
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -34487,7 +34663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5394018942478898046, guid: 44ada4e78e9a94349abf5d1a07d9c98a, type: 3}
       propertyPath: m_Name
-      value: Prop_LibraryLadder_Default_A_Prefab
+      value: Prefab_Prop_LibraryLadder_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5394018942478898046, guid: 44ada4e78e9a94349abf5d1a07d9c98a, type: 3}
       propertyPath: m_Layer
@@ -34495,7 +34671,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5394018942478898046, guid: 44ada4e78e9a94349abf5d1a07d9c98a, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5898479482351743659, guid: 44ada4e78e9a94349abf5d1a07d9c98a, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -35178,7 +35358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5394018942478898046, guid: 44ada4e78e9a94349abf5d1a07d9c98a, type: 3}
       propertyPath: m_Name
-      value: Prop_LibraryLadder_Default_A_Prefab
+      value: Prefab_Prop_LibraryLadder_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5394018942478898046, guid: 44ada4e78e9a94349abf5d1a07d9c98a, type: 3}
       propertyPath: m_Layer
@@ -35186,7 +35366,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5394018942478898046, guid: 44ada4e78e9a94349abf5d1a07d9c98a, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5898479482351743659, guid: 44ada4e78e9a94349abf5d1a07d9c98a, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -35826,6 +36010,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -35908,7 +36096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -35916,7 +36104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -36014,7 +36202,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3583532277042874666, guid: dff3fe601b62301499fce4d5f41d2a8e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36718,9 +36910,13 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Name
-      value: Prop_GiantTable_Default_A_Prefab (1)
+      value: Prefab_Prop_GiantTable_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Layer
@@ -36728,7 +36924,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -38058,7 +38254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2917694043738634184, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Empty_B_Prefab
+      value: Prefab_Prop_Bookshelf_Empty_B
       objectReference: {fileID: 0}
     - target: {fileID: 2917694043738634184, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_Layer
@@ -38066,11 +38262,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2917694043738634184, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3710199965394392605, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_ScaleInLightmap
-      value: 0.25
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -38734,9 +38930,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 141.675
       objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Name
-      value: Prop_GiantTable_Default_A_Prefab
+      value: Prefab_Prop_GiantTable_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Layer
@@ -38744,7 +38944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -38766,7 +38966,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2518029365838591233, guid: 6b08a7a6bea17164db601c45c11e540e, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Empty_D_Prefab
+      value: Prefab_Prop_Bookshelf_Empty_D
       objectReference: {fileID: 0}
     - target: {fileID: 2518029365838591233, guid: 6b08a7a6bea17164db601c45c11e540e, type: 3}
       propertyPath: m_Layer
@@ -38774,7 +38974,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2518029365838591233, guid: 6b08a7a6bea17164db601c45c11e540e, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3006723335099772859, guid: 6b08a7a6bea17164db601c45c11e540e, type: 3}
       propertyPath: m_LocalScale.x
@@ -38830,7 +39030,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4175164705706349780, guid: 6b08a7a6bea17164db601c45c11e540e, type: 3}
       propertyPath: m_ScaleInLightmap
-      value: 0.25
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39579,7 +39779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2917694043738634184, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Empty_B_Prefab
+      value: Prefab_Prop_Bookshelf_Empty_B
       objectReference: {fileID: 0}
     - target: {fileID: 2917694043738634184, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_Layer
@@ -39587,7 +39787,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2917694043738634184, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710199965394392605, guid: 4b7ce7374c6971a418ff37aa8398b76a, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -41202,7 +41406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6395100881783552229, guid: d8a3912017ca8f94a88501fd8286ddb9, type: 3}
       propertyPath: m_Name
-      value: Prop_BookPile_Default_A_Prefab (3)
+      value: Prefab_Prop_BookPile_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 6395100881783552229, guid: d8a3912017ca8f94a88501fd8286ddb9, type: 3}
       propertyPath: m_Layer
@@ -41210,7 +41414,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6395100881783552229, guid: d8a3912017ca8f94a88501fd8286ddb9, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8739352268476514825, guid: d8a3912017ca8f94a88501fd8286ddb9, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -41993,9 +42201,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.412
       objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Name
-      value: Prop_GiantTable_Default_A_Prefab
+      value: Prefab_Prop_GiantTable_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Layer
@@ -42003,7 +42215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -44087,7 +44299,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5020917985127872793, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_D_Prefab
+      value: Prefab_Prop_Bookshelf_Default_D
       objectReference: {fileID: 0}
     - target: {fileID: 5020917985127872793, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_Layer
@@ -44095,7 +44307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5020917985127872793, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5685287528787796899, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_LocalScale.x
@@ -44148,6 +44360,10 @@ PrefabInstance:
     - target: {fileID: 5685287528787796899, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -4.718
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822142262227835084, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -44491,6 +44707,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 627451675}
     m_Modifications:
+    - target: {fileID: 747669956902840378, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b5fb10503e89603498e09681aee26d7d, type: 2}
+    - target: {fileID: 4965837944535088452, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_Size.y
+      value: 3.686018
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965837944535088452, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_Center.y
+      value: 1.843009
+      objectReference: {fileID: 0}
+    - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7965318511904158377, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 7965318511904158377, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.86
+      objectReference: {fileID: 0}
     - target: {fileID: 5020917985127872793, guid: 57f77d68ed6b08b418a4b33383f1d002, type: 3}
       propertyPath: m_Name
       value: Prop_Bookshelf_Default_D_Prefab (1)
@@ -44563,34 +44807,6 @@ PrefabInstance:
       propertyPath: m_ScaleInLightmap
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 747669956902840378, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: b5fb10503e89603498e09681aee26d7d, type: 2}
-    - target: {fileID: 4965837944535088452, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_Size.y
-      value: 3.686018
-      objectReference: {fileID: 0}
-    - target: {fileID: 4965837944535088452, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_Center.y
-      value: 1.843009
-      objectReference: {fileID: 0}
-    - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 7965318511904158377, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3.72
-      objectReference: {fileID: 0}
-    - target: {fileID: 7965318511904158377, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.86
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -44612,6 +44828,10 @@ PrefabInstance:
     - target: {fileID: 747669956902840378, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969304263054392373, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2814068634273872507, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -44695,7 +44915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Default_A_Prefab
+      value: Prefab_Prop_Bookshelf_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_Layer
@@ -44703,7 +44923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390331225174608731, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6728926412284142833, guid: f7b377f3a25498a4ab886ffa666be714, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -46185,7 +46405,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2518029365838591233, guid: 6b08a7a6bea17164db601c45c11e540e, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Empty_D_Prefab
+      value: Prefab_Prop_Bookshelf_Empty_D
       objectReference: {fileID: 0}
     - target: {fileID: 2518029365838591233, guid: 6b08a7a6bea17164db601c45c11e540e, type: 3}
       propertyPath: m_Layer
@@ -46193,7 +46413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2518029365838591233, guid: 6b08a7a6bea17164db601c45c11e540e, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3006723335099772859, guid: 6b08a7a6bea17164db601c45c11e540e, type: 3}
       propertyPath: m_LocalScale.x
@@ -46246,6 +46466,10 @@ PrefabInstance:
     - target: {fileID: 3006723335099772859, guid: 6b08a7a6bea17164db601c45c11e540e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 4.214
+      objectReference: {fileID: 0}
+    - target: {fileID: 4175164705706349780, guid: 6b08a7a6bea17164db601c45c11e540e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -48223,9 +48447,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 12.369
       objectReference: {fileID: 0}
+    - target: {fileID: 2136038868815787900, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Name
-      value: Prop_GiantTable_Default_A_Prefab
+      value: Prefab_Prop_GiantTable_Default_A
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_Layer
@@ -48233,7 +48461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7446302526939119186, guid: cfad1d4231575aa4c98175c220b7b473, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -48494,7 +48722,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2317154677319645110, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3583532277042874666, guid: ce71577be1923d440bb7fc28007098dd, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -48765,13 +48997,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 571183095}
     m_Modifications:
+    - target: {fileID: 7972258439427879631, guid: 59bc2a366ff81e744b9067578ca163f5, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8476859441358754586, guid: 59bc2a366ff81e744b9067578ca163f5, type: 3}
       propertyPath: m_Name
-      value: Prop_Bookshelf_Empty_C_Prefab
+      value: Prefab_Prop_Bookshelf_Empty_C
       objectReference: {fileID: 0}
     - target: {fileID: 8476859441358754586, guid: 59bc2a366ff81e744b9067578ca163f5, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 126
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9144570122238331296, guid: 59bc2a366ff81e744b9067578ca163f5, type: 3}
       propertyPath: m_LocalScale.x
